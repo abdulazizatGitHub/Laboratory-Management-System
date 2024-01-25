@@ -1,8 +1,8 @@
-function Test (){
+function Test2 (){
     return(
         <div>
 
         </div>
     )
 }
-export default Test;
+export default Test2;
