@@ -1,0 +1,129 @@
+.active-days1 {
+  height: 62.9px;
+  width: 6.1px;
+  position: relative;
+  display: none;
+}
+.main-f-r-a-m-e-child {
+  align-self: stretch;
+  height: 776px;
+  position: relative;
+  background-color: var(--color-gray-500);
+  z-index: 1;
+}
+.pexels-chokniti-khongchum-2280-icon1,
+.pexels-chokniti-khongchum-2280-icon2 {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.pexels-chokniti-khongchum-2280-icon2 {
+  z-index: 2;
+}
+.pexelschoknitikhongchum-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--color-gray-500);
+  width: 453px;
+  height: 671px;
+  z-index: 3;
+}
+.pexelschoknitikhongchum {
+  align-self: stretch;
+  height: 793px;
+  position: relative;
+}
+.lms1 {
+  width: 204px;
+  height: 83.7px;
+  position: relative;
+  font-weight: 800;
+  display: inline-block;
+  flex-shrink: 0;
+  padding-left: var(--padding-xl);
+  padding-right: var(--padding-xl);
+  z-index: 4;
+  margin-top: -504px;
+}
+.pexelschoknitikhongchum-parent {
+  align-self: stretch;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: -776px;
+}
+.login-inner,
+.main-f-r-a-m-e,
+.main-f-r-a-m-e-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.main-f-r-a-m-e {
+  align-self: stretch;
+  height: 793px;
+  justify-content: flex-start;
+}
+.login-inner,
+.main-f-r-a-m-e-wrapper {
+  padding: 0;
+  box-sizing: border-box;
+}
+.main-f-r-a-m-e-wrapper {
+  align-self: stretch;
+  height: 671px;
+  justify-content: flex-start;
+}
+.login-inner {
+  width: 453px;
+  justify-content: flex-end;
+  min-width: 453px;
+  max-width: 100%;
+}
+.login {
+  width: 100%;
+  position: relative;
+  border-radius: var(--br-2xs);
+  background-color: var(--color-ghostwhite);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 59px;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: var(--font-size-61xl-9);
+  color: var(--color-turquoise);
+  font-family: var(--font-visby-round-cf);
+}
+@media screen and (max-width: 900px) {
+  .lms1 {
+    font-size: var(--font-size-21xl);
+  }
+  .login-inner {
+    flex: 1;
+  }
+  .login {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 700px) {
+  .login-inner {
+    min-width: 100%;
+  }
+  .login {
+    gap: var(--gap-10xl);
+  }
+}
+@media screen and (max-width: 450px) {
+  .lms1 {
+    font-size: var(--font-size-5xl);
+  }
+}

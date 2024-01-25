@@ -1,0 +1,71 @@
+.daily-sales-frame-child {
+  align-self: stretch;
+  width: 1.5px;
+  border-right: 1.5px solid var(--color-ghostwhite);
+  box-sizing: border-box;
+}
+.daily-sales-frame-child,
+.total-amount {
+  position: relative;
+  z-index: 1;
+}
+.card-transfer-svgrepo-com-1-icon {
+  height: 28px;
+  width: 28px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  min-height: 28px;
+  z-index: 1;
+}
+.frame-m-o {
+  height: 27px;
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
+.line-monly-sales {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: var(--gap-xs);
+  font-size: var(--font-size-3xl);
+  color: var(--color-dimgray);
+}
+.k-frame {
+  align-self: stretch;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-smi);
+}
+.daily-sales-frame,
+.g-frame,
+.k-frame {
+  display: flex;
+  justify-content: flex-start;
+}
+.g-frame {
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 0 var(--padding-9xs);
+}
+.daily-sales-frame {
+  height: 95px;
+  width: 143px;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 var(--padding-sm) 0 0;
+  box-sizing: border-box;
+  gap: var(--gap-7xl);
+  text-align: left;
+  font-size: var(--font-size-sm-3);
+  color: var(--color-darkgray);
+  font-family: var(--font-visby-round-cf);
+}
+@media screen and (max-width: 450px) {
+  .frame-m-o {
+    font-size: var(--font-size-lg);
+  }
+}

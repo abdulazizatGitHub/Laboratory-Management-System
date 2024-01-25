@@ -1,0 +1,214 @@
+.frame-child34 {
+  width: 195px;
+  position: relative;
+  background-color: var(--color-gray-200);
+  height: 769px;
+  display: none;
+}
+.lms5 {
+  height: 41px;
+  position: relative;
+  font-weight: 800;
+  display: inline-block;
+  z-index: 1;
+}
+.lms-frame {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 0 var(--padding-lg);
+  font-size: var(--font-size-15xl-2);
+  color: var(--color-turquoise);
+}
+.dashboard-svgrepo-com-1-icon2 {
+  height: 24px;
+  width: 24px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.dashboard3 {
+  position: relative;
+  font-weight: 500;
+  z-index: 1;
+}
+.dashboard-svgrepo-com-1-parent,
+.frame-wrapper9 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.dashboard-svgrepo-com-1-parent {
+  align-items: center;
+  gap: var(--gap-7xs);
+}
+.frame-wrapper9 {
+  align-items: flex-start;
+  padding: 0 var(--padding-sm);
+}
+.registrations-container {
+  align-self: stretch;
+  height: 40px;
+  font-family: var(--font-visby-round-cf);
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+  color: var(--color-white);
+  z-index: 1;
+}
+.frame-parent33 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-5xs);
+}
+.frame-child35 {
+  height: 5px;
+  width: 5px;
+  position: relative;
+  border-radius: 50%;
+  background-color: var(--color-turquoise);
+  z-index: 1;
+}
+.patient-registration4 {
+  margin: 0;
+}
+.search-test3 {
+  margin: 0;
+  color: var(--color-white);
+}
+.generate-token4 {
+  margin: 0;
+}
+.patient-registration-search-container2 {
+  height: 84px;
+  position: relative;
+  line-height: 28px;
+  display: inline-block;
+  z-index: 1;
+}
+.ellipse-group,
+.frame-wrapper10 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+.ellipse-group {
+  align-items: center;
+  gap: var(--gap-3xs);
+}
+.frame-wrapper10 {
+  flex: 1;
+  align-items: flex-start;
+  padding: 0 var(--padding-3xs) 0 var(--padding-10xl);
+  color: var(--color-gray-300);
+}
+.iconlylightpaper3 {
+  width: 20px;
+  height: 20px;
+  position: relative;
+  z-index: 1;
+}
+.iconlylightpaper-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0 var(--padding-2xs) 0 0;
+}
+.test-reports3 {
+  width: 96px;
+  position: relative;
+  font-weight: 500;
+  display: inline-block;
+  z-index: 1;
+}
+.test-reports-wrapper1 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 0;
+}
+.arrow-left-5-svgrepo-com-2-icon3 {
+  height: 16px;
+  width: 16px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: contain;
+  z-index: 2;
+}
+.frame-parent35 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.user-rounded-svgrepo-com-1-icon3 {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+  z-index: 1;
+}
+.account3 {
+  position: relative;
+  z-index: 1;
+}
+.user-rounded-svgrepo-com-1-group {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: var(--gap-2xs);
+}
+.frame-parent34,
+.rectangle-parent10 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.frame-parent34 {
+  align-self: stretch;
+  align-items: flex-start;
+  padding: 0 var(--padding-mini);
+  gap: var(--gap-xl);
+}
+.rectangle-parent10 {
+  height: 769px;
+  width: 195px;
+  background-color: var(--color-gray-200);
+  align-items: center;
+  padding: var(--padding-11xl) var(--padding-lg) var(--padding-413xl);
+  box-sizing: border-box;
+  gap: var(--gap-5xs);
+  text-align: left;
+  font-size: var(--font-size-xs);
+  color: var(--color-white);
+  font-family: var(--font-visby-round-cf);
+}
+@media screen and (max-width: 800px) {
+  .lms5 {
+    font-size: var(--font-size-8xl);
+  }
+}
+@media screen and (max-width: 675px) {
+  .rectangle-parent10 {
+    display: none;
+    padding-top: var(--padding-xl);
+    padding-bottom: var(--padding-262xl);
+    box-sizing: border-box;
+  }
+}
+@media screen and (max-width: 450px) {
+  .lms5 {
+    font-size: var(--font-size-2xl);
+  }
+}

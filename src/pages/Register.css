@@ -1,0 +1,108 @@
+.active-days,
+.frame-child {
+  position: relative;
+  display: none;
+}
+.active-days {
+  height: 62.9px;
+  width: 6.1px;
+  z-index: 0;
+}
+.frame-child {
+  height: 671px;
+  width: 453px;
+  background-color: var(--color-gray-500);
+  max-width: 100%;
+}
+.lms {
+  height: 83.7px;
+  position: relative;
+  font-weight: 800;
+  display: inline-block;
+  z-index: 2;
+}
+.rectangle-parent,
+.register-inner {
+  display: flex;
+  align-items: flex-start;
+  box-sizing: border-box;
+  max-width: 100%;
+}
+.rectangle-parent {
+  align-self: stretch;
+  flex: 1;
+  background-color: var(--color-gray-500);
+  flex-direction: row;
+  justify-content: center;
+  padding: var(--padding-268xl) var(--padding-2xl) var(--padding-268xl)
+    var(--padding-xl);
+  z-index: 1;
+}
+.register-inner {
+  height: 664px;
+  width: 453px;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+  min-width: 453px;
+}
+.pexels-chokniti-khongchum-2280-icon {
+  width: 453px;
+  position: absolute;
+  margin: 0 !important;
+  bottom: -120px;
+  left: 0;
+  height: 785px;
+  object-fit: cover;
+}
+.register {
+  width: 100%;
+  position: relative;
+  border-radius: var(--br-2xs);
+  background-color: var(--color-ghostwhite);
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 69px;
+  letter-spacing: normal;
+  text-align: left;
+  font-size: var(--font-size-61xl-9);
+  color: var(--color-turquoise);
+  font-family: var(--font-visby-round-cf);
+}
+@media screen and (max-width: 975px) {
+  .register {
+    gap: 34px;
+  }
+}
+@media screen and (max-width: 950px) {
+  .lms {
+    font-size: var(--font-size-21xl);
+  }
+  .register-inner {
+    flex: 1;
+  }
+  .register {
+    flex-wrap: wrap;
+  }
+}
+@media screen and (max-width: 700px) {
+  .rectangle-parent {
+    padding-top: var(--padding-168xl);
+    padding-bottom: var(--padding-168xl);
+    box-sizing: border-box;
+  }
+  .register-inner {
+    min-width: 100%;
+  }
+  .register {
+    gap: var(--gap-mid);
+  }
+}
+@media screen and (max-width: 450px) {
+  .lms {
+    font-size: var(--font-size-5xl);
+  }
+}
