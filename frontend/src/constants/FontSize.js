@@ -1,8 +1,8 @@
-const small = 14;
-const medium = 16;
-const large = 20;
-const xLarge = 30;
-const xxLarge = 35;
+const small = '0.7rem';
+const medium = '1.1rem';
+const large = '1.4rem';
+const xLarge = '2.1rem';
+const xxLarge = '5.1rem';
 
 export default {
   small,
