@@ -1,25 +1,47 @@
-import React from 'react';
+// Sidebar.js
+
+import React, { useState } from 'react';
 import '../CSS/Sidebar.css';
-function Sidebar(){
-    return(
-        <div class="sidebar">
-        <a href="#" class="active">LMS - Dashboard</a>
-        <div class="dropdown">
-          <button class="dropbtn">Registrations ▼</button>
-          <div class="dropdown-content">
-            <a href="#">Student Registration</a>
-            <a href="#">Staff Registration</a>
-          </div>
+
+function Sidebar() {
+    const [isRegistrationDropdownOpen, setRegistrationDropdownOpen] = useState(false);
+    const [isTestReportsDropdownOpen, setTestReportsDropdownOpen] = useState(false);
+
+    const handleRegistrationDropdownToggle = () => {
+        setRegistrationDropdownOpen(!isRegistrationDropdownOpen);
+        setTestReportsDropdownOpen(false); // Close other dropdown if open
+    };
+
+    const handleTestReportsDropdownToggle = () => {
+        setTestReportsDropdownOpen(!isTestReportsDropdownOpen);
+        setRegistrationDropdownOpen(false); // Close other dropdown if open
+    };
+
+    return (
+        <div className="sidenav">
+            <span className='Heading-sidebar'>LMS</span>
+
+            <a href="#about">
+                <i className="fa fa-dashboard"></i> Dashboard
+            </a>
+
+            <button className={`dropdown-btn ${isRegistrationDropdownOpen ? 'active' : ''}`} onClick={handleRegistrationDropdownToggle}>
+                <i className="fa fa-user-plus"></i> Registrations <i className="fa fa-caret-down"></i>
+            </button>
+            <div className={`dropdown-container ${isRegistrationDropdownOpen ? 'open' : ''}`}>
+                <a href="#">Patient Registration</a>
+                <a href="#">Search Test</a>
+            </div>
+
+            <button className={`dropdown-btn ${isTestReportsDropdownOpen ? 'active' : ''}`} onClick={handleTestReportsDropdownToggle}>
+                <i className="fa fa-file-text"></i> Test Reports <i className="fa fa-caret-down"></i>
+            </button>
+            <div className={`dropdown-container ${isTestReportsDropdownOpen ? 'open' : ''}`}>
+                <a href="#">Patient Registration</a>
+                <a href="#">Search Test</a>
+            </div>
         </div>
-        <div class="dropdown">
-          <button class="dropbtn">Test Reports ▼</button>
-          <div class="dropdown-content">
-            <a href="#">Student Test Reports</a>
-            <a href="#">Staff Test Reports</a>
-          </div>
-        </div>
-        <a href="#">Account</a>
-      </div>
-    )
+    );
 }
+
 export default Sidebar;

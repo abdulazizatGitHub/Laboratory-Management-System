@@ -1,66 +1,137 @@
-.sidebar {
-    width: 200px;
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
-  .sidebar a {
-    display: block;
-    padding: 10px;
-    color: #fff;
-    text-decoration: none;
-  }
-  
-  .sidebar a:hover {
-    background-color: #555;
-  }
-  
-  .sidebar a.active {
-    background-color: #4CAF50;
-  }
-  
-  .dropdown {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: #333;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+/* Sidebar.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+
+.sidenav {
+    height: 100%;
+    width: 250px;
+    position: fixed;
     z-index: 1;
-  }
-  
-  .dropdown-content a {
-    color: #fff;
-    padding: 12px 16px;
+    top: 0;
+    left: 0;
+    background-color: #161528;
+    overflow-x: hidden;
+    padding-top: 50px;
+    font-family: 'VisbyRoundCF', sans-serif; 
+}
+
+.sidenav a,
+.dropdown-btn {
+    padding: 10px 20px; /* Increased padding for better spacing */
     text-decoration: none;
+    font-size: 16px;
+    color: #818181;
     display: block;
-  }
-  
-  .dropdown-content a:hover {
-    background-color: #555;
-  }
-  
-  .dropdown:hover .dropdown-content {
-    display: block;
-  }
-  
-  .dropdown:hover .dropbtn {
-    background-color: #555;
-  }
-  
-  .dropbtn {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
     border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
     cursor: pointer;
-  }
-  
-  .dropbtn:hover {
-    background-color: #555;
-  }
+    outline: none;
+    margin-bottom: 10px; /* Add space between items */
+}
+
+.sidenav a:hover,
+.dropdown-btn:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 250px; /* Adjusted the margin to match the sidebar width */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 20px; /* Adjusted padding for content */
+}
+
+.active {
+    background-color: #282238;
+    color: white;
+}
+
+.dropdown-container {
+    display: none;
+    background-color: #161528;
+    padding-left: 30px;
+    list-style-type: none; /* Remove default bullets */
+    margin-top: -10px;
+}
+
+.dropdown-container a {
+    padding: 10px 35px; /* Adjusted padding to align with the custom bullets */
+    display: block;
+    position: relative;
+    margin-bottom: -2px; /* Add space between items */
+}
+
+.dropdown-container a::before {
+    content: '\2022'; /* Unicode character for a bullet */
+    font-size: 20px;
+    margin-right: 8px;
+    color: #22CAB8; /* Set bullet color */
+    position: absolute;
+    left: 20px; /* Adjust the left position to align with the text */
+    bottom: 7px;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.open {
+    display: block;
+}
+
+.Heading-sidebar {
+    font-size: 34px;
+    font-weight: bolder;
+    color: #22CAB8;
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .sidenav {
+        width: 150px; /* Adjusted width for medium devices */
+    }
+
+    .sidenav a,
+    .dropdown-btn {
+        padding: 10px 15px; /* Adjusted padding for medium devices */
+    }
+
+    .main {
+        margin-left: 150px; /* Adjusted margin for medium devices */
+    }
+
+    .dropdown-container {
+        padding-left: 20px; /* Adjusted padding for medium devices */
+    }
+
+    .dropdown-container a {
+        padding: 10px 30px; /* Adjusted padding for medium devices */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sidenav {
+        width: 100%; /* Full width for small devices */
+    }
+
+    .sidenav a,
+    .dropdown-btn {
+        padding: 10px; /* Adjusted padding for small devices */
+    }
+
+    .main {
+        margin-left: 0; /* No margin for small devices */
+    }
+
+    .dropdown-container {
+        padding-left: 20px; /* Adjusted padding for small devices */
+    }
+
+    .dropdown-container a {
+        padding: 10px 30px; /* Adjusted padding for small devices */
+    }
+}
