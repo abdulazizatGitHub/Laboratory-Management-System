@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Sidebar from './Components/Sidebar';
+import Sidebar from './receptionist/components/Sidebar';
 
 function App() {
   return (

@@ -1,5 +1,5 @@
-import react from 'react';
-import '../Assessts/Sidebar.css';
+import React from 'react';
+import '../CSS/Sidebar.css';
 function Sidebar(){
     return(
         <div class="sidebar">
