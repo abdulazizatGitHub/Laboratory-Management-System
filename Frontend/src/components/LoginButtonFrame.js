@@ -13,7 +13,7 @@ const LoginButtonFrame = () => {
   const navigate = useNavigate();
 
   const onDontHaveAnClick = useCallback(() => {
-    navigate("/");
+    navigate("/dashboard");
   }, [navigate]);
 
   return (
@@ -56,7 +56,7 @@ const LoginButtonFrame = () => {
           />
         </div>
       </div>
-      <Button
+      <Button onClick={onDontHaveAnClick}
         className="registration-prompt"
         disableElevation={true}
         variant="contained"
