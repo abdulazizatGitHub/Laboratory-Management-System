@@ -40,6 +40,8 @@ function Sidebar() {
                 <a href="#">Patient Registration</a>
                 <a href="#">Search Test</a>
             </div>
+
+            <div className="version">Version 1.0</div>
         </div>
     );
 }

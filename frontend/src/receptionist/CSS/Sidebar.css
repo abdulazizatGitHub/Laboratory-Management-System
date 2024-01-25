@@ -28,6 +28,12 @@
     cursor: pointer;
     outline: none;
     margin-bottom: 10px; /* Add space between items */
+ 
+}
+
+.sidenav a i,
+.dropdown-btn i {
+    margin-right: 5px; /* Adjusted margin for more space between icon and text */
 }
 
 .sidenav a:hover,
@@ -88,6 +94,18 @@
     display: block;
     text-align: center;
 }
+
+
+.version {
+  font-size: 14px;
+  color: #22CAB8;
+  position: absolute;
+  top: 95vh;
+  width: 100%;
+  text-align: center;
+}
+
+
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
