@@ -2,7 +2,9 @@
 
 .Main-Container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     font-family: var(--fontRegular);
     
 }
@@ -87,18 +89,72 @@
 }
 
 
-/* Media Query for smaller screens */
-@media screen and (max-width: 768px) {
-    .Profile {
-        margin-left: 150px;
-        width: calc(100% - 150px);
-    }
+/* Dashboard.css */
+/* ... (other styles) */
+
+.dashboard {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 95%;
+    height: 10vh;
+    background-color: var(--navbarTextColor);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-top: 20px;
 }
 
-/* Media Query for smaller screens */
-@media screen and (max-width: 576px) {
-    .Profile {
-        margin-left: 0;
-        width: 100%;
-    }
+.dashboard-item {
+    text-align: center;
+    position: relative;
+}
+
+.dashboard-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    bottom: 10%;
+    right: -10vh;
+    width: 1px;
+    background-color: #ddd;
+}
+  
+.dashboard-item h3 {
+    font-size: 14px;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+  
+.dashboard-item p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+
+.dashboard-item p svg {
+    margin-right: 10px; /* Adjust the margin as needed for space between icon and text */
+}
+
+.dashboard-charts {
+    width: 95%;
+    height: 48vh;
+    display: flex;
+    gap: 120px;
+    margin-top: 2rem;
+    
+}
+
+.chart-container {
+    width: 48%; 
+    height: 48vh;
+    border: 1px solid #ffffff;
+    padding: 0rem;
+    box-sizing: border-box; /* Include borders in total width and height */
+    background-color: var(--navbarTextColor);
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }

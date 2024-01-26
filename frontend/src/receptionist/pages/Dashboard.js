@@ -2,8 +2,41 @@
 import React from "react";
 import '../CSS/Dashboard.css';
 import img1 from '../../Assessts/Images/Profile1.jpg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFlask, faDollarSign, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
+import DailySalesChart from '../components/DailySalesChart';
+import MonthlySalesChart from '../components/MonthlySalesChart';
 
 const Dashboard = () => {
+    const numberOfTests = 2503;
+    const totalAmount = 19250;
+    const totalPatients = 30;
+    const tokensGenerated = 117;
+
+    const dailySalesData = [
+        { timeOfDay: '18', sales: 40 },
+        { timeOfDay: '20', sales: 20 },
+        { timeOfDay: '22', sales: 2 },
+        { timeOfDay: '24', sales: 4 },
+        { timeOfDay: '00', sales: 6 },
+        { timeOfDay: '02', sales: 8 },
+        { timeOfDay: '04', sales: 10 },
+        { timeOfDay: '06', sales: 12 },
+        { timeOfDay: '08', sales: 14 },
+        { timeOfDay: '10', sales: 16 },
+      ];
+  
+      const monthlySalesData = [
+        { dateOfMonth: '24', sales: 20000 },
+        { dateOfMonth: '30', sales: 10000 },
+        { dateOfMonth: '15', sales: 4 },
+        { dateOfMonth: '5', sales: 8 },
+        { dateOfMonth: '10', sales: 12 },
+        { dateOfDay: '15', sales: 16 },
+        { dateOfMonth: '20', sales: 20 },
+      ];
+  
+
     return (
         <div className="Main-Container">
             <div className="Profile">
@@ -47,6 +80,39 @@ const Dashboard = () => {
                     </div>
                 </div>
             </div>
+
+            <div className="dashboard">
+                <div className="dashboard-item">
+                   
+                    <h3>NUMBER OF TESTS</h3>
+                    <p > <FontAwesomeIcon icon={faFlask} />{numberOfTests}</p>
+                </div>
+                <div className="dashboard-item">
+                  
+                    <h3>TOTAL AMOUNT</h3>
+                    <p>  <FontAwesomeIcon icon={faDollarSign} />{totalAmount}</p>
+                </div>
+                <div className="dashboard-item">
+                   
+                    <h3>TOTAL PATIENT</h3>
+                    <p>  <FontAwesomeIcon icon={faUser} /> {totalPatients}</p>
+                </div>
+                <div className="dashboard-item">
+                    <h3>TOKENS GENERATED</h3>
+                    <p><FontAwesomeIcon icon={faKey} /> {tokensGenerated}</p>
+                </div>
+            </div>
+
+            <div className="dashboard-charts">
+                  <div className="chart-container">
+                    <h3>DAILY SALES CHART</h3>
+                    <DailySalesChart data={dailySalesData} />
+                  </div>
+                  <div className="chart-container">
+                    <h3>MONTHLY SALES CHART</h3>
+                    <MonthlySalesChart data={monthlySalesData} />
+                  </div>
+                </div>
         </div>
     );
 }
