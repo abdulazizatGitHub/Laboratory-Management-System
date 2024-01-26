@@ -1,13 +1,14 @@
 // Dashboard.js
 import React from "react";
 import '../CSS/Dashboard.css';
+import img1 from '../../Assessts/Images/Profile1.jpg';
 
 const Dashboard = () => {
     return (
         <div className="Main-Container">
             <div className="Profile">
                 <div className="Image-details">
-                    <img src=".." className="profile-image" />
+                    <img src={img1} className="profile-image" />
                 </div>
 
                 <div className="Profile-details">

@@ -26,10 +26,11 @@
 .Image-details {
     width: 20%;
     height: 100%;
-    border: 1px solid blue;
+    border: 1px solid rgb(255, 255, 255);
     border-radius: 50%;
     overflow: hidden;
     margin-right: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
 }
 
 .profile-image {
