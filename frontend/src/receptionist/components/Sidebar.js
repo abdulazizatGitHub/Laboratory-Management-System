@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import '../CSS/Sidebar.css';
+import Navbar from './Navbar';
 
 function Sidebar() {
     const [isRegistrationDropdownOpen, setRegistrationDropdownOpen] = useState(false);
@@ -18,6 +19,7 @@ function Sidebar() {
     };
 
     return (
+        <div className="sidebar-container">
         <div className="sidenav">
             <span className='Heading-sidebar'>LMS</span>
 
@@ -42,6 +44,9 @@ function Sidebar() {
             </div>
 
             <div className="version">Version 1.0</div>
+            
+        </div>
+        <Navbar />
         </div>
     );
 }
