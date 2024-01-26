@@ -1,0 +1,7 @@
+@import '../../constants/Colors.css';
+
+#namingBar-container{
+    
+    background-color: var(--boxBackColor);
+
+}

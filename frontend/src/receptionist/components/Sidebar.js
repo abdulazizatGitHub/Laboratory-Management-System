@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import '../CSS/Sidebar.css';
 import Navbar from './Navbar';
 
+import { Link } from "react-router-dom";
+
 function Sidebar() {
     const [isRegistrationDropdownOpen, setRegistrationDropdownOpen] = useState(false);
     const [isTestReportsDropdownOpen, setTestReportsDropdownOpen] = useState(false);
@@ -23,16 +25,17 @@ function Sidebar() {
         <div className="sidenav">
             <span className='Heading-sidebar'>LMS</span>
 
-            <a href="#about">
-                <i className="fa fa-dashboard"></i> Dashboard
-            </a>
-
+            
+            <Link to="dashboard"> <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
+                
             <button className={`dropdown-btn ${isRegistrationDropdownOpen ? 'active' : ''}`} onClick={handleRegistrationDropdownToggle}>
                 <i className="fa fa-user-plus"></i> Registrations <i className="fa fa-caret-down"></i>
             </button>
             <div className={`dropdown-container ${isRegistrationDropdownOpen ? 'open' : ''}`}>
-                <a href="#">Patient Registration</a>
-                <a href="#">Search Test</a>
+            <Link to="patient_registration"> <p>Patient Registration</p></Link>
+            <Link to="search_test"> <p>Search Test</p></Link>
+                
+                
             </div>
 
             <button className={`dropdown-btn ${isTestReportsDropdownOpen ? 'active' : ''}`} onClick={handleTestReportsDropdownToggle}>
@@ -46,7 +49,6 @@ function Sidebar() {
             <div className="version">Version 1.0</div>
             
         </div>
-        <Navbar />
         </div>
     );
 }
