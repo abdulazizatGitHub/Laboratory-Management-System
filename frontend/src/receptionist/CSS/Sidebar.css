@@ -18,7 +18,7 @@
     z-index: 1;
     top: 0;
     left: 0;
-    background-color: #161528;
+    background-color: var(--sidebarBackColor);
     overflow-x: hidden;
     padding-top: 50px;
     /* font-family: 'VisbyRoundCF', sans-serif;  */
@@ -98,9 +98,9 @@
 }
 
 .Heading-sidebar {
-    font-size: 34px;
+    font-size: var(--xLarge);
     font-weight: bolder;
-    color: #22CAB8;
+    color: var(--lms);
     padding: 15px;
     display: block;
     text-align: center;
