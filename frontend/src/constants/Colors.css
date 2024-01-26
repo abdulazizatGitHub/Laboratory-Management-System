@@ -13,7 +13,18 @@
   /* navbar colors */
   --navbarTextColor: #FFFFFF;
   --navbarColor: linear-gradient(90deg, #22CAB8 -0.9%, #108A7D 100%);
+  
+  /* Font */
+  --fontRegular: 'Visby Round CF', sans-serif;
+
+  /* Font Sizes */
+  --small: 0.7rem;
+  --medium: 1.1rem;
+  --large: 1.4rem;
+  --xLarge: 2.1rem;
+  --xxLarge: 5.1rem;
 }
+
 
 /* const primary = '#00ADB5';
 const secondary = '#5A6475';

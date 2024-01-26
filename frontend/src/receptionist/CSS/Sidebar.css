@@ -1,5 +1,6 @@
 /* Sidebar.css */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import '../../constants/Colors.css';
 
 .sidebar-container {
     display: flex;
@@ -20,7 +21,8 @@
     background-color: #161528;
     overflow-x: hidden;
     padding-top: 50px;
-    font-family: 'VisbyRoundCF', sans-serif; 
+    /* font-family: 'VisbyRoundCF', sans-serif;  */
+    font-family: var(--fontRegular);
 }
 
 .sidenav a,
