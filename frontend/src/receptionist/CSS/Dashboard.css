@@ -1,19 +1,27 @@
+@import '../../constants/Colors.css';
+
 .Main-Container {
     display: flex;
     justify-content: center;
+    font-family: var(--fontRegular);
+    
 }
 
 .Profile {
     display: flex;
     flex-direction: row;
-    margin-top: 30px;
+    margin-top: 15px;
     padding: 20px;
     box-sizing: border-box;
-    width: 90%;
-    border: 1px solid black;
-    height: 30vh;
+    width: 98%;
+    border: 5px solid rgb(255, 253, 253);
+    border-radius: 10px; 
+    height: 40vh;
     gap: 50px;
+    background-color: var(--navbarTextColor);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
 }
+
 
 .Image-details {
     width: 20%;
@@ -38,7 +46,8 @@
     flex-direction: column;
     width: 15%;
     height: 100%;
-    border: 1px solid black;
+
+    
 }
 
 .upper-profile,
@@ -49,19 +58,33 @@
 .Last-lower-profile {
     width: 100%;
     height: 20vh;
-    border: 1px solid black;
+  
     display: flex;
     flex-direction: column;
 }
 
-.upper-profile span,
-.Middle-upper-profile span,
-.Last-upper-profile span,
-.lower-profile span,
-.Middle-lower-profile span,
-.Last-lower-profile span {
-    text-align: left; /* Align text to the left within each span */
+/* Dashboard.css */
+/* ... (other styles) */
+
+.upper-profile p,
+.Middle-upper-profile p,
+.Last-upper-profile p,
+.lower-profile p,
+.Middle-lower-profile p,
+.Last-lower-profile p {
+    text-align: left; /* Align text to the left within each paragraph */
+    margin-top: 30px; /* Adjust the margin-top value as needed */
+    margin-bottom: -15px; /* Adjust the margin-bottom value as needed */
 }
+
+
+
+
+
+.bold-light {
+    font-weight: bold;
+}
+
 
 /* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
