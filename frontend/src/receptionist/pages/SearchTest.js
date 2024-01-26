@@ -1,8 +1,8 @@
 import React from "react"
-
+import NamingBar from "../components/NamingBar";
 const SearchTest = ()=>{
     return(<div>
-        <p>Search TEst</p>
+        <NamingBar name={"Search Test"}/>
     </div>)
 }
 

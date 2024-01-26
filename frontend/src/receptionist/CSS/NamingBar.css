@@ -1,7 +1,10 @@
 @import '../../constants/Colors.css';
 
 #namingBar-container{
-    
+    height: 50px;
+    display: flex;
+    justify-content: flex-start;
     background-color: var(--boxBackColor);
-
+    box-shadow: var(--divShadowColor);
+    padding-left: 1.2em;
 }

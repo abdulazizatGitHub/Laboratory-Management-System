@@ -34,6 +34,7 @@ function Sidebar() {
             <div className={`dropdown-container ${isRegistrationDropdownOpen ? 'open' : ''}`}>
             <Link to="patient_registration"> <p>Patient Registration</p></Link>
             <Link to="search_test"> <p>Search Test</p></Link>
+            <Link to="generate_token"> <p>Generate Token</p></Link>
                 
                 
             </div>

@@ -7,9 +7,8 @@ import NamingBar from "../components/NamingBar";
 const GenerateToken = ()=>{
     return(
         <div className="generateToken-container">
-        <Navbar />
-        <Sidebar />
-        <NamingBar name={"Dashboard"} />
+        
+        <NamingBar name={"Generate Token"} />
     </div>)
 }
 

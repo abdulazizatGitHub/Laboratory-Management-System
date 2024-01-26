@@ -4,8 +4,8 @@
 .navbar {
     position: fixed;
     top: 0;
-    left: 0;
-    width: 100%;
+    left: 17%; /* Adjusted left position for the content to accommodate the sidebar */
+    width: calc(100% - 17%); /* Adjusted width for the navbar */
     height: 50px;
     background: var(--navbarColor);
     display: flex;

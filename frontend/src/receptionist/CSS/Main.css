@@ -1,0 +1,13 @@
+#mainContainer-receptionist {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-side-recep {
+    width: 17%;
+}
+
+.right-side-recep {
+    width: 83%;
+}

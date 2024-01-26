@@ -1,12 +1,11 @@
 import React from "react"
-
+import NamingBar from "../components/NamingBar";
 
 
 
 const PatientRegistration = ()=>{
     return(<div>
-            
-        <p>Patient Registration</p>
+            <NamingBar name={"Patient Registration"} />
     </div>)
 }
 

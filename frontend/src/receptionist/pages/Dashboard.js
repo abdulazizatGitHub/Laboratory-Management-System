@@ -2,11 +2,12 @@
     import React from "react";
     import Sidebar from "../components/Sidebar";
     import '../CSS/Dashboard.css';
+import NamingBar from "../components/NamingBar";
 
     const Dashboard = () => {
         return (
             <div>
-                <Sidebar />
+                <NamingBar name={"Dashboard"} />
                 <div className="Profile">
                     <div className="Image-details">
                     <img src=".." className="profile-image" />

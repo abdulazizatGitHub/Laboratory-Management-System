@@ -3,28 +3,23 @@
 @import '../../constants/Colors.css';
 
 .sidebar-container {
-    display: flex;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 17%; /* Adjusted width for the sidebar */
+    height: 100%;
     z-index: 99;
+    background-color: var(--sidebarBackColor);
+    padding-top: 50px;
+    font-family: var(--fontRegular);
 }
-
 
 .sidenav {
     height: 100%;
-    width: 250px;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: var(--sidebarBackColor);
+    position: relative;
     overflow-x: hidden;
-    padding-top: 50px;
-    /* font-family: 'VisbyRoundCF', sans-serif;  */
-    font-family: var(--fontRegular);
 }
+
 
 .sidenav a,
 .dropdown-btn {
