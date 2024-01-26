@@ -112,7 +112,9 @@
   text-align: center;
 }
 
+/* Sidebar.css */
 
+/* Existing styles... */
 
 /* Media Queries */
 @media screen and (max-width: 768px) {
@@ -126,7 +128,14 @@
     }
 
     .main {
-        margin-left: 150px; /* Adjusted margin for medium devices */
+        margin-left: 0; /* No margin for small devices */
+    }
+
+    .dashboard {
+        position: fixed; /* Keep the Dashboard fixed at its position on small devices */
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
     .dropdown-container {
@@ -150,6 +159,13 @@
 
     .main {
         margin-left: 0; /* No margin for small devices */
+    }
+
+    .dashboard {
+        position: fixed; /* Keep the Dashboard fixed at its position on small devices */
+        top: 0;
+        left: 0;
+        width: 100%;
     }
 
     .dropdown-container {

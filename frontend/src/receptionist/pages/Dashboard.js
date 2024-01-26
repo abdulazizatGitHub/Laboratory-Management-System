@@ -1,13 +1,11 @@
     // Dashboard.js
     import React from "react";
-    import Sidebar from "../components/Sidebar";
     import '../CSS/Dashboard.css';
-import NamingBar from "../components/NamingBar";
 
     const Dashboard = () => {
         return (
-            <div>
-                <NamingBar name={"Dashboard"} />
+            <div className="Main-Container">
+         
                 <div className="Profile">
                     <div className="Image-details">
                     <img src=".." className="profile-image" />
@@ -25,6 +23,32 @@ import NamingBar from "../components/NamingBar";
                             <span>Khan</span>
                         </div>
                     </div>
+
+                    <div className="Middle-details">
+                        <div className="Middle-upper-profile">
+                            <span>Name</span> <br></br>
+                            <span>Hasnin Khan</span>
+                        </div>
+
+                        <div className="Middle-lower-profile">
+                        <span>Father Name</span> <br></br>
+                            <span>Khan</span>
+                        </div>
+                    </div>
+
+                    <div className="Last-details">
+                        <div className="Last-upper-profile">
+                            <span>Name</span> <br></br>
+                            <span>Mahad Khan</span>
+                        </div>
+
+                        <div className="Last-lower-profile">
+                        <span>Father Name</span> <br></br>
+                            <span>Khan</span>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         );

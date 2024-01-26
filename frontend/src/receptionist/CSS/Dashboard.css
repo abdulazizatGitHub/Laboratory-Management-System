@@ -1,58 +1,80 @@
-/* Dashboard.css */
+.Main-Container {
+    display: flex;
+    justify-content: center;
+}
+
 .Profile {
     display: flex;
     flex-direction: row;
-    margin-top: 60px; /* Adjusted margin to push content below the Navbar */
-    margin-left: 270px; /* Adjusted margin to push content to the right of the Sidebar */
-    padding: 20px; /* Add padding for better spacing */
-    box-sizing: border-box; /* Include padding in the element's total width and height */
-    width: calc(98% - 250px); /* Adjusted width to fit the remaining space */
+    margin-top: 30px;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 90%;
     border: 1px solid black;
-    height: 45vh;
+    height: 30vh;
+    gap: 50px;
 }
+
 .Image-details {
-    width: 20%; /* Adjusted width */
+    width: 20%;
     height: 100%;
     border: 1px solid blue;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 20px;
 }
+
 .profile-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.Profile-details{
+/* General styling for profile details sections */
+.Profile-details,
+.Middle-details,
+.Last-details {
     display: flex;
     flex-direction: column;
-    width: 30%;
-    height: 40vh;
+    width: 15%;
+    height: 100%;
     border: 1px solid black;
 }
-.upper-profile{
+
+.upper-profile,
+.Middle-upper-profile,
+.Last-upper-profile,
+.lower-profile,
+.Middle-lower-profile,
+.Last-lower-profile {
     width: 100%;
     height: 20vh;
     border: 1px solid black;
+    display: flex;
+    flex-direction: column;
 }
-.lower-profile{
-    width: 100%;
-    height: 20vh;
-    border: 1px solid blue;
+
+.upper-profile span,
+.Middle-upper-profile span,
+.Last-upper-profile span,
+.lower-profile span,
+.Middle-lower-profile span,
+.Last-lower-profile span {
+    text-align: left; /* Align text to the left within each span */
 }
+
 /* Media Query for smaller screens */
 @media screen and (max-width: 768px) {
     .Profile {
-        margin-left: 150px; /* Adjusted margin for medium devices */
-        width: calc(100% - 150px); /* Adjusted width for medium devices */
+        margin-left: 150px;
+        width: calc(100% - 150px);
     }
 }
 
 /* Media Query for smaller screens */
 @media screen and (max-width: 576px) {
     .Profile {
-        margin-left: 0; /* No margin for small devices */
-        width: 100%; /* Full width for small devices */
+        margin-left: 0;
+        width: 100%;
     }
 }
