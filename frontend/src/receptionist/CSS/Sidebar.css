@@ -21,9 +21,9 @@
 }
 
 
-.sidenav a,
+.sidenav p,
 .dropdown-btn {
-    padding: 10px 20px; /* Increased padding for better spacing */
+    padding: 8px 20px; 
     text-decoration: none;
     font-size: 16px;
     color: #818181;
@@ -34,16 +34,16 @@
     text-align: left;
     cursor: pointer;
     outline: none;
-    margin-bottom: 10px; /* Add space between items */
+    margin-bottom: 10px; 
  
 }
 
-.sidenav a i,
+.sidenav p i,
 .dropdown-btn i {
     margin-right: 5px; /* Adjusted margin for more space between icon and text */
 }
 
-.sidenav a:hover,
+.sidenav p:hover,
 .dropdown-btn:hover {
     color: #f1f1f1;
 }
@@ -67,21 +67,21 @@
     margin-top: -10px;
 }
 
-.dropdown-container a {
-    padding: 10px 35px; /* Adjusted padding to align with the custom bullets */
+.dropdown-container p {
+    padding: 2px 30px; /* Adjusted padding to align with the custom bullets */
     display: block;
     position: relative;
     margin-bottom: -2px; /* Add space between items */
 }
 
-.dropdown-container a::before {
+.dropdown-container p::before {
     content: '\2022'; /* Unicode character for a bullet */
     font-size: 20px;
-    margin-right: 8px;
+    margin-right: 15px;
     color: #22CAB8; /* Set bullet color */
     position: absolute;
     left: 20px; /* Adjust the left position to align with the text */
-    bottom: 7px;
+    bottom: 1px;
 }
 
 .fa-caret-down {
@@ -120,7 +120,7 @@
         width: 150px; /* Adjusted width for medium devices */
     }
 
-    .sidenav a,
+    .sidenav p,
     .dropdown-btn {
         padding: 10px 15px; /* Adjusted padding for medium devices */
     }
@@ -133,7 +133,7 @@
         padding-left: 20px; /* Adjusted padding for medium devices */
     }
 
-    .dropdown-container a {
+    .dropdown-container p {
         padding: 10px 30px; /* Adjusted padding for medium devices */
     }
 }
@@ -143,7 +143,7 @@
         width: 100%; /* Full width for small devices */
     }
 
-    .sidenav a,
+    .sidenav p,
     .dropdown-btn {
         padding: 10px; /* Adjusted padding for small devices */
     }
@@ -156,7 +156,7 @@
         padding-left: 20px; /* Adjusted padding for small devices */
     }
 
-    .dropdown-container a {
+    .dropdown-container p {
         padding: 10px 30px; /* Adjusted padding for small devices */
     }
 }
