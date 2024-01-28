@@ -85,9 +85,9 @@ const PatientRegistration = ()=>{
                     <button className="Next-button">Next</button> 
                 </div>
 
-              {/* <div className="Patient-Image">
+              <div className="Patient-Image">
         
-              </div> */}
+              </div>
                
             </section>
 
