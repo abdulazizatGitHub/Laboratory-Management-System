@@ -33,7 +33,7 @@ const PatientRegistration = ()=>{
                              <label for="fname">Age</label><br></br>
                               <input type="text" id="fname" name="fname" placeholder="Enter Your Name" /><br></br>
 
-                              <label for="fname">Cnic</label><br></br>
+                              <label for="fname">CNIC</label><br></br>
                               <input type="text" id="fname" name="fname" placeholder="Enter Your Gender" />
                                </div>
                      </div>
@@ -85,9 +85,9 @@ const PatientRegistration = ()=>{
                     <button className="Next-button">Next</button> 
                 </div>
 
-              <div className="Patient-Image">
+              {/* <div className="Patient-Image">
         
-              </div>
+              </div> */}
                
             </section>
 
