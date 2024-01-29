@@ -130,9 +130,9 @@ const PatientRegistration = () => {
             <input type="text" id="refDoctor" name="refDoctor" placeholder="Enter Your Name" value={formData.refDoctor}
               onChange={handleInputChange} /><br></br>
 
-            {/* <label for="fname">Internal Remarks</label><br></br>
+             <label for="fname">Internal Remarks</label><br></br>
               <input type="text" id="internalRemarks" name="internalRemarks" placeholder="Enter Your Rmarks" value={formData.internalRemarks}
-                onChange={handleInputChange} /> */}
+                onChange={handleInputChange} /> 
 
           </div>
 
@@ -145,10 +145,10 @@ const PatientRegistration = () => {
         <div className="btn-container"><button className="Next-button" onClick={handleNextClick}>Next</button></div>
       </div>
 
-      {/* <section className="Profile-Main-Container">
+      <section className="Profile-Main-Container">
 
         
-      </section> */}
+      </section>
 
     </div>
   )
