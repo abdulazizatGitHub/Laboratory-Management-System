@@ -14,7 +14,7 @@ const Right = () => {
         <div style={{  marginTop: "50px" }}>
           {/* Add a margin-top to create space for the Navbar */}
           <Routes>
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/*" element={<Dashboard />} />
             <Route
               path="/patient_registration"
               element={<PatientRegistration />}

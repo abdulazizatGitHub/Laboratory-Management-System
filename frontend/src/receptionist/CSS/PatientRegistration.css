@@ -50,7 +50,13 @@
 
 .Patient-Gender-Container {
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
+    width: 60%;
+    height: 19em;
+    /* border: 2px solid black; */
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .left-side-Profile input {
@@ -130,3 +136,30 @@ h2 {
 }
 
 
+
+
+.Patient-Gender-label{
+    display: flex;
+    border: 1px solid #CED4DA;
+    border-radius: 5px;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    width: 45%;
+    height: 95%;
+    
+}
+/* .patientGender-radio{
+    position: absolute;
+    left: -59px;
+    
+    
+
+} */
+
+.patientGender-txt{
+    font-size: var(--medium);
+    font-weight: 600;
+    color: #5A6475;
+    
+}
