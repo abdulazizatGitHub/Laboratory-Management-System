@@ -26,7 +26,7 @@ function Sidebar() {
             <span className='Heading-sidebar'>LMS</span>
 
             
-            <Link to="dashboard" style={{textDecoration:'none'}}> <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
+            <Link to="" style={{textDecoration:'none'}}> <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
                 
             <button className={`dropdown-btn ${isRegistrationDropdownOpen ? 'active' : ''}`} onClick={handleRegistrationDropdownToggle}>
                 <i className="fa fa-user-plus"></i> Registrations <i className="fa fa-caret-down"></i>

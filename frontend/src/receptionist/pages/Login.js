@@ -7,7 +7,7 @@ const Login = () => {
     const navigation = useNavigate();
 
     const handleLogin = () => {
-        navigation('/dashboard');
+        navigation('/receptionist');
     }
     return (
         <div className="login-main-container">

@@ -15,8 +15,8 @@ const Right = () => {
         <div style={{  marginTop: "50px" }}>
           {/* Add a margin-top to create space for the Navbar */}
           <Routes>
-          <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+          {/* <Route path="/" element={<Login />} /> */}
+            <Route path="/" element={<Dashboard />} />
             <Route
               path="/patient_registration"
               element={<PatientRegistration />}
@@ -24,6 +24,7 @@ const Right = () => {
             <Route path="/search_test" element={<SearchTest />} />
             <Route path="/generate_token" element={<GenerateToken />} />
           </Routes>
+          
         </div>
       </div>
     </div>
