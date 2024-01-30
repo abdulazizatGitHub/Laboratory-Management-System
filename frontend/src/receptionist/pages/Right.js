@@ -5,6 +5,7 @@ import Dashboard from "./Dashboard";
 import SearchTest from "./SearchTest";
 import Navbar from "../components/Navbar";
 import GenerateToken from "./GenerateToken";
+import Login from "./Login";
 
 const Right = () => {
   return (
@@ -14,7 +15,8 @@ const Right = () => {
         <div style={{  marginTop: "50px" }}>
           {/* Add a margin-top to create space for the Navbar */}
           <Routes>
-            <Route path="/*" element={<Dashboard />} />
+          <Route path="/login" element={<Login />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route
               path="/patient_registration"
               element={<PatientRegistration />}

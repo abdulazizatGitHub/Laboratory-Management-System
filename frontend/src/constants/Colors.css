@@ -5,7 +5,7 @@
   --headingColor: #5A6475;
   --textFieldBorderColor: 1.04px solid #CFCFCF;
   --textColor: #5A6475;
-  --divShadowColor: 0px 8px 10px 0px #00000008;
+  --divShadowColor: 0 0 10px rgba(0, 0, 0, 0.2);
   
 
   --boxBackColor: #FFFFFF;
