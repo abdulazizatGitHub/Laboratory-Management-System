@@ -43,8 +43,8 @@ function Sidebar() {
                 <i className="fa fa-file-text"></i> Test Reports <i className="fa fa-caret-down"></i>
             </button>
             <div className={`dropdown-container ${isTestReportsDropdownOpen ? 'open' : ''}`}>
-                <p>Patient Registration</p>
-                <p >Search Test</p>
+            <Link to="view_test_report" style={{textDecoration:'none'}}><p>View Test Report</p></Link>
+            <Link to="search_test_report" style={{textDecoration:'none'}}><p >Search Test Report</p></Link>
             </div>
 
             {/* <div className="version">Version 1.0</div> */}

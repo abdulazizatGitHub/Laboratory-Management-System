@@ -5,7 +5,8 @@ import Dashboard from "./Dashboard";
 import SearchTest from "./SearchTest";
 import Navbar from "../components/Navbar";
 import GenerateToken from "./GenerateToken";
-import Login from "./Login";
+import ViewTestReport from "./ViewTestReport";
+import SearchTestReport from "./SearchTestReport"
 
 const Right = () => {
   return (
@@ -23,6 +24,8 @@ const Right = () => {
             />
             <Route path="/search_test" element={<SearchTest />} />
             <Route path="/generate_token" element={<GenerateToken />} />
+            <Route path="/view_test_report" element={<ViewTestReport />} />
+            <Route path="/search_test_report" element={<SearchTestReport />} />
           </Routes>
           
         </div>
