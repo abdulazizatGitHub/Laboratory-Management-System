@@ -1,0 +1,14 @@
+@import "../../constants/Colors.css";
+
+#mainContainer-admin{
+    font-family: var(--fontRegular);
+     display: flex;
+     justify-content: space-between;
+}
+.left-side-admin{
+    width: 17%;
+      
+}
+.right-side-admin{
+    width: 83%;
+}
