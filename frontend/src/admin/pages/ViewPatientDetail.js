@@ -38,6 +38,10 @@ const ViewPatientDetail = () => {
         setQueryByPIN(query)
     }
 
+    const handleDetailView=()=>{
+        console.log("Detail");
+    }
+
     const filteredData = selectedField==="PIN"
     ? patientData.filter(data=>data.pin.includes(queryByPIN))
     : (selectedField==="Contact"
@@ -81,6 +85,7 @@ const ViewPatientDetail = () => {
                             <th>Name</th>
                             <th>Contact #</th>
                             <th>CNIC</th>
+                            <th>Detail</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -91,6 +96,9 @@ const ViewPatientDetail = () => {
                                     <td>{data.name}</td>
                                     <td>{data.conatctNo}</td>
                                     <td>{data.CNIC}</td>
+                                    <td>
+                                        <button type="button" id="ViewTestReport-roundButton" onClick={handleDetailView}>View</button>
+                                    </td>
                                 </tr>
                             ))
                         }
