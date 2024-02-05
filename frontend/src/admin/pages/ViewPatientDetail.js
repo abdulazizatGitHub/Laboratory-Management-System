@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../css/ViewPatientDetail.css';
+import { useNavigate } from "react-router-dom";
 const ViewPatientDetail = () => {
     const [queryByPIN, setQueryByPIN] = useState('');
     const [queryByContact, setQueryByContact] = useState('');
@@ -17,6 +18,12 @@ const ViewPatientDetail = () => {
         { pin: '2401-00009', name: 'Abdul Aziz', conatctNo: '0300-0000000', CNIC: '15402-0000000-0'},
         { pin: '2401-00010', name: 'Abdul Aziz', conatctNo: '0300-0000000', CNIC: '15402-0000000-0'},
       ]);
+
+      const navigation = useNavigate();
+
+      const handleButtonClick = () => {
+        navigation('view-patient-detail-records')
+      }
 
     return (
         <div className="View-Patient-Details-Container">
@@ -55,6 +62,7 @@ const ViewPatientDetail = () => {
                                 <td>{data.name}</td>
                                 <td>{data.conatctNo}</td>
                                 <td>{data.CNIC}</td>
+                                <td><button className="View-Button" onClick={handleButtonClick}>View</button></td>
                             </tr>
                                 ))
                             }
