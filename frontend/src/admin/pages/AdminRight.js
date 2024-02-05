@@ -7,13 +7,12 @@ import ViewStaffRecord from "./ViewStaffRecord";
 import ViewPatientDetail from "./ViewPatientDetail";
 import StaffReport from "./StaffReport";
 import MonthlyReport from "./MonthlyReport";
-import Dashboard from "../../receptionist/pages/Dashboard";
 
 const AdminRight = () => {
     return (
         <div style={{ width: "100%", height: "100%" }}>
             <Navbar />
-            <div style={{ marginTop: "3em" }}>
+            <div style={{ marginTop: "50px" }}>
                 <Routes>
                     <Route path="/" element={<AdminDashboard />} />
                     <Route path="/staff_registration" element={<StaffRegistration />} />

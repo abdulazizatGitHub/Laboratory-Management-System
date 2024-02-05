@@ -1,0 +1,12 @@
+@import "../../constants/Colors.css";
+
+#Admin-NameBar{
+    font-family: var(--fontRegular);
+    display: flex;
+    justify-content: center;
+    background-color: var(--boxBackColor);
+    box-shadow: var(--divShadowColor);
+}
+#Admin-name{
+    font-weight: 600;
+}

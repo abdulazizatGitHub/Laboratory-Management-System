@@ -1,6 +1,42 @@
 @import "../../constants/Colors.css";
 
+#AdminDashboard {
+    font-family: var(--fontRegular);
+}
 
-#AdminDashboard{
-    background-color: red;
+.AdminDashboard-subContainer {
+    width: 95%;
+    margin: 2em;
+    box-shadow: var(--divShadowColor);
+    display: flex;
+}
+
+.adminDash-equalBoxes {
+    width: 100%;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-smallbox{
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+.admin-text{
+    font-weight: 600;
+    color: var(--textColor);
+    font-size: var(--medium);
+}
+
+.admin-boxContainer{
+    display: flex;
+}
+
+
+.Admin-Bottom-divs{
+    width: 100%;
+    padding: 3em;
+    text-align: center;
 }
