@@ -30,7 +30,7 @@ function Sidebar() {
             <Link to="" style={{textDecoration:'none'}}> <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
                 
             <button className={`dropdown-btn ${isRegistrationDropdownOpen ? 'active' : ''}`} onClick={handleRegistrationDropdownToggle}>
-                <i className="fa fa-user-plus"></i> Registrations <i className="fa fa-caret-down"></i>
+                <i className="fa fa-user-plus"></i> Registrations<i className="fa fa-caret-down"></i>
             </button>
             <div className={`dropdown-container ${isRegistrationDropdownOpen ? 'open' : ''}`}>
             <Link to="staff_registration" style={{textDecoration:'none'}}> <p>Staff Registration</p></Link>
