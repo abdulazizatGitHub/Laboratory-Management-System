@@ -31,7 +31,7 @@ const AdminDashboard = () => {
 
                     <div className="admin-boxContainer">
                         <div className="admin-smallbox">
-                            <p className="admin-text">Total # of ECG</p>
+                            <p className="admin-text">Total # of X-Ray</p>
                             <p className="admin-text">80</p>
                         </div>
                         <div className="admin-smallbox">
@@ -42,7 +42,7 @@ const AdminDashboard = () => {
 
                     <div className="admin-boxContainer">
                         <div className="admin-smallbox">
-                            <p className="admin-text">Total # of Test</p>
+                            <p className="admin-text">Total # of ECG</p>
                             <p className="admin-text">80</p>
                         </div>
                         <div className="admin-smallbox">

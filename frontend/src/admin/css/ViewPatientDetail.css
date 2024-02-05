@@ -49,13 +49,13 @@
     font-weight: bold;
 }
 
-.Search-Content input {
+/* .Search-Content input {
     width: 20rem;
-    height: 30px; /* Increase the height as needed */
+    height: 30px; 
     border: 1px solid #838181;
-    border-radius: 5px; /* Add border-radius for rounded corners */
-    padding: 8px; /* Add padding for better spacing */
-}
+    border-radius: 5px; 
+    padding: 8px;
+} */
 
 .Scrolable-Table-Container {
     width: 95%;
@@ -106,4 +106,27 @@
 .Scrolable-Table tr:hover {
     background-color: rgb(207, 206, 206);
     cursor: pointer;
+}
+
+
+.ViewPat-search-input{
+    display: flex;
+    position: relative;
+    height: 2em;
+
+}
+
+.ViewPat-search-radio{
+    position: absolute;
+    top: 0.5em;
+}
+
+.ViewPat-search-text{   
+    
+    border: var(--textFieldBorderColor);
+    padding-left: 2em;
+    width: 100%;
+    height: 2em;
+    border-radius: 4px;
+
 }
