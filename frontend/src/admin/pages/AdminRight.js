@@ -21,7 +21,7 @@ const AdminRight = () => {
                     <Route path="/view-patient-detail" element={<ViewPatientDetail />} />
                     <Route path="/view-patient-detail/patientDetail" element={<PatientDetailPage />} />
                     <Route path="/staff_report" element={<StaffReport />} />
-                    <Route path="/monthly-report" element={<MonthlyReport />} />
+                    <Route path="/MonthlyReport" element={<MonthlyReport />} />
                 </Routes>
             </div>
         </div>

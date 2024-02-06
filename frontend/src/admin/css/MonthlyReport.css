@@ -1,0 +1,86 @@
+.Monthly-Report-main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+}
+.MonthlySales{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 5%;
+    width: 100%;
+    height: 100%;
+}
+
+.Left-Side-Monthly,
+.Right-Side-Monthly{
+    width: 45%;
+    height: 100%;
+    border: 5px solid rgb(255, 253, 253);
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.Monthly-h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.Top-Sale{
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    height: 100%;
+    border: 5px solid rgb(255, 253, 253);
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.Left-TopSales{
+    width: 65%;
+    height: 100%;
+
+}
+/* MonthlyReport.css */
+
+/* Define styles for table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  /* Define styles for table header */
+  thead th {
+    background-color: #f2f2f2;
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  /* Define styles for table rows */
+  tbody tr {
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Define styles for table data */
+  tbody td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  /* Define styles for table data in even rows */
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+.Right-Sales{
+    width: 35%;
+    height: 100%;
+ 
+}

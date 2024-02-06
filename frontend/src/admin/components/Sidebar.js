@@ -43,7 +43,7 @@ function Sidebar() {
             </button>
             <div className={`dropdown-container ${isTestReportsDropdownOpen ? 'open' : ''}`}>
             <Link to="staff_report" style={{textDecoration:'none'}}><p>Staff Report</p></Link>
-            <Link to="montly-report" style={{textDecoration:'none'}}><p >Monthly Report</p></Link>
+            <Link to="MonthlyReport" style={{textDecoration:'none'}}><p >Monthly Report</p></Link>
             </div>
 
             {/* <div className="version">Version 1.0</div> */}
