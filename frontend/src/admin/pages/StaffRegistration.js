@@ -11,16 +11,6 @@ const StaffRegistration = () => {
 
     return (
         <div className="Staff-Registration-Container">
-            <div className="sr-image-container">
-                <div className="sr-image-text">
-                    <h4>Staff Image</h4>
-                    <p>Add Staff Image Here</p>
-                </div>
-                <div className="sr-image-main">
-                    <span><HiOutlineCamera size={40} color="#22CAB8" cursor='pointer' /></span>
-                </div>
-
-            </div>
             <div className="sr-form-container">
                 <p>New Registration</p>
                 <form className="sr-form">
@@ -92,6 +82,15 @@ const StaffRegistration = () => {
                     </div>
 
                 </form>
+            </div>
+            <div className="sr-image-container">
+                <div className="sr-image-text">
+                    <h4>Staff Image</h4>
+                    <p>Add Staff Image Here</p>
+                </div>
+                <div className="sr-image-main">
+                    <span><HiOutlineCamera size={40} color="#22CAB8" cursor='pointer' /></span>
+                </div>
             </div>
         </div>
     )
