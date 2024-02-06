@@ -8,6 +8,7 @@ import ViewPatientDetail from "./ViewPatientDetail";
 import StaffReport from "./StaffReport";
 import MonthlyReport from "./MonthlyReport";
 import PatientDetailPage from "./PatientDetailPage";
+import DetailStaff from "./Detailstaff";
 
 const AdminRight = () => {
     return (
@@ -20,8 +21,9 @@ const AdminRight = () => {
                     <Route path="/view-staff-record" element={<ViewStaffRecord />} />
                     <Route path="/view-patient-detail" element={<ViewPatientDetail />} />
                     <Route path="/view-patient-detail/patientDetail" element={<PatientDetailPage />} />
-                    <Route path="/staff_report" element={<StaffReport />} />
+                    <Route path="/staff_report" element={<StaffReport  />} />
                     <Route path="/MonthlyReport" element={<MonthlyReport />} />
+                    <Route path="/StaffReport/Detailstaff" element={<DetailStaff />} />
                 </Routes>
             </div>
         </div>

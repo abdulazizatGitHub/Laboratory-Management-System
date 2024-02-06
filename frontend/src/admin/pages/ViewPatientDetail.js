@@ -7,6 +7,7 @@ const ViewPatientDetail = () => {
     const [queryByContact, setQueryByContact] = useState('');
     const [queryByCNIC, setQueryByCNIC] = useState('');
     const navigation = useNavigate();
+    
     const [patientData, setPatientData] = useState([
         { pin: '2401-00001', name: 'Abdul Aziz', conatctNo: '0310-0000000', CNIC: '15402-0000000-0' },
         { pin: '2401-00002', name: 'Mahad Wajid', conatctNo: '0320-0000000', CNIC: '15412-0000000-0' },
