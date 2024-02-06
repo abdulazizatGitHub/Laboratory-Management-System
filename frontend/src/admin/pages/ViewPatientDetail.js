@@ -51,6 +51,8 @@ const ViewPatientDetail = () => {
     : patientData.filter(data => data.CNIC.includes(queryByCNIC))
     )
 
+      
+
     return (
         <div className="View-Patient-Details-Container">
             <div className="Search-Container">
