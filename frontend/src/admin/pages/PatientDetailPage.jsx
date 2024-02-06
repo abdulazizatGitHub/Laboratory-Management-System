@@ -34,7 +34,7 @@ const PatientDetailPage = () => {
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">Gender: </p>
                         <p>Male</p>
-                    </div>.
+                    </div>
 
                     
                     <div className="pdp-subBoxes">

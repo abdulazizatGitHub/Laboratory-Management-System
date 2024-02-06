@@ -1,0 +1,217 @@
+@import '../../constants/Colors.css';
+
+.Staff-Registration-Container {
+    width: 99.77%;
+    height: auto; 
+    font-family: var(--fontRegular);
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.sr-image-container {
+    width: 23%;
+    height: 35vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+    margin-top: 10rem;
+}
+
+.sr-image-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sr-image-text h4 {
+    color: var(--lms);
+    font-weight: 600;
+    font-size: large;
+}
+.sr-image-text p {
+    font-size: medium;
+    font-weight: 400;
+    margin-top: -0.5rem;
+}
+
+.sr-image-main {
+    width: 90%;
+    height: 60%;
+    border-radius: 1rem;
+    background: #F4F4F4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sr-image-main span {
+    width: 25%;
+    height: 35%;
+    border-radius: 50%;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.sr-form-container {
+    width: 70%;
+    height: 100%;
+    border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.sr-form-container p {
+    color: var(--lms);
+    font-weight: 600;
+    font-size: x-large;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sr-form {
+    width: 90%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.sr-form h3 {
+    font-weight: 800;
+    font-size: large;
+    margin-left: 1rem;
+}
+
+.sr-form-details-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-left: 2rem
+}
+
+.sr-form-inputs-container {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 1rem;
+}
+
+.sr-form-inputs-container input {
+    width: 300px;
+    height: 30px; /* Increase the height as needed */
+    border: 1px solid #838181;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+}
+
+.sr-form-inputs-container label {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.sr-form-gender-container {
+    display: flex;
+    width: 90%;
+    height: 3em;
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sr-form-gender-main {
+    display: flex;
+    border: 1px solid #838181;
+    border-radius: 5px;
+    justify-content: center; /* Center horizontally */
+    align-items: center;
+    position: relative;
+    width: 40%;
+    height: 95%;
+    gap: 0.5rem;
+}
+
+.sr-form-gender-main label {
+    font-size: var(--medium);
+    font-weight: lighter;
+    color: #5A6475;
+    text-align: center; /* Center text */
+    margin-top: -0.1rem; /* Adjust the margin-top value to move the text slightly above */
+
+}
+
+.sr-form-gender-main input {
+    /* Add these styles to make the checkbox round and centered */
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 10px;
+    
+}
+
+.sr-form-button-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 1.2rem;
+    margin-top: 2rem;
+}
+
+.sr-form-button-container button {
+    width: 15rem;
+    height: 5vh;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: var(--fontRegular);
+    background-color: var( --lms);
+    border: 2px solid var(--lms);
+    border-radius: 5px;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.sr-form-button-container button:hover {
+    transform: scale(1.1);
+}
+
+.sr-form-gender-container input[type="radio"] {
+    appearance: none;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var( --headingColor);
+    margin-right: 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+.sr-form-gender-container input[type="radio"]:checked::before {
+    content: '';
+    display: block;
+    width: 10px;
+    height: 10px;
+    background-color: var(--lms);
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
