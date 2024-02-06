@@ -7,6 +7,7 @@ import ViewStaffRecord from "./ViewStaffRecord";
 import ViewPatientDetail from "./ViewPatientDetail";
 import StaffReport from "./StaffReport";
 import MonthlyReport from "./MonthlyReport";
+import PatientDetailPage from "./PatientDetailPage";
 
 const AdminRight = () => {
     return (
@@ -18,6 +19,7 @@ const AdminRight = () => {
                     <Route path="/staff_registration" element={<StaffRegistration />} />
                     <Route path="/view-staff-record" element={<ViewStaffRecord />} />
                     <Route path="/view-patient-detail" element={<ViewPatientDetail />} />
+                    <Route path="/view-patient-detail/patientDetail" element={<PatientDetailPage />} />
                     <Route path="/staff_report" element={<StaffReport />} />
                     <Route path="/monthly-report" element={<MonthlyReport />} />
                 </Routes>

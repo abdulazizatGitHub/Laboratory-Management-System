@@ -1,0 +1,68 @@
+@import "../../constants/Colors.css";
+
+#patientDetailPage-Fullcontainer{
+    font-family: var(--fontRegular);
+}
+
+
+#pdp-nameAndButtons{
+display: flex;
+justify-content: space-around;
+align-items:center;
+box-shadow: var(--divShadowColor);
+}
+
+#pdp-name{
+    font-size: var(--large);
+    color: var(--headingColor);
+    font-weight: 700;
+    text-align: right;
+    width: 50%;
+}
+
+
+
+#pdp-btn{
+    width: 7em;
+    height: 2em;
+    color: white;
+    background-color: var(--lms);
+    border-radius: 8px;
+    border: var(--textFieldBorderColor);
+    font-size: var(--medium);
+    padding: 0px;
+}
+
+#pdp-container{
+    box-shadow: var(--divShadowColor);
+    width: 89.3%;
+    padding-top: 0.5em;
+    padding-left: 5em;
+    padding-right: 5em;
+}
+
+.pdp-heading{
+    font-size: 1.3em;
+    color: var(--headingColor);
+    font-weight: 700;
+}
+
+.pdp-details{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0px 2em;
+}
+.pdp-subBoxes{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.pdp-smallHeading{
+    font-size: var(--medium);
+    color: var(--headingColor);
+    font-weight: 700;
+}

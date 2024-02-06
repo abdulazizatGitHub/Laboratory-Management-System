@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import '../css/ViewPatientDetail.css';
+import { useNavigate } from "react-router-dom";
 const ViewPatientDetail = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByPIN, setQueryByPIN] = useState('');
     const [queryByContact, setQueryByContact] = useState('');
     const [queryByCNIC, setQueryByCNIC] = useState('');
-
+    const navigation = useNavigate();
     const [patientData, setPatientData] = useState([
         { pin: '2401-00001', name: 'Abdul Aziz', conatctNo: '0300-0000000', CNIC: '15402-0000000-0' },
         { pin: '2401-00002', name: 'Abdul Aziz', conatctNo: '0300-0000000', CNIC: '15402-0000000-0' },
@@ -39,7 +40,8 @@ const ViewPatientDetail = () => {
     }
 
     const handleDetailView=()=>{
-        console.log("Detail");
+        navigation('/admin/view-patient-detail/patientDetail');
+        
     }
 
     const filteredData = selectedField==="PIN"
