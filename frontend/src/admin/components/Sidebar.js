@@ -3,8 +3,6 @@
 import React, { useState } from 'react';
 import "../../receptionist/CSS/Sidebar.css";
 
-import Navbar from './Navbar';
-
 import { Link } from "react-router-dom";
 
 function Sidebar() {

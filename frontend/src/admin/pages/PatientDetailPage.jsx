@@ -1,7 +1,9 @@
 import react from "react";
 import "../css/PatientDetailPage.css";
+import { useLocation } from "react-router-dom";
 const PatientDetailPage = () => {
-    
+    const location= useLocation();
+    const {data} = location.state;
     return (<div id="patientDetailPage-Fullcontainer">
         <div id="pdp-nameAndButtons">
             <p id="pdp-name">Patient Detail</p>
@@ -15,7 +17,7 @@ const PatientDetailPage = () => {
             <div className="pdp-details">
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">Name: </p>
-                        <p>Abdul AZiz</p>
+                        <p>{data.name}</p>
                     </div>.
 
                     <div className="pdp-subBoxes">
@@ -37,7 +39,7 @@ const PatientDetailPage = () => {
                     
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">CNIC: </p>
-                        <p>12101-29867111</p>
+                        <p>{data.CNIC}</p>
                     </div>.
             </div>
 
@@ -45,8 +47,8 @@ const PatientDetailPage = () => {
             <div className="pdp-details">
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">Contact#: </p>
-                        <p>0300-0000010001</p>
-                    </div>.
+                        <p>{data.contactNo}</p>
+                    </div>
 
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">Email: </p>
