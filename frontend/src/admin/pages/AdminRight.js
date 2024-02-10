@@ -9,6 +9,7 @@ import StaffReport from "./StaffReport";
 import MonthlyReport from "./MonthlyReport";
 import PatientDetailPage from "./PatientDetailPage";
 import StaffDetailPage from "./StaffDetailPage";
+import DetailStaff from "./Detailstaff";
 
 const AdminRight = () => {
     return (
