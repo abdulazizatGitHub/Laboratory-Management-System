@@ -8,11 +8,7 @@ import ViewPatientDetail from "./ViewPatientDetail";
 import StaffReport from "./StaffReport";
 import MonthlyReport from "./MonthlyReport";
 import PatientDetailPage from "./PatientDetailPage";
-<<<<<<< Updated upstream
-import DetailStaff from "./Detailstaff";
-=======
 import StaffDetailPage from "./StaffDetailPage";
->>>>>>> Stashed changes
 
 const AdminRight = () => {
     return (
