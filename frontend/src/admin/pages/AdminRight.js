@@ -8,7 +8,11 @@ import ViewPatientDetail from "./ViewPatientDetail";
 import StaffReport from "./StaffReport";
 import MonthlyReport from "./MonthlyReport";
 import PatientDetailPage from "./PatientDetailPage";
+<<<<<<< Updated upstream
 import DetailStaff from "./Detailstaff";
+=======
+import StaffDetailPage from "./StaffDetailPage";
+>>>>>>> Stashed changes
 
 const AdminRight = () => {
     return (
@@ -19,6 +23,7 @@ const AdminRight = () => {
                     <Route path="/" element={<AdminDashboard />} />
                     <Route path="/staff_registration" element={<StaffRegistration />} />
                     <Route path="/view-staff-record" element={<ViewStaffRecord />} />
+                    <Route path="/view-staff-record/staffDetail" element={<StaffDetailPage />} />
                     <Route path="/view-patient-detail" element={<ViewPatientDetail />} />
                     <Route path="/view-patient-detail/patientDetail" element={<PatientDetailPage />} />
                     <Route path="/staff_report" element={<StaffReport  />} />

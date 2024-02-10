@@ -9,16 +9,16 @@ const ViewPatientDetail = () => {
     const navigation = useNavigate();
     
     const [patientData, setPatientData] = useState([
-        { pin: '2401-00001', name: 'Abdul Aziz', conatctNo: '0310-0000000', CNIC: '15402-0000000-0' },
-        { pin: '2401-00002', name: 'Mahad Wajid', conatctNo: '0320-0000000', CNIC: '15412-0000000-0' },
-        { pin: '2401-00003', name: 'Waleed Rashid', conatctNo: '0330-0000000', CNIC: '15422-0000000-0' },
-        { pin: '2401-00004', name: 'Noman Khan', conatctNo: '0340-0000000', CNIC: '15432-0000000-0' },
-        { pin: '2401-00005', name: 'Raza Bukhari', conatctNo: '0350-0000000', CNIC: '15442-0000000-0' },
-        { pin: '2401-00006', name: 'Imran Khan', conatctNo: '0360-0000000', CNIC: '15452-0000000-0' },
-        { pin: '2401-00007', name: 'Nawaz Sharif', conatctNo: '0370-0000000', CNIC: '15462-0000000-0' },
-        { pin: '2401-00008', name: 'Zulfiqar ali', conatctNo: '0380-0000000', CNIC: '15472-0000000-0' },
-        { pin: '2401-00009', name: 'Anas Bukhari', conatctNo: '0390-0000000', CNIC: '15482-0000000-0' },
-        { pin: '2401-00010', name: 'Shahid Khan', conatctNo: '0301-0000000', CNIC: '15492-0000000-0' },
+        { pin: '2401-00001', name: 'Abdul Aziz', contactNo: '0310-0000000', CNIC: '15402-0000000-0' },
+        { pin: '2401-00002', name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' },
+        { pin: '2401-00003', name: 'Waleed Rashid', contactNo: '0330-0000000', CNIC: '15422-0000000-0' },
+        { pin: '2401-00004', name: 'Noman Khan', contactNo: '0340-0000000', CNIC: '15432-0000000-0' },
+        { pin: '2401-00005', name: 'Raza Bukhari', contactNo: '0350-0000000', CNIC: '15442-0000000-0' },
+        { pin: '2401-00006', name: 'Imran Khan', contactNo: '0360-0000000', CNIC: '15452-0000000-0' },
+        { pin: '2401-00007', name: 'Nawaz Sharif', contactNo: '0370-0000000', CNIC: '15462-0000000-0' },
+        { pin: '2401-00008', name: 'Zulfiqar ali', contactNo: '0380-0000000', CNIC: '15472-0000000-0' },
+        { pin: '2401-00009', name: 'Anas Bukhari', contactNo: '0390-0000000', CNIC: '15482-0000000-0' },
+        { pin: '2401-00010', name: 'Shahid Khan', contactNo: '0301-0000000', CNIC: '15492-0000000-0' },
     ]);
 
     const handleFieldChange = (event) => {
@@ -32,12 +32,12 @@ const ViewPatientDetail = () => {
 
     const handlePinContact = (event) => {
         const query = event.target.value;
-        setQueryByPIN(query)
+        setQueryByContact(query)
     }
 
     const handlePinCnic = (event) => {
         const query = event.target.value;
-        setQueryByPIN(query)
+        setQueryByCNIC(query)
     }
 
     const handleDetailView = (data) => {
@@ -46,8 +46,8 @@ const ViewPatientDetail = () => {
 
     const filteredData = selectedField === "PIN"
         ? patientData.filter(data => data.pin.includes(queryByPIN))
-        : (selectedField === "Contact"
-            ? patientData.filter(data => data.conatctNo.includes(queryByContact))
+        : (selectedField === "CONTACT"
+            ? patientData.filter(data => data.contactNo.includes(queryByContact))
             : patientData.filter(data => data.CNIC.includes(queryByCNIC))
         )
 
@@ -98,7 +98,7 @@ const ViewPatientDetail = () => {
                                 <tr>
                                     <td>{data.pin}</td>
                                     <td>{data.name}</td>
-                                    <td>{data.conatctNo}</td>
+                                    <td>{data.contactNo}</td>
                                     <td>{data.CNIC}</td>
                                     <td>
                                         <button type="button" id="ViewTestReport-roundButton" onClick={() => handleDetailView(data)}>View</button>
