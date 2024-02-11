@@ -3,7 +3,7 @@ import Sidebar from "../component/Sidebar";
 import PhelobotnyRight from "./PhelobotnyRight";
 
 
-const PhelobotnyMain=()=>{
+const PhlebotomyMain=()=>{
     return(
         <div id="mainContainer-receptionist">
             
@@ -18,4 +18,4 @@ const PhelobotnyMain=()=>{
     </div>
     )
 }
-export default PhelobotnyMain;
+export default PhlebotomyMain;

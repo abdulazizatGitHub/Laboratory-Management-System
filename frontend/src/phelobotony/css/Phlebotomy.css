@@ -1,0 +1,287 @@
+@import '../../constants/Colors.css';
+
+.phlebotomy-container {
+    width: 100%;
+    height: auto;
+    font-family: var(--fontRegular);
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.phlebotomy-left-container {
+    width: 25%;
+    height: auto;
+    margin-top: 3rem;
+    border: 1px solid black;border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+}
+
+.phlebotomy-right-container {
+    width: 60%;
+    height: auto;
+    margin-top: 3rem;
+    border: 1px solid black;border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+}
+
+.pl-heading {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #a5a3a3;
+    margin-top: -0.5rem;
+}
+
+.pl-heading p {
+    font-weight: 600;
+    font-size: small;
+    margin-left: 1rem;
+}
+
+.pl-select-options-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #cccbcb;
+    border-radius: 0.3rem;
+    margin-top: 0.7rem;
+}
+
+.pl-select-options-main {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.5rem;
+    gap: 1rem;
+}
+
+.pl-select-date {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.pl-select-date select {
+    width: 70%;
+    height: 2rem;
+    font-family: var(--fontRegular); 
+    font-weight: 600;
+    border: 1px solid #cccbcb;
+    border-radius: 0.3rem;
+}
+
+.pl-patient-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    width: 100%;
+}
+
+.pl-patient-container p {
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.pl-patient-search {
+    width: 90%;
+    height: 1.5rem; 
+    border: 1px solid #838181;
+    border-radius: 5px; 
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.pl-patient-search input {
+    border: none;
+}
+
+.pl-patient-search i {
+    color: #838181;
+}
+
+.pl-patient-list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-height: 10em;
+    overflow: scroll;
+    scroll-behavior: smooth;
+    margin-left: -0.2rem;
+}
+
+.pl-patient-list-container::-webkit-scrollbar {
+    width: 0;
+}
+
+.pl-patient-list {
+    border-collapse: collapse;
+    width: 97%;
+    font-size: small;
+    font-weight: 600;
+}
+
+.pl-patient-list td
+{
+    padding: 0.5rem 2rem;
+    text-align: left;
+    vertical-align: top;
+    color: #22CAB8;
+}
+
+.pl-patient-list tr:hover {
+    background-color: rgb(207, 206, 206);
+    cursor: pointer;
+}
+
+/* Phlebotomy Right Side CSS */
+
+.pr-patient-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 90%;
+    height: auto;
+    margin-left: 2.5rem;
+    margin-top: 1rem;
+}
+
+.pr-patient-details {
+    width: 100%;
+    max-height: 8rem;
+    background: rgb(221, 228, 230);
+    border-radius: 0.5rem;
+}
+
+.pr-patient-details p {
+    font-size: 0.7rem;
+    margin-left: 1rem;
+}
+
+.patient-other-details {
+    width: 60%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.pr-test-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.pr-test-heading {
+    font-weight: 600;
+    font-size: 0.8rem;
+    width: 20%;
+    color: #22CAB8;
+}
+
+.pr-test-heading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.pr-test-heading-container span {
+    width: 39%;
+    height: 0;
+    border: 1px solid #22CAB8;
+}
+
+.pr-test-table-container {
+    width: 100%;
+    max-height: 20em;
+    overflow: scroll;
+    scroll-behavior: smooth;
+}
+
+.pr-test-table-container::-webkit-scrollbar {
+    width: 0;
+}
+
+.pr-test-table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.pr-test-table th,
+.pr-test-table td
+{
+    padding: 0.1rem 2rem;
+    text-align: left;
+    vertical-align: top;
+    border: none;
+    font-size: small;
+}
+
+.pr-test-table thead {
+    border-bottom: 3px solid #EFEFEF;
+}
+
+.pr-test-table th {
+    position: sticky;
+    left: 0;
+    background-color: white; /* Ensures the first column stays visible when scrolling horizontally */
+    z-index: 1; 
+    font-weight: 800;
+}
+
+.pr-test-visit-remarks-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.pr-test-visit-remarks-container textarea {
+    border: 2px solid #cccbcb;
+    border-radius: 0.5rem;
+}
+
+.pr-test-visit-remarks-container button {
+    width: 20%;
+    height: 3em;
+    border: none;
+    border-radius: 10px;
+    color: #05ad9cef;
+    background: #69b9b152;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.pr-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pr-buttons-container button:nth-child(odd) {
+    width: 20%;
+    height: 3em;
+    border: none;
+    border-radius: 10px;
+    color: #f8f8f8ef;
+    background: #3fc7b9e1;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.pr-buttons-container button:nth-child(even) {
+    width: 20%;
+    height: 3em;
+    border: 2px solid#69b9b152;
+    border-radius: 10px;
+    color: #3fc7b9e1;
+    background: #ffffff52;
+    cursor: pointer;
+    font-weight: 600;
+}

@@ -16,7 +16,7 @@ function Sidebar() {
 
 
                 <Link to="" style={{ textDecoration: 'none' }}> <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
-
+                <Link to="phlebotomy" style={{ textDecoration: 'none' }}> <p><i class="fa-regular fa-microscope"></i> Phlebotomy</p></Link>
 
             </div>
         </div>
