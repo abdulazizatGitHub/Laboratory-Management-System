@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../component/Navbar";
 import Dashboard from "./Dashboard";
 import { Routes,Route } from "react-router";
-const PhelobotnyMain=()=>{
+const PhelobotnyRight=()=>{
     return(
         <div>
         <Navbar />
@@ -14,4 +14,4 @@ const PhelobotnyMain=()=>{
         </div>
     )
 }
-export default PhelobotnyMain;
+export default PhelobotnyRight;

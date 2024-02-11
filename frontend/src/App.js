@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './receptionist/pages/Login';
 import Main from './receptionist/pages/Main';
 import AdminMain from './admin/pages/AdminMain';
-import PhelobotnyMain from './phelobotony/pages/PhelobotnyMain';
-
+import PhelobotnyMain from './phelobotony/pages/PhelobotynyMain';
 function App() {
   return (
     <div className="App">

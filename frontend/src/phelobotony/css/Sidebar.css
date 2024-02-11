@@ -1,0 +1,178 @@
+/* Sidebar.css */
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css');
+@import '../../constants/Colors.css';
+
+.sidebar-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 17%; /* Adjusted width for the sidebar */
+    height: 100%;
+    z-index: 99;
+    background-color: var(--sidebarBackColor);
+    padding-top: 50px;
+    font-family: var(--fontRegular);
+}
+
+.sidenav {
+    height: 100%;
+    position: relative;
+    overflow-x: hidden;
+}
+
+
+.sidenav p,
+.dropdown-btn {
+    padding: 8px 20px; 
+    text-decoration: none;
+    font-size: 16px;
+    color: #818181;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    margin-bottom: 10px; 
+ 
+}
+
+.sidenav p i,
+.dropdown-btn i {
+    margin-right: 5px; /* Adjusted margin for more space between icon and text */
+}
+
+.sidenav p:hover,
+.dropdown-btn:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    margin-left: 250px; /* Adjusted the margin to match the sidebar width */
+    font-size: 20px; /* Increased text to enable scrolling */
+    padding: 20px; /* Adjusted padding for content */
+}
+
+.active {
+    background-color: #282238;
+    color: white;
+}
+
+.dropdown-container {
+    display: none;
+    background-color: #161528;
+    padding-left: 30px;
+    list-style-type: none; /* Remove default bullets */
+    margin-top: -10px;
+}
+
+.dropdown-container p {
+    padding: 2px 30px; /* Adjusted padding to align with the custom bullets */
+    display: block;
+    position: relative;
+    margin-bottom: -2px; /* Add space between items */
+}
+
+.dropdown-container p::before {
+    content: '\2022'; /* Unicode character for a bullet */
+    font-size: 20px;
+    margin-right: 15px;
+    color: #22CAB8; /* Set bullet color */
+    position: absolute;
+    left: 20px; /* Adjust the left position to align with the text */
+    bottom: 1px;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.open {
+    display: block;
+}
+
+.Heading-sidebar {
+    font-size: var(--xLarge);
+    font-weight: bolder;
+    color: var(--lms);
+    padding: 15px;
+    display: block;
+    text-align: center;
+}
+
+
+.version {
+  font-size: 14px;
+  color: #22CAB8;
+  position: absolute;
+  top: 95vh;
+  width: 100%;
+  text-align: center;
+}
+
+/* Sidebar.css */
+
+/* Existing styles... */
+
+/* Media Queries */
+@media screen and (max-width: 768px) {
+    .sidenav {
+        width: 150px; /* Adjusted width for medium devices */
+    }
+
+    .sidenav p,
+    .dropdown-btn {
+        padding: 10px 15px; /* Adjusted padding for medium devices */
+    }
+
+    .main {
+        margin-left: 0; /* No margin for small devices */
+    }
+
+    .dashboard {
+        position: fixed; /* Keep the Dashboard fixed at its position on small devices */
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .dropdown-container {
+        padding-left: 20px; /* Adjusted padding for medium devices */
+    }
+
+    .dropdown-container p {
+        padding: 10px 30px; /* Adjusted padding for medium devices */
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .sidenav {
+        width: 100%; /* Full width for small devices */
+    }
+
+    .sidenav p,
+    .dropdown-btn {
+        padding: 10px; /* Adjusted padding for small devices */
+    }
+
+    .main {
+        margin-left: 0; /* No margin for small devices */
+    }
+
+    .dashboard {
+        position: fixed; /* Keep the Dashboard fixed at its position on small devices */
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .dropdown-container {
+        padding-left: 20px; /* Adjusted padding for small devices */
+    }
+
+    .dropdown-container p {
+        padding: 10px 30px; /* Adjusted padding for small devices */
+    }
+}
