@@ -8,7 +8,8 @@ const Login = () => {
 
     const handleLogin = () => {
         // navigation('/receptionist');
-        navigation('/admin');
+        // navigation('/admin');
+        navigation('/phelobotny');
     }
     return (
         <div className="login-main-container">

@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Login from './receptionist/pages/Login';
 import Main from './receptionist/pages/Main';
 import AdminMain from './admin/pages/AdminMain';
-import Dashboard from './receptionist/pages/Dashboard';
-import AdminDashboard from './admin/pages/AdminDashboard';
+import PhelobotnyMain from './phelobotony/pages/PhelobotnyMain';
 
 function App() {
   return (
@@ -13,6 +12,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/receptionist/*" element={<Main />} />
         <Route path="/admin/*" element={<AdminMain />} />
+        <Route path="/phelobotny/*" element={<PhelobotnyMain />} />
       </Routes>
     </div>
   );
