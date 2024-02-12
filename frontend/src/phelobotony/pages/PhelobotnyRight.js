@@ -3,6 +3,7 @@ import Navbar from "../component/Navbar";
 import Dashboard from "./Dashboard";
 import { Routes,Route } from "react-router";
 import Phlebotomy from "./Phlebotomy";
+import Report from "./Report";
 const PhelobotnyRight=()=>{
     return(
         <div>
@@ -11,6 +12,7 @@ const PhelobotnyRight=()=>{
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/phlebotomy" element={<Phlebotomy />} />
+                <Route path="/phlebotomy/Report" element={<Report />} />
             </Routes>
         </div>
         </div>

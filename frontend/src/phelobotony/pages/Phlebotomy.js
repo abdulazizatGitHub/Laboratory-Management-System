@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
+import { Link } from 'react-router-dom';
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
@@ -53,6 +54,8 @@ const Phlebotomy = () => {
         },
     ]);
     const [selectedPatient, setSelectedPatient] = useState(null);
+    const [showReport, setShowReport] = useState(false);
+
 
     useEffect(() => {
         // Set default "to" date to today in the format "YYYY-MM-DD"
@@ -81,6 +84,11 @@ const Phlebotomy = () => {
         // Find the selected patient from the registrationDetails array
         const selectedPatientData = registrationDetails.find(patient => patient.PIN === pin);
         setSelectedPatient(selectedPatientData);
+    };
+
+       const handleTransferClick = () => {
+        setShowReport(true);
+        // Additional logic for navigation if needed...
     };
 
     return (
@@ -200,12 +208,15 @@ const Phlebotomy = () => {
                         <div className="pr-buttons-container">
                             <button>Pending</button>
                             <button>Print Barcode</button>
+                            <Link to='/phelobotny/phlebotomy/Report'>
                             <button>Transfer</button>
+                            </Link>
                         </div>
                     </div>
                 </div>
             </div>
-
+  
+         
         </div>
     )
 }
