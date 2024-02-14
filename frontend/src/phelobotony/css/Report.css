@@ -12,7 +12,7 @@
 .Main-report{
   display: flex;
   flex-direction: column;
-  width: 95%;
+  width: 80%;
   height: 100%;
   border: 5px solid rgb(255, 253, 253);
   border-radius: 5px; 
@@ -22,9 +22,9 @@
 .Header-report{
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 95%;
   height: 13vh;
-  /* border: 1px solid blue; */
+  margin-top: 1rem;
 }
 .Report-left-image{
    width: 15%;
@@ -102,12 +102,12 @@
   flex-direction: column;
   width: 30%;
   height: 100%;
- 
+  margin-left: 0.5rem;
 }
 .R-Report{
   width: 30%;
   height: 100%;
- 
+  margin-left: 0.5rem;
 }
 
 .R-Line {
@@ -151,6 +151,7 @@
    display: flex;
    flex-direction: row;
   text-align: center;
+  height: 50%;
 }
 .Fl-report{
   width: 33%;
