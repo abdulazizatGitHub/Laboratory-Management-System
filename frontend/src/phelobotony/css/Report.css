@@ -46,7 +46,7 @@
 }
 .Report-Middle h3,
 .Report-Middle p {
-  margin-top: -10px; /* Remove default margin from the top */
+  margin-top: -10px;
 }
 .Report-Middle h1 {
   margin-top: -5px; /* Remove default margin from the top */

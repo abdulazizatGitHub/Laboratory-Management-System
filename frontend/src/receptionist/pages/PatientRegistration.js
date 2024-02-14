@@ -21,6 +21,10 @@ const PatientRegistration = () => {
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
+    setFormData((prevData) => ({
+      ...prevData,
+      gender: event.target.value,
+    }));
   };
 
   const handleInputChange = (e) => {
@@ -70,12 +74,13 @@ const PatientRegistration = () => {
                   Male
                 </label>
                 <input
-                  className="patientGender-radio"
-                  type="radio"
-                  value="male"
-                  checked={selectedGender === 'male'}
-                  onChange={handleGenderChange}
-                />
+          className="patientGender-radio"
+          type="radio"
+          value="male"
+          checked={selectedGender === "male"}
+          onChange={handleGenderChange}
+          required // Add required attribute here
+        />
 
               </div>
               <div className="Patient-Gender-label">
@@ -83,13 +88,13 @@ const PatientRegistration = () => {
                   Female
                 </label>
                 <input
-                className="patientGender-radio"
-                  
-                  type="radio"
-                  value="female"
-                  checked={selectedGender === 'female'}
-                  onChange={handleGenderChange}
-                />
+          className="patientGender-radio"
+          type="radio"
+          value="female"
+          checked={selectedGender === "female"}
+          onChange={handleGenderChange}
+          required // Add required attribute here
+        />
 
               </div>
             </div>

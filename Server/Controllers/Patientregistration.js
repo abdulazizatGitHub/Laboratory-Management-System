@@ -3,7 +3,7 @@ import Patient from '../Models/Patientregistration.js';
 
 export const registerPatient = async (req, res) => {
   try {
-    // Add logic to save patient data to the database using the Patient model
+    
     const { name, gender, age, cnic, mobileNumber, address, email, refDoctor, internalRemarks, patientRemarks } = req.body;
 
     // Example: Saving to MongoDB

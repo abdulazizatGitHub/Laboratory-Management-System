@@ -25,4 +25,4 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/PatientRegistration',Patientdata);
+app.use('/PatientRegistration',Patientdata); //Patient Registration 
