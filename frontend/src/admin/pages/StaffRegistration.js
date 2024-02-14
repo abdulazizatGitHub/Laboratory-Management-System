@@ -4,40 +4,7 @@ import '../css/StaffRegistration.css';
 
 const StaffRegistration = () => {
     const [selectedGender, setSelectedGender] = useState('');
-<<<<<<< Updated upstream
-    const [selectedImage, setSelectedImage] = useState(null);
-  const [previewUrl, setPreviewUrl] = useState(null);
-
-  const handleImageChange = (event) => {
-    const selectedFile = event.target.files[0];
-
-    if (!selectedFile) {
-      return;
-    }
-
-    // Validate file type (optional)
-    if (!['image/jpeg', 'image/png'].includes(selectedFile.type)) {
-      alert('Invalid image format. Please select a JPEG or PNG file.');
-      return;
-    }
-
-    // Validate file size (optional)
-    if (selectedFile.size > 5242880) { // 5MB limit (adjust as needed)
-      alert('Image size exceeds 5MB limit. Please choose a smaller file.');
-      return;
-    }
-
-    // Create image preview
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setSelectedImage(selectedFile);
-      setPreviewUrl(reader.result);
-    };
-    reader.readAsDataURL(selectedFile);
-  };
-=======
     const [image, setImage] = useState(null);
->>>>>>> Stashed changes
 
     const handleGenderChange = (event) => {
         setSelectedGender(event.target.value);
