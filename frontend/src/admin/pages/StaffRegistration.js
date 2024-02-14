@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
+import { FcCheckmark, FcCancel } from "react-icons/fc"; // Import additional icons
 import '../css/StaffRegistration.css';
 import { staffRegsiteration } from "../../Services/API";
 const StaffRegistration = () => {
@@ -17,48 +18,93 @@ const StaffRegistration = () => {
         image: null,
     });
 
+    const [alert, setAlert] = useState({
+        show: false,
+        message: "",
+        icon: null,
+        loading: false,
+    });
+
+    const showAlert = (message, type) => {
+        let icon = null;
+        let alertClass = "";
+
+        switch (type) {
+            case "success":
+                icon = <FcCheckmark size={20} color="green" />;
+                alertClass = "success-alert";
+                break;
+            case "error":
+                icon = <FcCancel size={20} color="red" />;
+                alertClass = "error-alert";
+                break;
+            default:
+                break;
+        }
+
+        setAlert({
+            show: true,
+            message,
+            icon,
+            loading: false,
+            alertClass, // Add the alert class
+        });
+
+        setTimeout(() => {
+            setAlert({
+                show: false,
+                message: "",
+                icon: null,
+                loading: false,
+                alertClass: "",
+            });
+        }, 3000);
+    };
+
     const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, image } = staffDetails;
 
     const handleInputChange = (e) => {
         setStaffDetails({ ...staffDetails, [e.target.name]: e.target.value });
-      };
+    };
 
-      const handleImageUpload = (event) => {
+    const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
             setStaffDetails({ ...staffDetails, image: file });
         }
     };
-    
+
 
     const handleRemoveImage = () => {
-        setStaffDetails({ ...staffDetails, image: null});
+        setStaffDetails({ ...staffDetails, image: null });
     };
 
-const handleRegisterStaff = async (e) => {
-    e.preventDefault();
-    try {
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('fatherName', fatherName);
-        formData.append('gender', gender);
-        formData.append('age', age);
-        formData.append('role', role);
-        formData.append('shift', shift);
-        formData.append('contactNumber', contactNumber);
-        formData.append('cnic', cnic);
-        formData.append('address', address);
-        
-        // if (image) {
+    const handleRegisterStaff = async (e) => {
+        e.preventDefault();
+        setAlert({ ...alert, loading: true, message: "Registering staff..." })
+        try {
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('fatherName', fatherName);
+            formData.append('gender', gender);
+            formData.append('age', age);
+            formData.append('role', role);
+            formData.append('shift', shift);
+            formData.append('contactNumber', contactNumber);
+            formData.append('cnic', cnic);
+            formData.append('address', address);
             formData.append('image', image);
-        // }
 
-        const response = await staffRegsiteration(formData);
-        console.log('Response:', response.data);
-    } catch (error) {
-        console.error('Error registering staff:', error);
-    }
-};
+            const response = await staffRegsiteration(formData);
+            if (response) {
+                showAlert("Staff Added Successfully", "success");
+            } else {
+                showAlert("Registration failed", "error");
+            }
+        } catch (error) {
+            console.error('Error registering staff:', error);
+        }
+    };
 
     return (
         <div className="Staff-Registration-Container">
@@ -142,7 +188,7 @@ const handleRegisterStaff = async (e) => {
                     <p>Add Staff Image Here</p>
                 </div>
                 <div className="sr-image-main">
-                <label htmlFor="imageUpload">
+                    <label htmlFor="imageUpload">
                         {/* Conditionally render either the image or the camera icon */}
                         {image ? (
                             <div className="staff-image-content">
@@ -168,6 +214,13 @@ const handleRegisterStaff = async (e) => {
                     />
                 </div>
             </div>
+            {alert.show && (
+                <div className={`custom-alert ${alert.alertClass}`}>
+                    <p>
+                        {alert.icon} {alert.message}
+                    </p>
+                </div>
+            )}
 
         </div>
     )
