@@ -51,7 +51,7 @@
 }
 
 .sr-image-main span {
-    width: 25%;
+    width: 100%;
     height: 35%;
     border-radius: 50%;
     background: #FFFFFF;
@@ -215,3 +215,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+#staff-image-input {
+    display: none;
+  }
