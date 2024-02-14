@@ -18,17 +18,18 @@ export const staffRegistration = async (req, res) => {
             address,
             image: {
                 data: req.file.buffer,
-                contentType: req.file.mimeType
+                contentType: req.file.mimetype
             }
         });
 
-        const result = await StaffModel.save(newStaffRegistration);
+        // Save the new staff registration to the database
+        const result = await newStaffRegistration.save();
 
-        if(result) {
-            console.log("Staff Added Successfully");
-        }
+        // Send response to client
+        res.status(201).json({ message: 'Staff registered successfully' });
         
     } catch (error) {
-        
+        console.error(error);
+        res.status(500).json({ error: 'Internal Server Error' });
     }
-}
+};

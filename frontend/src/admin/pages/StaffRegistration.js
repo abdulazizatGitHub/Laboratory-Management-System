@@ -23,44 +23,42 @@ const StaffRegistration = () => {
         setStaffDetails({ ...staffDetails, [e.target.name]: e.target.value });
       };
 
-    const handleImageUpload = (event) => {
+      const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                setStaffDetails({ ...staffDetails, image: e.target.result });
-            };
-            reader.readAsDataURL(file);
+            setStaffDetails({ ...staffDetails, image: file });
         }
     };
+    
 
     const handleRemoveImage = () => {
         setStaffDetails({ ...staffDetails, image: null});
     };
 
-    const handleRegisterStaff = async (e) => {
-        e.preventDefault();
-         try {
-            const formData = new FormData();
-            formData.append('name', name);
-            formData.append('fatherName', fatherName);
-            formData.append('gender', gender);
-            formData.append('age', age);
-            formData.append('role', role);
-            formData.append('shift', shift);
-            formData.append('contactNumber', contactNumber);
-            formData.append('cnic', cnic);
-            formData.append('address', address);
-            
-            if (image) {
-                formData.append('image', image, image.name)
-            }
+const handleRegisterStaff = async (e) => {
+    e.preventDefault();
+    try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('fatherName', fatherName);
+        formData.append('gender', gender);
+        formData.append('age', age);
+        formData.append('role', role);
+        formData.append('shift', shift);
+        formData.append('contactNumber', contactNumber);
+        formData.append('cnic', cnic);
+        formData.append('address', address);
+        
+        // if (image) {
+            formData.append('image', image);
+        // }
 
-            const response = await staffRegsiteration(formData);
-         } catch (error) {
-            console.error('Error registering staff:', error);
-         }
+        const response = await staffRegsiteration(formData);
+        console.log('Response:', response.data);
+    } catch (error) {
+        console.error('Error registering staff:', error);
     }
+};
 
     return (
         <div className="Staff-Registration-Container">
@@ -144,14 +142,14 @@ const StaffRegistration = () => {
                     <p>Add Staff Image Here</p>
                 </div>
                 <div className="sr-image-main">
-                    <label htmlFor="imageUpload">
+                <label htmlFor="imageUpload">
                         {/* Conditionally render either the image or the camera icon */}
                         {image ? (
                             <div className="staff-image-content">
                                 <img
-                                style={{ width: '15rem', overflow: 'hidden', maxHeight: '9rem', }}
-                                src={image}
-                                alt="Staff Image"
+                                    style={{ width: '15rem', overflow: 'hidden', maxHeight: '9rem' }}
+                                    src={URL.createObjectURL(image)} // Use URL.createObjectURL to display the image
+                                    alt="Staff Image"
                                 />
                                 <div className="staff-image-remover" onClick={handleRemoveImage}><IoClose size={18} /></div>
                             </div>
