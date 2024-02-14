@@ -66,7 +66,7 @@ function Report() {
                 </div>
 
                 <div className="Middle-text">
-                    <h2 style={{ textAlign: "center" }}>Complete Blood Count (CBC) With Absolute Count</h2>
+                    <h2 style={{ textAlign: "center", fontSize: '1.2rem' }}>Complete Blood Count (CBC) With Absolute Count</h2>
                 </div>
 
                 <div className="Table-report">
