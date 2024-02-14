@@ -1,50 +1,39 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 import '../css/StaffRegistration.css';
 
 const StaffRegistration = () => {
     const [selectedGender, setSelectedGender] = useState('');
-    const input = document.querySelector('#imageInput');
-    const main = document.querySelector('.sr-image-main');
-    const mainRef = useRef(null);
+    const [selectedImage, setSelectedImage] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
-    input.addEventListener('change', function () {
-        const file = input.files[0];
-        const reader = new FileReader();
+  const handleImageChange = (event) => {
+    const selectedFile = event.target.files[0];
 
-        reader.onloadend = function () {
-            const img = document.createElement('img');
-            img.src = reader.result;
-            main.innerHTML = '';
-            main.appendChild(img);
-        }
+    if (!selectedFile) {
+      return;
+    }
 
-        if (file) {
-            reader.readAsDataURL(file);
-        } else {
-            main.innerHTML = '<span><HiOutlineCamera size={40} color="#22CAB8" cursor=\'pointer\' /></span>';
-        }
-    });
+    // Validate file type (optional)
+    if (!['image/jpeg', 'image/png'].includes(selectedFile.type)) {
+      alert('Invalid image format. Please select a JPEG or PNG file.');
+      return;
+    }
 
-    const handleImageChange = (event) => {
-        const input = event.target;
-        const main = mainRef.current;
-      
-        if (input.files && input.files[0]) {
-          const reader = new FileReader();
-      
-          reader.onload = (event) => {
-            const img = new Image();
-            img.src = event.target.result;
-            main.innerHTML = '';
-            main.appendChild(img);
-          };
-      
-          reader.readAsDataURL(input.files[0]);
-        } else {
-          main.innerHTML = '<span><HiOutlineCamera size={45} color="#22CAB8" cursor=\'pointer\' /></span>';
-        }
-      };
+    // Validate file size (optional)
+    if (selectedFile.size > 5242880) { // 5MB limit (adjust as needed)
+      alert('Image size exceeds 5MB limit. Please choose a smaller file.');
+      return;
+    }
+
+    // Create image preview
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSelectedImage(selectedFile);
+      setPreviewUrl(reader.result);
+    };
+    reader.readAsDataURL(selectedFile);
+  };
 
     const handleGenderChange = (event) => {
         setSelectedGender(event.target.value);
@@ -129,11 +118,8 @@ const StaffRegistration = () => {
                     <h4>Staff Image</h4>
                     <p>Add Staff Image Here</p>
                 </div>
-                <div className="sr-image-main" ref={mainRef}>
-                    <input type="file" id="staff-image-input" accept="image/*" onChange={handleImageChange} hidden />
-                    <label for="imageInput">
-                        <span><HiOutlineCamera size={45} color="#22CAB8" cursor='pointer' /></span>
-                    </label>
+                <div className="sr-image-main">
+                    <span><HiOutlineCamera size={40} color="#22CAB8" cursor='pointer' /></span>
                 </div>
             </div>
         </div>
