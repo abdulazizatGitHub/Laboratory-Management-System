@@ -8,5 +8,5 @@ export const registerPatient = async (formData) => {
 };
 
 export const staffRegsiteration = async (formData) => {
-    return await axios.post(`${Url}/admin/staffRegistration`, formData);
+    return await axios.post(`${Url}/admin/staff_registration`, formData);
 }

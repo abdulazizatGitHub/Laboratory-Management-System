@@ -6,6 +6,6 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({storage: storage});
 
-router.post('/staffRegistration', upload.single('image'), staffRegistration);
+router.post('/staff_registration', upload.single('image'), staffRegistration);
 
 export default router
