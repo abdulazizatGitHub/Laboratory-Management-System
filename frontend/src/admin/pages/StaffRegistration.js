@@ -4,6 +4,7 @@ import '../css/StaffRegistration.css';
 
 const StaffRegistration = () => {
     const [selectedGender, setSelectedGender] = useState('');
+<<<<<<< Updated upstream
     const [selectedImage, setSelectedImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
 
@@ -34,9 +35,23 @@ const StaffRegistration = () => {
     };
     reader.readAsDataURL(selectedFile);
   };
+=======
+    const [image, setImage] = useState(null);
+>>>>>>> Stashed changes
 
     const handleGenderChange = (event) => {
         setSelectedGender(event.target.value);
+    };
+
+    const handleImageUpload = (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImage(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     return (
@@ -119,9 +134,20 @@ const StaffRegistration = () => {
                     <p>Add Staff Image Here</p>
                 </div>
                 <div className="sr-image-main">
-                    <span><HiOutlineCamera size={40} color="#22CAB8" cursor='pointer' /></span>
+                    <input
+                        type="file"
+                        id="imageUpload"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        style={{ display: 'none' }}
+                    />
+                    <label htmlFor="imageUpload">
+                        <span><HiOutlineCamera size={40} color="#22CAB8" cursor='pointer' /></span>
+                    </label>
+                    {image && <img src={image} alt="Staff Image" />}
                 </div>
-            </div>
+                </div>
+
         </div>
     )
 }
