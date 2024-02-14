@@ -42,7 +42,7 @@
 
 .sr-image-main {
     width: 90%;
-    height: 60%;
+    height: 10rem;
     border-radius: 1rem;
     background: #F4F4F4;
     display: flex;
@@ -51,15 +51,34 @@
 }
 
 .sr-image-main span {
-    width: 25%;
+    width: 100%;
     height: 35%;
     border-radius: 50%;
     background: #FFFFFF;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
+
+.staff-image-container {
+    position: relative;
+  }
+  
+  .staff-image-remover {
+    position: absolute;
+    right: 2.5%;
+    bottom: 75%;
+    border: px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
 
 .sr-form-container {
     width: 70%;
