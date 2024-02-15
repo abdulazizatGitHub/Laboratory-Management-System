@@ -86,7 +86,7 @@ const Phlebotomy = () => {
         setSelectedPatient(selectedPatientData);
     };
 
-       const handleTransferClick = () => {
+    const handleTransferClick = () => {
         setShowReport(true);
         // Additional logic for navigation if needed...
     };
@@ -194,11 +194,11 @@ const Phlebotomy = () => {
                         </div>
                         <div className="pr-test-heading-container">
                             <span></span>
-                            <p style={{marginLeft: '2.5rem',}} className="pr-test-heading">Visit Remarks</p>
+                            <p style={{ marginLeft: '2.5rem', }} className="pr-test-heading">Visit Remarks</p>
                             <span></span>
                         </div>
                         <div className="pr-test-visit-remarks-container">
-                            <textarea 
+                            <textarea
                                 rows='4'
                                 cols='60'
                                 placeholder="Enter visit remarks"
@@ -208,15 +208,15 @@ const Phlebotomy = () => {
                         <div className="pr-buttons-container">
                             <button>Pending</button>
                             <button>Print Barcode</button>
-                            <Link to='/phelobotny/phlebotomy/Report'>
-                            <button>Transfer</button>
+                            <Link to='/phelobotny/phlebotomy/Report' style={{ width: "100%" }}>
+                                <button>Transfer</button>
                             </Link>
                         </div>
                     </div>
                 </div>
             </div>
-  
-         
+
+
         </div>
     )
 }

@@ -4,7 +4,7 @@
 
 .sidebar-container {
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
     width: 17%; /* Adjusted width for the sidebar */
     height: 100%;
@@ -12,6 +12,8 @@
     background-color: var(--sidebarBackColor);
     padding-top: 50px;
     font-family: var(--fontRegular);
+    z-index: 1000;
+
 }
 
 .sidenav {
@@ -112,67 +114,9 @@
   text-align: center;
 }
 
-/* Sidebar.css */
 
-/* Existing styles... */
-
-/* Media Queries */
-@media screen and (max-width: 768px) {
-    .sidenav {
-        width: 150px; /* Adjusted width for medium devices */
-    }
-
-    .sidenav p,
-    .dropdown-btn {
-        padding: 10px 15px; /* Adjusted padding for medium devices */
-    }
-
-    .main {
-        margin-left: 0; /* No margin for small devices */
-    }
-
-    .dashboard {
-        position: fixed; /* Keep the Dashboard fixed at its position on small devices */
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .dropdown-container {
-        padding-left: 20px; /* Adjusted padding for medium devices */
-    }
-
-    .dropdown-container p {
-        padding: 10px 30px; /* Adjusted padding for medium devices */
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .sidenav {
-        width: 100%; /* Full width for small devices */
-    }
-
-    .sidenav p,
-    .dropdown-btn {
-        padding: 10px; /* Adjusted padding for small devices */
-    }
-
-    .main {
-        margin-left: 0; /* No margin for small devices */
-    }
-
-    .dashboard {
-        position: fixed; /* Keep the Dashboard fixed at its position on small devices */
-        top: 0;
-        left: 0;
-        width: 100%;
-    }
-
-    .dropdown-container {
-        padding-left: 20px; /* Adjusted padding for small devices */
-    }
-
-    .dropdown-container p {
-        padding: 10px 30px; /* Adjusted padding for small devices */
+@media screen and (max-width: 790px) {
+    .sidebar-container {
+        width: 30%;
     }
 }

@@ -6,6 +6,7 @@
   justify-content: center;
   position: relative;
   top: 10px;
+  padding-bottom: 5rem;
   font-family: var(--fontRegular);
 
 }
@@ -23,12 +24,13 @@
   display: flex;
   flex-direction: row;
   width: 95%;
-  height: 13vh;
+  height: auto;
   margin-top: 1rem;
+  flex-wrap: wrap;
 }
 .Report-left-image{
-   width: 15%;
-   height: 13vh;
+   width: 20%;
+   height: auto;
    /* border: 1px solid black; */
 
 }
@@ -40,10 +42,13 @@
 }
 
 .Report-Middle{
-  width: 50%;
-  height: 13vh;
+  width: 70%;
+  height: auto;
   /* border: 2px solid black; */
 }
+
+
+
 .Report-Middle h3,
 .Report-Middle p {
   margin-top: -10px;
@@ -52,10 +57,18 @@
   margin-top: -5px; /* Remove default margin from the top */
 }
 
+.Report-smCnt{
+  width: 62%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 1rem;
+}
 
 .Report-Right{
   display: flex;
   flex-direction: column;
+  align-items: justify;
+  padding-left: 1rem;
   gap: 10px;
   width: 35%;
   height: 13vh;
@@ -67,7 +80,7 @@
   width: 100%;
   height: 3vh;
   background-color: var(--lms);
-
+  margin-bottom: 1rem;
 }
 
 .Middle-Report-Section{
@@ -75,6 +88,7 @@
  justify-content: center;
   width: 100%;
   height: 100%;
+  margin-bottom: 1rem;
   /* border: 1px solid black; */
 }
 .L-Report{
@@ -119,11 +133,17 @@
   width: 100%;
   height: 100%;
   border: 1px solid black;
+  margin-bottom: 1rem;
 }
 
+.Middle-text h2{
+  text-align: center;
+  font-size: 1.2em;
+}
 .Table-report{
   width: 100%;
-  height: 100%;
+  height: 100%; 
+  overflow: auto;
 }
 .medical-lab-report-table {
   border-collapse: collapse; /* Remove borders between table cells */
@@ -133,7 +153,7 @@
 .medical-lab-report-table th,
 .medical-lab-report-table td {
   border: none; /* Remove borders from table header and data cells */
-  padding: 8px; /* Add padding for better readability */
+  padding: 0.5; /* Add padding for better readability */
 }
 
 .medical-lab-report-table tbody td,
@@ -144,17 +164,131 @@
 /* ====================Footer Section=============================== */
 .Footer-Section {
   width: 100%;
-  height: 46vh; /* Set the height of the footer */
+  height: auto; /* Set the height of the footer */
   /* border: 1px solid black; */
 }
 .Details-Footer{
    display: flex;
    flex-direction: row;
   text-align: center;
-  height: 50%;
+  height: auto;
 }
 .Fl-report{
   width: 33%;
-  height: 25vh;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  
 }
 
+.Main-Report-container button{
+  
+  background-color: var(--buttonColor);
+  
+  color: whitesmoke;
+  width: 9rem;
+  font-size: large;
+  height: 2rem;
+  border:1px solid var(--buttonColor);
+  border-radius: 4px;
+  
+}
+
+@media  screen and (max-width: 844px) {
+  .Report-smCnt{
+    width: 100%;
+  }
+  .Report-Right{
+    width: 100%;
+  }
+ 
+}
+
+@media  screen and (max-width:790px) {
+  .Report-Middle h1{
+    font-size: 1.2em;
+  }
+  .Report-Middle h3{
+    font-size: 1em;
+  }
+  .Report-Middle p{
+    font-size: 0.8em;
+  }
+  .Report-Right a{
+    font-size: 0.8em;
+  }
+  .L-Report h3,
+  .M-Report h3
+  {
+    font-size: 1em;
+  }
+  .L-Report p,
+  .M-Report p,
+  .R-Report p{
+  font-size: 0.8em;
+  }
+  .L-Report{
+    gap: 0.4em;
+  }
+  .Middle-Report-Section-Color{
+    height: 2vh;
+  }
+  .Middle-text h2{
+    font-size: 0.8rem;
+  }
+  .medical-lab-report-table thead tr th{
+    font-size: 1em;
+  }
+  .medical-lab-report-table tbody tr td{
+    font-size: 0.8em;
+  }
+  .Footer-Section h3{
+    font-size: 1rem;
+  }
+  .Fl-report{
+    font-size: 0.8rem;
+  }
+  
+}
+
+
+
+
+
+
+@media print {
+    /* Hide elements not necessary for printing */
+    
+    .Footer-Section button {
+        display: none;
+    }
+
+    
+    
+
+    .logo-image {
+        max-width: 100px;
+    }
+
+  
+
+    /* Ensure table fits within the page */
+    .Table-report {
+        overflow: visible;
+    }
+
+  
+
+   
+
+    /* Ensure footer text fits within the page */
+    .Details-Footer {
+        flex-wrap: wrap;
+    }
+
+    /* Ensure footer fits within the page */
+    .Footer-Section {
+        margin-top: 10px;
+    }
+}

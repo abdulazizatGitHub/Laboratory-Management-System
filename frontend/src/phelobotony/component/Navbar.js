@@ -7,6 +7,9 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     return (
         <div className="navbar">
+       
+        <i className="fa fa-bars" style={{color:"white"}}></i> 
+        
             <div className="right-section">
             <Link className="navbar-icon" to='login' >
                     Login

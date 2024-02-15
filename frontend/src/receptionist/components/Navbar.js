@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 function Navbar() {
     return (
         <div className="navbar">
+        
             <div className="right-section">
             <Link className="navbar-icon" to='login' >
                     Login

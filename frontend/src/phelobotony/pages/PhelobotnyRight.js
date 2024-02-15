@@ -6,8 +6,8 @@ import Phlebotomy from "./Phlebotomy";
 import Report from "./Report";
 const PhelobotnyRight=()=>{
     return(
-        <div>
-        <Navbar />
+        <div style={{ width: "auto", height: "100vh" }}>
+       <Navbar />
         <div style={{  marginTop: "50px" }}>
             <Routes>
                 <Route path="/" element={<Dashboard />} />

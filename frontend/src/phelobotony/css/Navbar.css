@@ -4,12 +4,13 @@
 .navbar {
     position: fixed;
     top: 0;
-    left: 17%; /* Adjusted left position for the content to accommodate the sidebar */
-    width: calc(100%-17%); /* Adjusted width for the navbar */
+    left: 0px;
+    /* left: 17%; Adjusted left position for the content to accommodate the sidebar */
+    width: 100%;/* Adjusted width for the navbar */
     height: 50px;
     background: var(--navbarColor);
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     z-index: 999;

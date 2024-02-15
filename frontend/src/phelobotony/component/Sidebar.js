@@ -8,8 +8,7 @@ import { Link } from "react-router-dom";
 
 function Sidebar() {
 
-    const [isMobileScreen, setIsMobileScreen] = useState(false);
-
+   
     return (
         <div className="sidebar-container">
             <div className="sidenav">

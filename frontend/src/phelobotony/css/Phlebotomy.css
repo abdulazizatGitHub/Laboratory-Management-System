@@ -21,7 +21,7 @@
     width: 60%;
     height: auto;
     margin-top: 3rem;
-    border: 1px solid black;border: 5px solid rgb(255, 253, 253);
+    border: 5px solid rgb(255, 253, 253);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 0.6rem;
 }
@@ -93,10 +93,17 @@
     border-radius: 5px; 
     padding: 0.5rem;
     margin-top: 0.5rem;
+    overflow: hidden;
+    position: relative;
+    /* display: flex;
+    align-items: center; */
 }
 
 .pl-patient-search input {
     border: none;
+    position:absolute;
+    
+
 }
 
 .pl-patient-search i {
@@ -146,13 +153,15 @@
     justify-content: center;
     gap: 0.5rem;
     width: 90%;
-    height: auto;
-    margin-left: 2.5rem;
+    /* height: auto;
+    margin-left: 2.5rem; */
     margin-top: 1rem;
+    padding-left: 1rem;
 }
 
 .pr-patient-details {
-    width: 100%;
+    
+    width: 97%;
     max-height: 8rem;
     background: rgb(221, 228, 230);
     border-radius: 0.5rem;
@@ -164,12 +173,13 @@
 }
 
 .patient-other-details {
-    width: 60%;
+    width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .pr-test-details-container {
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -236,6 +246,7 @@
 }
 
 .pr-test-visit-remarks-container {
+   
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -247,7 +258,7 @@
 }
 
 .pr-test-visit-remarks-container button {
-    width: 20%;
+    width: auto;
     height: 3em;
     border: none;
     border-radius: 10px;
@@ -258,6 +269,8 @@
 }
 
 .pr-buttons-container {
+    width: 90%;
+    margin: 2rem;
     display: flex;
     justify-content: flex-end;
     align-items: center;
@@ -265,7 +278,7 @@
 }
 
 .pr-buttons-container button:nth-child(odd) {
-    width: 20%;
+    width: 100%;
     height: 3em;
     border: none;
     border-radius: 10px;
@@ -276,7 +289,7 @@
 }
 
 .pr-buttons-container button:nth-child(even) {
-    width: 20%;
+    width: 100%;
     height: 3em;
     border: 2px solid#69b9b152;
     border-radius: 10px;
@@ -284,4 +297,31 @@
     background: #ffffff52;
     cursor: pointer;
     font-weight: 600;
+}
+
+
+@media screen and (max-width: 1290px) {
+    /* Your CSS styles for medium screens here */
+    .pr-test-visit-remarks-container{
+        display: block;
+    }
+    
+    .pr-test-visit-remarks-container textarea{
+        width: 90%;
+    }
+}
+
+
+@media screen and (max-width:790px) {
+    .phlebotomy-container {
+        display: block;
+        margin-left: 2rem;
+        margin-top: 4rem;
+    }
+    .phlebotomy-left-container{
+        width: 90%;
+    }
+    .phlebotomy-right-container{
+        width: 90%;
+    }
 }

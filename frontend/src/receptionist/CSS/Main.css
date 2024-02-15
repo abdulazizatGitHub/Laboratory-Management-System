@@ -1,5 +1,6 @@
 #mainContainer-receptionist {
-    width: 100%;
+    /* width: 100%; */
+    height: 100vh;
     display: flex;
     justify-content: space-between;
 }
@@ -11,3 +12,14 @@
 .right-side-recep {
     width: 83%;
 }
+
+
+
+@media screen and (max-width: 790px) {
+    .left-side-recep{
+        width: 30%;
+    }
+    .right-side-recep{
+        width: 70%;
+    }
+  }
