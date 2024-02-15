@@ -1,0 +1,164 @@
+@import '../../constants/Colors.css';
+
+.Test-Details-Main-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--fontRegular);
+    width: 100%;
+    height: 110vh;
+}
+
+.Test-Details-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.7rem;
+    width: 60%;
+    height: 90%;
+    border: 5px solid rgb(255, 253, 253);
+    border-radius: 10px; 
+    background-color: var(--navbarTextColor);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.Test-Details-Heading {
+    text-align: left;
+    margin: 8px;
+    font-weight: 600;
+    font-size: larger;
+    color: var(--lms);
+}
+
+
+.Test-Details {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 25vh;
+    margin-left: 1rem;
+    gap: 1rem;
+}
+
+.Left-Side-Details {
+    width: 50%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-left: 10px;
+    /* gap: 0.9rem;   */
+}
+.Left-Side-Details label {
+    margin-bottom: -10px;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.Left-Side-Details input {
+    width: 300px;
+    height: 30px; /* Increase the height as needed */
+    border: 1px solid #838181;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+}
+
+
+.Right-side-Details {
+    width: 50%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align elements to the left */
+    /* gap: 0.9rem; */
+}
+
+.Right-side-Details label {
+    margin-bottom: -10px;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.Right-side-Details input {
+    width: 300px;
+    height: 30px; /* Increase the height as needed */
+    border: 1px solid #838181;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+}
+
+
+.btn-Container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Next-button {
+    width: 10rem;
+    height: 5vh;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: var(--fontRegular);
+    background-color: var( --lms);
+    border: 2px solid var(--lms);
+    border-radius: 5px;
+    color: rgb(250, 250, 250);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.Next-button:hover {
+    transform: scale(1.1);
+}
+
+.Normal-Test-Range-Container {
+    width: 100%;
+    height: 25vh;
+    margin-left: 1rem;
+    gap: 1rem;
+}
+
+.Normal-Test-Range-Container p {
+    font-weight: 600;
+    font-size: larger;
+}
+
+.Normal-Test-Range {
+    width: 50%;
+    height: 25vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; 
+    margin-left: 5px;
+}
+
+.Normal-Test-Range label {
+    margin-bottom: -10px;
+    margin-left: 0.5rem;
+    font-weight: 600;
+}
+
+.Test-Range-Inputs {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5rem;
+}
+
+.Test-Range-Inputs input {
+    width: 100px;
+    height: 30px; /* Increase the height as needed */
+    border: 1px solid #838181;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+}
+
+.Normal-Test-Range-Details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
