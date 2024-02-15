@@ -34,6 +34,7 @@ function Sidebar() {
             <Link to="staff_registration" style={{textDecoration:'none'}}> <p>Staff Registration</p></Link>
             <Link to="view-staff-record" style={{textDecoration:'none'}}> <p>View Staff Record</p></Link>
             <Link to="view-patient-detail" style={{textDecoration:'none'}}> <p>View Patient Details</p></Link>
+            <Link to="Addtest" style={{textDecoration:'none'}}> <p>Add Test Details</p></Link>
                 
                 
             </div>

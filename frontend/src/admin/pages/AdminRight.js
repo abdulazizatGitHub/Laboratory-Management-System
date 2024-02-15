@@ -10,6 +10,7 @@ import MonthlyReport from "./MonthlyReport";
 import PatientDetailPage from "./PatientDetailPage";
 import StaffDetailPage from "./StaffDetailPage";
 import DetailStaff from "./Detailstaff";
+import Addtest from "./Addtest";
 
 const AdminRight = () => {
     return (
@@ -26,6 +27,7 @@ const AdminRight = () => {
                     <Route path="/staff_report" element={<StaffReport  />} />
                     <Route path="/MonthlyReport" element={<MonthlyReport />} />
                     <Route path="/StaffReport/Detailstaff" element={<DetailStaff />} />
+                    <Route path="/Addtest" element={<Addtest />} />
                 </Routes>
             </div>
         </div>
