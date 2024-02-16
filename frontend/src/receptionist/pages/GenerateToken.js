@@ -11,6 +11,7 @@ const GenerateToken = () => {
   const [totalAmount, setTotalAmount] = useState(0);
   const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
   const [pin, setPin] = useState('');
+  const [tokenNumber, setTokenNumber] = useState('');
 
   useEffect(() => {
     let amount = 0;
@@ -27,16 +28,24 @@ const GenerateToken = () => {
   }, [patientData, selectedTests]); // Include patientData in the dependency array
 
   const generatePin = (tokenCount) => {
+    // Generate PIN
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Adding 1 to month because it starts from 0
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
     const pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
     setPin(pinNumber);
+
+    // Generate Token Number
+    const tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
+    setTokenNumber(tokenNumber);
+
     // Update token count in the database
     updateTokenCount()
       .then(() => console.log('Token count updated successfully'))
       .catch(error => console.error('Error updating token count:', error));
   };
+
+
 
   // Conditional rendering to ensure patientData is available before rendering
   if (!patientData) {
@@ -60,7 +69,7 @@ const GenerateToken = () => {
         </div>
         <div id="generateToken-PinAndToken">
           <p className="PinAndToken">PIN: {pin}</p>
-          <p className="PinAndToken">Token #: Btk-00001</p>
+          <p className="PinAndToken">Token #: {tokenNumber}</p>
         </div>
         <div id="generateToken-userInfo">
           <div id="genToken-firstDiv">

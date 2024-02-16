@@ -17,18 +17,21 @@ export const getTokenCount = async (req, res) => {
   }
 };
 
+// controllers/tokenController.js
+
 export const updateTokenCount = async (req, res) => {
-  try {
-    let token = await Tokencount.findOne();
-    if (!token) {
-      // If token count document doesn't exist, initialize it with count 0
-      token = new Tokencount({ count: 0 });
+    try {
+      let token = await Tokencount.findOne();
+      if (!token) {
+        token = new Tokencount();
+      }
+      token.count += 1;
+      const tokenNumber = `Btk-${(token.count).toString().padStart(5, '0')}`;
+      await token.save();
+      res.json({ tokenCount: token.count, tokenNumber });
+    } catch (error) {
+      console.error('Error updating token count:', error);
+      res.status(500).json({ error: 'Internal server error' });
     }
-    token.count += 1;
-    await token.save();
-    res.json({ tokenCount: token.count });
-  } catch (error) {
-    console.error('Error updating token count:', error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-};
+  };
+  
