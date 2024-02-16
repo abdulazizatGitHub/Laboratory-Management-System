@@ -44,9 +44,9 @@ const SearchTest = () => {
     setQueryByCode(value);
   };
 
-  const handleRowCheckboxChange = (event, id) => {
+  const handleRowCheckboxChange = (event, code) => {
     const isChecked = event.target.checked;
-    const row = testData.find((data) => data.id === id);
+    const row = testData.find((data) => data.code === code);
     if (isChecked) {
       setSelectedTests((prevTests) => {
         // Create a new array with the selected test added
@@ -55,7 +55,7 @@ const SearchTest = () => {
     } else {
       setSelectedTests((prevTests) => {
         // Filter out the test with the specified id
-        return prevTests.filter((item) => item.id !== id);
+        return prevTests.filter((item) => item.code !== code);
       });
     }
   };
@@ -150,8 +150,8 @@ const SearchTest = () => {
                     <td>
                     <input
                   type="checkbox"
-                  onChange={(event) => handleRowCheckboxChange(event, data.id)}
-                  checked={selectedTests.some((item) => item.id === data.id)}
+                  onChange={(event) => handleRowCheckboxChange(event, data.code)}
+                  checked={selectedTests.some((item) => item.code === data.code)}
                 />
                     </td>
                     <td>{data.code}</td>

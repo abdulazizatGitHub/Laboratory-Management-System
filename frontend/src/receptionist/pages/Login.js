@@ -7,8 +7,8 @@ const Login = () => {
     const navigation = useNavigate();
 
     const handleLogin = () => {
-        // navigation('/receptionist');
-        navigation('/admin');
+        navigation('/receptionist');
+        // navigation('/admin');
         // navigation('/phelobotny');
     }
     return (
