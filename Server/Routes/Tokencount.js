@@ -6,7 +6,7 @@ import { saveToken } from '../Controllers/GenerateToken.js';
 const router = express.Router();
 
 router.get('/',getTokenCount);
-router.post('/', updateTokenCount); ////Patient registration data
 router.post('/',saveToken);
+router.post('/', updateTokenCount); ////Patient registration data
 
 export default router;
