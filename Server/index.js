@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/StaffRoutes.js';
 import Addtestroutes from './Routes/Addtest.js';
+import Tokenroute from './Routes/Tokencount.js';
 
 dotenv.config();
 
@@ -30,3 +31,4 @@ app.use(express.json());
 app.use('/PatientRegistration',Patientdata); //Patient Registration 
 app.use('/admin', StaffRoutes);
 app.use('/admin/Addtest',Addtestroutes);
+app.use('/receptionist/generate_token',Tokenroute);

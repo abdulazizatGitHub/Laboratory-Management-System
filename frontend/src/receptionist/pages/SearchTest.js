@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import NamingBar from "../components/NamingBar";
-
 import "../CSS/SearchTest.css";
 import { fetchtests } from "../../Services/API";
 import { useLocation, useNavigate } from "react-router-dom";
