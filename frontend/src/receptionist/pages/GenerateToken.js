@@ -2,57 +2,77 @@ import React, { useState, useEffect } from "react";
 import NamingBar from "../components/NamingBar";
 import { useLocation } from "react-router-dom";
 import '../CSS/GenerateToken.css';
-import { fetchTokenCount, updateTokenCount } from "../../Services/API";
+import { fetchTokenCount, saveToken, updateTokenCount } from "../../Services/API";
 
 const GenerateToken = () => {
   const location = useLocation();
   const { patientData, selectedTests } = location.state;
 
-  const [totalAmount, setTotalAmount] = useState(0);
-  const [currentDate, setCurrentDate] = useState(new Date().toLocaleDateString());
   const [pin, setPin] = useState('');
   const [tokenNumber, setTokenNumber] = useState('');
+  const [discountPercentage, setDiscountPercentage] = useState(0); 
+  const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
-    let amount = 0;
-    selectedTests.forEach((test) => {
-      amount += test.total;
-    });
-    setTotalAmount(amount);
-
-    // Fetch token count from the database
+    // Fetch token count from the database and generate PIN and Token Number
     fetchTokenCount()
       .then(tokenCount => generatePin(tokenCount))
       .catch(error => console.error('Error fetching token count:', error));
+  }, []); // Run only once when the component mounts
 
-  }, [patientData, selectedTests]); // Include patientData in the dependency array
 
   const generatePin = (tokenCount) => {
-    // Generate PIN
     const currentDate = new Date();
-    const year = currentDate.getFullYear();
+    const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
     const pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
     setPin(pinNumber);
 
-    // Generate Token Number
     const tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
     setTokenNumber(tokenNumber);
+
+    // Calculate total price for all tests
+    let totalPrice = 0;
+    selectedTests.forEach(test => {
+      totalPrice += test.price;
+    });
+
+    // Apply discount percentage
+    const discountedTotal = totalPrice * (1 - discountPercentage / 100);
+    setGrandTotal(discountedTotal);
 
     // Update token count in the database
     updateTokenCount()
       .then(() => console.log('Token count updated successfully'))
       .catch(error => console.error('Error updating token count:', error));
+
+
+  };
+
+  const saveTokenData = () => {
+    // Save the token data
+    const tokenData = {
+      pin,
+      tokenNumber,
+      patientData,
+      tests: selectedTests,
+      grandTotal,
+      dateTime: new Date().toLocaleString()
+    };
+    saveToken(tokenData)
+      .then(response => {
+        console.log('Token saved successfully:', response);
+        // Redirect or update UI after successful save
+      })
+      .catch(error => {
+        console.error('Error saving token:', error);
+        // Display error message or handle error
+      });
   };
 
 
-
-  // Conditional rendering to ensure patientData is available before rendering
-  if (!patientData) {
-    return (
-      <div>Loading...</div>
-    );
-  }
+  // Calculate current date and time once
+  const currentDateTime = new Date().toLocaleString();
 
   return (
     <div className="generateToken-container">
@@ -85,8 +105,8 @@ const GenerateToken = () => {
             <p className="userInfo-text">{patientData.mobileNumber}</p>
             <p className="userInfo-heading">Referred By:</p>
             <p className="userInfo-text">{patientData.refDoctor}</p>
-            <p className="userInfo-heading">Date</p>
-            <p className="userInfo-text">{currentDate}</p>
+            <p className="userInfo-heading">Date and Time</p>
+            <p className="userInfo-text">{currentDateTime}</p>
           </div>
         </div>
 
@@ -94,21 +114,21 @@ const GenerateToken = () => {
           <table className="scrollable-table">
             <thead className="gToken-table-head">
               <tr>
-                <th>Test Name</th>
-                <th>Date and Time</th>
-                <th>Price</th>
-                <th>Discount</th>
-                <th>Total</th>
+                  <th>Code</th>
+                  <th>Test Name</th>
+                  <th>Type</th>
+                  <th>Sample Type</th>
+                  <th>Price</th>
               </tr>
             </thead>
             <tbody>
               {selectedTests.map((test) => (
                 <tr key={test.id}>
+                  <td>{test.code}</td>
                   <td>{test.name}</td>
-                  <td>{test.deliveryTime}</td>
+                  <td>{test.type}</td>
+                  <td>{test.sampleType}</td>
                   <td>{test.price}</td>
-                  <td>{test.discount}</td>
-                  <td>{test.total}</td>
                 </tr>
               ))}
             </tbody>
@@ -117,10 +137,11 @@ const GenerateToken = () => {
 
         <div id="generateToken-subTotal">
           <hr style={{ width: "12em", margin: "0.5em 4em 0.5em 0px", border: "1px dashed #000000" }} />
-          <p id="genToken-subTotal-text">Total: {totalAmount}</p>
+          <p id="genToken-subTotal-text">Total: {grandTotal}</p>
         </div>
       </div>
       <button type="Submit" id="generateToken-btn" onClick={() => window.print()}>Print</button>
+      <button type="button" onClick={saveTokenData}>Save Token Data</button>
     </div>
   );
 };

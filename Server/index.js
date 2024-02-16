@@ -8,6 +8,7 @@ import StaffRoutes from './Routes/StaffRoutes.js';
 import Addtestroutes from './Routes/Addtest.js';
 import Tokenroute from './Routes/Tokencount.js';
 
+
 dotenv.config();
 
 const app = express();
@@ -32,3 +33,4 @@ app.use('/PatientRegistration',Patientdata); //Patient Registration
 app.use('/admin', StaffRoutes);
 app.use('/admin/Addtest',Addtestroutes);
 app.use('/receptionist/generate_token',Tokenroute);
+// app.use('/receptionist/generate_token',GenToken);

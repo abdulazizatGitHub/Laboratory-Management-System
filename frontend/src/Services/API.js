@@ -17,13 +17,18 @@ export const addTest = async (test) =>{
 
 // Update token count in the backend API
 export const updateTokenCount = async () => {
-    return axios.post(`${Url}/receptionist/generate_token`);
+    return await axios.post(`${Url}/receptionist/generate_token`);
   };
+
+//Saved the TOKEN DATA 
+export const saveToken = async (tokenData) =>{
+  return await axios.post(`${Url}/receptionist/generate_token`,tokenData);
+}
 
 // ===================Get Requests==================================
 
 export const fetchtests = async () =>{
-    return axios.get(`${Url}/admin/Addtest`);
+    return await axios.get(`${Url}/admin/Addtest`);
 }
 
 // Fetch token count from the backend API
