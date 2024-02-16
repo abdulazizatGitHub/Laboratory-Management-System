@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import NamingBar from "../components/NamingBar";
 import '../CSS/PatientRegistration.css';
 import { registerPatient } from "../../Services/API";
+import { useNavigate } from "react-router-dom";
 
 const PatientRegistration = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ const PatientRegistration = () => {
   });
 
   const [selectedGender, setSelectedGender] = useState('');
+  const navigate = useNavigate();
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
@@ -44,6 +46,7 @@ const PatientRegistration = () => {
         // Display an alert with the success message
         window.alert('Patient registered successfully');
         // Handle any additional actions, such as redirecting to a success page
+        navigate("/receptionist/search_test", { state: { patientData: formData } });
         console.log('Redirecting to success page');
       } else {
         // Handle registration failure

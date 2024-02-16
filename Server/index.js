@@ -5,6 +5,7 @@ import { connection } from './Connection.js';
 import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/StaffRoutes.js';
+import Addtestroutes from './Routes/Addtest.js';
 
 dotenv.config();
 
@@ -28,3 +29,4 @@ app.use(express.json());
 
 app.use('/PatientRegistration',Patientdata); //Patient Registration 
 app.use('/admin', StaffRoutes);
+app.use('/admin/Addtest',Addtestroutes);

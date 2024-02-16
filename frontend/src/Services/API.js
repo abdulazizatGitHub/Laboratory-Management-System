@@ -10,3 +10,13 @@ export const registerPatient = async (formData) => {
 export const staffRegsiteration = async (formData) => {
     return await axios.post(`${Url}/admin/staff_registration`, formData);
 }
+
+export const addTest = async (test) =>{
+    return await axios.post(`${Url}/admin/Addtest`,test);
+}
+
+// ===================Get Requests==================================
+
+export const fetchtests = async () =>{
+    return axios.get(`${Url}/admin/Addtest`);
+}

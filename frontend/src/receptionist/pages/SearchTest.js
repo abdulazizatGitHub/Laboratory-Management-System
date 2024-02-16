@@ -1,27 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NamingBar from "../components/NamingBar";
+
 import "../CSS/SearchTest.css";
+import { fetchtests } from "../../Services/API";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SearchTest = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [selectedField, setSelectedField] = useState('Name');
   const [queryByName, setQueryByName] = useState('');
   const [queryByCode, setQueryByCode] = useState('');
-  const [testData, setTestData] = useState([
-    { id:1,name: 'ABC 1', type: 'Chemistry', code: 'A', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:2,name: 'ABC 1', type: 'physics', code: 'A', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    {id:3, name: 'XYX', type: 'Chemistry', code: 'B', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:4,name: 'LMN 1', type: 'Chemistry', code: 'C', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    {id:5, name: 'FGH 1', type: 'Chemistry', code: 'D', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    {id:6, name: 'IUY 1', type: 'Chemistry', code: 'E', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:7,name: 'ERT 1', type: 'Chemistry', code: 'F', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:8,name: 'BNM 1', type: 'Chemistry', code: 'g', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:9,name: 'rty 1', type: 'Chemistry', code: 'g', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:10,name: 'REW 1', type: 'Chemistry', code: 'h', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:11,name: 'REW 1', type: 'Chemistry', code: 'i', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:12,name: 'REW 1', type: 'Chemistry', code: 'k', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-    { id:13,name: 'REW 1', type: 'Chemistry', code: 'n', deliveryTime: '30 mins', price: 100.5, discount: '10%', total: 40 },
-  ]);
-  const [selectedData, setSelectedData] = useState([]);
+  const [testData, setTestData] = useState([]);
+  const [selectedTests, setSelectedTests] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const tests = await fetchtests();
+      if (tests.data && Array.isArray(tests.data)) {
+        setTestData(tests.data);
+      } else {
+        console.error("Error fetching tests: data is not an array");
+      }
+    } catch (error) {
+      console.error("Error fetching tests: ", error);
+    }
+  };
 
   const handleFieldChange = (event) => {
     setSelectedField(event.target.value);
@@ -41,21 +49,30 @@ const SearchTest = () => {
     const isChecked = event.target.checked;
     const row = testData.find((data) => data.id === id);
     if (isChecked) {
-      setSelectedData((prevData) => [...prevData, row]);
+      setSelectedTests((prevTests) => {
+        // Create a new array with the selected test added
+        return [...prevTests, { ...row }];
+      });
     } else {
-      setSelectedData((prevData) => prevData.filter((item) => item.id !== id));
+      setSelectedTests((prevTests) => {
+        // Filter out the test with the specified id
+        return prevTests.filter((item) => item.id !== id);
+      });
     }
   };
   
-  
 
   const handleGenerateToken = () => {
-    console.log("Selected Data:", selectedData);
+    navigate("/receptionist/generate_token", {
+      state: { patientData: location.state?.patientData, selectedTests: selectedTests },
+    });
   };
+  
 
   const filteredData = selectedField === 'Name'
     ? testData.filter(data => data.name.toLowerCase().includes(queryByName.toLowerCase()))
     : testData.filter(data => data.code.includes(queryByCode));
+
 
   return (
     <div id="SearchTest">
@@ -115,36 +132,42 @@ const SearchTest = () => {
               <thead>
                 <tr>
                   <th></th>
+                  <th>Code</th>
                   <th>Name</th>
                   <th>Type</th>
-                  <th>Code</th>
-                  <th>Delivery Time</th>
                   <th>Price</th>
-                  <th>Discount</th>
-                  <th>Total</th>
+                  <th>Sample Type</th>
+                  <th>Sample Quantity</th>
+                  <th>Unit</th>
+                  <th>Male Normal Range (From)</th>
+                  <th>Male Normal Range (To)</th>
+                  <th>Female Normal Range (From)</th>
+                  <th>Female Normal Range (To)</th>
                 </tr>
               </thead>
               <tbody>
-             
-{filteredData.map((data) => (
-  <tr key={data.id}>
-    <td>
-      <input
-        type="checkbox"
-        onChange={(event) => handleRowCheckboxChange(event, data.id)}
-        checked={selectedData.some((item) => item.id === data.id)}
-      />
-    </td>
-    <td>{data.name}</td>
-    <td>{data.type}</td>
-    <td>{data.code}</td>
-    <td>{data.deliveryTime}</td>
-    <td>{data.price}</td>
-    <td>{data.discount}</td>
-    <td>{data.total}</td>
-  </tr>
-))}
-
+                {filteredData.map((data) => (
+                  <tr key={data.id}>
+                    <td>
+                    <input
+                  type="checkbox"
+                  onChange={(event) => handleRowCheckboxChange(event, data.id)}
+                  checked={selectedTests.some((item) => item.id === data.id)}
+                />
+                    </td>
+                    <td>{data.code}</td>
+                    <td>{data.name}</td>
+                    <td>{data.type}</td>
+                    <td>{data.price}</td>
+                    <td>{data.sampleType}</td>
+                    <td>{data.sampleQuantity}</td>
+                    <td>{data.unit}</td>
+                    <td>{data.normalRange.male.from}</td>
+                    <td>{data.normalRange.male.to}</td>
+                    <td>{data.normalRange.female.from}</td>
+                    <td>{data.normalRange.female.to}</td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           </div>
