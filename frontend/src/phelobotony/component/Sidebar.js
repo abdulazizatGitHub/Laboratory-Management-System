@@ -1,26 +1,56 @@
-// Sidebar.js
-
-import React, { useState } from 'react';
+import React, { useEffect } from "react";
 import "../css/Sidebar.css";
-import Navbar from './Navbar';
-
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+function Sidebar({ setIsSideBar }) {
+  const handleCloseSign = () => {
+    setIsSideBar(false);
+  };
+  const handleLinkClick = () => {
+    if (window.innerWidth < 1200) {
+      setIsSideBar(false);
+    }
+  };
 
-   
-    return (
-        <div className="sidebar-container">
-            <div className="sidenav">
-                <span className='Heading-sidebar'>LMS</span>
+  useEffect(() => {
+    const handleResize = () => {
+      const windowWidth = window.innerWidth;
+      if (windowWidth >= 1200) {
+        setIsSideBar(true);
+      }
+    };
 
+    window.addEventListener("resize", handleResize);
 
-                <Link to="" style={{ textDecoration: 'none' }}> <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
-                <Link to="phlebotomy" style={{ textDecoration: 'none' }}> <p><i class="fa-regular fa-microscope"></i> Phlebotomy</p></Link>
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [setIsSideBar]);
 
-            </div>
-        </div>
-    );
+  return (
+    <div className="sidebar-container">
+
+      { window.innerWidth > 1200 ? null :
+        <i className="fa fa-times crossSign" style={{ color: "white" }} onClick={handleCloseSign}></i>
+}
+      <div className="sidenav">
+        <span className="Heading-sidebar">LMS</span>
+
+        <Link to="" style={{ textDecoration: "none" }} onClick={handleLinkClick}  >
+          
+          <p>
+            <i className="fa fa-dashboard"></i> Dashboard
+          </p>
+        </Link>
+        <Link to="phlebotomy" style={{ textDecoration: "none" }} onClick={handleLinkClick} >
+          {" "}
+          <p>
+            <i className="fa fa-microscope"></i> Phlebotomy
+          </p>
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default Sidebar;

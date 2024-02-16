@@ -1,25 +1,41 @@
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 import Sidebar from "../component/Sidebar";
 import PhelobotnyRight from "./PhelobotnyRight";
 
-const PhlebotomyMain=()=>{
-    const [isMobileScreen, setIsMobileScreen] = useState(true);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [isSideBar,setIsSideBar] = useState(false);
+const PhlebotomyMain = () => {
+  const [isMobileScreen, setIsMobileScreen] = useState(true);
+  const [isSideBar, setIsSideBar] = useState(true);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    
-    return(
-        <div id="mainContainer-receptionist">
-            
-         <div className="left-side-recep ">
-        <Sidebar />            
-        </div>
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+      if (window.innerWidth < 1200) {
+        setIsSideBar(false);
+      } else {
+        setIsSideBar(true);
+      }
+    };
 
-        <div className="right-side-recep">
-        <PhelobotnyRight />
-            
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  return (
+    <div id="mainContainer-receptionist">
+      {isSideBar && (
+        <div className="left-side-recep">
+          <Sidebar setIsSideBar={setIsSideBar} />
         </div>
+      )}
+
+      <div className="right-side-recep">
+        <PhelobotnyRight setIsSideBar={setIsSideBar} />
+      </div>
     </div>
-    )
-}
+  );
+};
 export default PhlebotomyMain;

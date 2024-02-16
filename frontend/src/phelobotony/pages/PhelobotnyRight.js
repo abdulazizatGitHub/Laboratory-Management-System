@@ -1,14 +1,14 @@
 import React from "react";
 import Navbar from "../component/Navbar";
 import Dashboard from "./Dashboard";
-import { Routes,Route } from "react-router";
+import { Routes,Route } from "react-router-dom";
 import Phlebotomy from "./Phlebotomy";
 import Report from "./Report";
-const PhelobotnyRight=()=>{
+const PhelobotnyRight=({setIsSideBar})=>{
     return(
         <div style={{ width: "auto", height: "100vh" }}>
-       <Navbar />
-        <div style={{  marginTop: "50px" }}>
+       <Navbar setIsSideBar={setIsSideBar} />
+        <div style={{  marginTop: "50px",width:"auto" }}>
             <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/phlebotomy" element={<Phlebotomy />} />

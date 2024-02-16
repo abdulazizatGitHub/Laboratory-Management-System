@@ -13,7 +13,14 @@
     padding-top: 50px;
     font-family: var(--fontRegular);
     z-index: 1000;
+    
 
+}
+.crossSign{
+    position: absolute;
+    top:15px;
+    right:12px;
+    font-size: 20px;
 }
 
 .sidenav {
