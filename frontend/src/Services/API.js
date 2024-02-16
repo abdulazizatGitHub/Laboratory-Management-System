@@ -17,7 +17,7 @@ export const addTest = async (test) =>{
 
 // Update token count in the backend API
 export const updateTokenCount = async () => {
-    return await axios.post(`${Url}/receptionist/generate_token`);
+    return await axios.put(`${Url}/receptionist/generate_token`);
   };
 
 //Saved the TOKEN DATA 

@@ -141,7 +141,7 @@ const GenerateToken = () => {
         </div>
       </div>
       <button type="Submit" id="generateToken-btn" onClick={() => window.print()}>Print</button>
-      <button type="button" onClick={saveTokenData}>Save Token Data</button>
+      <button type="button" id="generateToken-btn" onClick={saveTokenData}>Save Token Data</button>
     </div>
   );
 };
