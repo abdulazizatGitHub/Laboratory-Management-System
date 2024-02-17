@@ -12,7 +12,7 @@ const saveToken = async (req, res) => {
 
     // Create a new token document
     const newToken = new GenToken({
-      pin,
+      
       tokenNumber,
       patientData,
       tests,
