@@ -62,7 +62,8 @@ export const getStaffDetais = async (req, res) => {
 export const getPatientDetails = async (req, res) => {
     try {
         const patientDetails = await Patient.find();
-        res.status(200).json({patientDetails});
+        console.log(patientDetails);
+        res.status(200).json({patientDetails: patientDetails});
     } catch (error) {
         console.error("Error fetching patient details:", error);
         res.status(500).json({ error: "Internal Server Error" });
