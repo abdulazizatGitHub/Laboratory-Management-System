@@ -7,8 +7,8 @@ import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/StaffRoutes.js';
 import Addtestroutes from './Routes/Addtest.js';
 import Tokenroute from './Routes/Tokencount.js';
-import GenToken from './Routes/GenerateToken.js';
-
+import GetTest from './Routes/Addtest.js';
+import gentok from './Routes/GenerateToken.js';
 
 dotenv.config();
 
@@ -30,8 +30,13 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/PatientRegistration',Patientdata); //Patient Registration 
+app.use('/receptionist/PatientRegistration',Patientdata); //Patient Registration 
+
 app.use('/admin', StaffRoutes);
-app.use('/admin/Addtest',Addtestroutes);
+
+app.use('/admin/Addtest',Addtestroutes);//Add Test
+app.use('/receptionist',GetTest); //Get Test Count
+
+
 app.use('/receptionist/generate_token',Tokenroute);
-app.use('/receptionist/generate_token',GenToken);
+app.use('/receptionist/generate_token',gentok);

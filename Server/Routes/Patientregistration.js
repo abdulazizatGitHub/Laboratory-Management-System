@@ -5,5 +5,6 @@ const router = express.Router();
 
 
 router.post('/', registerPatient); ////Patient registration data
+router.get('/',registerPatient);
 
 export default router;

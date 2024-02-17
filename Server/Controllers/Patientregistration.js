@@ -29,3 +29,13 @@ export const registerPatient = async (req, res) => {
   }
 };
 
+export const getPatientCount = async (req, res) => {
+  try {
+    const patientCount = await Patient.countDocuments();
+    res.status(200).json({ patientCount });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+

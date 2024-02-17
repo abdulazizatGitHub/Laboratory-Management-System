@@ -3,7 +3,7 @@ import axios from 'axios';
 const Url = 'http://localhost:5000';
 
 export const registerPatient = async (formData) => {
-    return await axios.post(`${Url}/PatientRegistration`, formData);
+    return await axios.post(`${Url}/receptionist/PatientRegistration`, formData);
 
 };
 
@@ -41,3 +41,26 @@ export const fetchTokenCount = async () => {
       throw error; // Propagate the error to the calling function/component
     }
   };
+
+//Get No of Test Counts ///////////
+export const getAllTests = async () =>{
+  try {
+    const response = await axios.get(`${Url}/receptionist`); 
+    return response.data; 
+  } catch (error) {
+    console.error('Error fetching tests:', error);
+    throw error;
+  }
+}
+
+export const getAllPatientNumbers = async () => {
+  try {
+    const response = await axios.get(`${Url}/receptionist`);
+    const patients = response.data; // Extract patient data from the response
+    return patients.length; // Return the length of the patient array
+  } catch (error) {
+    console.error('Error fetching patient numbers:', error);
+    throw error;
+  }
+};
+

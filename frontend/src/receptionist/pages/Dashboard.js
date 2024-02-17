@@ -1,17 +1,18 @@
 // Dashboard.js
-import React from "react";
 import '../CSS/Dashboard.css';
 import img1 from '../../Assessts/Images/Profile1.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlask, faDollarSign, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import DailySalesChart from '../components/DailySalesChart';
 import MonthlySalesChart from '../components/MonthlySalesChart';
+import React, { useState, useEffect } from "react";
+import { getAllTests, fetchTokenCount, getAllPatientNumbers } from '../../Services/API'; // Update import
 
 const Dashboard = () => {
-    const numberOfTests = 2503;
-    const totalAmount = 19250;
-    const totalPatients = 30;
-    const tokensGenerated = 117;
+    const [numberOfTests, setNumberOfTests] = useState(0);
+    const [totalAmount, setTotalAmount] = useState(19250);
+    const [totalPatients, setTotalPatients] = useState(0);
+    const [tokensGenerated, setTokensGenerated] = useState(0);
 
     const dailySalesData = [
         { timeOfDay: '18', sales: 40 },
@@ -36,7 +37,41 @@ const Dashboard = () => {
         { dateOfMonth: '20', sales: 20 },
       ];
   
+      useEffect(() => {
+        async function fetchData() {
+            try {
+                const tests = await getAllTests(); // Fetch tests using API module
+                setNumberOfTests(tests.length);
+            } catch (error) {
+                console.error('Error fetching tests:', error);
+            }
+        }
+        fetchData();
+    }, []);
 
+    useEffect(() => {
+        async function fetchToken() {
+            try {
+                const tokenCount = await fetchTokenCount(); // Fetch token count
+                setTokensGenerated(tokenCount); // Update tokensGenerated state
+            } catch (error) {
+                console.error('Error fetching token count:', error);
+            }
+        }
+        fetchToken();
+    }, []);
+
+    useEffect(() => {
+        async function fetchPatients() {
+            try {
+                const patientCount = await getAllPatientNumbers(); // Fetch patient count
+                setTotalPatients(patientCount); // Update totalPatients state
+            } catch (error) {
+                console.error('Error fetching patient count:', error);
+            }
+        }
+        fetchPatients();
+    }, []);
     return (
         <div className="Main-Container">
             <div className="Profile">
@@ -83,17 +118,14 @@ const Dashboard = () => {
 
             <div className="dashboard">
                 <div className="dashboard-item">
-                   
                     <h3>NUMBER OF TESTS</h3>
-                    <p > <FontAwesomeIcon icon={faFlask} />{numberOfTests}</p>
+                    <p ><FontAwesomeIcon icon={faFlask} />{numberOfTests}</p>
                 </div>
                 <div className="dashboard-item">
-                  
                     <h3>TOTAL AMOUNT</h3>
                     <p>  <FontAwesomeIcon icon={faDollarSign} />{totalAmount}</p>
                 </div>
                 <div className="dashboard-item">
-                   
                     <h3>TOTAL PATIENT</h3>
                     <p>  <FontAwesomeIcon icon={faUser} /> {totalPatients}</p>
                 </div>
@@ -102,7 +134,6 @@ const Dashboard = () => {
                     <p><FontAwesomeIcon icon={faKey} /> {tokensGenerated}</p>
                 </div>
             </div>
-
             <div className="dashboard-charts">
                   <div className="chart-container">
                     <h3>DAILY SALES CHART</h3>
