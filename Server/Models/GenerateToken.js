@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 // Define the schema for the token
 const tokenSchema = new Schema({
-  pin: String,
+  
   tokenNumber: String,
   patientData: Object, // Assuming patientData is an object
   tests: [Object], // Assuming tests is an array of objects

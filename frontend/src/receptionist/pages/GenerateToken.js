@@ -8,12 +8,12 @@ const GenerateToken = () => {
   const location = useLocation();
   const { patientData, selectedTests } = location.state;
 
-  const [pin, setPin] = useState('');
   const [tokenNumber, setTokenNumber] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0); 
   const [grandTotal, setGrandTotal] = useState(0);
 
   useEffect(() => {
+    generatePin();
     // Fetch token count from the database and generate PIN and Token Number
     fetchTokenCount()
       .then(tokenCount => generatePin(tokenCount))
@@ -22,11 +22,7 @@ const GenerateToken = () => {
 
 
   const generatePin = (tokenCount) => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
-    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-    const pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
-    setPin(pinNumber);
+   
 
     const tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
     setTokenNumber(tokenNumber);
@@ -52,7 +48,6 @@ const GenerateToken = () => {
   const saveTokenData = () => {
     // Save the token data
     const tokenData = {
-      pin,
       tokenNumber,
       patientData,
       tests: selectedTests,
@@ -88,7 +83,7 @@ const GenerateToken = () => {
           <p className="labInfo">Batkhela</p>
         </div>
         <div id="generateToken-PinAndToken">
-          <p className="PinAndToken">PIN: {pin}</p>
+          <p className="PinAndToken">PIN: {patientData.pin}</p>
           <p className="PinAndToken">Token #: {tokenNumber}</p>
         </div>
         <div id="generateToken-userInfo">

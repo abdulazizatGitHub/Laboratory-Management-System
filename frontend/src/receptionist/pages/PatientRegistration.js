@@ -1,8 +1,9 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import NamingBar from "../components/NamingBar";
 import '../CSS/PatientRegistration.css';
 import { registerPatient } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
+import { fetchTokenCount } from "../../Services/API";
 
 const PatientRegistration = () => {
   const [formData, setFormData] = useState({
@@ -16,10 +17,36 @@ const PatientRegistration = () => {
     refDoctor: '',
     internalRemarks: '',
     patientRemarks: '',
+    pin:'',
   });
 
   const [selectedGender, setSelectedGender] = useState('');
   const navigate = useNavigate();
+  const[tokenCount,setTokenCount]=useState(0);
+  useEffect(() => {
+    fetchToken();
+    
+    }, []); // Run only once when the component mounts
+
+    const fetchToken=()=>{
+       fetchTokenCount()
+      .then(tokenCount => setTokenCount(tokenCount))
+      .catch(error => console.error('Error fetching token count:', error));
+ 
+    }
+
+    const generatePin = (tokenCount) => {
+     const currentDate = new Date();
+      const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
+      const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+      const pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
+      setFormData((prevData) => ({
+        ...prevData,
+        pin: pinNumber,
+      }));
+    };
+    
+  
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
@@ -36,11 +63,13 @@ const PatientRegistration = () => {
       [name]: value,
     }));
   };
+
   
 
   const handleNextClick = async () => {
     try {
-      const response = await registerPatient(formData);
+      generatePin(tokenCount);
+       const response = await registerPatient(formData);
   
       if (response.status === 200 && response.data.patient) {
         // Patient already exists, show warning

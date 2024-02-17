@@ -7,8 +7,8 @@ import GenToken from "../Models/GenerateToken.js";
 const saveToken = async (req, res) => {
   try {
     // Extract token data from the request body
-    const { pin, tokenNumber, patientData, tests, grandTotal, dateTime } = req.body;
-    console.log(pin);
+    const {  tokenNumber, patientData, tests, grandTotal, dateTime } = req.body;
+    
 
     // Create a new token document
     const newToken = new GenToken({

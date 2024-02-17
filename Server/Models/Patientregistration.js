@@ -11,6 +11,7 @@ const patientSchema = new mongoose.Schema({
   refDoctor: { type: String },
   internalRemarks: { type: String },
   patientRemarks: { type: String },
+  pin: {type: String},
 });
 
 const Patient = mongoose.model('Patient', patientSchema);
