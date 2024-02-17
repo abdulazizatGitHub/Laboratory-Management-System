@@ -55,9 +55,9 @@ export const getAllTests = async () =>{
 
 export const getAllPatientNumbers = async () => {
   try {
-    const response = await axios.get(`${Url}/receptionist`);
-    const patients = response.data; // Extract patient data from the response
-    return patients.length; // Return the length of the patient array
+    const response = await axios.get(`${Url}/receptionist/PatientRegistration`);
+    return  response.data.patientCount; // Extract patient data from the response
+    
   } catch (error) {
     console.error('Error fetching patient numbers:', error);
     throw error;

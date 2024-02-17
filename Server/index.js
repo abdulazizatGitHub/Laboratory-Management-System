@@ -32,6 +32,7 @@ app.use(express.json());
 
 app.use('/receptionist/PatientRegistration',Patientdata); //Patient Registration 
 
+
 app.use('/admin', StaffRoutes);
 
 app.use('/admin/Addtest',Addtestroutes);//Add Test

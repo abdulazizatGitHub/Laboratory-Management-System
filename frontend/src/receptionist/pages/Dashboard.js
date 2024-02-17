@@ -9,7 +9,7 @@ import React, { useState, useEffect } from "react";
 import { getAllTests, fetchTokenCount, getAllPatientNumbers } from '../../Services/API'; // Update import
 
 const Dashboard = () => {
-    const [numberOfTests, setNumberOfTests] = useState(0);
+    const [numberOfTests, setNumberOfTests] = useState([]);
     const [totalAmount, setTotalAmount] = useState(19250);
     const [totalPatients, setTotalPatients] = useState(0);
     const [tokensGenerated, setTokensGenerated] = useState(0);
@@ -37,41 +37,75 @@ const Dashboard = () => {
         { dateOfMonth: '20', sales: 20 },
       ];
   
-      useEffect(() => {
-        async function fetchData() {
-            try {
-                const tests = await getAllTests(); // Fetch tests using API module
-                setNumberOfTests(tests.length);
-            } catch (error) {
-                console.error('Error fetching tests:', error);
-            }
-        }
-        fetchData();
-    }, []);
+    //   useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const tests = await getAllTests(); // Fetch tests using API module
+    //             setNumberOfTests(tests.length);
+    //         } catch (error) {
+    //             console.error('Error fetching tests:', error);
+    //         }
+    //     }
+    //     fetchData();
+    // }, []);
+
+    // useEffect(() => {
+    //     async function fetchToken() {
+    //         try {
+    //             const tokenCount = await fetchTokenCount(); // Fetch token count
+    //             setTokensGenerated(tokenCount); // Update tokensGenerated state
+    //         } catch (error) {
+    //             console.error('Error fetching token count:', error);
+    //         }
+    //     }
+    //     fetchToken();
+    // }, []);
+
+    // useEffect(() => {
+    //     async function fetchPatients() {
+    //         try {
+    //             const patientCount = await getAllPatientNumbers(); // Fetch patient count
+    //             setTotalPatients(patientCount); // Update totalPatients state
+    //         } catch (error) {
+    //             console.error('Error fetching patient count:', error);
+    //         }
+    //     }
+    //     fetchPatients();
+    // }, []);
 
     useEffect(() => {
-        async function fetchToken() {
-            try {
-                const tokenCount = await fetchTokenCount(); // Fetch token count
-                setTokensGenerated(tokenCount); // Update tokensGenerated state
-            } catch (error) {
-                console.error('Error fetching token count:', error);
-            }
-        }
+        getTests();
         fetchToken();
+        fetchpatient();
     }, []);
 
-    useEffect(() => {
-        async function fetchPatients() {
-            try {
-                const patientCount = await getAllPatientNumbers(); // Fetch patient count
-                setTotalPatients(patientCount); // Update totalPatients state
-            } catch (error) {
-                console.error('Error fetching patient count:', error);
-            }
+    const getTests = async () => {
+        try {
+            const result = await getAllTests();
+            setNumberOfTests(result.length);
+        } catch (error) {
+            console.error('Error fetching tests:', error);
         }
-        fetchPatients();
-    }, []);
+    };
+
+    const fetchToken = async () =>{
+        try{
+            const tokencount= await fetchTokenCount();
+            setTokensGenerated(tokencount);
+        }catch(error){
+            console.error("Error whhile Fecthing Token",error);
+        }
+    }
+    const fetchpatient = async () => {
+        try {
+            const patientCount = await getAllPatientNumbers();
+            console.log("The Total Patients are", patientCount);
+            setTotalPatients(patientCount); // Update the state
+        } catch (error) {
+            console.error("Error in Patient", error);
+        }
+    };
+    
     return (
         <div className="Main-Container">
             <div className="Profile">

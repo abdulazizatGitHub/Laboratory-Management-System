@@ -36,27 +36,29 @@ const PatientRegistration = () => {
       [name]: value,
     }));
   };
-
+  
 
   const handleNextClick = async () => {
     try {
-      const registrationSuccess = await registerPatient(formData);
-
-      if (registrationSuccess) {
-        // Display an alert with the success message
+      const response = await registerPatient(formData);
+  
+      if (response.status === 200 && response.data.patient) {
+        // Patient already exists, show warning
+        window.alert('Patient already exists. Loading existing data.');
+      } else if (response.status === 201 && response.data.patient) {
         window.alert('Patient registered successfully');
-        // Handle any additional actions, such as redirecting to a success page
+
         navigate("/receptionist/search_test", { state: { patientData: formData } });
-        console.log('Redirecting to success page');
       } else {
-        // Handle registration failure
-        console.error('Show an error message to the user');
+        // Handle other cases (error or unexpected response)
+        console.error('Unexpected response from the server:', response);
       }
     } catch (error) {
       console.error('Error during registration:', error);
     }
   };
-
+  
+  
 
 
   return (
