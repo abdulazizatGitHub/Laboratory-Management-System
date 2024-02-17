@@ -1,24 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../css/ViewPatientDetail.css';
 import { useNavigate } from "react-router-dom";
-const ViewStaffRecord  = () => {
+import { getStaffDetails } from "../../Services/API";
+const ViewStaffRecord = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByShift, setQueryByShift] = useState('');
     const [queryByContact, setQueryByContact] = useState('');
     const [queryByCNIC, setQueryByCNIC] = useState('');
     const navigation = useNavigate();
-    const [patientData, setPatientData] = useState([
-        {name: 'Abdul Aziz', contactNo: '0310-0000000', CNIC: '15402-0000000-0' , shift:"Morning"},
-        {name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' , shift:"Afternoon"},
-        {name: 'Waleed Rashid', contactNo: '0330-0000000', CNIC: '15422-0000000-0' , shift:"Evening"},
-        {name: 'Noman Khan', contactNo: '0340-0000000', CNIC: '15432-0000000-0' , shift:"Morning"},
-        {name: 'Raza Bukhari', contactNo: '0350-0000000', CNIC: '15442-0000000-0' , shift:"Night"},
-        {name: 'Imran Khan', contactNo: '0360-0000000', CNIC: '15452-0000000-0' , shift:"Evening"},
-        {name: 'Nawaz Sharif', contactNo: '0370-0000000', CNIC: '15462-0000000-0' , shift:"Morning"},
-        {name: 'Zulfiqar ali', contactNo: '0380-0000000', CNIC: '15472-0000000-0' , shift:"Night"},
-        {name: 'Anas Bukhari', contactNo: '0390-0000000', CNIC: '15482-0000000-0', shift:"Afternoon" },
-        {name: 'Shahid Khan', contactNo: '0301-0000000', CNIC: '15492-0000000-0', shift:"Morning" },
-    ]);
+    const [staffData, setStaffData] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await getStaffDetails();
+                console.log('Fetched data:', response.data.staffDetails);
+                setStaffData(response.data.staffDetails);
+            } catch (error) {
+                console.log('Error occurred in fetching the staff data');
+            }
+        }
+    
+        fetchData();
+    }, []);
 
     const handleFieldChange = (event) => {
         setSelectedField(event.target.value)
@@ -43,14 +47,17 @@ const ViewStaffRecord  = () => {
         navigation('/admin/view-staff-record/staffDetail', { state: { data } });
     }
 
+    if (staffData === null) {
+        // Data is still being fetched, you can show a loading spinner or message
+        return <div>Loading...</div>;
+    }
+
     const filteredData = selectedField === "Shift"
-        ? patientData.filter(data => data.shift.includes(queryByShift))
+        ? staffData.filter(data => data.shift.includes(queryByShift))
         : (selectedField === "CONTACT"
-            ? patientData.filter(data => data.contactNo.includes(queryByContact))
-            : patientData.filter(data => data.CNIC.includes(queryByCNIC))
+            ? staffData.filter(data => data.contactNumber.includes(queryByContact))
+            : staffData.filter(data => data.cnic.includes(queryByCNIC))
         )
-
-
 
     return (
         <div className="View-Patient-Details-Container">
@@ -96,11 +103,11 @@ const ViewStaffRecord  = () => {
                             filteredData.map((data) => (
                                 <tr>
                                     <td>{data.name}</td>
-                                    <td>{data.contactNo}</td>
-                                    <td>{data.CNIC}</td>
+                                    <td>{data.contactNumber}</td>
+                                    <td>{data.cnic}</td>
                                     <td>{data.shift}</td>
                                     <td>
-                                        <button type="button" id="ViewTestReport-roundButton" onClick={() => handleDetailView(data)}>View</button>
+                                        <button type="button" id="ViewTestReport-roundButton" style={{cursor: 'pointer'}} onClick={() => handleDetailView(data)}>View</button>
                                     </td>
                                 </tr>
                             ))

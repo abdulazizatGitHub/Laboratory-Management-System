@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../css/ViewPatientDetail.css';
 import { useNavigate } from "react-router-dom";
+import { getPatientDetails } from "../../Services/API";
 const ViewPatientDetail = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByPIN, setQueryByPIN] = useState('');
@@ -8,18 +9,21 @@ const ViewPatientDetail = () => {
     const [queryByCNIC, setQueryByCNIC] = useState('');
     const navigation = useNavigate();
     
-    const [patientData, setPatientData] = useState([
-        { pin: '2401-00001', name: 'Abdul Aziz', contactNo: '0310-0000000', CNIC: '15402-0000000-0' },
-        { pin: '2401-00002', name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' },
-        { pin: '2401-00003', name: 'Waleed Rashid', contactNo: '0330-0000000', CNIC: '15422-0000000-0' },
-        { pin: '2401-00004', name: 'Noman Khan', contactNo: '0340-0000000', CNIC: '15432-0000000-0' },
-        { pin: '2401-00005', name: 'Raza Bukhari', contactNo: '0350-0000000', CNIC: '15442-0000000-0' },
-        { pin: '2401-00006', name: 'Imran Khan', contactNo: '0360-0000000', CNIC: '15452-0000000-0' },
-        { pin: '2401-00007', name: 'Nawaz Sharif', contactNo: '0370-0000000', CNIC: '15462-0000000-0' },
-        { pin: '2401-00008', name: 'Zulfiqar ali', contactNo: '0380-0000000', CNIC: '15472-0000000-0' },
-        { pin: '2401-00009', name: 'Anas Bukhari', contactNo: '0390-0000000', CNIC: '15482-0000000-0' },
-        { pin: '2401-00010', name: 'Shahid Khan', contactNo: '0301-0000000', CNIC: '15492-0000000-0' },
-    ]);
+    const [patientData, setPatientData] = useState(null);
+
+    useEffect(() => {
+        const handleGetPatientData = async () => {
+            try {
+                const response = await getPatientDetails();
+                console.log('Patient data is:', response.data.patientDetails);
+                setPatientData(response.data.patientDetails);
+            } catch (error) {
+                console.log('Error occurred in fetching the patient data');
+            }
+        }
+    
+        handleGetPatientData();
+    }, []);
 
     const handleFieldChange = (event) => {
         setSelectedField(event.target.value)
@@ -44,11 +48,16 @@ const ViewPatientDetail = () => {
         navigation('/admin/view-patient-detail/patientDetail', { state: { data } });
     }
 
+    if (patientData === null) {
+        // Data is still being fetched, you can show a loading spinner or message
+        return <div>Loading...</div>;
+    }
+
     const filteredData = selectedField === "PIN"
         ? patientData.filter(data => data.pin.includes(queryByPIN))
         : (selectedField === "CONTACT"
-            ? patientData.filter(data => data.contactNo.includes(queryByContact))
-            : patientData.filter(data => data.CNIC.includes(queryByCNIC))
+            ? patientData.filter(data => data.mobileNumber.includes(queryByContact))
+            : patientData.filter(data => data.cnic.includes(queryByCNIC))
         )
 
 
@@ -85,7 +94,6 @@ const ViewPatientDetail = () => {
                 <table className="Scrolable-Table">
                     <thead>
                         <tr>
-                            <th>PIN</th>
                             <th>Name</th>
                             <th>Contact #</th>
                             <th>CNIC</th>
@@ -96,10 +104,9 @@ const ViewPatientDetail = () => {
                         {
                             filteredData.map((data) => (
                                 <tr>
-                                    <td>{data.pin}</td>
                                     <td>{data.name}</td>
-                                    <td>{data.contactNo}</td>
-                                    <td>{data.CNIC}</td>
+                                    <td>{data.mobileNumber}</td>
+                                    <td>{data.cnic}</td>
                                     <td>
                                         <button type="button" id="ViewTestReport-roundButton" onClick={() => handleDetailView(data)}>View</button>
                                     </td>

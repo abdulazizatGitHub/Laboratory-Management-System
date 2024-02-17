@@ -31,6 +31,7 @@ box-shadow: var(--divShadowColor);
     border: var(--textFieldBorderColor);
     font-size: var(--medium);
     padding: 0px;
+    cursor: pointer;
 }
 
 #pdp-container{
@@ -66,3 +67,18 @@ box-shadow: var(--divShadowColor);
     color: var(--headingColor);
     font-weight: 700;
 }
+
+.pdp-passwordTxt {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.eye-icon {
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+

@@ -96,8 +96,8 @@ const StaffRegistration = () => {
             formData.append('image', image);
 
             const response = await staffRegsiteration(formData);
-            if (response) {
-                showAlert("Staff Added Successfully", "success");
+            if (response.data.message) {
+                showAlert(response.data.message, "success");
             } else {
                 showAlert("Registration failed", "error");
             }

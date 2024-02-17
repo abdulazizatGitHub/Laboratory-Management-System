@@ -3,22 +3,30 @@ import axios from 'axios';
 const Url = 'http://localhost:5000';
 
 export const registerPatient = async (formData) => {
-    return await axios.post(`${Url}/receptionist/PatientRegistration`, formData);
+  return await axios.post(`${Url}/receptionist/PatientRegistration`, formData);
 
 };
 
 export const staffRegsiteration = async (formData) => {
-    return await axios.post(`${Url}/admin/staff_registration`, formData);
+  return await axios.post(`${Url}/admin/staff_registration`, formData);
+}
+
+export const getStaffDetails = async () => {
+  return await axios.get(`${Url}/admin/view-staff-record`);
+}
+
+export const getPatientDetails = async () => {
+  return await axios.get(`${Url}/admin/view-patient-detail`);
 }
 
 export const addTest = async (test) =>{
-    return await axios.post(`${Url}/admin/Addtest`,test);
+  return await axios.post(`${Url}/admin/Addtest`,test);
 }
 
 // Update token count in the backend API
 export const updateTokenCount = async () => {
-    return await axios.put(`${Url}/receptionist/generate_token`);
-  };
+  return await axios.put(`${Url}/receptionist/generate_token`);
+};
 
 //Saved the TOKEN DATA 
 export const saveToken = async (tokenData) =>{
@@ -28,7 +36,7 @@ export const saveToken = async (tokenData) =>{
 // ===================Get Requests==================================
 
 export const fetchtests = async () =>{
-    return await axios.get(`${Url}/admin/Addtest`);
+  return await axios.get(`${Url}/admin/Addtest`);
 }
 
 // Fetch token count from the backend API

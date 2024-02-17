@@ -13,7 +13,9 @@ const staffSchema = new mongoose.Schema({
     image: {
         data: Buffer,
         contentType: String
-    }
+    },
+    userName: {type: String, required: true},
+    password: {type: String, required: true},
 });
 
 const StaffModel = mongoose.model('Staff', staffSchema);
