@@ -23,8 +23,7 @@ const GenerateToken = () => {
     const generatedTokens= await getGeneratedToken();
     setGeneratedTokenData(generatedTokens);
     generatePin(generatedTokens.length);
-    console.log("Generated Tokens in GenerateToken.js : ",generatedTokens.length)
-  }
+     }
   
   
     // const fetchToken = () => {
