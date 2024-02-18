@@ -11,19 +11,26 @@ const GenerateToken = () => {
   const [tokenNumber, setTokenNumber] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0); 
   const [grandTotal, setGrandTotal] = useState(0);
+  const [ tokenCount , setTokenCount] = useState('');
 
   useEffect(() => {
-    generatePin();
-    // Fetch token count from the database and generate PIN and Token Number
-    fetchTokenCount()
-      .then(tokenCount => generatePin(tokenCount))
-      .catch(error => console.error('Error fetching token count:', error));
-  }, []); // Run only once when the component mounts
+    fetchToken();
+    
+    }, []); // Run only once when the component mounts
+
+    const fetchToken = () => {
+      fetchTokenCount()
+        .then(tokenCount => {
+          setTokenCount(tokenCount);
+          generatePin(tokenCount);
+          console.log("Token Count is : ", tokenCount);
+        })
+        .catch(error => console.error('Error fetching token count:', error));
+    };
 
 
   const generatePin = (tokenCount) => {
-   
-
+    
     const tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
     setTokenNumber(tokenNumber);
 

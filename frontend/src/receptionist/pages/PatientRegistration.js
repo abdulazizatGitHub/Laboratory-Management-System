@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import NamingBar from "../components/NamingBar";
 import '../CSS/PatientRegistration.css';
-import { registerPatient } from "../../Services/API";
+import { getAllPatient, registerPatient } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
 import { fetchTokenCount } from "../../Services/API";
 
@@ -19,21 +19,26 @@ const PatientRegistration = () => {
     patientRemarks: '',
     pin:'',
   });
+ 
 
   const [selectedGender, setSelectedGender] = useState('');
   const navigate = useNavigate();
   const[tokenCount,setTokenCount]=useState(0);
+  
   useEffect(() => {
     fetchToken();
     
     }, []); // Run only once when the component mounts
 
-    const fetchToken=()=>{
-       fetchTokenCount()
-      .then(tokenCount => setTokenCount(tokenCount))
+   const fetchToken = () => {
+    getAllPatient()
+      .then(tokenCount => {
+        setTokenCount(tokenCount);
+        generatePin(tokenCount);
+        console.log("Token Count is : ", tokenCount);
+      })
       .catch(error => console.error('Error fetching token count:', error));
- 
-    }
+  };
 
     const generatePin = (tokenCount) => {
      const currentDate = new Date();
@@ -68,9 +73,10 @@ const PatientRegistration = () => {
 
   const handleNextClick = async () => {
     try {
-      generatePin(tokenCount);
+      // generatePin(tokenCount);
+        console.log(formData.pin);
        const response = await registerPatient(formData);
-  
+       
       if (response.status === 200 && response.data.patient) {
         // Patient already exists, show warning
         window.alert('Patient already exists. Loading existing data.');
