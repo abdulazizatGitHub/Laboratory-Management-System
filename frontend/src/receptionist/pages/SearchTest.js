@@ -15,7 +15,7 @@ const SearchTest = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+     }, []);
 
   const fetchData = async () => {
     try {
@@ -66,7 +66,6 @@ const SearchTest = () => {
     navigate("/receptionist/generate_token", {
       state: { 
         patientData: location.state?.patientData,
-        selectedPatient: location.state?.selectedPatient,
         selectedTests: selectedTests 
       },
     });
