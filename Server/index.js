@@ -40,4 +40,8 @@ app.use('/receptionist',GetTest); //Get Test Count
 
 
 app.use('/receptionist/generate_token',Tokenroute);
+
 app.use('/receptionist/generate_token',gentok);
+
+app.use('/receptionist/getGenTok',gentok)
+

@@ -18,7 +18,6 @@ export const getStaffDetails = async () => {
 export const getPatientDetails = async () => {
   try {
     const res = await axios.get(`${Url}/admin/view-patient-detail`);
-    console.log("Patient data in getPatientDetail function in API : ", res.data)
     return  res.data; // Extract patient data from the response
     
   } catch (error) {
@@ -79,4 +78,15 @@ export const getAllPatientNumbers = async () => {
     throw error;
   }
 };
+
+export const  getGeneratedToken=async()=>{
+  try {
+    const response = await axios.get(`${Url}/receptionist/getGenTok`);
+    return  response.data; // Extract patient data from the response
+    
+  } catch (error) {
+    console.log('Error fetching Generated Token Data',error )
+    throw error;
+  }
+}
 

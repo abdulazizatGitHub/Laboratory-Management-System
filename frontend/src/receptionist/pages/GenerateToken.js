@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import NamingBar from "../components/NamingBar";
 import { useLocation } from "react-router-dom";
 import '../CSS/GenerateToken.css';
-import { fetchTokenCount, saveToken, updateTokenCount } from "../../Services/API";
+import { fetchTokenCount, getGeneratedToken, saveToken, updateTokenCount } from "../../Services/API";
 
 const GenerateToken = () => {
   const location = useLocation();
@@ -11,17 +11,23 @@ const GenerateToken = () => {
   const [tokenNumber, setTokenNumber] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0); 
   const [grandTotal, setGrandTotal] = useState(0);
-  const [ tokenCount , setTokenCount] = useState('');
+  const [ generatedTokenData , setGeneratedTokenData] = useState('');
 
   useEffect(() => {
+    fetchAllGeneratedTokens();
     fetchToken();
     
     }, []); // Run only once when the component mounts
 
+    const fetchAllGeneratedTokens=async()=>{
+      const generatedTokens= await getGeneratedToken();
+      setGeneratedTokenData(generatedTokens);
+      console.log("Generated Tokens in GenerateToken.js : ",generatedTokens)
+    }
+
     const fetchToken = () => {
       fetchTokenCount()
         .then(tokenCount => {
-          setTokenCount(tokenCount);
           generatePin(tokenCount);
           console.log("Token Count is : ", tokenCount);
         })
@@ -31,7 +37,19 @@ const GenerateToken = () => {
 
   const generatePin = (tokenCount) => {
     
-    const tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
+    let tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
+
+    if (generatedTokenData.length > 0) {
+      // Extract existing PINs from data
+      const existingTokens = generatedTokenData.map(Gtok => Gtok.tokenNumber);
+  
+      // Generate a unique pin
+      while (existingTokens.includes(tokenNumber)) {
+        tokenCount++; 
+        tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
+      }
+    }
+
     setTokenNumber(tokenNumber);
 
     // Calculate total price for all tests

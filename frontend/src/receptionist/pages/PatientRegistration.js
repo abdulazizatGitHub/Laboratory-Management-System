@@ -23,11 +23,10 @@ const PatientRegistration = () => {
   const [data,setData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
   const navigate = useNavigate();
-  const[tokenCount,setTokenCount]=useState(0);
   
   useEffect(() => {
     fetchPatientData();
-    fetchToken();
+    fetchPatientNumber();
     
     }, []); // Run only once when the component mounts
 
@@ -36,21 +35,19 @@ const PatientRegistration = () => {
       setData(data);
     }
 
-   const fetchToken = () => {
+   const fetchPatientNumber = () => {
     getAllPatientNumbers()
-      .then(tokenCount => {
-        setTokenCount(tokenCount);
-        generatePin(tokenCount);
-        console.log("Token Count is : ", tokenCount);
+      .then(patientCount => {
+        generatePin(patientCount);
       })
       .catch(error => console.error('Error fetching token count:', error));
   };
 
-    const generatePin = (tokenCount) => {
+    const generatePin = (patientCount) => {
       const currentDate = new Date();
       const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
       const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-      let pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
+      let pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
     
       // Check if data is available
       if (data.length > 0) {
@@ -59,8 +56,8 @@ const PatientRegistration = () => {
     
         // Generate a unique pin
         while (existingPins.includes(pinNumber)) {
-          tokenCount++; // Increment token count if pin exists
-          pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
+          patientCount++; 
+          pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
         }
       }
     
@@ -93,7 +90,6 @@ const PatientRegistration = () => {
 
   const handleNextClick = async () => {
     try {
-      // generatePin(tokenCount);
         console.log(formData.pin);
        const response = await registerPatient(formData);
        
