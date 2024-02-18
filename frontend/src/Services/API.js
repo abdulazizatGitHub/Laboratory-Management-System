@@ -46,17 +46,6 @@ export const fetchtests = async () =>{
   return await axios.get(`${Url}/admin/Addtest`);
 }
 
-// // Fetch token count from the backend API
-// export const fetchTokenCount = async () => {
-//     try {
-//       const response = await axios.get(`${Url}/receptionist/generate_token`); // Adjust the endpoint according to your backend setup
-//       return response.data.tokenCount;
-//     } catch (error) {
-//       console.error('Error fetching token count:', error);
-//       throw error; // Propagate the error to the calling function/component
-//     }
-//   };
-
 //Get No of Test Counts ///////////
 export const getAllTests = async () =>{
   try {

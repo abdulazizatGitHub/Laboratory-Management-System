@@ -64,9 +64,14 @@ const SearchTest = () => {
 
   const handleGenerateToken = () => {
     navigate("/receptionist/generate_token", {
-      state: { patientData: location.state?.patientData, selectedTests: selectedTests },
+      state: { 
+        patientData: location.state?.patientData,
+        selectedPatient: location.state?.selectedPatient,
+        selectedTests: selectedTests 
+      },
     });
   };
+  
   
 
   const filteredData = selectedField === 'Name'

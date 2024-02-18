@@ -33,8 +33,10 @@ function Sidebar() {
             </button>
             <div className={`dropdown-container ${isRegistrationDropdownOpen ? 'open' : ''}`}>
             <Link to="patient_registration" style={{textDecoration:'none'}}> <p>Patient Registration</p></Link>
+            <Link to="SearchPatient" style={{textDecoration:'none'}}> <p>Search Patient</p></Link>
             <Link to="search_test" style={{textDecoration:'none'}}> <p>Search Test</p></Link>
             <Link to="generate_token" style={{textDecoration:'none'}}> <p>Generate Token</p></Link>
+
                 
                 
             </div>

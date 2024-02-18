@@ -96,6 +96,8 @@ const PatientRegistration = () => {
       if (response.status === 200 && response.data.patient) {
         // Patient already exists, show warning
         window.alert('Patient already exists. Loading existing data.');
+        navigate("/receptionist/search_patient");
+        
       } else if (response.status === 201 && response.data.patient) {
         window.alert('Patient registered successfully');
 

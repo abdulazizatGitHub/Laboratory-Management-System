@@ -1,80 +1,58 @@
 import React, { useState, useEffect } from "react";
 import NamingBar from "../components/NamingBar";
+import "../CSS/GenerateToken.css";
 import { useLocation } from "react-router-dom";
-import '../CSS/GenerateToken.css';
-import { fetchTokenCount, getGeneratedToken, saveToken, updateTokenCount } from "../../Services/API";
+import { getGeneratedToken, saveToken } from "../../Services/API";
 
 const GenerateToken = () => {
   const location = useLocation();
-  const { patientData, selectedTests } = location.state;
+  const patientData = location.state?.patientData;
+  const selectedTests = location.state?.selectedTests;
+  const selectedpatient = location.state?.selectedPatient;
+
+  console.log("The Selected patient in Token", selectedpatient);
 
   const [tokenNumber, setTokenNumber] = useState('');
-  const [discountPercentage, setDiscountPercentage] = useState(0); 
+  const [discountPercentage, setDiscountPercentage] = useState(0);
   const [grandTotal, setGrandTotal] = useState(0);
-  const [ generatedTokenData , setGeneratedTokenData] = useState('');
+  const [generatedTokenData, setGeneratedTokenData] = useState('');
 
   useEffect(() => {
     fetchAllGeneratedTokens();
-    // fetchToken();
-    
-  }, []); // Run only once when the component mounts
-  
-  const fetchAllGeneratedTokens=async()=>{
-    const generatedTokens= await getGeneratedToken();
+  }, []);
+
+  const fetchAllGeneratedTokens = async () => {
+    const generatedTokens = await getGeneratedToken();
     setGeneratedTokenData(generatedTokens);
     generatePin(generatedTokens.length);
-     }
-  
-  
-    // const fetchToken = () => {
-      //   fetchTokenCount()
-    //     .then(tokenCount => {
-      //       generatePin(tokenCount);
-    //       console.log("Token Count is : ", tokenCount);
-    //     })
-    //     .catch(error => console.error('Error fetching token count:', error));
-    // };
+  };
 
-    
-    const generatePin = (tokenCount) => {
-      const currentDate = new Date();
+  const generatePin = (tokenCount) => {
+    const currentDate = new Date();
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-    const day = ('0' + currentDate.getDate()).slice(-2); 
+    const day = ('0' + currentDate.getDate()).slice(-2);
     let tokenNumber = `Btk-${month}${day}-${(tokenCount + 1).toString().padStart(3, '0')}`;
 
     if (generatedTokenData.length > 0) {
-      // Extract existing PINs from data
       const existingTokens = generatedTokenData.map(Gtok => Gtok.tokenNumber);
-      
-      // Generate a unique pin
       while (existingTokens.includes(tokenNumber)) {
-        tokenCount++; 
+        tokenCount++;
         tokenNumber = `Btk-${month}${day}-${(tokenCount + 1).toString().padStart(3, '0')}`;
       }
     }
-    
+
     setTokenNumber(tokenNumber);
-    
-    // Calculate total price for all tests
+
     let totalPrice = 0;
     selectedTests.forEach(test => {
       totalPrice += test.price;
     });
-    
-    // Apply discount percentage
+
     const discountedTotal = totalPrice * (1 - discountPercentage / 100);
     setGrandTotal(discountedTotal);
-    
-    // Update token count in the database
-    // updateTokenCount()
-    //   .then(() => console.log('Token count updated successfully'))
-    //   .catch(error => console.error('Error updating token count:', error));
-    
-    
   };
-  
+
   const saveTokenData = () => {
-    // Save the token data
     const tokenData = {
       tokenNumber,
       patientData,
@@ -83,20 +61,16 @@ const GenerateToken = () => {
       dateTime: new Date().toLocaleString()
     };
     saveToken(tokenData)
-    .then(response => {
-      console.log('Token saved successfully:', response);
-      // Redirect or update UI after successful save
-    })
-    .catch(error => {
-      console.error('Error saving token:', error);
-      // Display error message or handle error
-    });
+      .then(response => {
+        console.log('Token saved successfully:', response);
+      })
+      .catch(error => {
+        console.error('Error saving token:', error);
+      });
   };
-  
-  
-  // Calculate current date and time once
+
   const currentDateTime = new Date().toLocaleString();
-  
+
   return (
     <div className="generateToken-container">
       <NamingBar name={"GENERATE TOKEN"} />
@@ -111,23 +85,23 @@ const GenerateToken = () => {
           <p className="labInfo">Batkhela</p>
         </div>
         <div id="generateToken-PinAndToken">
-          <p className="PinAndToken">PIN: {patientData.pin}</p>
+          <p className="PinAndToken">PIN: {selectedpatient ? selectedpatient.pin : (patientData ? patientData.pin : '')}</p>
           <p className="PinAndToken">Token #: {tokenNumber}</p>
         </div>
         <div id="generateToken-userInfo">
           <div id="genToken-firstDiv">
             <p className="userInfo-heading">Name</p>
-            <p className="userInfo-text">{patientData.name}</p>
+            <p className="userInfo-text">{selectedpatient ? selectedpatient.name : (patientData ? patientData.name : '')}</p>
             <p className="userInfo-heading">Age</p>
-            <p className="userInfo-text">{patientData.age}</p>
+            <p className="userInfo-text">{selectedpatient ? selectedpatient.age : (patientData ? patientData.age : '')}</p>
             <p className="userInfo-heading">Gender</p>
-            <p className="userInfo-text">{patientData.gender}</p>
+            <p className="userInfo-text">{selectedpatient ? selectedpatient.gender : (patientData ? patientData.gender : '')}</p>
           </div>
           <div id="genToken-secondDiv">
             <p className="userInfo-heading">Contact#:</p>
-            <p className="userInfo-text">{patientData.mobileNumber}</p>
+            <p className="userInfo-text">{selectedpatient ? selectedpatient.mobileNumber : (patientData ? patientData.mobileNumber : '')}</p>
             <p className="userInfo-heading">Referred By:</p>
-            <p className="userInfo-text">{patientData.refDoctor}</p>
+            <p className="userInfo-text">{selectedpatient ? selectedpatient.refDoctor : (patientData ? patientData.refDoctor : '')}</p>
             <p className="userInfo-heading">Date and Time</p>
             <p className="userInfo-text">{currentDateTime}</p>
           </div>
@@ -137,11 +111,11 @@ const GenerateToken = () => {
           <table className="scrollable-table">
             <thead className="gToken-table-head">
               <tr>
-                  <th>Code</th>
-                  <th>Test Name</th>
-                  <th>Type</th>
-                  <th>Sample Type</th>
-                  <th>Price</th>
+                <th>Code</th>
+                <th>Test Name</th>
+                <th>Type</th>
+                <th>Sample Type</th>
+                <th>Price</th>
               </tr>
             </thead>
             <tbody>
