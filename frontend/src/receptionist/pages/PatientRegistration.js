@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import NamingBar from "../components/NamingBar";
 import '../CSS/PatientRegistration.css';
-import { getAllPatient, registerPatient } from "../../Services/API";
+import { registerPatient } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
-import { fetchTokenCount } from "../../Services/API";
+import { fetchTokenCount,getAllPatientNumbers } from "../../Services/API";
 
 const PatientRegistration = () => {
   const [formData, setFormData] = useState({
@@ -31,7 +31,7 @@ const PatientRegistration = () => {
     }, []); // Run only once when the component mounts
 
    const fetchToken = () => {
-    getAllPatient()
+    getAllPatientNumbers()
       .then(tokenCount => {
         setTokenCount(tokenCount);
         generatePin(tokenCount);

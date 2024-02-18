@@ -6,7 +6,7 @@ import { faFlask, faDollarSign, faUser, faKey } from '@fortawesome/free-solid-sv
 import DailySalesChart from '../components/DailySalesChart';
 import MonthlySalesChart from '../components/MonthlySalesChart';
 import React, { useState, useEffect } from "react";
-import { getAllTests, fetchTokenCount, getAllPatient } from '../../Services/API'; // Update import
+import { getAllTests, fetchTokenCount, getAllPatientNumbers } from '../../Services/API'; // Update import
 
 const Dashboard = () => {
     const [numberOfTests, setNumberOfTests] = useState([]);
@@ -36,6 +36,42 @@ const Dashboard = () => {
         { dateOfDay: '15', sales: 16 },
         { dateOfMonth: '20', sales: 20 },
       ];
+  
+    //   useEffect(() => {
+    //     async function fetchData() {
+    //         try {
+    //             const tests = await getAllTests(); // Fetch tests using API module
+    //             setNumberOfTests(tests.length);
+    //         } catch (error) {
+    //             console.error('Error fetching tests:', error);
+    //         }
+    //     }
+    //     fetchData();
+    // }, []);
+
+    // useEffect(() => {
+    //     async function fetchToken() {
+    //         try {
+    //             const tokenCount = await fetchTokenCount(); // Fetch token count
+    //             setTokensGenerated(tokenCount); // Update tokensGenerated state
+    //         } catch (error) {
+    //             console.error('Error fetching token count:', error);
+    //         }
+    //     }
+    //     fetchToken();
+    // }, []);
+
+    // useEffect(() => {
+    //     async function fetchPatients() {
+    //         try {
+    //             const patientCount = await getAllPatientNumbers(); // Fetch patient count
+    //             setTotalPatients(patientCount); // Update totalPatients state
+    //         } catch (error) {
+    //             console.error('Error fetching patient count:', error);
+    //         }
+    //     }
+    //     fetchPatients();
+    // }, []);
 
     useEffect(() => {
         getTests();
@@ -62,9 +98,9 @@ const Dashboard = () => {
     }
     const fetchpatient = async () => {
         try {
-            const patientCount = await getAllPatient();
+            const patientCount = await getAllPatientNumbers();
             console.log("The Total Patients are", patientCount);
-            setTotalPatients(patientCount.patientCount); // Update the state
+            setTotalPatients(patientCount); // Update the state
         } catch (error) {
             console.error("Error in Patient", error);
         }
