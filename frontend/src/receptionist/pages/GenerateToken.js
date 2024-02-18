@@ -15,61 +15,65 @@ const GenerateToken = () => {
 
   useEffect(() => {
     fetchAllGeneratedTokens();
-    fetchToken();
+    // fetchToken();
     
-    }, []); // Run only once when the component mounts
+  }, []); // Run only once when the component mounts
+  
+  const fetchAllGeneratedTokens=async()=>{
+    const generatedTokens= await getGeneratedToken();
+    setGeneratedTokenData(generatedTokens);
+    generatePin(generatedTokens.length);
+    console.log("Generated Tokens in GenerateToken.js : ",generatedTokens.length)
+  }
+  
+  
+    // const fetchToken = () => {
+      //   fetchTokenCount()
+    //     .then(tokenCount => {
+      //       generatePin(tokenCount);
+    //       console.log("Token Count is : ", tokenCount);
+    //     })
+    //     .catch(error => console.error('Error fetching token count:', error));
+    // };
 
-    const fetchAllGeneratedTokens=async()=>{
-      const generatedTokens= await getGeneratedToken();
-      setGeneratedTokenData(generatedTokens);
-      console.log("Generated Tokens in GenerateToken.js : ",generatedTokens)
-    }
-
-    const fetchToken = () => {
-      fetchTokenCount()
-        .then(tokenCount => {
-          generatePin(tokenCount);
-          console.log("Token Count is : ", tokenCount);
-        })
-        .catch(error => console.error('Error fetching token count:', error));
-    };
-
-
-  const generatePin = (tokenCount) => {
     
-    let tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
+    const generatePin = (tokenCount) => {
+      const currentDate = new Date();
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2); 
+    let tokenNumber = `Btk-${month}${day}-${(tokenCount + 1).toString().padStart(3, '0')}`;
 
     if (generatedTokenData.length > 0) {
       // Extract existing PINs from data
       const existingTokens = generatedTokenData.map(Gtok => Gtok.tokenNumber);
-  
+      
       // Generate a unique pin
       while (existingTokens.includes(tokenNumber)) {
         tokenCount++; 
-        tokenNumber = `Btk-${(tokenCount + 1).toString().padStart(5, '0')}`;
+        tokenNumber = `Btk-${month}${day}-${(tokenCount + 1).toString().padStart(3, '0')}`;
       }
     }
-
+    
     setTokenNumber(tokenNumber);
-
+    
     // Calculate total price for all tests
     let totalPrice = 0;
     selectedTests.forEach(test => {
       totalPrice += test.price;
     });
-
+    
     // Apply discount percentage
     const discountedTotal = totalPrice * (1 - discountPercentage / 100);
     setGrandTotal(discountedTotal);
-
+    
     // Update token count in the database
-    updateTokenCount()
-      .then(() => console.log('Token count updated successfully'))
-      .catch(error => console.error('Error updating token count:', error));
-
-
+    // updateTokenCount()
+    //   .then(() => console.log('Token count updated successfully'))
+    //   .catch(error => console.error('Error updating token count:', error));
+    
+    
   };
-
+  
   const saveTokenData = () => {
     // Save the token data
     const tokenData = {
@@ -80,20 +84,20 @@ const GenerateToken = () => {
       dateTime: new Date().toLocaleString()
     };
     saveToken(tokenData)
-      .then(response => {
-        console.log('Token saved successfully:', response);
-        // Redirect or update UI after successful save
-      })
-      .catch(error => {
-        console.error('Error saving token:', error);
-        // Display error message or handle error
-      });
+    .then(response => {
+      console.log('Token saved successfully:', response);
+      // Redirect or update UI after successful save
+    })
+    .catch(error => {
+      console.error('Error saving token:', error);
+      // Display error message or handle error
+    });
   };
-
-
+  
+  
   // Calculate current date and time once
   const currentDateTime = new Date().toLocaleString();
-
+  
   return (
     <div className="generateToken-container">
       <NamingBar name={"GENERATE TOKEN"} />

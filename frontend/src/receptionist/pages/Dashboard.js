@@ -75,7 +75,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         getTests();
-        fetchToken();
+        // fetchToken();
         fetchpatient();
     }, []);
 
@@ -88,14 +88,14 @@ const Dashboard = () => {
         }
     };
 
-    const fetchToken = async () =>{
-        try{
-            const tokencount= await fetchTokenCount();
-            setTokensGenerated(tokencount);
-        }catch(error){
-            console.error("Error whhile Fecthing Token",error);
-        }
-    }
+    // const fetchToken = async () =>{
+    //     try{
+    //         const tokencount= await fetchTokenCount();
+    //         setTokensGenerated(tokencount);
+    //     }catch(error){
+    //         console.error("Error whhile Fecthing Token",error);
+    //     }
+    // }
     const fetchpatient = async () => {
         try {
             const patientCount = await getAllPatientNumbers();

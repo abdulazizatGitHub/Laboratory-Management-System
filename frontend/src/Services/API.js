@@ -81,7 +81,7 @@ export const getAllPatientNumbers = async () => {
 
 export const  getGeneratedToken=async()=>{
   try {
-    const response = await axios.get(`${Url}/receptionist/getGenTok`);
+    const response = await axios.get(`${Url}/receptionist/generate_token`);
     return  response.data; // Extract patient data from the response
     
   } catch (error) {
