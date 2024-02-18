@@ -30,7 +30,6 @@ const ViewPatientDetail = () => {
     const fetchPatientData =async()=>{
         const data= await getPatientDetails();
         setPatientData(data);
-        console.log("Patient Data ",data);
     }
 
     const handleFieldChange = (event) => {
