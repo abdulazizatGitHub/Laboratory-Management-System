@@ -6,7 +6,6 @@ import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/StaffRoutes.js';
 import Addtestroutes from './Routes/Addtest.js';
-import Tokenroute from './Routes/Tokencount.js';
 import GetTest from './Routes/Addtest.js';
 import gentok from './Routes/GenerateToken.js';
 
@@ -39,7 +38,6 @@ app.use('/admin/Addtest',Addtestroutes);//Add Test
 app.use('/receptionist',GetTest); //Get Test Count
 
 
-app.use('/receptionist/generate_token',Tokenroute);
 
 app.use('/receptionist/generate_token',gentok);
 

@@ -48,8 +48,6 @@ const getGeneratedToken  = async (req, res) => {
 }
 
 
-
-
 // Export the controller function
 export { saveToken,getGeneratedToken };
 
