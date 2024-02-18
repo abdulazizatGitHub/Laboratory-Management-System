@@ -6,7 +6,7 @@ import { faFlask, faDollarSign, faUser, faKey } from '@fortawesome/free-solid-sv
 import DailySalesChart from '../components/DailySalesChart';
 import MonthlySalesChart from '../components/MonthlySalesChart';
 import React, { useState, useEffect } from "react";
-import { getAllTests, fetchTokenCount, getAllPatientNumbers } from '../../Services/API'; // Update import
+import { getAllTests, fetchTokenCount, getAllPatientNumbers, getGeneratedToken } from '../../Services/API'; // Update import
 
 const Dashboard = () => {
     const [numberOfTests, setNumberOfTests] = useState([]);
@@ -74,8 +74,8 @@ const Dashboard = () => {
     // }, []);
 
     useEffect(() => {
-        getTests();
-        // fetchToken();
+        getTests();        
+        fetchToken();
         fetchpatient();
     }, []);
 
@@ -88,14 +88,17 @@ const Dashboard = () => {
         }
     };
 
-    // const fetchToken = async () =>{
-    //     try{
-    //         const tokencount= await fetchTokenCount();
-    //         setTokensGenerated(tokencount);
-    //     }catch(error){
-    //         console.error("Error whhile Fecthing Token",error);
-    //     }
-    // }
+    const fetchToken = async () =>{
+        // try{
+        //     const tokencount= await fetchTokenCount();
+        //     setTokensGenerated(tokencount);
+        // }catch(error){
+        //     console.error("Error whhile Fecthing Token",error);
+        // }
+
+        const tokencount = await getGeneratedToken();
+        setTokensGenerated(tokencount.length);
+    }
     const fetchpatient = async () => {
         try {
             const patientCount = await getAllPatientNumbers();

@@ -10,8 +10,7 @@ const ViewPatientDetail = () => {
     const navigation = useNavigate();
     
     const [patientData, setPatientData] = useState([
-        { pin: '', name: '', contactNo: '', CNIC: '' },
-        // { pin: '2401-00002', name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' },
+         // { pin: '2401-00002', name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' },
         // { pin: '2401-00003', name: 'Waleed Rashid', contactNo: '0330-0000000', CNIC: '15422-0000000-0' },
         // { pin: '2401-00004', name: 'Noman Khan', contactNo: '0340-0000000', CNIC: '15432-0000000-0' },
         // { pin: '2401-00005', name: 'Raza Bukhari', contactNo: '0350-0000000', CNIC: '15442-0000000-0' },
@@ -25,13 +24,13 @@ const ViewPatientDetail = () => {
     
 
     useEffect(()=>{
-        // fetchPatientData();
+        fetchPatientData();
     },[])
     
     const fetchPatientData =async()=>{
         const data= await getPatientDetails();
         setPatientData(data);
-        console.log(patientData);
+        console.log("Patient Data ",data);
     }
 
     const handleFieldChange = (event) => {
@@ -60,8 +59,8 @@ const ViewPatientDetail = () => {
     const filteredData = selectedField === "PIN"
         ? patientData.filter(data => data.pin.includes(queryByPIN))
         : (selectedField === "CONTACT"
-            ? patientData.filter(data => data.contactNo.includes(queryByContact))
-            : patientData.filter(data => data.CNIC.includes(queryByCNIC))
+            ? patientData.filter(data => data.mobileNumber.includes(queryByContact))
+            : patientData.filter(data => data.cnic.includes(queryByCNIC))
         )
 
 
@@ -111,8 +110,8 @@ const ViewPatientDetail = () => {
                                 <tr>
                                     <td>{data.pin}</td>
                                     <td>{data.name}</td>
-                                    <td>{data.contactNo}</td>
-                                    <td>{data.CNIC}</td>
+                                    <td>{data.mobileNumber}</td>
+                                    <td>{data.cnic}</td>
                                     <td>
                                         <button type="button" id="ViewTestReport-roundButton" onClick={() => handleDetailView(data)}>View</button>
                                     </td>
