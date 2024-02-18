@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import '../css/ViewPatientDetail.css';
 import { useNavigate } from "react-router-dom";
+import { getPatientDetails } from "../../Services/API";
 const ViewPatientDetail = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByPIN, setQueryByPIN] = useState('');
@@ -9,17 +10,29 @@ const ViewPatientDetail = () => {
     const navigation = useNavigate();
     
     const [patientData, setPatientData] = useState([
-        { pin: '2401-00001', name: 'Abdul Aziz', contactNo: '0310-0000000', CNIC: '15402-0000000-0' },
-        { pin: '2401-00002', name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' },
-        { pin: '2401-00003', name: 'Waleed Rashid', contactNo: '0330-0000000', CNIC: '15422-0000000-0' },
-        { pin: '2401-00004', name: 'Noman Khan', contactNo: '0340-0000000', CNIC: '15432-0000000-0' },
-        { pin: '2401-00005', name: 'Raza Bukhari', contactNo: '0350-0000000', CNIC: '15442-0000000-0' },
-        { pin: '2401-00006', name: 'Imran Khan', contactNo: '0360-0000000', CNIC: '15452-0000000-0' },
-        { pin: '2401-00007', name: 'Nawaz Sharif', contactNo: '0370-0000000', CNIC: '15462-0000000-0' },
-        { pin: '2401-00008', name: 'Zulfiqar ali', contactNo: '0380-0000000', CNIC: '15472-0000000-0' },
-        { pin: '2401-00009', name: 'Anas Bukhari', contactNo: '0390-0000000', CNIC: '15482-0000000-0' },
-        { pin: '2401-00010', name: 'Shahid Khan', contactNo: '0301-0000000', CNIC: '15492-0000000-0' },
-    ]);
+        { pin: '', name: '', contactNo: '', CNIC: '' },
+        // { pin: '2401-00002', name: 'Mahad Wajid', contactNo: '0320-0000000', CNIC: '15412-0000000-0' },
+        // { pin: '2401-00003', name: 'Waleed Rashid', contactNo: '0330-0000000', CNIC: '15422-0000000-0' },
+        // { pin: '2401-00004', name: 'Noman Khan', contactNo: '0340-0000000', CNIC: '15432-0000000-0' },
+        // { pin: '2401-00005', name: 'Raza Bukhari', contactNo: '0350-0000000', CNIC: '15442-0000000-0' },
+        // { pin: '2401-00006', name: 'Imran Khan', contactNo: '0360-0000000', CNIC: '15452-0000000-0' },
+        // { pin: '2401-00007', name: 'Nawaz Sharif', contactNo: '0370-0000000', CNIC: '15462-0000000-0' },
+        // { pin: '2401-00008', name: 'Zulfiqar ali', contactNo: '0380-0000000', CNIC: '15472-0000000-0' },
+        // { pin: '2401-00009', name: 'Anas Bukhari', contactNo: '0390-0000000', CNIC: '15482-0000000-0' },
+        // { pin: '2401-00010', name: 'Shahid Khan', contactNo: '0301-0000000', CNIC: '15492-0000000-0' },
+       ]);
+
+    
+
+    useEffect(()=>{
+        // fetchPatientData();
+    },[])
+    
+    const fetchPatientData =async()=>{
+        const data= await getPatientDetails();
+        setPatientData(data);
+        console.log(patientData);
+    }
 
     const handleFieldChange = (event) => {
         setSelectedField(event.target.value)

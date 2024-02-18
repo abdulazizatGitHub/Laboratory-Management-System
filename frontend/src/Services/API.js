@@ -16,7 +16,15 @@ export const getStaffDetails = async () => {
 }
 
 export const getPatientDetails = async () => {
-  return await axios.get(`${Url}/admin/view-patient-detail`);
+  try {
+    const res = await axios.get(`${Url}/admin/view-patient-detail`);
+    console.log("Patient data in getPatientDetail function in API : ", res.data)
+    return  res.data; // Extract patient data from the response
+    
+  } catch (error) {
+    console.error('Error fetching patient numbers:', error);
+    throw error;
+  } 
 }
 
 export const addTest = async (test) =>{

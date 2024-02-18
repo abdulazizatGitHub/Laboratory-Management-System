@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import NamingBar from "../components/NamingBar";
 import '../CSS/PatientRegistration.css';
-import { registerPatient } from "../../Services/API";
+import { getPatientDetails, registerPatient } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
 import { fetchTokenCount,getAllPatientNumbers } from "../../Services/API";
 
@@ -19,16 +19,22 @@ const PatientRegistration = () => {
     patientRemarks: '',
     pin:'',
   });
- 
 
+  const [data,setData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
   const navigate = useNavigate();
   const[tokenCount,setTokenCount]=useState(0);
   
   useEffect(() => {
+    fetchPatientData();
     fetchToken();
     
     }, []); // Run only once when the component mounts
+
+    const fetchPatientData=async()=>{
+      const data = getPatientDetails();
+      setData(data);
+    }
 
    const fetchToken = () => {
     getAllPatientNumbers()
@@ -41,11 +47,25 @@ const PatientRegistration = () => {
   };
 
     const generatePin = (tokenCount) => {
-     const currentDate = new Date();
+      const currentDate = new Date();
       const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
       const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-      const pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
-      setFormData((prevData) => ({
+      let pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
+    
+      // Check if data is available
+      if (data.length > 0) {
+        // Extract existing PINs from data
+        const existingPins = data.map(patient => patient.pin);
+    
+        // Generate a unique pin
+        while (existingPins.includes(pinNumber)) {
+          tokenCount++; // Increment token count if pin exists
+          pinNumber = `${year}${month}-${(tokenCount + 1).toString().padStart(5, '0')}`;
+        }
+      }
+    
+      // Update form data with the generated pin
+      setFormData(prevData => ({
         ...prevData,
         pin: pinNumber,
       }));
