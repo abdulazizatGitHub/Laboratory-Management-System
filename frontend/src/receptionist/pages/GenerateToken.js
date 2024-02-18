@@ -10,12 +10,12 @@ const GenerateToken = () => {
   const selectedTests = location.state?.selectedTests;
   const selectedpatient = location.state?.selectedPatient;
 
-  console.log("The Selected patient in Token", selectedpatient);
+  console.log("The Selected patrent in Token",selectedpatient);
 
   const [tokenNumber, setTokenNumber] = useState('');
-  const [discountPercentage, setDiscountPercentage] = useState(0);
+  const [discountPercentage, setDiscountPercentage] = useState(0); 
   const [grandTotal, setGrandTotal] = useState(0);
-  const [generatedTokenData, setGeneratedTokenData] = useState('');
+  const [ generatedTokenData , setGeneratedTokenData] = useState('');
 
   useEffect(() => {
     fetchAllGeneratedTokens();
@@ -26,32 +26,32 @@ const GenerateToken = () => {
     setGeneratedTokenData(generatedTokens);
     generatePin(generatedTokens.length);
   };
-
+  
   const generatePin = (tokenCount) => {
     const currentDate = new Date();
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-    const day = ('0' + currentDate.getDate()).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2); 
     let tokenNumber = `Btk-${month}${day}-${(tokenCount + 1).toString().padStart(3, '0')}`;
 
     if (generatedTokenData.length > 0) {
       const existingTokens = generatedTokenData.map(Gtok => Gtok.tokenNumber);
       while (existingTokens.includes(tokenNumber)) {
-        tokenCount++;
+        tokenCount++; 
         tokenNumber = `Btk-${month}${day}-${(tokenCount + 1).toString().padStart(3, '0')}`;
       }
     }
-
+    
     setTokenNumber(tokenNumber);
-
+    
     let totalPrice = 0;
     selectedTests.forEach(test => {
       totalPrice += test.price;
     });
-
+    
     const discountedTotal = totalPrice * (1 - discountPercentage / 100);
     setGrandTotal(discountedTotal);
   };
-
+  
   const saveTokenData = () => {
     const tokenData = {
       tokenNumber,
@@ -68,44 +68,91 @@ const GenerateToken = () => {
         console.error('Error saving token:', error);
       });
   };
-
+  
   const currentDateTime = new Date().toLocaleString();
-
+  
   return (
     <div className="generateToken-container">
       <NamingBar name={"GENERATE TOKEN"} />
 
       <div id="generateToken-innerComponent">
-        <div id="Lab-name-div">
-          <p className="labNameAndTime">Siraj Shaheed</p>
-          <p className="labNameAndTime">24/7</p>
+      {patientData ? (
+    // Display patientData
+    <div>
+      <div id="Lab-name-div">
+        <p className="labNameAndTime">Siraj Shaheed</p>
+        <p className="labNameAndTime">24/7</p>
+      </div>
+      <div id="generateToken-labInfo">
+        <p className="labInfo">Diagnostic Center</p>
+        <p className="labInfo">Batkhela</p>
+      </div>
+      <div id="generateToken-PinAndToken">
+        <p className="PinAndToken">PIN: {patientData.pin}</p>
+        <p className="PinAndToken">Token #: {tokenNumber}</p>
+      </div>
+      <div id="generateToken-userInfo">
+        <div id="genToken-firstDiv">
+          <p className="userInfo-heading">Name</p>
+          <p className="userInfo-text">{patientData.name}</p>
+          <p className="userInfo-heading">Age</p>
+          <p className="userInfo-text">{patientData.age}</p>
+          <p className="userInfo-heading">Gender</p>
+          <p className="userInfo-text">{patientData.gender}</p>
         </div>
-        <div id="generateToken-labInfo">
-          <p className="labInfo">Diagnostic Center</p>
-          <p className="labInfo">Batkhela</p>
+        <div id="genToken-secondDiv">
+          <p className="userInfo-heading">Contact#:</p>
+          <p className="userInfo-text">{patientData.mobileNumber}</p>
+          <p className="userInfo-heading">Referred By:</p>
+          <p className="userInfo-text">{patientData.refDoctor}</p>
+          <p className="userInfo-heading">Date and Time</p>
+          <p className="userInfo-text">{currentDateTime}</p>
         </div>
-        <div id="generateToken-PinAndToken">
-          <p className="PinAndToken">PIN: {selectedpatient ? selectedpatient.pin : (patientData ? patientData.pin : '')}</p>
-          <p className="PinAndToken">Token #: {tokenNumber}</p>
-        </div>
-        <div id="generateToken-userInfo">
-          <div id="genToken-firstDiv">
-            <p className="userInfo-heading">Name</p>
-            <p className="userInfo-text">{selectedpatient ? selectedpatient.name : (patientData ? patientData.name : '')}</p>
-            <p className="userInfo-heading">Age</p>
-            <p className="userInfo-text">{selectedpatient ? selectedpatient.age : (patientData ? patientData.age : '')}</p>
-            <p className="userInfo-heading">Gender</p>
-            <p className="userInfo-text">{selectedpatient ? selectedpatient.gender : (patientData ? patientData.gender : '')}</p>
+      </div>
+    </div>
+  ) : (
+    // If patientData is not available, check if selectedpatient is available
+    selectedpatient && (
+      // Display selectedpatient
+      <div>
+        {/* Render patient information for each selected patient */}
+        {selectedpatient.map((patient, index) => (
+          <div key={index}>
+            <div id="Lab-name-div">
+              <p className="labNameAndTime">Siraj Shaheed</p>
+              <p className="labNameAndTime">24/7</p>
+            </div>
+            <div id="generateToken-labInfo">
+              <p className="labInfo">Diagnostic Center</p>
+              <p className="labInfo">Batkhela</p>
+            </div>
+            <div id="generateToken-PinAndToken">
+              <p className="PinAndToken">PIN: {patient.pin}</p>
+              <p className="PinAndToken">Token #: {tokenNumber}</p>
+            </div>
+            <div id="generateToken-userInfo">
+              <div id="genToken-firstDiv">
+                <p className="userInfo-heading">Name</p>
+                <p className="userInfo-text">{patient.name}</p>
+                <p className="userInfo-heading">Age</p>
+                <p className="userInfo-text">{patient.age}</p>
+                <p className="userInfo-heading">Gender</p>
+                <p className="userInfo-text">{patient.gender}</p>
+              </div>
+              <div id="genToken-secondDiv">
+                <p className="userInfo-heading">Contact#:</p>
+                <p className="userInfo-text">{patient.mobileNumber}</p>
+                <p className="userInfo-heading">Referred By:</p>
+                <p className="userInfo-text">{patient.refDoctor}</p>
+                <p className="userInfo-heading">Date and Time</p>
+                <p className="userInfo-text">{currentDateTime}</p>
+              </div>
+            </div>
           </div>
-          <div id="genToken-secondDiv">
-            <p className="userInfo-heading">Contact#:</p>
-            <p className="userInfo-text">{selectedpatient ? selectedpatient.mobileNumber : (patientData ? patientData.mobileNumber : '')}</p>
-            <p className="userInfo-heading">Referred By:</p>
-            <p className="userInfo-text">{selectedpatient ? selectedpatient.refDoctor : (patientData ? patientData.refDoctor : '')}</p>
-            <p className="userInfo-heading">Date and Time</p>
-            <p className="userInfo-text">{currentDateTime}</p>
-          </div>
-        </div>
+        ))}
+      </div>
+    )
+  )}
 
         <div className="scrollable-table-container gToken-table-cnt">
           <table className="scrollable-table">
