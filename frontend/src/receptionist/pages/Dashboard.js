@@ -10,73 +10,18 @@ import { getAllTests, fetchTokenCount, getAllPatientNumbers, getGeneratedToken }
 
 const Dashboard = () => {
     const [numberOfTests, setNumberOfTests] = useState([]);
-    const [totalAmount, setTotalAmount] = useState(19250);
+    const [totalAmount, setTotalAmount] = useState(0);
     const [totalPatients, setTotalPatients] = useState(0);
     const [tokensGenerated, setTokensGenerated] = useState(0);
-
-    const dailySalesData = [
-        { timeOfDay: '18', sales: 40 },
-        { timeOfDay: '20', sales: 20 },
-        { timeOfDay: '22', sales: 2 },
-        { timeOfDay: '24', sales: 4 },
-        { timeOfDay: '00', sales: 6 },
-        { timeOfDay: '02', sales: 8 },
-        { timeOfDay: '04', sales: 10 },
-        { timeOfDay: '06', sales: 12 },
-        { timeOfDay: '08', sales: 14 },
-        { timeOfDay: '10', sales: 16 },
-      ];
-  
-      const monthlySalesData = [
-        { dateOfMonth: '24', sales: 20000 },
-        { dateOfMonth: '30', sales: 10000 },
-        { dateOfMonth: '15', sales: 4 },
-        { dateOfMonth: '5', sales: 8 },
-        { dateOfMonth: '10', sales: 12 },
-        { dateOfDay: '15', sales: 16 },
-        { dateOfMonth: '20', sales: 20 },
-      ];
-  
-    //   useEffect(() => {
-    //     async function fetchData() {
-    //         try {
-    //             const tests = await getAllTests(); // Fetch tests using API module
-    //             setNumberOfTests(tests.length);
-    //         } catch (error) {
-    //             console.error('Error fetching tests:', error);
-    //         }
-    //     }
-    //     fetchData();
-    // }, []);
-
-    // useEffect(() => {
-    //     async function fetchToken() {
-    //         try {
-    //             const tokenCount = await fetchTokenCount(); // Fetch token count
-    //             setTokensGenerated(tokenCount); // Update tokensGenerated state
-    //         } catch (error) {
-    //             console.error('Error fetching token count:', error);
-    //         }
-    //     }
-    //     fetchToken();
-    // }, []);
-
-    // useEffect(() => {
-    //     async function fetchPatients() {
-    //         try {
-    //             const patientCount = await getAllPatientNumbers(); // Fetch patient count
-    //             setTotalPatients(patientCount); // Update totalPatients state
-    //         } catch (error) {
-    //             console.error('Error fetching patient count:', error);
-    //         }
-    //     }
-    //     fetchPatients();
-    // }, []);
+    const [dailySalesData, setDailySalesData] = useState([]);
+    const [monthlySalesData, setMonthlySalesData] = useState([]);
 
     useEffect(() => {
-        getTests();        
+        getTests();
         fetchToken();
-        fetchpatient();
+        fetchPatient();
+        getDailySales();
+        getMonthlySales();
     }, []);
 
     const getTests = async () => {
@@ -88,18 +33,12 @@ const Dashboard = () => {
         }
     };
 
-    const fetchToken = async () =>{
-        // try{
-        //     const tokencount= await fetchTokenCount();
-        //     setTokensGenerated(tokencount);
-        // }catch(error){
-        //     console.error("Error whhile Fecthing Token",error);
-        // }
-
+    const fetchToken = async () => {
         const tokencount = await getGeneratedToken();
         setTokensGenerated(tokencount.length);
-    }
-    const fetchpatient = async () => {
+    };
+
+    const fetchPatient = async () => {
         try {
             const patientCount = await getAllPatientNumbers();
             console.log("The Total Patients are", patientCount);
@@ -108,7 +47,59 @@ const Dashboard = () => {
             console.error("Error in Patient", error);
         }
     };
-    
+
+    const isToday = (someDate) => {
+        const today = new Date();
+        const date = new Date(someDate);
+        return (
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear()
+        );
+    };
+
+    const getDailySales = async () => {
+        const salesdata = await getGeneratedToken();
+        const todayData = salesdata.filter(item => isToday(item.dateTime));
+        console.log("The Daily Data is", todayData);
+        setDailySalesData(todayData);
+    };
+
+    const getMonthlySales = async () => {
+        const salesdata = await getGeneratedToken();
+        const today = new Date();
+        const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        const monthData = salesdata.filter(item => {
+            const itemDate = new Date(item.dateTime);
+            return itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth;
+        });
+        console.log("Current Month's Sales Data is", monthData);
+        setMonthlySalesData(monthData);
+    };
+
+    const formattedDailySalesData = dailySalesData.map(data => ({
+        timeOfDay: new Date(data.dateTime).toLocaleTimeString('en-US', { hour: 'numeric', hour12: true }),
+        sales: data.grandTotal,
+    }));
+
+    const formattedMonthlySalesData = monthlySalesData.map(data => ({
+        dateOfMonth: new Date(data.dateTime).getDate(),
+        sales: data.grandTotal,
+    }));
+
+    useEffect(() => {
+        calculateTotalAmount(); // Call the function to calculate total amount whenever monthly sales data changes
+    }, [monthlySalesData]);
+
+    const calculateTotalAmount = () => {
+        let total = 0;
+        monthlySalesData.forEach(item => {
+            total += item.grandTotal;
+        });
+        setTotalAmount(total);
+    };
+
     return (
         <div className="Main-Container">
             <div className="Profile">
@@ -174,11 +165,11 @@ const Dashboard = () => {
             <div className="dashboard-charts">
                   <div className="chart-container">
                     <h3>DAILY SALES CHART</h3>
-                    <DailySalesChart data={dailySalesData} />
+                    <DailySalesChart data={formattedDailySalesData} />
                   </div>
                   <div className="chart-container">
                     <h3>MONTHLY SALES CHART</h3>
-                    <MonthlySalesChart data={monthlySalesData} />
+                    <MonthlySalesChart data={formattedMonthlySalesData} />
                   </div>
                 </div>
         </div>

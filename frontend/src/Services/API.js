@@ -30,11 +30,6 @@ export const addTest = async (test) =>{
   return await axios.post(`${Url}/admin/Addtest`,test);
 }
 
-// // Update token count in the backend API
-// export const updateTokenCount = async () => {
-//   return await axios.put(`${Url}/receptionist/generate_token`);
-// };
-
 //Saved the TOKEN DATA 
 export const saveToken = async (tokenData) =>{
   return await axios.post(`${Url}/receptionist/generate_token`,tokenData);

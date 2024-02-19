@@ -1,120 +1,130 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
+import { getGeneratedToken, getPatientDetails } from "../../Services/API";
 const ViewTestReport = () => {
 
-    const [queryByContact, setQueryByContact] = useState('')
-    const [queryByToken, setQueryByToken] = useState('')
-    const [selectedField, setSelectedField] = useState("Contact");
+    const [queryByPIN, setQueryByPIN] = useState('');
+    const [queryByContact, setQueryByContact] = useState('');
+    const [queryByCNIC, setQueryByCNIC] = useState('');
+    const [selectedField, setSelectedField] = useState("PIN");
 
-    const [reportData, setReportData] = useState([
-        { id: 1, patientName: "ABC", testNames: ["efs", "zyz", "imn"], token: "20125-4158", contact: "0322-0002889", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 2, patientName: "XYZ", testNames: ["efs", "zyz", "imn"], token: "20135-4158", contact: "0311-0001119", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 3, patientName: "LMN", testNames: ["efs", "zyz", "imn"], token: "20145-4158", contact: "0333-0001339", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 4, patientName: "PQR", testNames: ["efs", "zyz", "imn"], token: "20155-4158", contact: "0344-0001339", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 5, patientName: "STU", testNames: ["efs", "zyz", "imn"], token: "20165-4158", contact: "0345-0001229", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 6, patientName: "DFE", testNames: ["efs", "zyz", "imn"], token: "20175-4158", contact: "0355-0001159", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 7, patientName: "JKL", testNames: ["efs", "zyz", "imn"], token: "20185-4158", contact: "0316-0001669", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 8, patientName: "TYU", testNames: ["efs", "zyz", "imn"], token: "20195-4158", contact: "0316-0001609", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 9, patientName: "NJI", testNames: ["efs", "zyz", "imn"], token: "20115-4158", contact: "0316-0005669", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        { id: 10, patientName: "FGT", testNames: ["efs", "zyz", "imn"], token: "20182-4158", contact: "0316-0002669", deliveryTime: "1:30 PM", status: "Final", totalAmountPaid: "1000" },
-        ])
+    const [reportData, setReportData] = useState([]);
+
+    useEffect(() => {
+        fetchdata();
+    }, []);
+
+    const isToday = (someDate) => {
+        const today = new Date();
+        const date = new Date(someDate);
+        return (
+            date.getDate() === today.getDate() &&
+            date.getMonth() === today.getMonth() &&
+            date.getFullYear() === today.getFullYear()
+        );
+    }
+    
+    const fetchdata = async () => {
+        const data = await getGeneratedToken();
+    
+        // Filter the data to include only today's data
+        const todayData = data.filter(item => isToday(item.dateTime));
+    
+        console.log("Today's Patient Data is ", todayData);
+        setReportData(todayData);
+    }
+    
 
     const handleFieldChange = (event) => {
         setSelectedField(event.target.value);
+      }
+
+    const handlePinChange = (event) => {
+        const query = event.target.value;
+        setQueryByPIN(query);
     }
 
-    const handleQueryChangeByContact = (event) => {
-        const value = event.target.value;
-        setQueryByContact(value);
+    const handlePinContact = (event) => {
+        const query = event.target.value;
+        setQueryByContact(query);
     }
 
-    const handleQueryChangeByToken=(event)=>{
-            const value = event.target.value;
-            setQueryByToken(value);
+    const handlePinCnic = (event) => {
+        const query = event.target.value;
+        setQueryByCNIC(query);
     }
 
-    const handleReceipt =()=>{
+
+    const handleReceipt = () => {
         console.log("Printing Receipt");
     }
 
-    const filteredData = selectedField === 'Contact'
-    ? reportData.filter(data => data.contact.toLowerCase().includes(queryByContact.toLowerCase()))
-    : reportData.filter(data => data.token.toLowerCase().includes(queryByToken.toLowerCase()));
+    const filteredData = selectedField === "PIN"
+    ? reportData.filter(data => data.patientData.pin && data.patientData.pin.includes(queryByPIN))
+    : (selectedField === "CONTACT"
+        ? reportData.filter(data => data.patientData.mobileNumber && data.patientData.mobileNumber.includes(queryByContact))
+        : reportData.filter(data => data.patientData.cnic && data.patientData.cnic.includes(queryByCNIC))
+    )
+
+    
 
 
     return (<div id="ViewTestReport">
-        <NamingBar name={"vIEW TEST REPORTS"} />
-        <form className="ViewTestReport-innerComponent">
-            <div className="ViewTestReport-searchDivs">
-                <p className="ViewTestReport-Text">Contact#</p>
-                <div className="ViewTestReport-inputDivs">
-                    <input
-                        type="radio"
-                        value="Contact"
-                        checked={selectedField === "Contact"}
-                        onChange={handleFieldChange}
-                        className="ViewTestReport-radio"
-                    />
-                    <input
-                        type="text"
-                        value={queryByContact}
-                        onChange={handleQueryChangeByContact}
-                        placeholder="Search"
-                        disabled={selectedField !== "Contact"}
-                        className="ViewTestReport-searchBox"
-                    />
-                </div>
+        <NamingBar name={"VIEW TEST REPORTS"} />
+        <div className="Search-Container">
+          <p>Search Here</p>
+          <div className="Search-Main">
+            <div className="Search-Content">
+              <label>Search By PIN</label>
+              <div className="ViewPat-search-input">
+                <input type="radio" value="PIN" checked={selectedField === 'PIN'} onChange={handleFieldChange} className="ViewPat-search-radio" />
+                <input type="text" name="search-by-pin" placeholder="Search" className="ViewPat-search-text" disabled={selectedField !== 'PIN'} onChange={handlePinChange} value={queryByPIN} />
+              </div>
             </div>
-
-            <div className="ViewTestReport-searchDivs">
-                <p className="ViewTestReport-Text">Token#</p>
-                <div className="ViewTestReport-inputDivs">
-                    <input
-                        type="radio"
-                        value="Token"
-                        checked={selectedField === "Token"}
-                        onChange={handleFieldChange}
-                        className="ViewTestReport-radio"
-                    />
-                    <input
-                        type="text"
-                        value={queryByToken}
-                        onChange={handleQueryChangeByToken}
-                        placeholder="Search"
-                        disabled={selectedField !== "Token"}
-                        className="ViewTestReport-searchBox"
-                    />
-                </div>
+            <div className="Search-Content">
+              <label>Search By Contact #</label>
+              <div className="ViewPat-search-input">
+                <input type="radio" value="CONTACT" checked={selectedField === 'CONTACT'} onChange={handleFieldChange} className="ViewPat-search-radio" />
+                <input type="text" name="search-by-pin" placeholder="Search" className="ViewPat-search-text" disabled={selectedField !== 'CONTACT'} onChange={handlePinContact} value={queryByContact} />
+              </div>
             </div>
-        </form>
+            <div className="Search-Content">
+              <label>Search By CNIC</label>
+              <div className="ViewPat-search-input">
+                <input type="radio" value="CNIC" checked={selectedField === 'CNIC'} onChange={handleFieldChange} className="ViewPat-search-radio" />
+                <input type="text" name="search-by-pin" placeholder="Search" className="ViewPat-search-text" disabled={selectedField !== 'CNIC'} onChange={handlePinCnic} value={queryByCNIC} />
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="ViewTestReport-innerComponent TableDiv">
             <table className="ViewTestReport-Table">
                 <thead id="ViewTestReport-TableHead">
                     <tr >
 
-                        <th>Patient Name</th>
-                        <th>Test Name</th>
-                        <th>Token</th>
-                        <th>Contact</th>
-                        <th>Delivery Time</th>
-                        <th>Status</th>
-                        <th>Total Amount Paid</th>
-                        <th>Detail</th>
+                  <th>PIN</th>
+                  <th>Token No</th>
+                  <th>Name</th>
+                  <th>Cnic</th>
+                  <th>Mobile Number</th>
+                  <th>Date and Time</th>
+                  <th>Total Price</th>
+                  <th>Reciept</th>
                     </tr>
                 </thead>
                 <tbody >
                     {
-                        filteredData.map((d) => (
-                            <tr key={d.id}>
-                                <td>{d.patientName}</td>
-                                <td>{d.testNames.join(", ")}</td>
-                                <td>{d.token}</td>
-                                <td>{d.contact}</td>
-                                <td>{d.deliveryTime}</td>
-                                <td>{d.status}</td>
-                                <td>{d.totalAmountPaid}</td>
+                        filteredData.map((data) => (
+                            <tr key={data._id}>
+                                <td>{data.patientData.pin}</td>
+                                <td>{data.tokenNumber}</td>
+                                <td>{data.patientData.name}</td>
+                                <td>{data.patientData.cnic}</td>
+                                <td>{data.patientData.mobileNumber}</td>
+                                <td>{data.dateTime}</td>
+                                <td>{data.grandTotal}</td>
                                 <td><button type="submit" id="ViewTestReport-roundButton" onClick={handleReceipt}>Receipt</button></td>
                             </tr>
                         ))

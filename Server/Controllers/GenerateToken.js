@@ -37,15 +37,16 @@ const saveToken = async (req, res) => {
 
 const getGeneratedToken  = async (req, res) => {
   try {
-      console.log("helo i am in getGenerateToken in Genertae Tokne controller")
+
       const generatedTokens = await GenToken.find();
-      console.log("Patient Detail data in controlleris : ",generatedTokens);
+    
       res.status(200).json(generatedTokens); 
   } catch (error) {
       console.error("Error fetching patient details:", error);
       res.status(500).json({ error: "Internal Server Error" });
   }
 }
+
 
 
 // Export the controller function
