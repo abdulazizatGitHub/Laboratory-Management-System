@@ -6,7 +6,7 @@ import Phlebotomy from "./Phlebotomy";
 import Report from "./Report";
 const PhelobotnyRight=({setIsSideBar})=>{
     return(
-        <div style={{ width: "auto", height: "100vh" }}>
+        <div style={{  width:"100%" }}>
        <Navbar setIsSideBar={setIsSideBar} />
         <div style={{  marginTop: "50px",width:"auto" }}>
             <Routes>

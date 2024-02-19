@@ -1,6 +1,6 @@
 // Navbar.js
 import React from 'react';
-import "../../receptionist/CSS/Navbar.css"
+import "../../phelobotony/css/Navbar.css"
 import { Link } from 'react-router-dom';
 
 

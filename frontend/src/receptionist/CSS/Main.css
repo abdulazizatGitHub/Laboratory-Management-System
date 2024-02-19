@@ -14,5 +14,10 @@
 }
 
 
-
+@media screen and (max-width:1200px) {
+    
+    .right-side-recep{
+        width: 100%;
+    }
+}
 

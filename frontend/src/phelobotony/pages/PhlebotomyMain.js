@@ -3,13 +3,10 @@ import Sidebar from "../component/Sidebar";
 import PhelobotnyRight from "./PhelobotnyRight";
 
 const PhlebotomyMain = () => {
-  const [isMobileScreen, setIsMobileScreen] = useState(true);
   const [isSideBar, setIsSideBar] = useState(true);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
+  
   useEffect(() => {
     const handleResize = () => {
-      setWindowWidth(window.innerWidth);
       if (window.innerWidth < 1200) {
         setIsSideBar(false);
       } else {

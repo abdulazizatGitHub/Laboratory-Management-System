@@ -3,19 +3,19 @@ import { Route, Routes } from "react-router-dom";
 import PatientRegistration from "./PatientRegistration";
 import Dashboard from "./Dashboard";
 import SearchTest from "./SearchTest";
-import Navbar from "../components/Navbar";
+import Navbar from "../../phelobotony/component/Navbar";
 import GenerateToken from "./GenerateToken";
 import ViewTestReport from "./ViewTestReport";
 import SearchTestReport from "./SearchTestReport"
 import SearchPatient from "./SearchPatient";
 
-const Right = () => {
+const Right = ({setIsSideBar}) => {
   return (
-    <div >
-      <div>
-        <Navbar />
-        <div style={{  marginTop: "50px" }}>
-          {/* Add a margin-top to create space for the Navbar */}
+    
+    <div style={{  width:"100%" }}>
+       <Navbar setIsSideBar={setIsSideBar} />
+        <div style={{  marginTop: "50px",width:"auto" }}>
+             {/* Add a margin-top to create space for the Navbar */}
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route
@@ -31,7 +31,7 @@ const Right = () => {
           
         </div>
       </div>
-    </div>
+    
   );
 };
 

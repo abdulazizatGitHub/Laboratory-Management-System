@@ -103,7 +103,7 @@ const Dashboard = () => {
     return (
         <div className="Main-Container">
             <div className="Profile">
-                <div className="Image-details">
+                {/* <div className="Image-details">
                     <img src={img1} className="profile-image" />
                 </div>
 
@@ -141,6 +141,46 @@ const Dashboard = () => {
                         <p className="bold-light">CNIC</p>
                         <p>16101-8233468-5</p>
                     </div>
+                </div> */}
+
+                <div className="Image-details">
+                    <img src={img1} className="profile-image" />
+                </div>
+
+                <div className='profile-info'>
+                    <div className="profile-divs">
+                        <p className="bold-light">NAME</p>
+                        <p>Mahad Khan</p>
+                    </div>
+
+                    <div className="profile-divs">
+                        <p className="bold-light">FATHER NAME</p>
+                        <p>Khan</p>
+                    </div>
+
+
+
+                    <div className="profile-divs">
+                        <p className="bold-light">GENDER</p>
+                        <p>Male</p>
+                    </div>
+
+                    <div className="profile-divs">
+                        <p className="bold-light">DATE OF BIRTH</p>
+                        <p>Khan</p>
+                    </div>
+
+
+
+                    <div className="profile-divs">
+                        <p className="bold-light">CONTACT</p>
+                        <p>065415151121</p>
+                    </div>
+
+                    <div className="profile-divs">
+                        <p className="bold-light">CNIC</p>
+                        <p>16101-8233468-5</p>
+                    </div>
                 </div>
             </div>
 
@@ -163,16 +203,17 @@ const Dashboard = () => {
                 </div>
             </div>
             <div className="dashboard-charts">
-                  <div className="chart-container">
+                <div className="chart-container">
                     <h3>DAILY SALES CHART</h3>
                     <DailySalesChart data={formattedDailySalesData} />
-                  </div>
-                  <div className="chart-container">
+                </div>
+                <div className="chart-container">
                     <h3>MONTHLY SALES CHART</h3>
                     <MonthlySalesChart data={formattedMonthlySalesData} />
-                  </div>
                 </div>
+            </div>
         </div>
+
     );
 }
 

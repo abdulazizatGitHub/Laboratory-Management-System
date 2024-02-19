@@ -4,13 +4,13 @@ import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'rec
 const DailySalesChart = ({ data }) => {
   return (
     <BarChart
-      width={500}
+      width={400}
       height={300}
       data={data}
       margin={{
-        top: 5,
-        right: 30,
-        left: 20,
+        top: 10,
+        right: 10,
+        left: 0,
         bottom: 5,
       }}
     >

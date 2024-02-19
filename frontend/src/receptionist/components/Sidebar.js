@@ -1,12 +1,36 @@
 // Sidebar.js
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import '../CSS/Sidebar.css';
-import Navbar from './Navbar';
 
 import { Link } from "react-router-dom";
 
-function Sidebar() {
+
+function Sidebar({ setIsSideBar }) {
+    const handleCloseSign = () => {
+      setIsSideBar(false);
+    };
+    const handleLinkClick = () => {
+      if (window.innerWidth < 1200) {
+        setIsSideBar(false);
+      }
+    };
+  
+    useEffect(() => {
+      const handleResize = () => {
+        const windowWidth = window.innerWidth;
+        if (windowWidth >= 1200) {
+          setIsSideBar(true);
+        }
+      };
+  
+      window.addEventListener("resize", handleResize);
+  
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }, [setIsSideBar]);
+  
     const [isRegistrationDropdownOpen, setRegistrationDropdownOpen] = useState(false);
     const [isTestReportsDropdownOpen, setTestReportsDropdownOpen] = useState(false);
 
@@ -22,6 +46,9 @@ function Sidebar() {
 
     return (
         <div className="sidebar-container">
+        { window.innerWidth > 1200 ? null :
+        <i className="fa fa-times crossSign" style={{ color: "white" }} onClick={handleCloseSign}></i>
+}
         <div className="sidenav">
             <span className='Heading-sidebar'>LMS</span>
 

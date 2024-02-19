@@ -42,7 +42,7 @@ const PatientDetailPage = () => {
                     
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">CNIC: </p>
-                        <p>{data.CNIC}</p>
+                        <p>{data.cnic}</p>
                     </div>.
             </div>
 
@@ -68,7 +68,7 @@ const PatientDetailPage = () => {
             <div className="pdp-details">
                     <div className="pdp-subBoxes">
                         <p className="pdp-smallHeading">Contact#: </p>
-                        <p>{data.contactNo}</p>
+                        <p>{data.mobileNumber}</p>
                     </div>.
 
                     <div className="pdp-subBoxes">
