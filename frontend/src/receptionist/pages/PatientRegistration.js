@@ -43,6 +43,7 @@ const PatientRegistration = () => {
       .catch(error => console.error('Error fetching token count:', error));
   };
 
+  
     const generatePin = (patientCount) => {
       const currentDate = new Date();
       const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
@@ -87,31 +88,44 @@ const PatientRegistration = () => {
   };
 
   
-  const handleNextClick = async () => {
-    try {
-      const response = await registerPatient(formData);
-      
-      if (response.status === 200 && response.data.patient) {
-        // Patient already exists, show warning
-        window.alert('Patient already exists. Loading existing data.');
-        navigate("/receptionist/SearchPatient");
-      } else if (response.status === 201 && response.data.patient) {
-        window.alert('Patient registered successfully');
-        navigate("/receptionist/search_test", { state: { patientData: formData } });
-      } else {
-        // Handle other cases (error or unexpected response)
-        console.error('Unexpected response from the server:', response);
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 200 && error.response.data.patient) {
-        // Patient already exists, show warning
-        window.alert('Patient already exists. Loading existing data.');
-        navigate("/receptionist/search_patient");
-      } else {
-        console.error('Error during registration:', error);
-      }
+const handleNextClick = async (event) => {
+  event.preventDefault(); // Prevent the default form submission behavior
+  
+  // Manually check if any required fields are empty
+  const requiredFields = ['name', 'gender', 'age', 'cnic', 'mobileNumber', 'refDoctor', 'internalRemarks', 'patientRemarks'];
+  const isEmpty = requiredFields.some(field => !formData[field]);
+  
+  if (isEmpty) {
+    window.alert('Please fill in all required fields.');
+    return;
+  }
+
+  try {
+    const response = await registerPatient(formData);
+    
+    if (response.status === 200 && response.data.patient) {
+      // Patient already exists, show warning
+      window.alert('Patient already exists. Loading existing data.');
+      navigate("/receptionist/SearchPatient");
+    } else if (response.status === 201 && response.data.patient) {
+      window.alert('Patient registered successfully');
+      navigate("/receptionist/search_test", { state: { patientData: formData } });
+    } else {
+      // Handle other cases (error or unexpected response)
+      console.error('Unexpected response from the server:', response);
     }
-  };
+  } catch (error) {
+    if (error.response && error.response.status === 200 && error.response.data.patient) {
+      // Patient already exists, show warning
+      window.alert('Patient already exists. Loading existing data.');
+      navigate("/receptionist/search_patient");
+    } else {
+      console.error('Error during registration:', error);
+    }
+  }
+};
+
+  
   
   
 
@@ -207,7 +221,7 @@ const PatientRegistration = () => {
               onChange={handleInputChange} required /><br></br>
           </div>
         </div>
-        <div className="btn-container"><button className="Next-button" onClick={handleNextClick}>Next</button></div>
+        <div className="btn-container"><button className="Next-button" onClick={(event) => handleNextClick(event)}>Next</button></div>
       </form>
 
 

@@ -63,11 +63,13 @@ const GenerateToken = () => {
     saveToken(tokenData)
       .then(response => {
         console.log('Token saved successfully:', response);
+        window.alert('Token saved successfully!');
       })
       .catch(error => {
         console.error('Error saving token:', error);
       });
   };
+  
   
   const currentDateTime = new Date().toLocaleString();
   
