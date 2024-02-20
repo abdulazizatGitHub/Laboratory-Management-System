@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../phelobotony/component/Navbar";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 import StaffRegistration from "./StaffRegistration";
@@ -12,11 +12,11 @@ import StaffDetailPage from "./StaffDetailPage";
 import DetailStaff from "./Detailstaff";
 import Addtest from "./Addtest";
 
-const AdminRight = () => {
+const AdminRight = ({setIsSideBar}) => {
     return (
-        <div style={{ width: "100%", height: "100%" }}>
-            <Navbar />
-            <div style={{ marginTop: "50px" }}>
+        <div style={{ width: "100%"}}>
+            <Navbar setIsSideBar={setIsSideBar} />
+       <div style={{ marginTop: "50px" ,width:"auto"}}>
                 <Routes>
                     <Route path="/" element={<AdminDashboard />} />
                     <Route path="/staff_registration" element={<StaffRegistration />} />

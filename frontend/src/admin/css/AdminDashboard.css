@@ -16,12 +16,16 @@
     padding: 2em;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 20px;
 }
 
 .admin-smallbox{
-    width: 100%;
+    
     justify-content: center;
     text-align: center;
+    margin-left: 2rem;
 }
 
 .admin-text{
@@ -32,6 +36,8 @@
 
 .admin-boxContainer{
     display: flex;
+    width: 100%;
+    justify-content: space-between;
 }
 
 
@@ -39,4 +45,16 @@
     width: 100%;
     padding: 3em;
     text-align: center;
+}
+
+
+@media screen and (max-width: 828px) {
+    .AdminDashboard-subContainer{
+        flex-direction: column;
+    }
+    
+.admin-boxContainer{    
+    justify-content: space-around;
+}
+
 }

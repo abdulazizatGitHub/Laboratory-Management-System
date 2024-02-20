@@ -2,6 +2,8 @@
 
 #mainContainer-admin{
     font-family: var(--fontRegular);
+    width: 100%;
+    /* height: 100vh; */
      display: flex;
      justify-content: space-between;
 }
@@ -11,4 +13,12 @@
 }
 .right-side-admin{
     width: 83%;
+}
+
+
+@media screen and (max-width:1200px) {
+    
+    .right-side-admin{
+        width: 100%;
+    }
 }

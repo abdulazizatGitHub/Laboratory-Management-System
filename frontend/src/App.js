@@ -5,6 +5,7 @@ import Login from './receptionist/pages/Login';
 import Main from './receptionist/pages/Main';
 import AdminMain from './admin/pages/AdminMain';
 import PhlebotomyMain from './phelobotony/pages/PhlebotomyMain';
+
 function App() {
   return (
     <div className="App">
