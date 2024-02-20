@@ -8,14 +8,11 @@ const GenerateToken = () => {
   const location = useLocation();
   const patientData = location.state?.patientData;
   const selectedTests = location.state?.selectedTests;
-  // const selectedpatient = location.state?.selectedPatient;
-
-  console.log("The Selected patrent in Token",patientData);
 
   const [tokenNumber, setTokenNumber] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0); 
   const [grandTotal, setGrandTotal] = useState(0);
-  const [ generatedTokenData , setGeneratedTokenData] = useState('');
+  const [generatedTokenData, setGeneratedTokenData] = useState('');
 
   useEffect(() => {
     fetchAllGeneratedTokens();
@@ -53,13 +50,17 @@ const GenerateToken = () => {
   };
   
   const saveTokenData = () => {
+    const currentDate = new Date();
+    const formattedDateTime = currentDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+    
     const tokenData = {
       tokenNumber,
       patientData,
       tests: selectedTests,
       grandTotal,
-      dateTime: new Date().toLocaleString()
+      dateTime: formattedDateTime
     };
+    
     saveToken(tokenData)
       .then(response => {
         console.log('Token saved successfully:', response);
@@ -69,7 +70,6 @@ const GenerateToken = () => {
         console.error('Error saving token:', error);
       });
   };
-  
   
   const currentDateTime = new Date().toLocaleString();
   
