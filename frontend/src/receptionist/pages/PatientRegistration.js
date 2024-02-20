@@ -51,31 +51,27 @@ const PatientRegistration = () => {
   };
 
   
-    const generatePin = (patientCount) => {
-      const currentDate = new Date();
-      const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
-      const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-      let pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-      
-      // Check if data is available
-      if (data.length > 0) {
-        // Extract existing PINs from data
-        const existingPins = data.map(patient => patient.pin);
-    
-        // Generate a unique pin
-        while (existingPins.includes(pinNumber)) {
-          patientCount++; 
-          pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-        } 
-        
-      }
-    
-      setFormData(prevData => ({
-        ...prevData,
-        pin: pinNumber,
-      }));
-    };
-    
+  const generatePin = (patientCount) => {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const currentMonth = currentDate.getMonth() + 1;
+    const monthString = currentMonth < 10 ? `0${currentMonth}` : `${currentMonth}`;
+  
+    const pinMonthYear = `${currentYear}${monthString}`;
+  
+    // If the pinMonthYear is different from the previously generated pinMonthYear,
+    // reset the patient count to 1, otherwise increment it.
+    const nextPatientCount = pinMonthYear === formData.pin.substring(0, 6) ? patientCount + 1 : 1;
+  
+    // Create the new PIN number by combining the current month and year with the incremented patient count.
+    const newPin = `${pinMonthYear}-${nextPatientCount.toString().padStart(4, '0')}`;
+  
+    setFormData(prevData => ({
+      ...prevData,
+      pin: newPin,
+    }));
+  };
+  
   
 
   const handleGenderChange = (event) => {
