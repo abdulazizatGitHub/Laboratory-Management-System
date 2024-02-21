@@ -49,7 +49,7 @@ const fetchprevmonth = async () =>{
       return itemDate >= firstDayOfPreviousMonth && itemDate <= lastDayOfPreviousMonth;
     });
     console.log("Prev Month",previousMonthData);
-    setmonthlysalesdata(previousMonthData);
+    setpremonthData(previousMonthData);
 }
 
 const formattedprevmonth = premonthData.map(data => ({
