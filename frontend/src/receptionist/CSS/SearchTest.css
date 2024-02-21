@@ -12,9 +12,10 @@
     margin-top: 1.2rem;
     margin-bottom: 0px;
     
+    
 }
 .searchTest-mainBox{
-    margin: 2rem;
+    /* margin: 2rem; */
     margin-top: 1.2rem;
     margin-bottom: 0px;
     background-color: var(--boxBackColor);    
@@ -81,12 +82,13 @@
   /*Table css*/
   .scrollable-table-container {
     /* overflow-x: auto; */
-    width: 97%;
-    margin: 2em;
+    width: 100%;
+    /* margin: 2em; */
+    padding: 2em;
     
     max-height: 25em;
     
-    overflow: scroll;
+    overflow: auto;
     scroll-behavior: smooth;
     
     }
@@ -148,5 +150,16 @@
     min-height: 25em
   } */
 
+
+  @media screen and (max-width: 900px){
+    .searchTest-mainBox{
+      flex-direction: column;
+    }
+    .searchTest-searchDivs{
+      width: 100%;
+      padding: 0;
+      gap: 0;
+    }
+  }
 
   

@@ -74,7 +74,7 @@ function SearchPatient() {
   return (
     <div id="SearchTest">
       <div className="SearchTest-innerComponent">
-        <div className="Search-Container">
+        <div className="Search-Container" style={{width:"100%"}}>
           <p>Search Here</p>
           <div className="Search-Main">
             <div className="Search-Content">

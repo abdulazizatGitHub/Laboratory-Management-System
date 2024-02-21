@@ -151,6 +151,7 @@ const SearchTest = () => {
               </thead>
               <tbody>
                 {filteredData.map((data) => (
+                  <>
                   <tr key={data._id}>
                     <td>
                     <input
@@ -171,7 +172,29 @@ const SearchTest = () => {
                     <td>{data.normalRange.female.from}</td>
                     <td>{data.normalRange.female.to}</td>
                   </tr>
+                  <tr key={data._id}>
+                    <td>
+                    <input
+                  type="checkbox"
+                  onChange={(event) => handleRowCheckboxChange(event, data._id)}
+                  checked={selectedTests.some((item) => item._id === data._id)}
+                />
+                    </td>
+                    <td>{data.code}</td>
+                    <td>{data.name}</td>
+                    <td>{data.type}</td>
+                    <td>{data.price}</td>
+                    <td>{data.sampleType}</td>
+                    <td>{data.sampleQuantity}</td>
+                    <td>{data.unit}</td>
+                    <td>{data.normalRange.male.from}</td>
+                    <td>{data.normalRange.male.to}</td>
+                    <td>{data.normalRange.female.from}</td>
+                    <td>{data.normalRange.female.to}</td>
+                  </tr></>
                 ))}
+
+
               </tbody>
             </table>
           </div>
