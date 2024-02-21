@@ -71,7 +71,9 @@ const ViewTestReport = () => {
 
 
     return (<div id="ViewTestReport">
-        <NamingBar name={"VIEW TEST REPORTS"} />
+       <div style={{width:"95%"}}>
+       <NamingBar name={"VIEW TEST REPORTS"} />
+       </div>
         <div className="Search-Container">
           <p>Search Here</p>
           <div className="Search-Main">

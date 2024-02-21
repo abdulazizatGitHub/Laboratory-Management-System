@@ -4,6 +4,8 @@
     font-family: var(--fontRegular);
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .ViewTestReport-innerComponent{
@@ -12,6 +14,7 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     display: flex;
     justify-content: space-between;
+    width: 95%;
 }
 
 .ViewTestReport-searchDivs{
@@ -51,8 +54,8 @@
 }
 .ViewTestReport-Table{
     width: 100% ;
-    margin-top: 0.5em;
-    margin-right: 2em;
+    
+    margin: 2em;
 }
 .TableDiv::-webkit-scrollbar {
     width: 0;
