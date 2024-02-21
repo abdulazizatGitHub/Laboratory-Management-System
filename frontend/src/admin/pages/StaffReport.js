@@ -17,8 +17,8 @@ const StaffReport = () => {
 
     return (
         <div>
-            <h2>All Staff Sales</h2>
-            <table>
+            <h2 style={{textAlign:"center",color:"rgba(0, 225, 225, 0.9)"}}>All Staff Sales</h2>
+            <table style={{margin:"2rem", width:"95%"}}>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -32,6 +32,7 @@ const StaffReport = () => {
                 </thead>
                 <tbody>
                     {staffData.map((staff) => (
+                       
                         <tr key={staff.id}>
                             <td>{staff.name}</td>
                             <td>{staff.address}</td>
@@ -40,9 +41,12 @@ const StaffReport = () => {
                             <td>{staff.status}</td>
                             <td>{staff.shift}</td>
                             <td>
-                                <button type="button" onClick={() => handleDetailView(staff)}>View</button>
+                                <button type="button" id="ViewTestReport-roundButton" onClick={() => handleDetailView(staff)}>View</button>
                             </td>
                         </tr>
+
+                        
+
                     ))}
                 </tbody>
             </table>

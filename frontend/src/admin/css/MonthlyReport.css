@@ -6,24 +6,28 @@
     align-items: center;
     flex-direction: column;
     gap: 20px;
+    
 }
 .MonthlySales{
+  margin-top: 1rem;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     gap: 5%;
-    width: 100%;
+    width: 77%;
     height: 100%;
+    flex-wrap: wrap;
 }
 
 .Left-Side-Monthly,
 .Right-Side-Monthly{
-    width: 45%;
+    width: 46%;
     height: 100%;
     border: 5px solid rgb(255, 253, 253);
     border-radius: 10px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .Monthly-h2{
@@ -36,17 +40,21 @@
 .Top-Sale{
     display: flex;
     flex-direction: row;
-    width: 95%;
+    width: 77%;
     height: 100%;
     border: 5px solid rgb(255, 253, 253);
     border-radius: 10px; 
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    flex-wrap: wrap;
+    /* gap: 1rem; */
 }
 .Left-TopSales{
-    width: 65%;
+    width: 50%;
     height: 100%;
+    overflow:auto;
 
 }
+
 /* MonthlyReport.css */
 
 /* Define styles for table */
@@ -80,7 +88,39 @@ table {
   }
   
 .Right-Sales{
-    width: 35%;
+    /* width: 30%; */
     height: 100%;
  
+}
+
+@media  screen and (max-width: 800px) {
+  .MonthlySales{
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0;
+  }
+
+  .Left-Side-Monthly,
+.Right-Side-Monthly{
+    width: 100%;
+    margin: 1rem;
+
+}
+}
+
+
+@media  screen and (max-width: 1267px) {
+  .Left-TopSales{
+   width: 100%; 
+  }
+  .Right-Sales{
+    overflow: auto;
+    width: 100%;
+  }
+
+  
+.Top-Sale{
+  justify-content: flex-start;
+}
 }

@@ -5,7 +5,7 @@
 }
 
 .AdminDashboard-subContainer {
-    width: 95%;
+    width: 90%;
     margin: 2em;
     box-shadow: var(--divShadowColor);
     display: flex;
