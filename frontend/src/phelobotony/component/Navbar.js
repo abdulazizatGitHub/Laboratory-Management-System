@@ -33,13 +33,17 @@ function Navbar({ setIsSideBar }) {
               </div>
             </div>
             <div className="horizontal-line"></div>
-            <Link to="/change-password">
-              <FaLock /> Change Password
-            </Link>
+            <div className="anchorTagFor">
+              <Link to="/change-password">
+                <FaLock /> Change Password
+              </Link>
+            </div>
             <div className="horizontal-line"></div>
-            <Link to="/sign-out">
-              <FaSignOutAlt /> Sign out
-            </Link>
+            <div className="anchorTagFor">
+              <Link to="/sign-out">
+                <FaSignOutAlt /> Sign out
+              </Link>
+            </div>
           </div>
         </div>
       </div>
