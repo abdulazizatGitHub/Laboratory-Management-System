@@ -1,18 +1,19 @@
 @import "../../constants/Colors.css";
 
-#patientDetailPage-Fullcontainer{
+#patientDetailPage-Fullcontainer {
     font-family: var(--fontRegular);
 }
 
 
-#pdp-nameAndButtons{
-display: flex;
-justify-content: space-around;
-align-items:center;
-box-shadow: var(--divShadowColor);
+#pdp-nameAndButtons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: var(--divShadowColor);
+    height: 9vh;
 }
 
-#pdp-name{
+#pdp-name {
     font-size: var(--large);
     color: var(--headingColor);
     font-weight: 700;
@@ -22,7 +23,7 @@ box-shadow: var(--divShadowColor);
 
 
 
-#pdp-btn{
+#pdp-btn {
     width: 7em;
     height: 2em;
     color: white;
@@ -34,35 +35,46 @@ box-shadow: var(--divShadowColor);
     cursor: pointer;
 }
 
-#pdp-container{
+#pdp-container {
     box-shadow: var(--divShadowColor);
-    width: 89.3%;
-    padding-top: 0.5em;
+    width: 100%;
+    padding-top: 2em;
+    padding-bottom: 2em;
     padding-left: 5em;
     padding-right: 5em;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
 }
 
-.pdp-heading{
+.pdp-heading {
     font-size: 1.3em;
     color: var(--headingColor);
     font-weight: 700;
+    text-decoration: underline;
 }
 
-.pdp-details{
+.pdp-details {
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-between;
-    padding: 0px 2em;
+    /* justify-content: space-between; */
+    flex-wrap: wrap;
+    /* gap: 2rem; */
+    margin: 0 2rem;
 }
-.pdp-subBoxes{
-    width: 40%;
+
+.pdp-subBoxes {
+    width: 16rem;
     display: flex;
     justify-content: space-between;
+    padding: 1rem 2rem;
 
 }
 
-.pdp-smallHeading{
+.pdp-smallHeading {
     font-size: var(--medium);
     color: var(--headingColor);
     font-weight: 700;
@@ -82,3 +94,58 @@ box-shadow: var(--divShadowColor);
 }
 
 
+@media screen and (min-width: 563px) and (max-width: 674px) {
+    .pdp-details {
+        justify-content: center;
+    }
+
+    .pdp-subBoxes {
+        width: 25rem;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0;
+        padding-top: 0;
+        padding-bottom: 1rem;
+    }
+}
+
+
+@media screen and (max-width: 562px) {
+    .pdp-details {
+        margin: 0;
+    }
+
+    .pdp-subBoxes {
+        width: 25rem;
+        flex-direction: row;
+        margin: 0;
+        padding: 0;
+        gap: 0.5rem;
+    }
+
+
+    #pdp-nameAndButtons {
+        justify-content: space-between;
+        gap: 1rem;
+    }
+
+    #pdp-name {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width:392px) {
+    #pdp-nameAndButtons{
+        height: auto;
+        flex-direction: column;
+    }
+    #pdp-name {
+        width: 100%;
+        text-align: center;
+
+    }
+    #pdp-container{
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
