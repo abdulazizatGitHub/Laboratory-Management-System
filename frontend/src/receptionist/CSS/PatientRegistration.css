@@ -6,7 +6,8 @@
     align-items: center;
     font-family: var(--fontRegular);
     width: 100%;
-    height: 110vh;
+    /* height: 110vh; */
+    height: auto;
 }
 /* .Profile-Main-Container{
     display: flex;
@@ -17,101 +18,23 @@
 } */
 
 .Patient-Details-Container{
+    margin: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.7rem;
-    width: 60%;
-    height: 98%;
+    width: 95%;
+    padding-right: 1rem;
+    /* height: 98%; */
     border: 5px solid rgb(255, 253, 253);
     border-radius: 10px; 
     background-color: var(--navbarTextColor);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
-.Personal-Details{
-    display: flex;
+
+
+.btn-container {
     width: 100%;
-    height: 25vh;
-    margin-left: 1rem;
-    gap: 1rem;
-}
-
-.left-side-Profile{
-    width: 50%;
-    height: 25vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; 
-    margin-left: 5px;
-    /* gap: 0.9rem;   */
-}
-.left-side-Profile label {
-    margin-bottom: -15px;
-}
-
-.Patient-Gender-Container {
-    display: flex;
-    /* justify-content: space-around; */
-    width: 85%;
-    height: 3em;
-    /* border: 2px solid black; */
-    overflow: hidden;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.left-side-Profile input {
-    width: 300px;
-    height: 30px; /* Increase the height as needed */
-    border: 1px solid #838181;
-    border-radius: 5px; /* Add border-radius for rounded corners */
-    padding: 8px; /* Add padding for better spacing */
-}
-
-
-.Right-side-Profile{
-    width: 50%;
-    height: 25vh;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Align elements to the left */
-    /* gap: 0.9rem; */
-}
-
-.Right-side-Profile label {
-    margin-bottom: -15px;
-}
-
-.Right-side-Profile input {
-    width: 300px;
-    height: 30px; /* Increase the height as needed */
-    border: 1px solid #838181;
-    border-radius: 5px; /* Add border-radius for rounded corners */
-    padding: 8px; /* Add padding for better spacing */
-}
-
-h2 {
-    text-align: left;
-    margin: 8px;
-}
-
-/* =============Patient Contact Details================= */
-
-.Contact-Details{
-    display: flex;
-    width: 100%;
-     height: 25vh;
-    margin-left: 1rem;
-}
-
-/* ========DoctorContact========= */
-.Visit-Details{
-    display: flex;
-    width: 100%;
-    height: 25vh;
-    margin-left: 1rem;
-}
-
-.btn-Container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -128,66 +51,50 @@ h2 {
     border-radius: 5px; 
 }
 
-/* =========Patient Image===== */
 
 
-
-
-
-
-/* ... Your existing CSS ... */
-
-.Patient-Gender-label {
+.patient-Details-pers{
+    width: 100%;
     display: flex;
-    border: 1px solid #838181;
-    border-radius: 5px;
-    justify-content: center; /* Center horizontally */
-    align-items: center;
-    position: relative;
-    width: 45%;
-    height: 95%;
+    flex-wrap: wrap;
+    margin-left: 2rem;
+    margin-right: 2rem;
 }
-
-.patientGender-radio {
-    /* Add these styles to make the checkbox round and centered */
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-left: 10px;
+.patient-divss{
+    width: 45%;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.patient-divss input{
+    width: 100%;
+    height: 2rem;
+    padding-left: 0.5rem;
+}
+.radio-div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 20%;
+    /* background-color: red; */
+}
+.patient-divss-radio-btns{
+    width: 8rem;
+    height: 2rem;
+    display: flex;
+    border: 1px solid black;
+    justify-content: flex-start;
+    align-items: center;
     
 }
 
-.patientGender-txt {
-    font-size: var(--medium);
-    font-weight: lighter;
-    color: #5A6475;
-    text-align: center; /* Center text */
-    margin-top: -15px; /* Adjust the margin-top value to move the text slightly above */
-
+.radio-btn-in-patient-divss{
+    background-color: green;
+    
 }
 
-/* Additional styles for radio buttons (checkboxes) */
-.Patient-Gender-Container input[type="radio"] {
-    appearance: none;
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    border: 1px solid var( --headingColor);
-    margin-right: 5px;
-    position: relative;
-    cursor: pointer;
-}
 
-.Patient-Gender-Container input[type="radio"]:checked::before {
-    content: '';
-    display: block;
-    width: 10px;
-    height: 10px;
-    background-color: var(--lms);
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
