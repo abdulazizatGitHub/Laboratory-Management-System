@@ -81,9 +81,4 @@
     align-items: start;
 }
 
-/* Media Queries */
-@media only screen and (max-width: 768px) {
-    .dropdown-content {
-        min-width: 150px; /* Adjust as needed for smaller screens */
-    }
-}
+
