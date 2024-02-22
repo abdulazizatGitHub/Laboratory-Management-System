@@ -29,7 +29,7 @@
     display: none;
     position: absolute;
     background-color: #f9f9f9;
-    min-width: 190px;
+    min-width: 200px;
     border: 5px solid rgb(255, 253, 253);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     border-radius: 0.6rem;
