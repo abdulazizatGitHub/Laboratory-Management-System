@@ -7,9 +7,9 @@ import { login }  from '../../Services/API';
 
 const Login = () => {
     const navigation = useNavigate();
-    const [usernamePrefix, setUsernamePrefix] = useState("RE");
+    const [usernamePrefix, setUsernamePrefix] = useState("Select");
     const [usernameSuffix, setUsernameSuffix] = useState("");
-    const [registrationNumber, setRegistrationNumber] = useState("001");
+    const [registrationNumber, setRegistrationNumber] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
@@ -55,33 +55,29 @@ const Login = () => {
                     </div>
                     <div className="login-form-details">
                         <label className="login-form-label">Username</label>
-                        <div style={{ display: 'flex' }}>
+                        <div className="login-form-username-container">
                             <select
                                 value={usernamePrefix}
                                 onChange={(e) => setUsernamePrefix(e.target.value)}
                             >
+                                <option value="Select">Select</option>
                                 <option value="RE">RE</option>
                                 <option value="PH">PH</option>
                                 <option value="AD">AD</option>
                             </select>
+                            <p>-</p>
                             <input
                                 type="text"
                                 value={usernameSuffix}
                                 onChange={(e) => setUsernameSuffix(e.target.value)}
-                                placeholder="Enter your username"
+                            />
+                            <p>-</p>
+                            <input
+                                type="text"
+                                value={registrationNumber}
+                                onChange={(e) => setRegistrationNumber(e.target.value)}
                             />
                         </div>
-                        <label className="login-form-label">Registration Number</label>
-                        <select
-                            value={registrationNumber}
-                            onChange={(e) => setRegistrationNumber(e.target.value)}
-                        >
-                            {[...Array(100).keys()].map((number) => (
-                                <option key={number} value={String(number + 1).padStart(3, '0')}>
-                                    {String(number + 1).padStart(3, '0')}
-                                </option>
-                            ))}
-                        </select>
                         <label className="login-form-label">Password</label>
                         <input
                             type="password"

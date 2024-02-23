@@ -62,9 +62,24 @@
     gap: 1rem;
 }
 
-.login-form-details input,
-.login-form-details select {
+.login-form-details input {
     width: 22rem;
+    height: 30px; /* Increase the height as needed */
+    border: 1px solid #838181;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+}
+
+.login-form-username-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.login-form-username-container input,
+.login-form-username-container select {
+    width: 5rem;
     height: 30px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
