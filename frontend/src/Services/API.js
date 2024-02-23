@@ -75,3 +75,18 @@ export const  getGeneratedToken=async()=>{
   }
 }
 
+
+//Login
+export const login = async (username, password) => {
+  try {
+      const response = await axios.post(`${Url}/Login`, {
+          username,
+          password
+      });
+      
+      return response.data; // Assuming the backend returns role upon successful login
+  } catch (error) {
+      console.error('Login failed:', error);
+      throw error; // Propagate error to handle it in components
+  }
+};

@@ -2,10 +2,18 @@ import React from "react";
 import "../css/Navbar.css";
 import { Link } from "react-router-dom";
 import { FaLock, FaSignOutAlt } from "react-icons/fa"; // Import icons from Font Awesome
+import { useAuth } from "../../Services/AuthContext";
 
 function Navbar({ setIsSideBar }) {
+  const { logout } = useAuth();
+
   const handleClickNav = () => {
     setIsSideBar((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    logout();
+    console.log("The logout Performd",logout);
   };
 
   return (
@@ -40,7 +48,7 @@ function Navbar({ setIsSideBar }) {
             </div>
             <div className="horizontal-line"></div>
             <div className="anchorTagFor">
-              <Link to="/sign-out">
+              <Link to="/" onClick={handleLogout}>
                 <FaSignOutAlt /> Sign out
               </Link>
             </div>

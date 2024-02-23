@@ -4,13 +4,14 @@ import { IoClose } from "react-icons/io5";
 import { FcCheckmark, FcCancel } from "react-icons/fc"; // Import additional icons
 import '../css/StaffRegistration.css';
 import { staffRegsiteration } from "../../Services/API";
+
 const StaffRegistration = () => {
     const [staffDetails, setStaffDetails] = useState({
         name: '',
         fatherName: '',
         gender: '',
         age: '',
-        role: '',
+        role: '', // Removed default role value
         shift: '',
         contactNumber: '',
         cnic: '',
@@ -74,7 +75,6 @@ const StaffRegistration = () => {
         }
     };
 
-
     const handleRemoveImage = () => {
         setStaffDetails({ ...staffDetails, image: null });
     };
@@ -88,7 +88,7 @@ const StaffRegistration = () => {
             formData.append('fatherName', fatherName);
             formData.append('gender', gender);
             formData.append('age', age);
-            formData.append('role', role);
+            formData.append('role', role); // Include role in formData
             formData.append('shift', shift);
             formData.append('contactNumber', contactNumber);
             formData.append('cnic', cnic);
@@ -152,7 +152,16 @@ const StaffRegistration = () => {
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Role</label>
-                            <input type="text" name="role" placeholder="Enter Role" onChange={handleInputChange} />
+                            <select
+                                name="role"
+                                value={role}
+                                onChange={handleInputChange}
+                            >
+                                <option value="">Select Role</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Receptionist">Receptionist</option>
+                                <option value="Phlebotomy">Phlebotomy</option>
+                            </select>
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Shift</label>
@@ -225,4 +234,5 @@ const StaffRegistration = () => {
         </div>
     )
 }
+
 export default StaffRegistration;

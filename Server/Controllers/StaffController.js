@@ -1,5 +1,9 @@
 import StaffModel from "../Models/StaffModel.js";
 import Patient from "../Models/Patientregistration.js";
+import jwt from 'jsonwebtoken';
+
+import dotenv from 'dotenv';
+dotenv.config();
 
 export const staffRegistration = async (req, res) => {
     try {
@@ -69,3 +73,25 @@ export const getPatientDetails = async (req, res) => {
         res.status(500).json({ error: "Internal Server Error" });
     }
 }
+
+// Function to handle login
+export const login = async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        // Check if the staff exists with the provided username and password
+        const staff = await StaffModel.findOne({ userName: username, password: password });
+        
+        if (staff) {
+            // Generate JWT token
+            const token = jwt.sign({ username: staff.userName, role: staff.role }, process.env.SECRETKEY, { expiresIn: '1h' });
+            // Return the token and role of the staff upon successful login
+            res.status(200).json({ token, role: staff.role });
+        } else {
+            // Return an error if staff not found or invalid credentials
+            res.status(401).json({ message: 'Invalid username or password' });
+        }
+    } catch (error) {
+        console.error('Login failed:', error);
+        res.status(500).json({ message: 'Login failed' });
+    }
+};

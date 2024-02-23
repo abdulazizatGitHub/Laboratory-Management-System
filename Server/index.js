@@ -8,6 +8,7 @@ import StaffRoutes from './Routes/StaffRoutes.js';
 import Addtestroutes from './Routes/Addtest.js';
 import GetTest from './Routes/Addtest.js';
 import gentok from './Routes/GenerateToken.js';
+import logincre from './Routes/Login.js';
 
 dotenv.config();
 
@@ -40,3 +41,6 @@ app.use('/receptionist',GetTest); //Get Test Count
 
 
 app.use('/receptionist/generate_token',gentok);
+
+
+app.use('/Login',logincre);

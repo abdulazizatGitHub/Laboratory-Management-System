@@ -1,5 +1,6 @@
 import StaffModel from "../Models/StaffModel.js";
 
+
 export const generateStaffCredentials = async (req, res, next) => {
     try {
         const { role, name } = req.body;
@@ -19,7 +20,10 @@ export const generateStaffCredentials = async (req, res, next) => {
         };
 
         // Generate a unique registration number based on the role, name initials, and count
-        const registrationNumber = generateRegistrationNumber(count + 1); // Increment the count
+        let registrationNumber = generateRegistrationNumber(count + 1); // Increment the count
+
+        // Remove spaces from the generated registration number
+        registrationNumber = registrationNumber.replace(/\s/g, '');
 
         // Generate a default password with the laboratory name
         const defaultPassword = 'sslab123';
