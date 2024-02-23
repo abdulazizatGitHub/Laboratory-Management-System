@@ -1,6 +1,5 @@
 import StaffModel from "../Models/StaffModel.js";
 
-
 export const generateStaffCredentials = async (req, res, next) => {
     try {
         const { role, name } = req.body;
@@ -22,15 +21,22 @@ export const generateStaffCredentials = async (req, res, next) => {
         // Generate a unique registration number based on the role, name initials, and count
         let registrationNumber = generateRegistrationNumber(count + 1); // Increment the count
 
-        // Remove spaces from the generated registration number
-        registrationNumber = registrationNumber.replace(/\s/g, '');
+        // Fetch the highest username from the database
+        const highestUsernameStaff = await StaffModel.findOne({}, { userName: 1 }, { sort: { userName: -1 } });
 
-        // Generate a default password with the laboratory name
-        const defaultPassword = 'sslab123';
+        // Set the counter to start from '001' if no username exists, otherwise start from the next number after the highest username
+        const counter = highestUsernameStaff ? parseInt(highestUsernameStaff.userName.split('-')[2], 10) + 1 : 1;
+
+        // Generate a username with the specified format
+        const formattedUsernameCounter = ('000' + counter).slice(-3);
+        const generatedUsername = `${role.substring(0, 2).toUpperCase()} - ${firstNameInitial}${lastNameInitial} - ${formattedUsernameCounter}`;
+
+        // Remove spaces from the generated registration number
+        registrationNumber = generatedUsername.replace(/\s/g, '');
 
         // Attach generated credentials to the request body
         req.body.userName = registrationNumber;
-        req.body.password = defaultPassword;
+        req.body.password = 'sslab123'; // Assuming a default password
 
         // Continue to the next middleware or route handler
         next();

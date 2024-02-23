@@ -152,6 +152,8 @@
     cursor: pointer; /* Cursor on hover */
 }
 
+
+
 .sr-form-inputs-container select:focus {
     outline: none; /* Remove default focus style */
     border-color: #22cab8; /* Change border color on focus */
