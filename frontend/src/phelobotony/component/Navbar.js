@@ -7,27 +7,6 @@ import { useAuth } from "../../Services/AuthContext";
 function Navbar({ setIsSideBar }) {
     const { logout } = useAuth();
     const user = JSON.parse(localStorage.getItem('user'));
-    
-    const dataURItoBlob = (dataURI) => {
-      if (typeof dataURI !== 'string') {
-        console.error('dataURItoBlob expects a string argument');
-        return null;
-      }
-  
-      const data = dataURI.split(',')[1];
-      const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-      const byteString = atob(data);
-      const arrayBuffer = new ArrayBuffer(byteString.length);
-      const uint8Array = new Uint8Array(arrayBuffer);
-  
-      for (let i = 0; i < byteString.length; i++) {
-        uint8Array[i] = byteString.charCodeAt(i);
-      }
-  
-      return new Blob([uint8Array], { type: mimeString });
-    }
-  
-    const imageBlob = dataURItoBlob(user.image.data);
 
     const handleClickNav = () => {
         setIsSideBar((prev) => !prev);
