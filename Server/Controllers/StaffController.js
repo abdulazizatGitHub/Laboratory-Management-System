@@ -74,7 +74,6 @@ export const getPatientDetails = async (req, res) => {
     }
 }
 
-// Function to handle login
 export const login = async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -84,8 +83,8 @@ export const login = async (req, res) => {
         if (staff) {
             // Generate JWT token
             const token = jwt.sign({ username: staff.userName, role: staff.role }, process.env.SECRETKEY, { expiresIn: '1h' });
-            // Return the token and role of the staff upon successful login
-            res.status(200).json({ token, role: staff.role });
+            // Return all user data upon successful login
+            res.status(200).json({ token, user: staff });
         } else {
             // Return an error if staff not found or invalid credentials
             res.status(401).json({ message: 'Invalid username or password' });

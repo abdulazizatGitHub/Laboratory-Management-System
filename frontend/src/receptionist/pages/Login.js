@@ -17,12 +17,13 @@ const Login = () => {
         const username = `${usernamePrefix}-${usernameSuffix}-${registrationNumber}`;
         try {
             const response = await login(username, password);
-            const { token, role } = response; // Extract token from response
+            const { token, user } = response; // Extract token and user data from response
     
-            // Store token in local storage
+            // Store token and user data in local storage
             localStorage.setItem('token', token);
+            localStorage.setItem('user', JSON.stringify(user));
     
-            switch (role) {
+            switch (user.role) {
                 case 'Receptionist':
                     navigation('/receptionist');
                     break;
@@ -41,6 +42,7 @@ const Login = () => {
             setError('Invalid username or password');
         }
     }
+    
     
     return (
         <div className="login-main-container">
