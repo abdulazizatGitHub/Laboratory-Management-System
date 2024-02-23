@@ -13,9 +13,14 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    // Logic for logout goes here
-    setIsLoggedIn(false);
+    if (isLoggedIn) {
+      localStorage.removeItem('loggedUser');
+    }
+    localStorage.removeItem('token');
+    localStorage.removeItem('userEmail');
+    setIsLoggedIn(false); // Set isLoggedIn to false after logout
   };
+  
 
   return (
     <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
