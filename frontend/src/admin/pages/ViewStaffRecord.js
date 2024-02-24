@@ -9,6 +9,7 @@ const ViewStaffRecord = () => {
     const [queryByCNIC, setQueryByCNIC] = useState('');
     const navigation = useNavigate();
     const [staffData, setStaffData] = useState(null);
+    const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -16,13 +17,20 @@ const ViewStaffRecord = () => {
                 const response = await getStaffDetails();
                 console.log('Fetched data: ', response);
                 setStaffData(response.staffDetails);
+                filteringData();
             } catch (error) {
                 console.log('Error occurred in fetching the staff data');
             }
         }
     
         fetchData();
+        
     }, []);
+
+    const filteringData=()=>{
+        const data = staffData.filter(d=> d._id != user._id);
+        setStaffData(data);
+    }
 
     const handleFieldChange = (event) => {
         setSelectedField(event.target.value)
@@ -101,7 +109,7 @@ const ViewStaffRecord = () => {
                     <tbody>
                         {
                             filteredData.map((data) => (
-                                <tr>
+                                <tr key={data._id}>
                                     <td>{data.name}</td>
                                     <td>{data.contactNumber}</td>
                                     <td>{data.cnic}</td>

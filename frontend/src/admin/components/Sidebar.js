@@ -54,13 +54,13 @@ function Sidebar({ setIsSideBar }) {
 
 
                 <Link to="" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
-
+                        
                 <button className={`dropdown-btn ${isRegistrationDropdownOpen ? 'active' : ''}`} onClick={handleRegistrationDropdownToggle}>
                     <i className="fa fa-user-plus"></i> Registrations<i className="fa fa-caret-down"></i>
                 </button>
                 <div className={`dropdown-container ${isRegistrationDropdownOpen ? 'open' : ''}`}>
                     <Link to="staff_registration" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>Staff Registration</p></Link>
-                    <Link to="view-staff-record" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>View Staff Record</p></Link>
+                    <Link to="view-staff-record"  style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>View Staff Record</p></Link>
                     <Link to="view-patient-detail" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>View Patient Details</p></Link>
                     <Link to="Addtest" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>Add Test Details</p></Link>
 
