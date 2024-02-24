@@ -15,7 +15,6 @@ const ViewStaffRecord = () => {
         const fetchData = async () => {
             try {
                 const response = await getStaffDetails();
-                console.log('Fetched data: ', response);
                 setStaffData(response.staffDetails);
                 filteringData();
             } catch (error) {
