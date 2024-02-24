@@ -14,7 +14,7 @@ const ViewStaffRecord = () => {
         const fetchData = async () => {
             try {
                 const response = await getStaffDetails();
-                console.log('Fetched data:', response.data.staffDetails);
+                console.log('Fetched data:', response);
                 setStaffData(response.data.staffDetails);
             } catch (error) {
                 console.log('Error occurred in fetching the staff data');

@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
       localStorage.removeItem('loggedUser');
     }
     localStorage.removeItem('token');
-    localStorage.removeItem('userEmail');
+    localStorage.removeItem('user');
     setIsLoggedIn(false); // Set isLoggedIn to false after logout
   };
   
