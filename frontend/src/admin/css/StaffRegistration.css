@@ -10,7 +10,7 @@
 }
 
 .sr-image-container {
-    width: 23%;
+    width: 18rem;
     height: 35vh;
     display: flex;
     flex-direction: column;
@@ -112,12 +112,13 @@
     font-weight: 800;
     font-size: large;
     margin-left: 1rem;
+    text-decoration: underline ;
 }
 
 .sr-form-details-container {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
+    flex-wrap: wrap;
     align-items: center;
     gap: 2rem;
     margin-left: 2rem
@@ -133,7 +134,7 @@
 }
 
 .sr-form-inputs-container input {
-    width: 300px;
+    width: 100%;
     height: 30px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
@@ -168,10 +169,11 @@
 .sr-form-gender-container {
     display: flex;
     width: 90%;
-    height: 3em;
+    height: auto;
     overflow: hidden;
     align-items: center;
     justify-content: space-between;
+    gap: 0.5rem;
 }
 
 .sr-form-gender-main {
@@ -181,8 +183,8 @@
     justify-content: center; /* Center horizontally */
     align-items: center;
     position: relative;
-    width: 40%;
-    height: 95%;
+    width: 8rem;
+    height: 3rem;
     gap: 0.5rem;
 }
 
@@ -206,14 +208,17 @@
 
 .sr-form-button-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     margin-left: 1.2rem;
     margin-top: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
+
 .sr-form-button-container button {
-    width: 15rem;
+    width: 22rem;
     height: 5vh;
     margin-bottom: 20px;
     font-weight: bold;
@@ -224,6 +229,7 @@
     color: #FFFFFF;
     cursor: pointer;
     transition: transform 0.2s ease-in-out;
+   
 }
 
 .sr-form-button-container button:hover {
@@ -290,4 +296,34 @@
   
   .error-alert {
     color: red;
+  }
+
+
+
+  @media screen and (max-width: 969px) {
+    .Staff-Registration-Container{
+        flex-direction: column-reverse;
+        width: 95%;
+        
+    }
+    .sr-form-container{
+        width: 95%;
+        align-self: center;
+    }
+    .sr-image-container{
+        /* width: 100%; */
+        align-self: center;
+        
+    }
+    .sr-form-gender-container{
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+  }
+
+  
+  @media screen and (max-width: 444px) {
+    .sr-form-inputs-container{
+        width: 100%;
+    }
   }

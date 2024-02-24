@@ -67,7 +67,7 @@ function Addtest() {
             <input type="name" id="name" name="name" value={test.name} onChange={handleChange} placeholder="Enter Test Name" /><br />
 
             <label htmlFor="type">Type</label><br />
-            <input type="text" id="type" name="type" value={test.type} onChange={handleChange} placeholder="Enter Type of Test" />
+            <input type="text" id="type" name="type" value={test.type} onChange={handleChange} placeholder="Enter Type of Test" /><br />
           </div>
         </div>
 
@@ -85,12 +85,12 @@ function Addtest() {
             <input type="text" id="sampleQuantity" name="sampleQuantity" value={test.sampleQuantity} onChange={handleChange} placeholder="Enter Sample Quantity" /><br />
 
             <label htmlFor="unit">Unit</label><br />
-            <input type="text" id="unit" name="unit" value={test.unit} onChange={handleChange} placeholder="Enter Unit of Test" /><br />
+            <input type="text" id="unit" name="unit" value={test.unit} onChange={handleChange} placeholder="Enter Unit of Test" />
           </div>
         </div>
 
         <div className="Normal-Test-Range-Container">
-          <p>Normal Range Value</p>
+          <p style={{textDecoration:"underline",marginTop:"1rem",marginBottom:"1rem"}}>Normal Range Value</p>
           <div className="Normal-Test-Range-Details">
             <div className="Normal-Test-Range">
               <label htmlFor="menRange">Male</label><br />

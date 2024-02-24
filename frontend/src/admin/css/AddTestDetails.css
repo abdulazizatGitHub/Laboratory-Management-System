@@ -7,7 +7,7 @@
     align-items: center;
     font-family: var(--fontRegular);
     width: 100%;
-    height: 110vh;
+    height: auto;
 }
 
 .Test-Details-Container {
@@ -16,8 +16,10 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.7rem;
-    width: 60%;
-    height: 90%;
+    width: 95%;
+    margin-top: 1rem;
+    padding: 1rem;
+    height: auto;
     border: 5px solid rgb(255, 253, 253);
     border-radius: 10px; 
     background-color: var(--navbarTextColor);
@@ -38,18 +40,18 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    height: 25vh;
+    height: auto;
     margin-left: 1rem;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .Left-Side-Details {
-    width: 50%;
-    height: 25vh;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: flex-start; 
-    margin-left: 10px;
+    /* margin-left: 10px; */
     /* gap: 0.9rem;   */
 }
 .Left-Side-Details label {
@@ -59,7 +61,7 @@
 }
 
 .Left-Side-Details input {
-    width: 300px;
+    width: 100%;
     height: 30px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
@@ -68,8 +70,7 @@
 
 
 .Right-side-Details {
-    width: 50%;
-    height: 25vh;
+    width: 45%;
     display: flex;
     flex-direction: column;
     align-items: flex-start; /* Align elements to the left */
@@ -83,7 +84,7 @@
 }
 
 .Right-side-Details input {
-    width: 300px;
+    width: 100%;
     height: 30px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
@@ -117,7 +118,7 @@
 
 .Normal-Test-Range-Container {
     width: 100%;
-    height: 25vh;
+    height: auto;
     margin-left: 1rem;
     gap: 1rem;
 }
@@ -128,12 +129,12 @@
 }
 
 .Normal-Test-Range {
-    width: 50%;
-    height: 25vh;
+    width: 45%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: flex-start; 
-    margin-left: 5px;
+    margin: 5px;
 }
 
 .Normal-Test-Range label {
@@ -146,11 +147,12 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    gap: 5rem;
+    gap: 23%;
+    width: 100%;
 }
 
 .Test-Range-Inputs input {
-    width: 100px;
+    width: 40%;
     height: 30px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
@@ -158,8 +160,27 @@
 }
 
 .Normal-Test-Range-Details {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
+
+@media screen and (max-width:410px) {
+    .Normal-Test-Range-Details{
+        flex-direction: column;
+    }
+    .Normal-Test-Range{
+        width: 70%;
+    }
+    .Test-Details{
+        flex-direction: column;
+    }
+    .Right-side-Details,.Left-Side-Details{
+        width: 100%;
+    }
+
+}
