@@ -1,10 +1,8 @@
 import express from 'express';
 import multer from 'multer';
-<<<<<<< Updated upstream
-import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration } from '../Controllers/StaffController.js';
-=======
-import { getPatientDetails, deleteStaffData, getStaffDetais, staffRegistration, updateStaff } from '../Controllers/StaffController.js';
->>>>>>> Stashed changes
+import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff } from '../Controllers/StaffController.js';
+
+
 import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
 const router = express.Router();
 import {imageUpload} from "../ImageUpload/imageUpload.js";
@@ -16,10 +14,7 @@ router.get('/view-patient-detail', getPatientDetails);
 
 
 router.delete("/staffDel/:id", deleteStaffData);
-<<<<<<< Updated upstream
 router.delete("/patDel/:id", deletePatData);
-=======
 
 router.put('/staffDel/:id',updateStaff);
->>>>>>> Stashed changes
 export default router;

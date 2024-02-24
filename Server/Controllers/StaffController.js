@@ -167,7 +167,6 @@ export const deleteStaffData = async (req, res) => {
         console.log(error);
         res.status(500).send("An error occurred while deleting staff data.");
     }
-<<<<<<< Updated upstream
 };
 
 export const deletePatData = async (req, res) => {
@@ -183,8 +182,7 @@ export const deletePatData = async (req, res) => {
         res.status(500).send("An error occurred while deleting Patient data.");
     }
 }
-=======
-}
+
 
 // Controller function to update staff data
 export const updateStaff = async (req, res) => {
@@ -206,4 +204,3 @@ export const updateStaff = async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   };
->>>>>>> Stashed changes
