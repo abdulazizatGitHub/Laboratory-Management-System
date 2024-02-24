@@ -124,6 +124,7 @@ export const deleteStaffData = async (id) =>{
   }
 }
 
+<<<<<<< Updated upstream
 export const deletePatData = async (id) =>{
   try{
     return await axios.delete(`${Url}/admin/patDel/${id}`)
@@ -132,3 +133,12 @@ export const deletePatData = async (id) =>{
     throw error;
   }
 }
+=======
+export const updateStaffData = async (staffData) => {
+  try {
+    return await axios.put(`${Url}/admin/staffDel/${staffData._id}`, staffData);
+  } catch (error) {
+    throw error;
+  }
+};
+>>>>>>> Stashed changes

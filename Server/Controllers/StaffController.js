@@ -167,6 +167,7 @@ export const deleteStaffData = async (req, res) => {
         console.log(error);
         res.status(500).send("An error occurred while deleting staff data.");
     }
+<<<<<<< Updated upstream
 };
 
 export const deletePatData = async (req, res) => {
@@ -182,3 +183,27 @@ export const deletePatData = async (req, res) => {
         res.status(500).send("An error occurred while deleting Patient data.");
     }
 }
+=======
+}
+
+// Controller function to update staff data
+export const updateStaff = async (req, res) => {
+    try {
+      const { id } = req.params;
+      const updatedStaffData = req.body;
+  
+      // Find the staff member by ID and update their data
+      const updatedStaff = await StaffModel.findByIdAndUpdate(id, updatedStaffData, { new: true });
+  
+      if (!updatedStaff) {
+        return res.status(404).json({ message: 'Staff member not found' });
+      }
+  
+      // Return the updated staff data
+      res.status(200).json(updatedStaff);
+    } catch (error) {
+      console.error('Error updating staff:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  };
+>>>>>>> Stashed changes

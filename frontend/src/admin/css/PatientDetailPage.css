@@ -92,6 +92,65 @@
     background: none;
     cursor: pointer;
 }
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure modal is on top of other elements */
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 400px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: red;
+}
+
+/* Additional Styles */
+.modal-input {
+    margin-bottom: 1rem;
+}
+
+.modal-input label {
+    font-weight: bold;
+}
+
+.modal-input input {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid #838181;
+    border-radius: 5px;
+    margin-top: 0.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1rem;
+}
+
+.modal-buttons button {
+    margin-left: 0.5rem;
+}
 
 
 @media screen and (min-width: 563px) and (max-width: 674px) {
