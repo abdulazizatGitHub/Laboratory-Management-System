@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import '../CSS/Login.css';
 import loginImage from '../../Assessts/Images/login.jpeg';
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { login }  from '../../Services/API';
+import { getPatientDetails, getStaffDetails, login }  from '../../Services/API';
 
 const Login = () => {
     const navigation = useNavigate();
@@ -15,10 +15,11 @@ const Login = () => {
 
     const handleLogin = async () => {
         const username = `${usernamePrefix}-${usernameSuffix}-${registrationNumber}`;
+        console.log("username s ",username);
         try {
             const response = await login(username, password);
             const { token, user } = response; // Extract token and user data from response
-    
+            console.log("user and token is ", JSON.stringify(user), " and ",token)
             // Store token and user data in local storage
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
@@ -42,7 +43,13 @@ const Login = () => {
             setError('Invalid username or password');
         }
     }
-    
+
+    useEffect(()=>{
+        console.log("data is ",getAllPatient());
+    },[])
+    const getAllPatient=async()=>{
+        return await getStaffDetails();
+    }
     
     return (
         <div className="login-main-container">

@@ -37,7 +37,7 @@ export const generateStaffCredentials = async (req, res, next) => {
         // Attach generated credentials to the request body
         req.body.userName = registrationNumber;
         req.body.password = 'sslab123'; // Assuming a default password
-
+            console.log("i am doing the work")
         // Continue to the next middleware or route handler
         next();
     } catch (error) {

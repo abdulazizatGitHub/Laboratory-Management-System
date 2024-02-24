@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../css/Navbar.css";
 import { Link } from "react-router-dom";
 import { FaLock, FaSignOutAlt } from "react-icons/fa"; // Import icons from Font Awesome
@@ -8,6 +8,11 @@ function Navbar({ setIsSideBar }) {
     const { logout } = useAuth();
     const user = JSON.parse(localStorage.getItem('user'));
 
+    useEffect(()=>{
+      console.log("User is , ",user.image
+      )
+       
+    },[])
     const handleClickNav = () => {
         setIsSideBar((prev) => !prev);
     };
@@ -24,7 +29,7 @@ function Navbar({ setIsSideBar }) {
             <div className="right-section">
                 <div className="dropdown">
                     <img
-                        src={user.imageUrl || "https://via.placeholder.com/50x50.png?text=ML"}
+                        src={`http://localhost:5000/uploads/${user.image}` || "https://via.placeholder.com/50x50.png?text=ML"}
                         alt="Profile"
                         className="round-icon"
                     />
@@ -32,7 +37,7 @@ function Navbar({ setIsSideBar }) {
                     <div className="dropdown-content">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <img
-                                src={user.imageUrl || "https://via.placeholder.com/50x50.png?text=ML"}
+                                src={`http://localhost:5000/uploads/${user.image}` || "https://via.placeholder.com/50x50.png?text=ML"}
                                 alt="Profile"
                                 className="round-icon"
                             />

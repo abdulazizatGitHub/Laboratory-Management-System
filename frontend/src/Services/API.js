@@ -11,8 +11,15 @@ export const staffRegsiteration = async (formData) => {
   return await axios.post(`${Url}/admin/staff_registration`, formData);
 }
 
-export const getStaffDetails = async () => {
-  return await axios.get(`${Url}/admin/view-staff-record`);
+export const getStaffDetails = async () => { 
+  try{
+    const res =await axios.get(`${Url}/admin/view-staff-record`);
+    return res.data;
+  }
+  catch (error) {
+    console.error('Error fetching staff details:', error);
+    throw error;
+  } 
 }
 
 export const getPatientDetails = async () => {
@@ -22,7 +29,7 @@ export const getPatientDetails = async () => {
     return  res.data; // Extract patient data from the response
     
   } catch (error) {
-    console.error('Error fetching patient numbers:', error);
+    console.error('Error fetching patient details:', error);
     throw error;
   } 
 }

@@ -6,6 +6,8 @@ import '../css/StaffRegistration.css';
 import { staffRegsiteration } from "../../Services/API";
 
 const StaffRegistration = () => {
+    const [downloadImgUrl, setDownloadImgUrl] = useState(null);
+
     const [staffDetails, setStaffDetails] = useState({
         name: '',
         fatherName: '',
@@ -16,7 +18,7 @@ const StaffRegistration = () => {
         contactNumber: '',
         cnic: '',
         address: '',
-        image: null,
+        image: "",
     });
 
     const [alert, setAlert] = useState({
@@ -71,12 +73,22 @@ const StaffRegistration = () => {
     const handleImageUpload = (event) => {
         const file = event.target.files[0];
         if (file) {
+            const reader = new FileReader();
+            
+            reader.onload = () => {
+              // Get the URL of the image
+              const imageUrl = reader.result;
+              setDownloadImgUrl(imageUrl);
+              console.log(imageUrl)
+            };
+        
+            reader.readAsDataURL(file);
             setStaffDetails({ ...staffDetails, image: file });
         }
     };
 
     const handleRemoveImage = () => {
-        setStaffDetails({ ...staffDetails, image: null });
+        setStaffDetails({ ...staffDetails, image: "" });
     };
 
     const handleRegisterStaff = async (e) => {
@@ -94,6 +106,7 @@ const StaffRegistration = () => {
             formData.append('cnic', cnic);
             formData.append('address', address);
             formData.append('image', image);
+            console.log("Form data is ", image)
 
             const response = await staffRegsiteration(formData);
             if (response.data.message) {
@@ -199,11 +212,11 @@ const StaffRegistration = () => {
                 <div className="sr-image-main">
                     <label htmlFor="imageUpload">
                         {/* Conditionally render either the image or the camera icon */}
-                        {image ? (
+                        {downloadImgUrl ? (
                             <div className="staff-image-content">
                                 <img
                                     style={{ width: '15rem', overflow: 'hidden', maxHeight: '9rem' }}
-                                    src={URL.createObjectURL(image)} // Use URL.createObjectURL to display the image
+                                    src={downloadImgUrl} // Use URL.createObjectURL to display the image
                                     alt="Staff Image"
                                 />
                                 <div className="staff-image-remover" onClick={handleRemoveImage}><IoClose size={18} /></div>

@@ -10,10 +10,9 @@ const staffSchema = new mongoose.Schema({
     contactNumber: { type: String, required: true },
     cnic: { type: String, required: true },
     address: { type: String, required: true },
-    image: {
-        data: Buffer,
-        contentType: String
-    },
+    image:{
+        type:String,
+      },
     userName: {type: String, required: true},
     password: {type: String, required: true},
 });

@@ -31,10 +31,8 @@ export const staffRegistration = async (req, res) => {
                 contactNumber,
                 cnic,
                 address,
-                image: {
-                    data: req.file.buffer,
-                    contentType: req.file.mimetype
-                },
+                image: req.file.filename,               
+                
                 userName,
                 password
             });
