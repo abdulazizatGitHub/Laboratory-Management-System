@@ -11,6 +11,7 @@ import PatientDetailPage from "./PatientDetailPage";
 import StaffDetailPage from "./StaffDetailPage";
 import DetailStaff from "./Detailstaff";
 import Addtest from "./Addtest";
+import ChangePassword from "../../receptionist/pages/ChangePassword";
 
 const AdminRight = ({setIsSideBar}) => {
     return (
@@ -28,6 +29,8 @@ const AdminRight = ({setIsSideBar}) => {
                     <Route path="/MonthlyReport" element={<MonthlyReport />} />
                     <Route path="/StaffReport/Detailstaff" element={<DetailStaff />} />
                     <Route path="/Addtest" element={<Addtest />} />
+                    <Route path="/Change-password" element={<ChangePassword />} />
+
                 </Routes>
             </div>
         </div>

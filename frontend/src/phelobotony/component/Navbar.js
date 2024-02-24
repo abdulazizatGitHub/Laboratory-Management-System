@@ -48,7 +48,7 @@ function Navbar({ setIsSideBar }) {
                         </div>
                         <div className="horizontal-line"></div>
                         <div className="anchorTagFor">
-                            <Link to="/ChangePassword">
+                            <Link to="Change-password" >
                                 <FaLock /> Change Password
                             </Link>
                         </div>

@@ -5,7 +5,6 @@ import Login from './receptionist/pages/Login';
 import Main from './receptionist/pages/Main';
 import AdminMain from './admin/pages/AdminMain';
 import PhlebotomyMain from './phelobotony/pages/PhlebotomyMain';
-import ChangePassword from './receptionist/pages/ChangePassword';
 
 
 function App() {
@@ -16,8 +15,7 @@ function App() {
         <Route path="/receptionist/*" element={<Main />} />
         <Route path="/admin/*" element={<AdminMain />} />
         <Route path="/phelobotny/*" element={<PhlebotomyMain />} />
-        <Route path="/Forgot-password" element={<ChangePassword />} />
-
+        
       </Routes>
     </div>
   );
