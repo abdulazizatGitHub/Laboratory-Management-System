@@ -12,4 +12,5 @@ router.post("/staff_registration",imageUpload.single("image"),generateStaffCrede
 router.get('/view-staff-record', getStaffDetais);
 router.get('/view-patient-detail', getPatientDetails);
 
+
 export default router;

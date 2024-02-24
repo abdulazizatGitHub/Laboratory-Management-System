@@ -9,6 +9,7 @@ import Addtestroutes from './Routes/Addtest.js';
 import GetTest from './Routes/Addtest.js';
 import gentok from './Routes/GenerateToken.js';
 import logincre from './Routes/Login.js';
+import Chanpass from './Routes/Changepassword.js';
 
 dotenv.config();
 
@@ -47,3 +48,5 @@ app.use('/receptionist/generate_token',gentok);
 
 
 app.use('/Login',logincre);
+
+app.use('/ChangePassword',Chanpass);

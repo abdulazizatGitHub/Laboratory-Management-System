@@ -97,3 +97,13 @@ export const login = async (username, password) => {
       throw error; // Propagate error to handle it in components
   }
 };
+
+// Change Password API
+export const changePassword = async (userData) => {
+  try {
+      const response = await axios.put("/ChangePassword", userData);
+      return response.data;
+  } catch (error) {
+      throw error;
+  }
+};

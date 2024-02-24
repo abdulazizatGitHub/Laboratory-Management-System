@@ -92,3 +92,35 @@ export const login = async (req, res) => {
         res.status(500).json({ message: 'Login failed' });
     }
 };
+
+export const changePassword = async (req, res) => {
+    const token = req.headers.authorization.split(" ")[1]; // Extract token from headers
+    const { userId, newPassword } = req.body; // Extract userId and newPassword from request body
+
+    try {
+        // Verify token
+        const decodedToken = jwt.verify(token, process.env.SECRETKEY);
+        
+        if (decodedToken) {
+            // Check if userId from token matches userId from request body
+            if (decodedToken.userId !== userId) {
+                return res.status(403).json({ message: "Unauthorized access" });
+            }
+            
+            // Update the password in the database for the user with userId
+            const updatedStaff = await StaffModel.findByIdAndUpdate(userId, { password: newPassword });
+            
+            if (!updatedStaff) {
+                return res.status(404).json({ message: "User not found" });
+            }
+
+            // Send a success response
+            res.status(200).json({ message: "Password changed successfully" });
+        } else {
+            res.status(401).json({ message: "Unauthorized access" });
+        }
+    } catch (error) {
+        console.error("Error changing password:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
