@@ -1,6 +1,8 @@
 import StaffModel from "../Models/StaffModel.js";
 import Patient from "../Models/Patientregistration.js";
 import jwt from 'jsonwebtoken';
+import fs from 'fs';
+import path from 'path';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -136,3 +138,33 @@ export const changePassword = async (req, res) => {
         }
     }
 };
+
+
+export const deleteStaffData = async (req, res) => {
+    console.log(req.params.id);
+    try {
+        // Find the staff data by ID
+        const staffData = await StaffModel.findById(req.params.id);
+
+        // Check if staff data exists
+        if (!staffData) {
+            return res.status(404).send("Staff data not found.");
+        }
+
+        // Delete the associated image file from the uploads folder
+        if (staffData.image) {
+            const imagePath = path.join('./uploads/', staffData.image);
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+            }
+        }
+
+        // Delete the staff data from the database
+        await StaffModel.findByIdAndDelete(req.params.id);
+
+        res.status(200).send("Staff data deleted successfully.");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("An error occurred while deleting staff data.");
+    }
+}

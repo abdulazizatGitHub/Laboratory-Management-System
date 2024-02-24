@@ -112,3 +112,14 @@ export const changePassword = async (userData, token) => {
       throw error;
   }
 };
+
+
+
+export const deleteStaffData = async (id) =>{
+  try{
+    return await axios.delete(`${Url}/admin/staffDel/${id}`)
+  }
+  catch(error){
+    throw error;
+  }
+}

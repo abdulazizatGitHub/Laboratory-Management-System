@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../css/PatientDetailPage.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
+import { deleteStaffData } from "../../Services/API";
 
 const StaffDetailPage = () => {
+    const navigation = useNavigate();
     const location = useLocation();
     const { data } = location.state;
     const [showPassword, setShowPassword] = useState(false);
@@ -17,12 +19,17 @@ const StaffDetailPage = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
+    const delStaff=async()=>{
+        await deleteStaffData(data._id)
+        navigation('/admin/view-staff-record');
+    }
+
     return (<div id="patientDetailPage-Fullcontainer">
         <div id="pdp-nameAndButtons">
             <p id="pdp-name">Staff Detail</p>
 
             <button type="button" id="pdp-btn">Edit</button>
-            <button type="button" id="pdp-btn">Delete</button>
+            <button type="button" id="pdp-btn" onClick={delStaff}>Delete</button>
 
         </div>
 
