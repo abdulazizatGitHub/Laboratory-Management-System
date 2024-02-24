@@ -4,18 +4,22 @@ import { changePassword } from "../../Services/API";
 function ChangePassword() {
     const [newPassword, setNewPassword] = useState("");
     const user = JSON.parse(localStorage.getItem("user"));
+    console.log("The User is ", user);
     const token = localStorage.getItem("token");
+    console.log("The token is ",token);
 
     const handleChangePassword = async (e) => {
         e.preventDefault();
         try {
-            const userData = { userId: user.id, newPassword };
-            await changePassword(userData, token);
+            const userData = { userId: user._id, newPassword }; // Correct the key to userId
+            console.log("The Data is ", userData);
+            await changePassword(userData, token); // Pass token as argument
             // Redirect or show success message
         } catch (error) {
-            // Handle error
+            console.error("error in happen ",error);
         }
     };
+    
 
     return (
         <div>

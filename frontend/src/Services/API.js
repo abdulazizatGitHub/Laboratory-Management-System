@@ -86,22 +86,27 @@ export const  getGeneratedToken=async()=>{
 //Login
 export const login = async (username, password) => {
   try {
-      const response = await axios.post(`${Url}/Login`, {
-          username,
-          password
-      });
+    const response = await axios.post(`${Url}/Login`, {
+      username,
+      password
+    });
       
-      return response.data; // Assuming the backend returns role upon successful login
+    return response.data; // Assuming the backend returns role upon successful login
   } catch (error) {
-      console.error('Login failed:', error);
-      throw error; // Propagate error to handle it in components
+    console.error('Login failed:', error);
+    throw error; // Propagate error to handle it in components
   }
 };
 
+
 // Change Password API
-export const changePassword = async (userData) => {
+export const changePassword = async (userData, token) => {
   try {
-      const response = await axios.put("/ChangePassword", userData);
+      const response = await axios.put("/admin/Change-password", userData, {
+          headers: {
+              Authorization: `Bearer ${token}`
+          }
+      });
       return response.data;
   } catch (error) {
       throw error;

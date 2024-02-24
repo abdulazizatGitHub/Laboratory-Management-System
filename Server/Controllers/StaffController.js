@@ -94,33 +94,45 @@ export const login = async (req, res) => {
 };
 
 export const changePassword = async (req, res) => {
-    const token = req.headers.authorization.split(" ")[1]; // Extract token from headers
-    const { userId, newPassword } = req.body; // Extract userId and newPassword from request body
-
     try {
-        // Verify token
-        const decodedToken = jwt.verify(token, process.env.SECRETKEY);
-        
-        if (decodedToken) {
-            // Check if userId from token matches userId from request body
-            if (decodedToken.userId !== userId) {
-                return res.status(403).json({ message: "Unauthorized access" });
-            }
-            
-            // Update the password in the database for the user with userId
-            const updatedStaff = await StaffModel.findByIdAndUpdate(userId, { password: newPassword });
-            
-            if (!updatedStaff) {
-                return res.status(404).json({ message: "User not found" });
-            }
-
-            // Send a success response
-            res.status(200).json({ message: "Password changed successfully" });
-        } else {
-            res.status(401).json({ message: "Unauthorized access" });
+        const token = req.headers.authorization; // Retrieve the authorization header
+  
+        if (!token) {
+            return res.status(401).json({ message: "Authorization header is missing" });
         }
+
+        const tokenParts = token.split(" ");
+        if (tokenParts.length !== 2 || tokenParts[0] !== "Bearer") {
+            return res.status(401).json({ message: "Invalid authorization header format" });
+        }
+
+        const decodedToken = jwt.verify(tokenParts[1], process.env.SECRETKEY);
+        if (!decodedToken) {
+            return res.status(401).json({ message: "Invalid token" });
+        }
+
+        const { userId, newPassword } = req.body;
+        console.log("The Data is",req.body);
+        if (!userId || !newPassword) {
+            return res.status(400).json({ message: "Missing userId or newPassword in request body" });
+        }
+
+        // Update the password in the database for the user with userId
+        const updatedStaff = await StaffModel.findByIdAndUpdate(userId, { password: newPassword });
+        if (!updatedStaff) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Send a success response
+        res.status(200).json({ message: "Password changed successfully" });
     } catch (error) {
         console.error("Error changing password:", error);
-        res.status(500).json({ error: "Internal Server Error" });
+        if (error instanceof jwt.JsonWebTokenError || error instanceof jwt.TokenExpiredError) {
+            res.status(401).json({ message: "Invalid token" });
+        } else if (error.name === "CastError") {
+            res.status(400).json({ message: "Invalid userId format" });
+        } else {
+            res.status(500).json({ error: "Internal Server Error" });
+        }
     }
 };

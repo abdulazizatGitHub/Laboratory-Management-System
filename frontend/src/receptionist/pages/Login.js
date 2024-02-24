@@ -17,7 +17,7 @@ const Login = () => {
         const username = `${usernamePrefix}-${usernameSuffix}-${registrationNumber}`;
         console.log("username s ",username);
         try {
-            const response = await login(username, password);
+            const response = await login(username, password, localStorage.getItem('token'));
             const { token, user } = response; // Extract token and user data from response
             console.log("user and token is ", JSON.stringify(user), " and ",token)
             // Store token and user data in local storage

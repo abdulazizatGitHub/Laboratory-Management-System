@@ -49,4 +49,4 @@ app.use('/receptionist/generate_token',gentok);
 
 app.use('/Login',logincre);
 
-app.use('/ChangePassword',Chanpass);
+app.use('/admin/Change-password',Chanpass);
