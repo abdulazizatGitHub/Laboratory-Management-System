@@ -11,15 +11,15 @@ function ChangePassword() {
     const handleChangePassword = async (e) => {
         e.preventDefault();
         try {
-            const userData = { userId: user._id, newPassword }; // Correct the key to userId
+            const userData = { userId: user._id, newPassword };
             console.log("The Data is ", userData);
-            await changePassword(userData, token); // Pass token as argument
-            // Redirect or show success message
+            await changePassword(userData, token);
+            alert("Password changed successfully"); // Show success message
         } catch (error) {
-            console.error("error in happen ",error);
+            console.error("Error changing password:", error);
+            alert("Failed to change password. Please try again."); // Show error message
         }
     };
-    
 
     return (
         <div>
