@@ -20,7 +20,8 @@ const StaffDetailPage = () => {
     };
 
     const delStaff=async()=>{
-        await deleteStaffData(data._id)
+        const res=await deleteStaffData(data._id)
+        alert(res.data);
         navigation('/admin/view-staff-record');
     }
 

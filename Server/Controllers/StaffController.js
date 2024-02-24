@@ -141,7 +141,7 @@ export const changePassword = async (req, res) => {
 
 
 export const deleteStaffData = async (req, res) => {
-    console.log(req.params.id);
+    
     try {
         // Find the staff data by ID
         const staffData = await StaffModel.findById(req.params.id);
@@ -166,5 +166,19 @@ export const deleteStaffData = async (req, res) => {
     } catch (error) {
         console.log(error);
         res.status(500).send("An error occurred while deleting staff data.");
+    }
+};
+
+export const deletePatData = async (req, res) => {
+    
+    try {
+
+        // Delete the staff data from the database
+        await Patient.findByIdAndDelete(req.params.id);
+
+        res.status(200).send("Patient data deleted successfully.");
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("An error occurred while deleting Patient data.");
     }
 }

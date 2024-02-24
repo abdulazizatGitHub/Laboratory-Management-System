@@ -123,3 +123,12 @@ export const deleteStaffData = async (id) =>{
     throw error;
   }
 }
+
+export const deletePatData = async (id) =>{
+  try{
+    return await axios.delete(`${Url}/admin/patDel/${id}`)
+  }
+  catch(error){
+    throw error;
+  }
+}

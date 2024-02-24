@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { getPatientDetails, deleteStaffData, getStaffDetais, staffRegistration } from '../Controllers/StaffController.js';
+import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration } from '../Controllers/StaffController.js';
 import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
 const router = express.Router();
 import {imageUpload} from "../ImageUpload/imageUpload.js";
@@ -12,4 +12,5 @@ router.get('/view-patient-detail', getPatientDetails);
 
 
 router.delete("/staffDel/:id", deleteStaffData);
+router.delete("/patDel/:id", deletePatData);
 export default router;

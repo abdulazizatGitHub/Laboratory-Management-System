@@ -1,17 +1,27 @@
 import React, { useEffect } from "react";
 import "../css/PatientDetailPage.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { deletePatData } from "../../Services/API";
+
 const PatientDetailPage = () => {
+    const navigation = useNavigate();
     const location = useLocation();
     const { data } = location.state;
     useEffect(() => {
         console.log("contact No: ", data);
     }, []);
+    
+    const delPat=async()=>{
+        const res = await deletePatData(data._id)
+        alert(res.data);
+        navigation('/admin/view-patient-detail');
+    }
+
     return (<div id="patientDetailPage-Fullcontainer">
         <div id="pdp-nameAndButtons">
             <p id="pdp-name">Patient Detail</p>
             <button type="button" id="pdp-btn">Edit</button>
-            <button type="button" id="pdp-btn">Delete</button>
+            <button type="button" id="pdp-btn" onClick={delPat}>Delete</button>
         </div>
         <div id="pdp-container">
             <p className="pdp-heading">Personal Detail</p>
