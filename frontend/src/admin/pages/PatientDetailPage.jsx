@@ -63,12 +63,14 @@ const PatientDetailPage = () => {
         <div id="pdp-container">
         {isEditing ? (
                     <>
+                        
                         <input
-                            type="text"
-                            name="name"
-                            value={editedData.name}
-                            onChange={handleInputChange}
-                        />
+                        type="text"
+                        className="pdp-input"
+                        name="name"
+                        value={editedData.name}
+                        onChange={handleInputChange}
+                    />
                         <input
                             type="text"
                             name="fatherName"
@@ -139,6 +141,7 @@ const PatientDetailPage = () => {
                                 <p className="pdp-smallHeading">Gender: </p>
                                 <p>{data.gender}</p>
                             </div>
+                            
                             <div className="pdp-subBoxes">
                                 <p className="pdp-smallHeading">CNIC: </p>
                                 <p>{data.cnic}</p>
@@ -156,8 +159,8 @@ const PatientDetailPage = () => {
                                 <p>{data.address}</p>
                             </div>
                             <div className="pdp-subBoxes">
-                                <p className="pdp-smallHeading">Registration no: </p>
-                                <p>{data.registrationNo}</p>
+                                <p className="pdp-smallHeading">Pin No: </p>
+                                <p>{data.pin}</p>
                             </div>
 
                 <div className="pdp-subBoxes">
