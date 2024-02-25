@@ -95,15 +95,23 @@
     margin-top: 0.5rem;
     overflow: hidden;
     position: relative;
-    /* display: flex;
-    align-items: center; */
+    display: flex;
+    align-items: center;
 }
 
 .pl-patient-search input {
     border: none;
     position:absolute;
-    
+    width: 100%;
+}
 
+.pl-patient-search i {
+    font-size: small;
+}
+
+.pl-patient-search input:focus,
+.pl-patient-search select:focus {
+    outline: none;
 }
 
 .pl-patient-search i {
