@@ -123,20 +123,20 @@ const Phlebotomy = () => {
             </div>
 
             <div className="phlebotomy-right-container">
-                <div className="pl-heading"><p>{`Visit Samples (${selectedRegistrationDetails})`}</p></div>
+                <div className="pl-heading"><p>{`Visit Samples (${selectedRegistrationDetails.patientData.pin})`}</p></div>
                 <div className="pr-patient-details-container">
 
                 {selectedRegistrationDetails && (
                         <div className="pr-patient-details">
                             <p style={{ fontWeight: '600', fontSize: '0.8rem' }}>{`${selectedRegistrationDetails.patientData.name} (${selectedRegistrationDetails.patientData.pin})`}</p>
                             <div className="patient-other-details">
-                                <p>Date: {selectedRegistrationDetails.date}</p>
                                 <p>Age: {selectedRegistrationDetails.patientData.age}</p>
                                 <p>Gender: {selectedRegistrationDetails.patientData.gender}</p>
-                                <p>Contact: {selectedRegistrationDetails.patientData.contact}</p>
+                                <p>Contact: {selectedRegistrationDetails.patientData.mobileNumber}</p>
                             </div>
                             <p>Address: {selectedRegistrationDetails.patientData.address}</p>
-                            <p>City: {selectedRegistrationDetails.patientData.city}</p>
+                            <p>Refered BY: {selectedRegistrationDetails.patientData.refDoctor}</p>
+                            <p>Date: {selectedRegistrationDetails.dateTime}</p>
                         </div>
                     )}
                     <div className="pr-test-details-container">
@@ -160,8 +160,8 @@ const Phlebotomy = () => {
                                         <tr key={test._id}>
                                             <td>{test.code}</td>
                                             <td>{test.name}</td>
-                                            <td>{test.sample}</td>
-                                            <td>{test.quantity}</td>
+                                            <td>{test.sampleType}</td>
+                                            <td>{test.sampleQuantity}</td>
                                         </tr>
                                     ))}
                                 </tbody>
