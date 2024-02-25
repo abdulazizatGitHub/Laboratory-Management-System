@@ -52,12 +52,12 @@ const Phlebotomy = () => {
         // Find the selected patient from the registrationDetails array
         const selectedPatientData = registrationDetails.find(patient => patient.patientData.pin === pin);
         setSelectedRegistrationDetails(selectedPatientData);
-        console.log('The selected detail is: ', selectedRegistrationDetails);
-    };
+        };
 
     const handleTransferClick = () => {
         setShowReport(true);
         // Additional logic for navigation if needed...
+        
     };
 
 
@@ -123,7 +123,7 @@ const Phlebotomy = () => {
             </div>
 
             <div className="phlebotomy-right-container">
-                <div className="pl-heading"><p>Visit Sample </p></div>
+                <div className="pl-heading"><p>Visit Samples {selectedRegistrationDetails ?`(${selectedRegistrationDetails.patientData.pin})`:""}</p></div>
                 <div className="pr-patient-details-container">
 
                 {selectedRegistrationDetails && (

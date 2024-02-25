@@ -99,58 +99,70 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.5);
+    align-self: center;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
+    padding: 1rem;
     z-index: 1000; /* Ensure modal is on top of other elements */
 }
 
 .modal-content {
+    width: 100%;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 400px;
+    
+    max-width: 24rem;
+    /* position:relative; */
+    aspect-ratio: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 .close {
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: -1.5rem;
+    right: 1rem;
     cursor: pointer;
+    font-size: 70px;
 }
 
 .close:hover {
     color: red;
 }
 
-/* Additional Styles */
-.modal-input {
-    margin-bottom: 1rem;
-}
-
-.modal-input label {
-    font-weight: bold;
-}
-
-.modal-input input {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid #838181;
-    border-radius: 5px;
-    margin-top: 0.5rem;
-}
-
-.modal-buttons {
-    display: flex;
-    justify-content: flex-end;
+#edit-divss{
     margin-top: 1rem;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    /* display: flex;
+    flex-direction: column; */
 }
 
-.modal-buttons button {
-    margin-left: 0.5rem;
+.edit-divs-each-input{
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
 }
+#edit-divss input{
+    width: 15rem;
+    height: 3rem;
+    margin: 0.7rem;
+}
+
+
+#edit-divss label{
+    width:5rem;
+    
+}
+
 
 
 @media screen and (min-width: 563px) and (max-width: 674px) {
@@ -207,4 +219,36 @@
         padding-left: 2rem;
         padding-right: 2rem;
     }
+}
+
+
+@media screen and (max-width:437px) {
+    .modal{
+        width: 95%;
+        aspect-ratio: 1/1.3;
+    }
+
+    
+.modal-content {
+    aspect-ratio: 1/1.3;
+}
+.close{
+    top: -1.1rem;
+    right: 1.2rem;
+}
+}
+
+
+@media screen and (max-width: 360px){
+    .edit-divs-each-input{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+#edit-divss input{
+   
+        width: 100%;
+    }
+
+
 }
