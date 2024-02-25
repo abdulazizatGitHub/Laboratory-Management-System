@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff } from '../Controllers/StaffController.js';
+import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff, updatePatient } from '../Controllers/StaffController.js';
 
 
 import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
@@ -17,4 +17,6 @@ router.delete("/staffDel/:id", deleteStaffData);
 router.delete("/patDel/:id", deletePatData);
 
 router.put('/staffDel/:id',updateStaff);
+router.put('/patDel/:id',updatePatient);
+
 export default router;

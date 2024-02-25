@@ -204,3 +204,18 @@ export const updateStaff = async (req, res) => {
       res.status(500).json({ message: 'Internal server error' });
     }
   };
+
+
+  // Update patient details
+export const updatePatient = async (req, res) => {
+    const { id } = req.params;
+    const updatedData = req.body; // Assuming the updated data is sent in the request body
+
+    try {
+        const updatedPatient = await Patient.findByIdAndUpdate(id, updatedData, { new: true });
+        res.json(updatedPatient);
+    } catch (error) {
+        console.error("Error updating patient data:", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+};

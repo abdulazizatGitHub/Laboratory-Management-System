@@ -144,3 +144,15 @@ export const updateStaffData = async (staffData) => {
 export const getTokenDetails = async () => {
   return await axios.get(`${Url}/phelobotny/phlebotomy`);
 }
+
+// Example function to update patient data
+export const updatePatData = async (editedData) => {
+  try {
+      // Assume you're using axios or fetch for making API requests
+      const response = await axios.put(`${Url}/admin/patDel/${editedData._id}`, editedData);
+      return response.data; // Assuming the response contains the updated data or a success message
+  } catch (error) {
+      console.error("Error updating patient data:", error);
+      throw error; // You might want to handle errors appropriately in your component
+  }
+};
