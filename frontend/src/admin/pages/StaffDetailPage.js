@@ -138,8 +138,21 @@ const StaffDetailPage = () => {
                      <div className="edit-divs-each-input"> <label>Name : </label>  <input type="text" name="name" value={editedData.name} onChange={handleChange} /></div>
                      <div className="edit-divs-each-input"> <label>Father : </label><input type="text" name="fatherName" value={editedData.fatherName} onChange={handleChange} /></div>
                      <div className="edit-divs-each-input">  <label>Age : </label> <input type="number" name="age" value={editedData.age} onChange={handleChange} /></div>
-                     <div className="edit-divs-each-input">   <label>Gender : </label><input type="text" name="gender" value={editedData.gender} onChange={handleChange} /></div>
-                     <div className="edit-divs-each-input">  <label>Role : </label> <input type="text" name="role" value={editedData.role} onChange={handleChange} /></div>
+                     <div className="edit-divs-each-input">
+                                <label>Gender : </label>
+                                <select name="gender" value={editedData.gender} onChange={handleChange}>
+                                    <option value="Male">Male</option>
+                                    <option value="Male">Female</option>
+                                </select>
+                            </div>
+                            <div className="edit-divs-each-input">
+                                <label>Role : </label>
+                                <select name="role" value={editedData.role} onChange={handleChange}>
+                                <option value="Admin">Admin</option>
+                                <option value="Receptionist">Receptionist</option>
+                                <option value="Phlebotomy">Phlebotomy</option>
+                                </select>
+                            </div>
                      <div className="edit-divs-each-input">  <label>Shift : </label> <input type="text" name="shift" value={editedData.shift} onChange={handleChange} /></div>
                      <div className="edit-divs-each-input">   <label>Contact : </label><input type="text" name="contactNumber" value={editedData.contactNumber} onChange={handleChange} /></div>
                      <div className="edit-divs-each-input">  <label>CNIC : </label> <input type="text" name="cnic" value={editedData.cnic} onChange={handleChange} /></div>

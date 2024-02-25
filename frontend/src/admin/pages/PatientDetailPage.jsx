@@ -54,12 +54,7 @@ const PatientDetailPage = () => {
                     <p className="pdp-smallHeading">Name: </p>
                     <p>{data.name}</p>
                 </div>.
-{/* 
-                <div className="pdp-subBoxes">
-                    <p className="pdp-smallHeading">Father Name: </p>
-                    <p>Abdul AZiz</p>
-                </div>. */}
-
+                
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Age: </p>
                     <p>{data.age}</p>
@@ -129,8 +124,11 @@ const PatientDetailPage = () => {
                                 <input type="number" name="age" value={editedData.age} onChange={handleChange} />
                             </div>
                             <div className="edit-divs-each-input">
-                                <label>Gender:</label>
-                                <input type="text" name="gender" value={editedData.gender} onChange={handleChange} />
+                                <label>Gender : </label>
+                                <select name="gender" value={editedData.gender} onChange={handleChange}>
+                                    <option value="Male">Male</option>
+                                    <option value="Male">Female</option>
+                                </select>
                             </div>
                             <div className="edit-divs-each-input">
                                 <label>CNIC:</label>

@@ -151,6 +151,12 @@
     align-items: center;
 
 }
+.edit-divs-each-input select {
+    width: 15rem;
+    height: 3rem;
+    margin: 0.7rem;
+    /* Add your additional styling here */
+}
 #edit-divss input{
     width: 15rem;
     height: 3rem;
