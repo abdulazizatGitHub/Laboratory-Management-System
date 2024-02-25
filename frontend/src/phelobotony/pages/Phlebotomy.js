@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link } from 'react-router-dom';
 import { getTokenDetails } from "../../Services/API";
-
+import Barcode from 'react-barcode';
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
@@ -123,7 +123,7 @@ const Phlebotomy = () => {
             </div>
 
             <div className="phlebotomy-right-container">
-                <div className="pl-heading"><p>{`Visit Samples (${selectedRegistrationDetails.patientData.pin})`}</p></div>
+                <div className="pl-heading"><p>Visit Sample </p></div>
                 <div className="pr-patient-details-container">
 
                 {selectedRegistrationDetails && (
