@@ -10,6 +10,7 @@ import GetTest from './Routes/Addtest.js';
 import gentok from './Routes/GenerateToken.js';
 import logincre from './Routes/Login.js';
 import Chanpass from './Routes/Changepassword.js';
+import PhlebotomyRoutes from './Routes/PhlebotomyRoutes.js';
 
 dotenv.config();
 
@@ -50,3 +51,5 @@ app.use('/receptionist/generate_token',gentok);
 app.use('/Login',logincre);
 
 app.use('/admin/Change-password',Chanpass);
+
+app.use('/phelobotny', PhlebotomyRoutes);

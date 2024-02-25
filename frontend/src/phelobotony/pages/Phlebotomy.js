@@ -1,73 +1,29 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link } from 'react-router-dom';
+import { getTokenDetails } from "../../Services/API";
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
     const [selectedOption, setSelectedOption] = useState('Phlebotomy');
-    const [registrationDetails, setRegistrationDetails] = useState([
-        {
-            PIN: '2401-00001', name: 'Abdul Aziz', age: '21', gender: 'Male', registerDate: '31-jan-2024', contact: '0300000000', address: 'Comsats Tube Well', city: 'Abbottabad',
-            tests: {
-                code: 'PTH',
-                testName: 'Intact Parathyroid Harmone',
-                sample: 'EDTA Plasma',
-                quantity: '3 CC seurm'
-            }
-        },
-        {
-            PIN: '2401-00002', name: 'Abdul Aziz', age: '21', gender: 'Male', registerDate: '31-jan-2024', contact: '0300000000', address: 'Comsats Tube Well', city: 'Abbottabad',
-            tests: {
-                code: 'PTH',
-                testName: 'Intact Parathyroid Harmone',
-                sample: 'EDTA Plasma',
-                quantity: '3 CC seurm'
-            }
-        },
-        {
-            PIN: '2401-00003', name: 'Abdul Aziz', age: '21', gender: 'Male', registerDate: '31-jan-2024', contact: '0300000000', address: 'Comsats Tube Well', city: 'Abbottabad',
-            tests: {
-                code: 'PTH',
-                testName: 'Intact Parathyroid Harmone',
-                sample: 'EDTA Plasma',
-                quantity: '3 CC seurm'
-            }
-        },
-        {
-            PIN: '2401-00004', name: 'Abdul Aziz', age: '21', gender: 'Male', registerDate: '31-jan-2024', contact: '0300000000', address: 'Comsats Tube Well', city: 'Abbottabad',
-            tests: {
-                code: 'PTH',
-                testName: 'Intact Parathyroid Harmone',
-                sample: 'EDTA Plasma',
-                quantity: '3 CC seurm'
-            }
-        },
-        {
-            PIN: '2401-00005', name: 'Abdul Aziz', age: '21', gender: 'Male', registerDate: '31-jan-2024', contact: '0300000000', address: 'Comsats Tube Well', city: 'Abbottabad',
-            tests: {
-                code: 'PTH',
-                testName: 'Intact Parathyroid Harmone',
-                sample: 'EDTA Plasma',
-                quantity: '3 CC seurm'
-            }
-        },
-    ]);
-    const [selectedPatient, setSelectedPatient] = useState(null);
+    const [registrationDetails, setRegistrationDetails] = useState([]);
+    const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
     const [showReport, setShowReport] = useState(false);
 
-    // useEffect(() => {
-    //     const fetchTokenDetails = async () => {
-    //         try {
-    //             const response = await getTokenDetails();
-    //             console.log('Token Details are: ', response.data);
-    //         } catch (error) {
-    //             console.log('Error occure in fetching the token data', error);
-    //         }
-    //     }
+    useEffect(() => {
+        const fetchTokenDetails = async () => {
+            try {
+                const response = await getTokenDetails();
+                setRegistrationDetails(response.data);
+                console.log('Token Details are: ', registrationDetails);
+            } catch (error) {
+                console.log('Error occure in fetching the token data', error);
+            }
+        }
 
-    //     fetchTokenDetails();
-    // }, [])
+        fetchTokenDetails();
+    }, []);
 
     useEffect(() => {
         // Set default "to" date to today in the format "YYYY-MM-DD"
@@ -94,8 +50,9 @@ const Phlebotomy = () => {
 
     const handlePatientClick = (pin) => {
         // Find the selected patient from the registrationDetails array
-        const selectedPatientData = registrationDetails.find(patient => patient.PIN === pin);
-        setSelectedPatient(selectedPatientData);
+        const selectedPatientData = registrationDetails.find(patient => patient.patientData.pin === pin);
+        setSelectedRegistrationDetails(selectedPatientData);
+        console.log('The selected detail is: ', selectedRegistrationDetails);
     };
 
     const handleTransferClick = () => {
@@ -153,7 +110,7 @@ const Phlebotomy = () => {
                                         {
                                             registrationDetails.map((data) => (
                                                 <tr>
-                                                    <td onClick={() => handlePatientClick(data.PIN)}>{data.PIN}</td>
+                                                    <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
                                                 </tr>
                                             ))
                                         }

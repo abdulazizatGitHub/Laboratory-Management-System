@@ -40,7 +40,7 @@ const getGeneratedToken  = async (req, res) => {
 
       const generatedTokens = await GenToken.find();
     
-      res.status(200).json(generatedTokens); 
+      res.status(200).json(generatedTokens);
   } catch (error) {
       console.error("Error fetching patient details:", error);
       res.status(500).json({ error: "Internal Server Error" });

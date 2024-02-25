@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { url } from 'inspector';
 
 const Url = 'http://localhost:5000';
 
@@ -142,5 +141,6 @@ export const updateStaffData = async (staffData) => {
 };
 
 
-// =============================Phlebotomy==================================
-
+export const getTokenDetails = async () => {
+  return await axios.get(`${Url}/phelobotny/phlebotomy`);
+}
