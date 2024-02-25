@@ -123,7 +123,7 @@ const Phlebotomy = () => {
             </div>
 
             <div className="phlebotomy-right-container">
-                <div className="pl-heading"><p>{`Visit Samples ()`}</p></div>
+                <div className="pl-heading"><p>{`Visit Samples (${selectedRegistrationDetails})`}</p></div>
                 <div className="pr-patient-details-container">
                     <div className="pr-patient-details">
                         <p style={{ fontWeight: '600', fontSize: '0.8rem' }}>{`Abdul Aziz (2401-00001)`}</p>
