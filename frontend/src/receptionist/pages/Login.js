@@ -32,7 +32,7 @@ const Login = () => {
                     navigation('/admin');
                     break;
                 case 'Phlebotomy':
-                    navigation('/phlebotomy');
+                    navigation('/phelobotny');
                     break;
                 default:
                     setError('Unknown role');
