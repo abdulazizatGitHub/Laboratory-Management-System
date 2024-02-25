@@ -23,20 +23,19 @@ function Report() {
         <div className="Main-Report-container">
             <section className="Main-report">
                 <div className="Header-report">
-
                     <div className="Report-smCnt">
                         <div className="Report-left-image">
                             <img src={img1} alt="Logo" className="logo-image" />
                         </div>
                         <div className="Report-Middle">
-                            <h1>SIRAJ SHAHEED MEDICAL LAB</h1>
+                            <span className="report-heading-effect"><h1>SIRAJ SHAHEED MEDICAL LAB</h1></span>
                             <h3>ACCURATE , CARING , INSTANT</h3>
                             <p>Opposite Cat A Hospital DHQ Batkhela Distt Malakand 230100</p>
                         </div>
                     </div>
                     <div className="Report-Right">
-                        <a><FaPhone /> 03000-98545565/0303-0094836</a>
-                        <a><FaEnvelope /> doctorkhan123@gmail.com</a>
+                        <a><FaPhone  color='#6ec007'/> 03000-98545565/0303-0094836</a>
+                        <a><FaEnvelope color='#6ec007' /> doctorkhan123@gmail.com</a>
                     </div>
                 </div>
 
@@ -50,14 +49,15 @@ function Report() {
                         <p>PID:55008</p>
                         <p>Address: XYX</p>
                     </div>
-                    <hr className="R-Line" />
+                    <span className="R-Line"></span>
 
                     <div className="M-Report">
                         <h3>Sample Collected At:</h3>
-                        <p>345 Abdara Road khar dheri olagram <br></br>Batkhela </p>
-                        <h3>Ref By: DR Sajjad Bukhari </h3>
+                        <p>Siraj Shaheed Medical Laboratory Batkhela</p>
+                        <h4>Ref By: DR Sajjad Bukhari </h4>
                     </div>
-                    <hr className="R-Line" />
+                    <span className="R-Line"></span>
+
                     <div className="R-Report">
                         <p>Reffered on:12:23pm</p>
                         <p>Reported on:12:20pm</p>
@@ -101,15 +101,9 @@ function Report() {
                 </div>
 
                 <div className="Footer-Section">
-                    <h3>This Report is For intended Doctor Reference Only</h3>
-                    <hr />
+                    <p className="Footer-Section-heading">This Report is For intended Doctor Reference Only</p>
+
                     <div className="Details-Footer">
-                        <div className="Fl-report">
-                            <p>Thanks For Reference</p>
-                            
-                            <h4>Medical Lab Technician</h4>
-                            <h5>MLT Peshawar(BMLT)</h5>
-                        </div>
 
                         <div className="Fl-report" >
                             <p>Report Preparaed By</p>
@@ -119,18 +113,17 @@ function Report() {
                         </div>
 
                         <div className="Fl-report" >
-                            <p>Signed By</p>
+                            <p>Reviewed By</p>
                             
                             <h4>DR Iqbal Hassan</h4>
                             <h5>MD Pathologist</h5>
                         </div>
                     </div>
-                    <hr />
-                    <p style={{ marginTop: "1.5rem", textAlign: "right" }}>Generated on 5:30pm</p>
-                    <div className="Middle-Report-Section-Color"></div>
+
+                    <p className="generated-time">Generated on 5:30pm</p>
+                    <div className="report-bottom-bar-code"></div>
 
 
-                    <button onClick={handlePrint}>Print Report</button>
                 </div>
             </section>
         </div>
