@@ -1,10 +1,16 @@
 import Test from "../Models/AddTest.js";
 
 
-const addTest = async (req, res) => {
+export const addTest = async (req, res) => {
   const { code, name, type, price, section, sampleType, sampleQuantity, unit, normalRange } = req.body;
 
   try {
+    const existingTest = await Test.findOne({ code });
+
+    if (existingTest) {
+      return res.status(400).json({ success: false, message: 'Test already exists' });
+    }
+
     const newTest = new Test({
       code,
       name,
@@ -24,7 +30,7 @@ const addTest = async (req, res) => {
   }
 };
 
-export { addTest };
+
 
 
 // ==========Get Request===

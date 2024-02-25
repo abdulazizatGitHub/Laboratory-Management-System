@@ -40,15 +40,21 @@ function Addtest() {
   const handleSubmit = async () => {
     try {
       const response = await addTest(test); // Use the API function
-      console.log(response); // Log the response from the server
-      window.alert('Test details saved successfully!'); // Alert message for successful data saving
-      // Optionally, you can redirect the user or show a success message
+
+      if (response.status === 201 && response.data) {
+        // Test registered successfully
+        window.alert('Test registered successfully');
+      } else if (response.status === 400 && response.data.message === 'Test already exists') {
+        // Test already exists, show warning
+        window.alert('Test already exists.');
+      } else {
+        // Handle other cases (error or unexpected response)
+        console.error('Unexpected response from the server:', response);
+      }
     } catch (error) {
-      console.error('Error adding test details:', error);
-      // Optionally, you can show an error message to the user
+      console.error('Error during registration:', error);
     }
   };
-  
   return (
     <div className="Test-Details-Main-Container">
       <div className="Test-Details-Container">
