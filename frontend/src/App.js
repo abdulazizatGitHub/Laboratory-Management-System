@@ -19,7 +19,7 @@ function App() {
        <Route element={<PrivateRoutes />}>
           <Route path="/receptionist/*" element={<Main />} />
           <Route path="/admin/*" element={<AdminMain />} />
-          <Route path="/phelobotony/*" element={<PhlebotomyMain />} />
+          <Route path="/phelobotny/*" element={<PhlebotomyMain />} />
           </Route>
       </Routes>
     </div>
