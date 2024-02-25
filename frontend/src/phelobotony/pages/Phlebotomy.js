@@ -16,7 +16,7 @@ const Phlebotomy = () => {
             try {
                 const response = await getTokenDetails();
                 setRegistrationDetails(response.data);
-                console.log('Token Details are: ', registrationDetails);
+                console.log('Token Details are: ', response.data);
             } catch (error) {
                 console.log('Error occure in fetching the token data', error);
             }
@@ -125,21 +125,24 @@ const Phlebotomy = () => {
             <div className="phlebotomy-right-container">
                 <div className="pl-heading"><p>{`Visit Samples (${selectedRegistrationDetails})`}</p></div>
                 <div className="pr-patient-details-container">
-                    <div className="pr-patient-details">
-                        <p style={{ fontWeight: '600', fontSize: '0.8rem' }}>{`Abdul Aziz (2401-00001)`}</p>
-                        <div className="patient-other-details">
-                            <p>Date /</p>
-                            <p>Age /</p>
-                            <p>Gender</p>
-                            <p>Conatct</p>
+
+                {selectedRegistrationDetails && (
+                        <div className="pr-patient-details">
+                            <p style={{ fontWeight: '600', fontSize: '0.8rem' }}>{`${selectedRegistrationDetails.patientData.name} (${selectedRegistrationDetails.patientData.pin})`}</p>
+                            <div className="patient-other-details">
+                                <p>Date: {selectedRegistrationDetails.date}</p>
+                                <p>Age: {selectedRegistrationDetails.patientData.age}</p>
+                                <p>Gender: {selectedRegistrationDetails.patientData.gender}</p>
+                                <p>Contact: {selectedRegistrationDetails.patientData.contact}</p>
+                            </div>
+                            <p>Address: {selectedRegistrationDetails.patientData.address}</p>
+                            <p>City: {selectedRegistrationDetails.patientData.city}</p>
                         </div>
-                        <p>Address</p>
-                        <p>City</p>
-                    </div>
+                    )}
                     <div className="pr-test-details-container">
                         <div className="pr-test-heading-container">
                             <span></span>
-                            <p className="pr-test-heading">{`Test of (PIN ${'2401-00001'})`}</p>
+                            <p className="pr-test-heading">{`Test of (PIN ${selectedRegistrationDetails ? selectedRegistrationDetails.patientData.pin : ''})`}</p>
                             <span></span>
                         </div>
                         <div className="pr-test-table-container">
@@ -153,15 +156,19 @@ const Phlebotomy = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>PTH</td>
-                                        <td>ABdul Aziz</td>
-                                        <td>Hello</td>
-                                        <td>Hello</td>
-                                    </tr>
+                                    {selectedRegistrationDetails && selectedRegistrationDetails.tests.map(test => (
+                                        <tr key={test._id}>
+                                            <td>{test.code}</td>
+                                            <td>{test.name}</td>
+                                            <td>{test.sample}</td>
+                                            <td>{test.quantity}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
+
+
                         <div className="pr-test-heading-container">
                             <span></span>
                             <p style={{ marginLeft: '2.5rem', }} className="pr-test-heading">Visit Remarks</p>
