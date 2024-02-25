@@ -7,6 +7,7 @@ import DailySalesChart from '../components/DailySalesChart';
 import MonthlySalesChart from '../components/MonthlySalesChart';
 import React, { useState, useEffect } from "react";
 import { getAllTests, fetchTokenCount, getAllPatientNumbers, getGeneratedToken } from '../../Services/API'; // Update import
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
     
@@ -16,6 +17,8 @@ const Dashboard = () => {
     const [tokensGenerated, setTokensGenerated] = useState(0);
     const [dailySalesData, setDailySalesData] = useState([]);
     const [monthlySalesData, setMonthlySalesData] = useState([]);
+    const [user, setUser] = useState(null);
+    const navigation = useNavigate();
 
     useEffect(() => {
         getTests();
@@ -27,7 +30,15 @@ const Dashboard = () => {
     }, []);
 
    
-
+    useEffect(() => {
+        const userData = localStorage.getItem('user');
+        if (userData) {
+            setUser(JSON.parse(userData));
+        } else {
+            // Redirect to login if user data is not available
+            navigation('/');
+        }
+    }, []);
    
 
     const getTests = async () => {
@@ -109,48 +120,52 @@ const Dashboard = () => {
 
     return (
         <div className="Main-Container">
+
+{user && (
             <div className="Profile">
                
                 <div className="Image-details">
-                    <img src={img1} className="profile-image" />
+                    <img src={`http://localhost:5000/uploads/${user.image}`} className="profile-image" />
                 </div>
 
                 <div className='profile-info'>
                     <div className="profile-divs">
                         <p className="bold-light">NAME</p>
-                        <p>Mahad Khan</p>
+                        <p>{user.name}</p>
                     </div>
 
                     <div className="profile-divs">
                         <p className="bold-light">FATHER NAME</p>
-                        <p>Khan</p>
+                        <p>{user.fatherName}</p>
                     </div>
 
 
 
                     <div className="profile-divs">
                         <p className="bold-light">GENDER</p>
-                        <p>Male</p>
+                        <p>{user.gender}</p>
                     </div>
 
                     <div className="profile-divs">
-                        <p className="bold-light">DATE OF BIRTH</p>
-                        <p>Khan</p>
+                        <p className="bold-light">ADDRESS</p>
+                        <p>{user.address}</p>
                     </div>
 
 
 
                     <div className="profile-divs">
                         <p className="bold-light">CONTACT</p>
-                        <p>065415151121</p>
+                        <p>{user.contactNumber}</p>
                     </div>
 
                     <div className="profile-divs">
                         <p className="bold-light">CNIC</p>
-                        <p>16101-8233468-5</p>
+                        <p>{user.cnic}</p>
                     </div>
                 </div>
             </div>
+
+)}
 
             <div className="dashboard">
                 <div className="dashboard-item">
