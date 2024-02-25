@@ -56,6 +56,18 @@ const Phlebotomy = () => {
     const [selectedPatient, setSelectedPatient] = useState(null);
     const [showReport, setShowReport] = useState(false);
 
+    // useEffect(() => {
+    //     const fetchTokenDetails = async () => {
+    //         try {
+    //             const response = await getTokenDetails();
+    //             console.log('Token Details are: ', response.data);
+    //         } catch (error) {
+    //             console.log('Error occure in fetching the token data', error);
+    //         }
+    //     }
+
+    //     fetchTokenDetails();
+    // }, [])
 
     useEffect(() => {
         // Set default "to" date to today in the format "YYYY-MM-DD"
@@ -90,6 +102,7 @@ const Phlebotomy = () => {
         setShowReport(true);
         // Additional logic for navigation if needed...
     };
+
 
     return (
         <div className="phlebotomy-container">
