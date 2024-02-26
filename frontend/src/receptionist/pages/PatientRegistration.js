@@ -43,11 +43,10 @@ const PatientRegistration = () => {
     const year = currentDate.getFullYear().toString().slice(2);
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
 
+    if(data.length>0){
       const exsisting_pc = parseInt(data[data.length-1].pin.slice(-4));
-      
-
       localStorage.setItem('pinCounter', exsisting_pc+1);
-
+    }
     
   
     // Check if the stored month in localStorage matches the current month
