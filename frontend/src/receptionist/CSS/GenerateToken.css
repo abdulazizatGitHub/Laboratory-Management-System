@@ -113,7 +113,8 @@
 
 
 .gToken-table-cnt{
-    max-height: 18em;
+    /* max-height: 18em; */
+    height: auto
 }
 .gToken-table-head{
  border-top: 3px solid #EFEFEF;
