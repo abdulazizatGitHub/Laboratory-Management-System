@@ -97,8 +97,11 @@ const GenerateToken = () => {
   
   
   const saveTokenData = () => {
-
-     window.print();
+    let printContents = document.getElementById('generateToken-innerComponent').innerHTML;
+    let originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+   document.body.innerHTML = originalContents; 
     
     const currentDate = new Date();
     const formattedDateTime = currentDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
