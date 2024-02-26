@@ -74,8 +74,7 @@ const PatientRegistration = () => {
     // Store generated PIN, year, month, and update counter in localStorage
     localStorage.setItem('generatedPin', pin);
     localStorage.setItem('year', year);
-    localStorage.setItem('pinCounter', counter); // Update pin counter in localStorage
-
+    console.log("format counter is ", formattedCounter)
     // Update state with generated PIN
     setFormData(prevData => ({ ...prevData, pin: pin }));
 };
