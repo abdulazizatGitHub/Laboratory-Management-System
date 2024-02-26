@@ -3,7 +3,6 @@ import Patient from "../Models/Patientregistration.js";
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import path from 'path';
-import bcrypt from 'bcrypt';
 import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
 
