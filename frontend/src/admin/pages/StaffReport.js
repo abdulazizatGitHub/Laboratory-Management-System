@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../css/ViewPatientDetail.css';
+import '../css/StaffReport.css';
 import { useNavigate } from "react-router-dom";
 import { getStaffByRole } from "../../Services/API";
 const ViewStaffRecord = () => {
@@ -60,29 +60,29 @@ const ViewStaffRecord = () => {
         );
 
     return (
-        <div className="View-Patient-Details-Container">
-            <div className="Search-Container">
+        <div className="View-Staff-Report-Container">
+            <div className="Filter-Container">
                 <p>Staff Sales Report</p>
-                <div className="Search-Main">
-                    <div className="Search-Content">
+                <div className="Filter-Main">
+                    <div className="Filter-Content">
                         <label>Search By Shift</label>
-                        <div className="ViewPat-search-input">
-                            <input type="radio" value="Shift" checked={selectedField === 'Shift'} onChange={handleFieldChange} className="ViewPat-search-radio" />
-                            <input type="text" name="search-by-shift" placeholder="Search" className="ViewPat-search-text" disabled={selectedField !== 'Shift'} onChange={handlePinChange} value={queryByShift} />
+                        <div className="ViewStaff-filter-input">
+                            <input type="radio" value="Shift" checked={selectedField === 'Shift'} onChange={handleFieldChange} className="ViewStaff-filter-radio" />
+                            <input type="text" name="search-by-shift" placeholder="Search" className="ViewStaff-filter-text" disabled={selectedField !== 'Shift'} onChange={handlePinChange} value={queryByShift} />
                         </div>
                     </div>
-                    <div className="Search-Content">
+                    <div className="Filter-Content">
                         <label>Search By CNIC</label>
-                        <div className="ViewPat-search-input">
-                            <input type="radio" value="CNIC" checked={selectedField === 'CNIC'} onChange={handleFieldChange} className="ViewPat-search-radio" />
-                            <input type="text" name="search-by-pin" placeholder="Search" className="ViewPat-search-text" disabled={selectedField !== 'CNIC'} onChange={handlePinCnic} value={queryByCNIC} />
+                        <div className="ViewStaff-filter-input">
+                            <input type="radio" value="CNIC" checked={selectedField === 'CNIC'} onChange={handleFieldChange} className="ViewStaff-filter-radio" />
+                            <input type="text" name="search-by-pin" placeholder="Search" className="ViewStaff-filter-text" disabled={selectedField !== 'CNIC'} onChange={handlePinCnic} value={queryByCNIC} />
                         </div>
                     </div>
                     
                 </div>
             </div>
-            <div className="Scrolable-Table-Container">
-                <table className="Scrolable-Table">
+            <div className="StaffDetail-Table-Container">
+                <table className="staffDetails-Table">
                     <thead>
                         <tr>
                             <th>Name</th>

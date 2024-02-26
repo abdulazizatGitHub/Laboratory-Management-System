@@ -1,0 +1,137 @@
+@import '../../constants/Colors.css';
+
+.View-Staff-Report-Container {
+    width: 100%;
+    height: auto;
+    font-family: var(--fontRegular);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.Filter-Container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    height: auto;
+    border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+    margin-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.Filter-Container p {
+    color: var(--lms);
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.Filter-Main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.Filter-Content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.Filter-Content label {
+    margin-left: 1rem;
+    font-weight: bold;
+}
+
+.StaffDetail-Table-Container {
+    width: 95%;
+    margin: 2em;
+    
+    max-height: 25em;
+    
+    overflow: scroll;
+    scroll-behavior: smooth;
+    border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+}
+
+.StaffDetail-Table-Container::-webkit-scrollbar {
+    width: 0;
+  }
+
+.staffDetails-Table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.staffDetails-Table th,
+.staffDetails-Table td
+{
+    padding: 0.5rem 2rem;
+    text-align: left;
+    vertical-align: top;
+}
+
+.staffDetails-Table thead {
+    border-bottom: 3px solid #EFEFEF;
+}
+
+.staffDetails-Table th {
+    position: sticky;
+    left: 0;
+    background-color: white; /* Ensures the first column stays visible when scrolling horizontally */
+    z-index: 1; 
+}
+
+.staffDetails-Table td {
+    border-top: none;
+}
+
+
+.staffDetails-Table tr:hover {
+    background-color: rgb(207, 206, 206);
+}
+
+.View-Button {
+    width: 100%;
+    height: 2em;
+    border: 1px solid var(--buttonColor);
+    border-radius: 10px;
+    color: whitesmoke;
+    background: linear-gradient(90deg, #22CAB8 -0.9%, #108A7D 100%);
+    cursor: pointer;
+}
+
+
+.ViewStaff-filter-input {
+    display: flex;
+    position: relative;
+    height: 2em;
+
+}
+
+.ViewStaff-filter-radio {
+    position: absolute;
+    top: 0.5em;
+}
+
+.ViewStaff-filter-text {   
+    
+    border: var(--textFieldBorderColor);
+    padding-left: 2em;
+    width: 100%;
+    height: 2em;
+    border-radius: 4px;
+
+}
+
