@@ -83,7 +83,7 @@ function Report() {
                         <tbody>
                             <tr>
                                 <td>Primary Sample Type:</td>
-                                <td>Blood</td>
+                                <td> <input type="text" placeholder="Enter value" /> </td>
                             </tr>
                             <tr>
                                 <td>Haemoglobin HB</td>

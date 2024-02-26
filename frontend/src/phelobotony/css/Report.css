@@ -197,9 +197,11 @@
   display: flex;
   justify-content: center;
   width: 95%;
-  height: 30vh; 
+  max-height: 30vh; /* Change height to max-height */
   overflow: auto;
+  margin-bottom: 30rem; /* Add margin bottom to create space */
 }
+
 .medical-lab-report-table {
   width: 100%;
   height: auto;
@@ -213,6 +215,11 @@
   border: none; /* Remove borders from table header and data cells */
   padding: 0.5rem; /* Add padding for better readability */
 }
+
+.medical-lab-report-table tbody td {
+  text-align: left; /* Align tbody content to the left */
+}
+
 
 .medical-lab-report-table tbody td,
 .medical-lab-report-table tbody tr  {
