@@ -15,7 +15,8 @@ export const staffRegistration = async (req, res) => {
         const existingStaff = await StaffModel.findOne({
             $or: [
                 { contactNumber: contactNumber },
-                { cnic: cnic }
+                { cnic: cnic },
+                { email: email }
             ]
         });
 
