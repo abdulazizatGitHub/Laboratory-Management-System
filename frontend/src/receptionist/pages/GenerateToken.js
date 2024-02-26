@@ -88,7 +88,8 @@ const GenerateToken = () => {
       patientData,
       tests: selectedTests,
       grandTotal,
-      dateTime: formattedDateTime
+      dateTime: formattedDateTime,
+      generatedBy: JSON.parse(localStorage.getItem('user')).userName
     };
     
     saveToken(tokenData)
