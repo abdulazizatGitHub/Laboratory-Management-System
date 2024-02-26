@@ -18,6 +18,7 @@ const StaffRegistration = () => {
         contactNumber: '',
         cnic: '',
         address: '',
+        email:'',
         image: "",
     });
 
@@ -64,7 +65,7 @@ const StaffRegistration = () => {
         }, 3000);
     };
 
-    const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, image } = staffDetails;
+    const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, email, image } = staffDetails;
 
     const handleInputChange = (e) => {
         setStaffDetails({ ...staffDetails, [e.target.name]: e.target.value });
@@ -105,6 +106,7 @@ const StaffRegistration = () => {
             formData.append('contactNumber', contactNumber);
             formData.append('cnic', cnic);
             formData.append('address', address);
+            formData.append('email', email);
             formData.append('image', image);
             console.log("Form data is ", image)
 
@@ -195,6 +197,11 @@ const StaffRegistration = () => {
                         <div className="sr-form-inputs-container">
                             <label>Address</label>
                             <input type="text" name="address" placeholder="Enter Address" onChange={handleInputChange} />
+                        </div>
+
+                        <div className="sr-form-inputs-container">
+                            <label>Email</label>
+                            <input type="email" name="email" placeholder="Enter Email" onChange={handleInputChange} />
                         </div>
                     </div>
                     <div className="sr-form-button-container">

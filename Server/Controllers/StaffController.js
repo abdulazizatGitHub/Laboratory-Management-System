@@ -9,7 +9,7 @@ dotenv.config();
 
 export const staffRegistration = async (req, res) => {
     try {
-        const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, userName, password } = req.body;
+        const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, email , userName, password } = req.body;
 
         // Check if a staff member with the same contact number or CNIC already exists
         const existingStaff = await StaffModel.findOne({
@@ -33,6 +33,7 @@ export const staffRegistration = async (req, res) => {
                 contactNumber,
                 cnic,
                 address,
+                email,
                 image: req.file.filename,               
                 
                 userName,

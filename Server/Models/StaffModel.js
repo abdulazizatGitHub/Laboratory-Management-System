@@ -10,6 +10,7 @@ const staffSchema = new mongoose.Schema({
     contactNumber: { type: String, required: true },
     cnic: { type: String, required: true },
     address: { type: String, required: true },
+    email: { type: String, required: true },
     image:{
         type:String,
       },

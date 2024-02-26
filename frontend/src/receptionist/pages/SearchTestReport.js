@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
