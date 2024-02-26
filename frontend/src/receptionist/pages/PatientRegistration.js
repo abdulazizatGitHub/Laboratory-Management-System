@@ -32,45 +32,49 @@ const PatientRegistration = () => {
   }, []); 
 
   useEffect(() => {
-    if(data.length>0)
+    // if(data.length>0)
     generatePin();
    
     
   }, [data]); 
-
   const generatePin = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear().toString().slice(2);
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
 
-    if(data.length>0){
-      const exsisting_pc = parseInt(data[data.length-1].pin.slice(-4));
-      localStorage.setItem('pinCounter', exsisting_pc+1);
-    }
+    let storedMonth = localStorage.getItem('month'); // Declare storedMonth using let to allow reassignment
     
-  
-    // Check if the stored month in localStorage matches the current month
-    const storedMonth = localStorage.getItem('month');
+
+    if (!storedMonth) {
+        localStorage.setItem('month', month);
+        storedMonth = month; // Ensure storedMonth is assigned a string value
+        localStorage.setItem('pinCounter', 1);
+    }
+
+    if (data.length > 0) {
+        const existing_pc = parseInt(data[data.length - 1].pin.slice(-4));
+        localStorage.setItem('pinCounter', existing_pc + 1);
+    }
+
     if (storedMonth !== month) {
-      // Reset the pin counter to 1 if the month has changed
-      localStorage.setItem('pinCounter', 1);
-      localStorage.setItem('month', month); // Update stored month in localStorage
+        localStorage.setItem('pinCounter', 1);
+        localStorage.setItem('month', month);
     }
-  
+
     // Retrieve the counter from localStorage
-    const formattedCounter = ('0000' + (localStorage.getItem('pinCounter') )).slice(-4);
+    const formattedCounter = ('0000' + (localStorage.getItem('pinCounter'))).slice(-4);
+   
     const pin = `${year}${month}-${formattedCounter}`;
-    
+
     // Store generated PIN, year, month, and update counter in localStorage
     localStorage.setItem('generatedPin', pin);
     localStorage.setItem('year', year);
     // localStorage.setItem('pinCounter', parseInt(formattedCounter) + 1);
-    
+
     // Update state with generated PIN
     setFormData(prevData => ({ ...prevData, pin: pin }));
-  };
-  
-  
+};
+
   
   
   const fetchPatientData = async () => {
