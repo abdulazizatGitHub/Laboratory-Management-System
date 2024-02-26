@@ -45,7 +45,7 @@ const SearchTest = () => {
   };
 
   const handleRowCheckboxChange = (event, id) => {
-    console.log(id)
+    
     const isChecked = event.target.checked;
     const row = testData.find((data) => data._id === id);
     if (isChecked) {
@@ -180,7 +180,7 @@ const SearchTest = () => {
           </div>
         </div>
       </div>
-      <button type="button" id="searchTest-btn" onClick={handleGenerateToken}>Generate Token</button>
+      <button type="button" id="searchTest-btn" onClick={handleGenerateToken} disabled={selectedTests.length==0?true:false} style={selectedTests.length==0? { backdropFilter: "blur(4px)", pointerEvents: "none", opacity: 0.6 } : {}}>Generate Token</button>
     </div>
   );
 };

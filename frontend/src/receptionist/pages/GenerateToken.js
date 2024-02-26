@@ -18,15 +18,14 @@ const GenerateToken = () => {
   
   useEffect(() => {
     fetchAllGeneratedTokens();
-    
+    handleOneTime();
   }, []);
   
-  // useEffect(()=>{
-   
-  // },[pin])
+ 
 
   useEffect(()=>{
     generateToken();
+    
   },[generatedTokenData])
 
   const fetchAllGeneratedTokens = async () => {
@@ -42,11 +41,12 @@ const GenerateToken = () => {
       const day = ('0' + currentDate.getDate()).slice(-2);
       const existing_tc= parseInt(generatedTokenData[generatedTokenData.length-1].tokenNumber.slice(-3));
       localStorage.setItem('tokenCounter', existing_tc+1);
-      // Check if the date has changed
-      if (localStorage.getItem('currentDate') !== currentDate.toDateString()) {
-        // If the date has changed, reset the counter to 1
+      
+      const storedDay = localStorage.getItem('currentDate');
+      if (storedDay !== day) {
+        
         localStorage.setItem('tokenCounter', 1);
-        localStorage.setItem('currentDate', currentDate.toDateString());
+        localStorage.setItem('currentDate', currentDate);
       }
   
       // Create a counter to keep track of the token number
@@ -80,7 +80,7 @@ const GenerateToken = () => {
       console.error('Error generating token:', error);
       // Handle the error, e.g., show an error message to the user
     }
-    setPin(patientData.pin);
+    
   };
   
   
@@ -120,7 +120,6 @@ const GenerateToken = () => {
 const handleOneTime=()=>{
   if(patientData.pin==null || selectedTests.length==0)
   {
-    console.log("pin is nuull ", pin,"AND ",patientData.pin , " adn slect leng", selectedTests.length)
     setButtonPress(true);
   }
 }

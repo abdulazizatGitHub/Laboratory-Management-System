@@ -142,7 +142,7 @@ function SearchPatient() {
           </div>
         </div>
       </div>
-      <button type="button" id="searchTest-btn" onClick={handleGenerateToken}>Select Test</button>
+      <button type="button" id="searchTest-btn" onClick={handleGenerateToken} disabled={selectedPatient.pin== "" ? true: false} style={selectedPatient.pin== "" ? { backdropFilter: "blur(4px)", pointerEvents: "none", opacity: 0.6 } : {}}>Select Test</button>
     </div>
   );
 };
