@@ -221,3 +221,13 @@ export const updatePatient = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 };
+
+export const getStaffDetailsByRole = async (req, res) => {
+    try {
+        const receptionistDetails = await StaffModel.find({role: 'Receptionist'});
+        console.log('the receptionist data is: ', receptionistDetails);
+        res.status(200).json(receptionistDetails);
+    } catch (error) {
+        
+    }
+}

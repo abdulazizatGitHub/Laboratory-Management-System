@@ -1,6 +1,6 @@
 import express from 'express';
 import multer from 'multer';
-import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff, updatePatient } from '../Controllers/StaffController.js';
+import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff, updatePatient, getStaffDetailsByRole } from '../Controllers/StaffController.js';
 
 
 import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
@@ -11,6 +11,7 @@ router.post("/staff_registration",imageUpload.single("image"),generateStaffCrede
 // router.post('/staff_registration', upload.single('image'), generateStaffCredentials, staffRegistration);
 router.get('/view-staff-record', getStaffDetais);
 router.get('/view-patient-detail', getPatientDetails);
+router.get('/staff_report', getStaffDetailsByRole);
 
 
 router.delete("/staffDel/:id", deleteStaffData);

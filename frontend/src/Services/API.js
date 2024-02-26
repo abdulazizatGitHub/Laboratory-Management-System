@@ -156,3 +156,7 @@ export const updatePatData = async (editedData) => {
       throw error; // You might want to handle errors appropriately in your component
   }
 };
+
+export const getStaffByRole = async () => {
+  return await axios.get(`${Url}/admin/staff_report`);
+}

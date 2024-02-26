@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import '../css/ViewPatientDetail.css';
 import { useNavigate } from "react-router-dom";
-import { getStaffDetails } from "../../Services/API";
+import { getStaffByRole } from "../../Services/API";
 const ViewStaffRecord = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByShift, setQueryByShift] = useState('');
     const [queryByCNIC, setQueryByCNIC] = useState('');
     const navigation = useNavigate();
-    const [staffData, setStaffData] = useState(null);
+    const [receptionistData, setReceptionistData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user'));
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await getStaffDetails();
-                setStaffData(response.staffDetails);
+                const response = await getStaffByRole();
+                console.log('the role based data is: ', response.data);
+                setReceptionistData(response.data);
                 filteringData();
             } catch (error) {
                 console.log('Error occurred in fetching the staff data');
@@ -26,8 +27,8 @@ const ViewStaffRecord = () => {
     }, []);
 
     const filteringData=()=>{
-        const data = staffData.filter(d=> d._id != user._id);
-        setStaffData(data);
+        const data = receptionistData.filter(d=> d._id != user._id);
+        setReceptionistData(data);
     }
 
     const handleFieldChange = (event) => {
@@ -45,17 +46,17 @@ const ViewStaffRecord = () => {
     }
 
     const handleDetailView = (data) => {
-        navigation('/admin/view-staff-record/staffDetail', { state: { data } });
+        navigation('/admin/StaffReport/Detailstaff', { state: { data } });
     }
 
-    if (staffData === null) {
+    if (receptionistData === null) {
         // Data is still being fetched, you can show a loading spinner or message
         return <div>Loading...</div>;
     }
 
     const filteredData = selectedField === "Shift"
-        ? staffData.filter(data => data.shift.includes(queryByShift))
-        : staffData.filter(data => data.cnic.includes(queryByCNIC)
+        ? receptionistData.filter(data => data.shift.includes(queryByShift))
+        : receptionistData.filter(data => data.cnic.includes(queryByCNIC)
         );
 
     return (
@@ -87,6 +88,7 @@ const ViewStaffRecord = () => {
                             <th>Name</th>
                             <th>Contact #</th>
                             <th>CNIC</th>
+                            <th>Role</th>
                             <th>Status</th>
                             <th>Shift</th>
                             <th>Details</th>
@@ -99,6 +101,7 @@ const ViewStaffRecord = () => {
                                     <td>{data.name}</td>
                                     <td>{data.contactNumber}</td>
                                     <td>{data.cnic}</td>
+                                    <td>{data.role}</td>
                                     <td>{data.shift}</td>
                                     <td>{data.shift}</td>   
                                     <td>
