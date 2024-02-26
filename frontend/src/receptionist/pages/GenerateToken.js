@@ -38,48 +38,47 @@ const GenerateToken = () => {
   const generateToken = () => {
     try {
       const currentDate = new Date();
-      const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-      const day = ('0' + currentDate.getDate()).slice(-2);
-      
-      if (generatedTokenData.length > 0) {
-          console.log("groooooooooooooooo")
-          const existing_tc = parseInt(generatedTokenData[generatedTokenData.length - 1].tokenNumber.slice(-3));
-          console.log("EX ", existing_tc, " and ", typeof(existing_tc))
-          localStorage.setItem('tokenCounter', existing_tc + 1);
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + currentDate.getDate()).slice(-2);
+    
+    let storedDate = localStorage.getItem('currentDate');
+    let storedDay = storedDate ? new Date(storedDate).getDate().toString() : null; // Ensure storedDay is a string
+    if (!storedDay) {
+        localStorage.setItem('currentDate', currentDate.toISOString().slice(0, 10)); // Store current date in ISO 8601 format
+        storedDay = day.toString(); // Ensure storedDay is a string
       }
       
-      let storedDate = localStorage.getItem('currentDate');
-      let storedDay = storedDate ? new Date(storedDate).getDate().toString() : null; // Ensure storedDay is a string
-      
-      if (!storedDay) {
-          console.log(" alllllllllllll")
-          localStorage.setItem('currentDate', currentDate.toISOString().slice(0, 10)); // Store current date in ISO 8601 format
-          storedDay = day.toString(); // Ensure storedDay is a string
-          localStorage.setItem('tokenCounter', 1);
-      }
-      if (storedDay !== day) {
-          console.log(" stoday ", typeof (storedDay), " and day ", typeof (day))
-          localStorage.setItem('tokenCounter', 1);
-          localStorage.setItem('currentDate', currentDate.toISOString().slice(0, 10)); // Store current date in ISO 8601 format
-      }
-      
-      // Create a counter to keep track of the token number
-      let counter = parseInt(localStorage.getItem('tokenCounter'));
-      
-      // Format the counter with leading zeros
-      const formattedCounter = ('000' + counter).slice(-3);
-      
-      // Construct the token number with the specified format
-      const locationAbbreviation = 'BTK'; // Replace with your actual location logic or state
-      let newTokenNumber = `${locationAbbreviation}-${month}${day}-${formattedCounter}`;
-      
-      // Check if the generated token number already exists
-      
-      console.log("The token number is f", newTokenNumber);
-      // Update the counter for the next token number
-      
-      // Set the generated token number in the state
-      setTokenNumber(newTokenNumber);
+      let counter = 1;
+
+    if (generatedTokenData.length > 0) {
+        const existing_tc = parseInt(generatedTokenData[generatedTokenData.length - 1].tokenNumber.slice(-3));
+        console.log("EX ", existing_tc, " and ", typeof(existing_tc));
+        // localStorage.setItem('tokenCounter', existing_tc + 1);
+        counter= existing_tc + 1;
+    }
+    
+    
+    if (storedDay !== day) {
+        console.log(" stoday ", typeof (storedDay), " and day ", typeof (day));
+        counter=1;
+        localStorage.setItem('currentDate', currentDate.toISOString().slice(0, 10)); // Store current date in ISO 8601 format
+    }
+    
+    // Create a counter to keep track of the token number
+    const formattedCounter = ('000' + counter).slice(-3);
+
+    
+    // Construct the token number with the specified format
+    const locationAbbreviation = 'BTK'; // Replace with your actual location logic or state
+    let newTokenNumber = `${locationAbbreviation}-${month}${day}-${formattedCounter}`;
+    
+    // Check if the generated token number already exists
+    
+    console.log("The token number is f", newTokenNumber);
+    // Update the counter for the next token number
+    
+    // Set the generated token number in the state
+    setTokenNumber(newTokenNumber);
       //te grand total based on selected tests and discount
       let totalPrice = 0;
       selectedTests.forEach(test => {

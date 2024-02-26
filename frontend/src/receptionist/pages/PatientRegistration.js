@@ -57,6 +57,15 @@ const PatientRegistration = () => {
         counter = existing_pc + 1; // Set counter to the next available number
     }
 
+    if(storedMonth !== month){
+      console.log("Stored Mont h is ", storedMonth, " and ", typeof(storedMonth));
+      console.log("Month ", month, " and ", typeof(month));
+
+      counter=1;
+      localStorage.setItem('month', month);
+        
+    }
+
     // Format the counter with leading zeros
     const formattedCounter = ('0000' + counter).slice(-4);
 
