@@ -1,0 +1,100 @@
+@import '../../constants/Colors.css';
+
+.staff-report-detail-container {
+    width: 100%;
+    height: auto;
+    font-family: var(--fontRegular);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sr-details-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    width: 80%;
+    height: 8rem;
+    border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+    margin-top: 2rem;
+}
+
+.sr-details-main h2 {
+    color: var(--lms);
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.staff-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+    height: 90%;
+}
+
+.sr-daily-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    width: 80%;
+    height: 22rem;
+    border: 5px solid rgb(255, 253, 253);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 0.6rem;
+}
+
+.sr-daily-details-container h2 {
+    color: var(--lms);
+    font-weight: 600;
+    font-size: x-large;
+}
+
+.sr-daily-details-main {
+    width: 90%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sr-daily-details{
+    width: 40%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.sr-daily-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sr-daily-content p {
+    font-weight: 900;
+    font-size: large;
+}
+
+.sr-daily-detail-graph{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+}

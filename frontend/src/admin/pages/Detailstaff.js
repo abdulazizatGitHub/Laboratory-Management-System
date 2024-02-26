@@ -2,7 +2,7 @@ import React from "react";
 import { useLocation } from "react-router-dom";
 import DailySalesChart from "../components/DailySaleschart";
 import MonthlySalesChart from "../components/Detailstaffmonthly";
-
+import '../css/StaffReportDetails.css';
 const DetailStaff = () => {
     const location = useLocation();
     const { data } = location.state;
@@ -29,25 +29,56 @@ const DetailStaff = () => {
     ];
 
     return (
-        <div>
-            <h2>{data.name} Details</h2>
-            <p><strong>Name:</strong> {data.name}</p>
-            <p><strong>Address:</strong> {data.address}</p>
-            <p><strong>CNIC:</strong> {data.cnic}</p>
-            <p><strong>Today's Sale:</strong> {data.todaySale}</p>
-            <p><strong>Status:</strong> {data.status}</p>
-            <p><strong>Shift:</strong> {data.shift}</p>
-
-            {/* Daily Sales Chart */}
-            <div>
-                <h3>Daily Sales</h3>
-                <DailySalesChart data={dailySalesData} />
+        <div className="staff-report-detail-container">
+            <div className="sr-details-main">
+                <h2>{data.name} Reports</h2>
+                <div className="staff-details">
+                    <p><strong>Name:</strong> {data.name}</p>
+                    <p><strong>Contact #:</strong> {data.contactNumber}</p>
+                    <p><strong>Role:</strong> {data.role}</p>
+                    <p><strong>Status:</strong> {data.status}</p>
+                    <p><strong>Shift:</strong> {data.shift}</p>
+                </div>
             </div>
 
-            {/* Monthly Sales Chart */}
-            <div>
-                <h3>Monthly Sales</h3>
-                <MonthlySalesChart data={monthlySalesData} />
+            <div className="sr-daily-details-container">
+                <h2>Daily Reports</h2>
+                <div className="sr-daily-details-main">
+                    <div className="sr-daily-details">
+                        <div className="sr-daily-content">
+                            <p>Total Number of Tokens</p>
+                            <p>20</p>
+                        </div>
+                        <div className="sr-daily-content">
+                            <p>Total amount</p>
+                            <p>2000</p>
+                        </div>
+                    </div>
+                    {/* Daily Sales Chart */}
+                    <div className="sr-daily-detail-graph">
+                        <DailySalesChart data={dailySalesData} />
+                    </div>
+                </div>
+            </div>
+
+            <div className="sr-daily-details-container">
+                <h2>Monthly Reports</h2>
+                <div className="sr-daily-details-main">
+                    <div className="sr-daily-details">
+                        <div className="sr-daily-content">
+                            <p>Total Number of Tokens</p>
+                            <p>20</p>
+                        </div>
+                        <div className="sr-daily-content">
+                            <p>Total amount</p>
+                            <p>2000</p>
+                        </div>
+                    </div>
+                    {/* Monthly Sales Chart */}
+                    <div className="sr-daily-detail-graph">
+                    <MonthlySalesChart data={monthlySalesData} />
+                    </div>
+                </div>
             </div>
         </div>
     );
