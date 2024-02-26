@@ -37,43 +37,40 @@ const PatientRegistration = () => {
    
     
   }, [data]); 
+
   const generatePin = () => {
     const currentDate = new Date();
     const year = currentDate.getFullYear().toString().slice(2);
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
 
-    let storedMonth = localStorage.getItem('month'); // Declare storedMonth using let to allow reassignment
-    
+    let storedMonth = localStorage.getItem('month');
 
     if (!storedMonth) {
         localStorage.setItem('month', month);
-        storedMonth = month; // Ensure storedMonth is assigned a string value
-        localStorage.setItem('pinCounter', 1);
+        storedMonth = month;
     }
+
+    let counter = 1; // Default counter value
 
     if (data.length > 0) {
         const existing_pc = parseInt(data[data.length - 1].pin.slice(-4));
-        localStorage.setItem('pinCounter', existing_pc + 1);
+        counter = existing_pc + 1; // Set counter to the next available number
     }
 
-    if (storedMonth !== month) {
-        localStorage.setItem('pinCounter', 1);
-        localStorage.setItem('month', month);
-    }
+    // Format the counter with leading zeros
+    const formattedCounter = ('0000' + counter).slice(-4);
 
-    // Retrieve the counter from localStorage
-    const formattedCounter = ('0000' + (localStorage.getItem('pinCounter'))).slice(-4);
-   
     const pin = `${year}${month}-${formattedCounter}`;
 
     // Store generated PIN, year, month, and update counter in localStorage
     localStorage.setItem('generatedPin', pin);
     localStorage.setItem('year', year);
-    // localStorage.setItem('pinCounter', parseInt(formattedCounter) + 1);
+    localStorage.setItem('pinCounter', counter); // Update pin counter in localStorage
 
     // Update state with generated PIN
     setFormData(prevData => ({ ...prevData, pin: pin }));
 };
+
 
   
   
