@@ -11,6 +11,7 @@ import gentok from './Routes/GenerateToken.js';
 import logincre from './Routes/Login.js';
 import Chanpass from './Routes/Changepassword.js';
 import PhlebotomyRoutes from './Routes/PhlebotomyRoutes.js';
+import Forpass from './Routes/Forgotpassword.js';
 
 dotenv.config();
 
@@ -53,3 +54,5 @@ app.use('/Login',logincre);
 app.use('/admin/Change-password',Chanpass);
 
 app.use('/phelobotny', PhlebotomyRoutes);
+
+app.use('/',Forpass);

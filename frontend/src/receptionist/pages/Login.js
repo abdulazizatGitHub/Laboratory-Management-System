@@ -95,7 +95,7 @@ const Login = () => {
                             placeholder="Enter your password"
                         />
                         {error && <p className="error-message">{error}</p>}
-                        <Link className="forgot-pass">Forgot password?</Link>
+                        <Link to='/Forgotpassword' className="forgot-pass">Forgot password?</Link>
                     </div>
                     <div className="login-form-btn-container">
                         <button className="login-form-btn" onClick={handleLogin}>Login</button>

@@ -16,6 +16,7 @@ const staffSchema = new mongoose.Schema({
       },
     userName: {type: String, required: true},
     password: {type: String, required: true},
+    resetCode: { type: String }
 });
 
 const StaffModel = mongoose.model('Staff', staffSchema);

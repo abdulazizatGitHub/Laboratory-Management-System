@@ -3,6 +3,9 @@ import Patient from "../Models/Patientregistration.js";
 import jwt from 'jsonwebtoken';
 import fs from 'fs';
 import path from 'path';
+import bcrypt from 'bcrypt';
+import nodemailer from 'nodemailer';
+import { google } from 'googleapis';
 
 import dotenv from 'dotenv';
 dotenv.config();
@@ -222,6 +225,7 @@ export const updatePatient = async (req, res) => {
     }
 };
 
+<<<<<<< Updated upstream
 export const getStaffDetailsByRole = async (req, res) => {
     try {
         const receptionistDetails = await StaffModel.find({role: 'Receptionist'});
@@ -231,3 +235,104 @@ export const getStaffDetailsByRole = async (req, res) => {
         
     }
 }
+=======
+
+//Forgot Password //////////////////////////////
+
+// Set up OAuth 2.0 client credentials
+const CLIENT_ID = '1003734756814-v6qnfbuhb52ksl7c0p9rmff653enmi58.apps.googleusercontent.com';
+const CLIENT_SECRET = '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';
+const REDIRECT_URI = 'https://developers.google.com/oauthplayground'; // Redirect URI used during OAuth 2.0 setup
+const REFRESH_TOKEN = '1//04bb5_hi_MlJoCgYIARAAGAQSNwF-L9IrItsBm1Hb_7G3EolBFwvV537etgJuigKJ9ov35AYaZibqnKLDg3aTt5qaGqXTZznoBrc'; // Refresh token obtained during OAuth 2.0 setup
+
+// Create OAuth 2.0 client
+const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
+oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
+
+// Create a Nodemailer transporter using OAuth 2.0
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+        type: 'OAuth2',
+        user: 'mahadwajid613@gmail.com', // Your Gmail address
+        clientId: CLIENT_ID,
+        clientSecret: CLIENT_SECRET,
+        refreshToken: REFRESH_TOKEN,
+        accessToken: oAuth2Client.getAccessToken()
+    }
+});
+
+
+
+
+// Function to send reset code
+export const sendResetCode = async (req, res) => {
+    const { username } = req.body;
+
+    try {
+        // Generate reset code (for demonstration purpose)
+        const resetCode = Math.random().toString(36).slice(-8);
+
+        // Store the reset code in the database for the user
+        const user = await StaffModel.findOneAndUpdate(
+            { userName: username },
+            { resetCode: resetCode },
+            { new: true }
+        );
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Send the reset code to the user via email or other means
+        await transporter.sendMail({
+            from: 'mahadwajid613@gmail.com',
+            to: user.email,
+            subject: 'Password Reset Code',
+            text: `Your password reset code is: ${resetCode}`
+        });
+
+        res.status(200).json({ message: 'Reset code sent successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Failed to send reset code' });
+    }
+};
+
+// Function to reset password
+export const resetPassword = async (req, res) => {
+    const { username, resetCode, newPassword } = req.body;
+
+    try {
+        // Retrieve the reset code associated with the user from the database
+        const user = await StaffModel.findOne({ userName: username });
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Check if the reset code matches the one stored in the database
+        if (user.resetCode !== resetCode) {
+            return res.status(400).json({ message: 'Invalid reset code' });
+        }
+
+        // Update the user's password and clear the reset code
+        user.password = newPassword;
+        user.resetCode = null;
+        await user.save();
+
+        // Send confirmation email to the user
+        await transporter.sendMail({
+            from: 'mahadwajid613@gmail.com',
+            to: user.email,
+            subject: 'Password Reset Confirmation',
+            text: 'Your password has been successfully reset.'
+        });
+
+        res.status(200).json({ message: 'Password updated successfully' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ message: 'Failed to reset password' });
+    }
+};
+>>>>>>> Stashed changes

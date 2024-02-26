@@ -6,6 +6,7 @@ import Main from './receptionist/pages/Main';
 import AdminMain from './admin/pages/AdminMain';
 import PhlebotomyMain from './phelobotony/pages/PhlebotomyMain';
 import PrivateRoutes from './Services/ProtectedRoutes';
+import ForgotPassword from './receptionist/pages/ForgotPassword';
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
           <Route path="/admin/*" element={<AdminMain />} />
           <Route path="/phelobotny/*" element={<PhlebotomyMain />} />
           </Route>
+
+          <Route path='/Forgotpassword' element={<ForgotPassword />} />
       </Routes>
     </div>
   );
