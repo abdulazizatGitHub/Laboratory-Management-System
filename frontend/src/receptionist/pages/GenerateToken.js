@@ -39,8 +39,10 @@ const GenerateToken = () => {
       const currentDate = new Date();
       const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
       const day = ('0' + currentDate.getDate()).slice(-2);
+      if(generatedTokenData.length>0){
       const existing_tc= parseInt(generatedTokenData[generatedTokenData.length-1].tokenNumber.slice(-3));
       localStorage.setItem('tokenCounter', existing_tc+1);
+      }
       
       const storedDay = localStorage.getItem('currentDate');
       if (storedDay !== day) {
@@ -61,7 +63,7 @@ const GenerateToken = () => {
   
       // Check if the generated token number already exists
       
-      console.log("The token number is", newTokenNumber);
+      console.log("The token number is f", newTokenNumber);
       // Update the counter for the next token number
       
       // Set the generated token number in the state
