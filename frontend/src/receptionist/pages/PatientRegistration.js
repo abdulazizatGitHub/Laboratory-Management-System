@@ -21,7 +21,7 @@ const PatientRegistration = () => {
     pin:'',
   });
 
-  const [data, setData] = useState([]);
+   const [data, setData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
   const navigate = useNavigate();
 

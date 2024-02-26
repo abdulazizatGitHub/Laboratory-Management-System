@@ -6,17 +6,24 @@ import { getGeneratedToken, saveToken } from "../../Services/API";
 
 const GenerateToken = () => {
   const location = useLocation();
-  const patientData = location.state?.patientData;
-  const selectedTests = location.state?.selectedTests;
-
+  let patientData = location.state?.patientData;
+  let selectedTests = location.state?.selectedTests;
+  
+  const[buttonPress,setButtonPress] = useState(false);
+  const[pin,setPin] = useState(null);
   const [tokenNumber, setTokenNumber] = useState('');
   const [discountPercentage, setDiscountPercentage] = useState(0); 
   const [grandTotal, setGrandTotal] = useState(0);
   const [generatedTokenData, setGeneratedTokenData] = useState('');
-
+  
   useEffect(() => {
     fetchAllGeneratedTokens();
+    
   }, []);
+  
+  // useEffect(()=>{
+   
+  // },[pin])
 
   useEffect(()=>{
     generateToken();
@@ -73,10 +80,14 @@ const GenerateToken = () => {
       console.error('Error generating token:', error);
       // Handle the error, e.g., show an error message to the user
     }
+    setPin(patientData.pin);
   };
   
   
   const saveTokenData = () => {
+
+     window.print();
+    
     const currentDate = new Date();
     const formattedDateTime = currentDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
     
@@ -92,6 +103,11 @@ const GenerateToken = () => {
     saveToken(tokenData)
       .then(response => {
         console.log('Token saved successfully:', response);
+        patientData.pin=null;
+        console.log("patient data.pin ", patientData.pin);
+       
+       handleOneTime();
+
         window.alert('Token saved successfully!');
       })
       .catch(error => {
@@ -101,6 +117,14 @@ const GenerateToken = () => {
   
   const currentDateTime = new Date().toLocaleString();
   
+const handleOneTime=()=>{
+  if(patientData.pin==null || selectedTests.length==0)
+  {
+    console.log("pin is nuull ", pin,"AND ",patientData.pin , " adn slect leng", selectedTests.length)
+    setButtonPress(true);
+  }
+}
+
   return (
     <div className="generateToken-container">
       <NamingBar name={"GENERATE TOKEN"} />
@@ -171,8 +195,8 @@ const GenerateToken = () => {
           <p id="genToken-subTotal-text">Total: {grandTotal}</p>
         </div>
       </div>
-      <button type="Submit" id="generateToken-btn" onClick={() => window.print()}>Print</button>
-      <button type="button" id="generateToken-btn" onClick={saveTokenData}>Save Token Data</button>
+      <button type="Submit" id="generateToken-btn" onClick={saveTokenData} disabled={buttonPress} style={buttonPress ? { backdropFilter: "blur(4px)", pointerEvents: "none", opacity: 0.6 } : {}}>Print</button>
+      {/* <button type="button" id="generateToken-btn" onClick={saveTokenData} disabled={handleOneTime}>Save Token Data</button> */}
     </div>
   );
 };
