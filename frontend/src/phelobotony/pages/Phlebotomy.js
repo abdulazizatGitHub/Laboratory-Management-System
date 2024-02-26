@@ -130,7 +130,7 @@ const Phlebotomy = () => {
 
                 {selectedRegistrationDetails && (
                         <div className="pr-patient-details">
-                            <p style={{ fontWeight: '600', fontSize: '0.8rem' }}>{`${selectedRegistrationDetails.patientData.name} (${selectedRegistrationDetails.patientData.pin})`}</p>
+                            <p style={{ fontWeight: '600', fontSize: '1rem' }}>{`${selectedRegistrationDetails.patientData.name} (${selectedRegistrationDetails.patientData.pin})`}</p>
                             <div className="patient-other-details">
                                 <p>Age: {selectedRegistrationDetails.patientData.age}</p>
                                 <p>Gender: {selectedRegistrationDetails.patientData.gender}</p>

@@ -174,10 +174,12 @@
     max-height: 8rem;
     background: rgb(221, 228, 230);
     border-radius: 0.5rem;
+    padding-bottom: 1rem;
+    padding-top: 0.5rem;
 }
 
 .pr-patient-details p {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     margin-left: 1rem;
 }
 
@@ -197,8 +199,8 @@
 
 .pr-test-heading {
     font-weight: 600;
-    font-size: 0.8rem;
-    width: 20%;
+    font-size: 1rem;
+    width: 30%;
     color: #22CAB8;
 }
 
@@ -211,7 +213,7 @@
 }
 
 .pr-test-heading-container span {
-    width: 39%;
+    width: 35%;
     height: 0;
     border: 1px solid #22CAB8;
 }
