@@ -1,9 +1,15 @@
-import React from "react";
-import '../css/Report.css'
+import React, {useState} from "react";
+import '../css/Report.css' 
 import { FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing the icons from react-icons library
 import img1 from '../../Assessts/Images/Logo2.png';
+import { useLocation } from "react-router-dom";
 
 function Report() {
+
+    const location = useLocation();
+    const { selectedRegistrationDetails } = location.state;
+    const [generatedDateTime, setGeneratedDateTime] = useState(null);
+
 
     // Function to print only the Main-Report-container div
     const handlePrint = () => {
@@ -19,6 +25,16 @@ function Report() {
         document.body.innerHTML = originalContents;
     };
 
+    const handleFinalizeReport = () => {
+         // Capture the current date and time
+         const currentDate = new Date();
+         const formattedDate = currentDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+         const formattedTime = currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+         const generatedOn = `${formattedDate} at ${formattedTime}`;
+ 
+         // Set the captured date and time to the state
+         setGeneratedDateTime(generatedOn);
+    }
     return (
         <div className="Main-Report-container">
             <section className="Main-report">
@@ -43,18 +59,18 @@ function Report() {
 
                 <div className="Middle-Report-Section">
                     <div className="L-Report">
-                        <h3>Mahad Khan</h3>
-                        <p>AGE:21 Years</p>
-                        <p>Sex: Male</p>
-                        <p>PID:55008</p>
-                        <p>Address: XYX</p>
+                        <h3>{selectedRegistrationDetails.patientData.name}</h3>
+                        <p>PID: {selectedRegistrationDetails.patientData.pin}</p>
+                        <p>AGE: {selectedRegistrationDetails.patientData.age} / {selectedRegistrationDetails.patientData.gender}</p>
+                        <p>Contact #: {selectedRegistrationDetails.patientData.mobileNumber}</p>
+                        <p>Address: {selectedRegistrationDetails.patientData.address}</p>
                     </div>
                     <span className="R-Line"></span>
 
                     <div className="M-Report">
                         <h3>Sample Collected At:</h3>
                         <p>Siraj Shaheed Medical Laboratory Batkhela</p>
-                        <h4>Ref By: DR Sajjad Bukhari </h4>
+                        <h4>Ref By: {selectedRegistrationDetails.patientData.refDoctor} </h4>
                     </div>
                     <span className="R-Line"></span>
 
@@ -81,20 +97,16 @@ function Report() {
                             </tr>
                         </thead>
                         <tbody className="tableBody-report">
-                            <tr className="tableBody-row">
-                                <td>Primary Sample Type:</td>
+                            {selectedRegistrationDetails.tests.map((data) => (
+                                <tr className="tableBody-row">
+                                <td>{data.name}</td>
                                 <td> <input type="text" placeholder="Enter value" id="input-report"/> </td>
-                            </tr>
-                            <tr className="tableBody-row">
-                                <td>Haemoglobin HB</td>
-                            </tr>
+                                <td>{selectedRegistrationDetails.patientData.gender === 'male' ? data.normalRange.male.from + ' - ' + data.normalRange.male.to : data.normalRange.female.from + ' - ' + data.normalRange.female.to}</td>
+                                <td>{data.unit}</td>
+                                </tr>
+                            ))
 
-                            <tr className="tableBody-row">
-                                <td>Haemoglobin</td>
-                                <td>13.6</td>
-                                <td>14-17</td>
-                                <td>g/dl</td>
-                            </tr>
+                            }
 
                         </tbody>
                     </table>
@@ -108,24 +120,28 @@ function Report() {
                         <div className="Fl-report" >
                             <p>Report Preparaed By</p>
                             
-                            <h4>DR Iqbal Hassan</h4>
-                            <h5>MD Pathologist</h5>
+                            <h4>{JSON.parse(localStorage.getItem('user')).name}</h4>
+                            <h5>Pathologist</h5>
                         </div>
 
                         <div className="Fl-report" >
                             <p>Reviewed By</p>
                             
-                            <h4>DR Iqbal Hassan</h4>
-                            <h5>MD Pathologist</h5>
+                            <h4>{JSON.parse(localStorage.getItem('user')).name}</h4>
+                            <h5>Pathologist</h5>
                         </div>
                     </div>
 
-                    <p className="generated-time">Generated on 5:30pm</p>
+                    <p className="generated-time">{generatedDateTime || 'Not finalized yet'}</p>
                     <div className="report-bottom-bar-code"></div>
 
 
                 </div>
             </section>
+
+            <div className="sr-button-container">
+            <button onClick={handleFinalizeReport}>Finalized</button>
+            </div>
         </div>
     )
 }

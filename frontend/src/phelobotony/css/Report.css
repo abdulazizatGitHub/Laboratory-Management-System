@@ -3,8 +3,7 @@
 
 .Main-Report-container{
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
   position: relative;
   top: 10px;
   padding-bottom: 5rem;
@@ -317,6 +316,25 @@
   background: linear-gradient(to right, #6ec007 -0.9%, #90EE90 100%);
   margin-bottom: 1rem;
   border-radius: 5px;
+}
+
+.sr-button-container {
+  width: 20%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.sr-button-container button {
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.sr-button-container button:hover {
+  transform: scale(1.1);
 }
 
 @media  screen and (max-width: 844px) {

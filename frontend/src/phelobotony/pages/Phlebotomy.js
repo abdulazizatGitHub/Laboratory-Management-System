@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { getTokenDetails } from "../../Services/API";
 import Barcode from 'react-barcode';
-
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
@@ -11,7 +10,8 @@ const Phlebotomy = () => {
     const [selectedOption, setSelectedOption] = useState('Phlebotomy');
     const [registrationDetails, setRegistrationDetails] = useState([]);
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
-    const [showReport, setShowReport] = useState(false);
+
+    const navigation = useNavigate();
 
     useEffect(() => {
         const fetchTokenDetails = async () => {
@@ -56,12 +56,9 @@ const Phlebotomy = () => {
         setSelectedRegistrationDetails(selectedPatientData);
         };
 
-    const handleTransferClick = () => {
-        setShowReport(true);
-        // Additional logic for navigation if needed...
-        
-    };
-
+    const handleTransferData = () => {
+        navigation('/phelobotny/phlebotomy/Report', {state: {selectedRegistrationDetails}});
+    }
 
     return (
         <div className="phlebotomy-container">
@@ -187,9 +184,10 @@ const Phlebotomy = () => {
                         <div className="pr-buttons-container">
                             <button>Pending</button>
                             <button>Print Barcode</button>
-                            <Link to='/phelobotny/phlebotomy/Report' style={{ width: "100%" }}>
-                                <button>Transfer</button>
-                            </Link>
+                            <button onClick={handleTransferData}>Transfer</button>
+                            {/* <Link to='/phelobotny/phlebotomy/Report' style={{ width: "100%" }}>
+                                
+                            </Link> */}
                         </div>
                     </div>
                 </div>
