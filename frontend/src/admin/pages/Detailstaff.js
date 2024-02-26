@@ -3,9 +3,34 @@ import { useLocation } from "react-router-dom";
 import DailySalesChart from "../components/DailySaleschart";
 import MonthlySalesChart from "../components/Detailstaffmonthly";
 import '../css/StaffReportDetails.css';
+import { useEffect } from "react";
+import { getGeneratedToken } from "../../Services/API";
+import { useState } from "react";
 const DetailStaff = () => {
     const location = useLocation();
     const { data } = location.state;
+    const[token,setToken] = useState([]);
+    const[daily,setDaily] = useState([]);
+
+    useEffect(()=>{
+        console.log("data is ", data);
+        getGenerateTokenData();
+    },[]);
+
+    const getGenerateTokenData=async()=>{
+        const data = await getGeneratedToken(); 
+        setToken(data);
+        getDailyData();
+    }
+
+    const getDailyData=()=>{
+        console.log("Token is ", token, " and cnic ", data.userName)
+        const dateTimeString = token[0].dateTime;
+        const dateTime = new Date(dateTimeString);
+const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+const dayOfWeekIndex = dateTime.getDay();
+const dayOfWeek = daysOfWeek[dayOfWeekIndex];
+    }
 
     // Dummy data for demonstration
     const dailySalesData = [
