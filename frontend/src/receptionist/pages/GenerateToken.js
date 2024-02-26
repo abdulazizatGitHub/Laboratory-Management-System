@@ -18,27 +18,32 @@ const GenerateToken = () => {
     fetchAllGeneratedTokens();
   }, []);
 
+  useEffect(()=>{
+    generateToken();
+  },[generatedTokenData])
+
   const fetchAllGeneratedTokens = async () => {
     const generatedTokens = await getGeneratedToken();
     setGeneratedTokenData(generatedTokens);
-    generateToken(generatedTokens.length);
+    
   };
   
-  const generateToken = (tokenCount) => {
+  const generateToken = () => {
     try {
       const currentDate = new Date();
       const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
       const day = ('0' + currentDate.getDate()).slice(-2);
-  
+      const existing_tc= parseInt(generatedTokenData[generatedTokenData.length-1].tokenNumber.slice(-3));
+      localStorage.setItem('tokenCounter', existing_tc+1);
       // Check if the date has changed
       if (localStorage.getItem('currentDate') !== currentDate.toDateString()) {
         // If the date has changed, reset the counter to 1
-        localStorage.setItem('tokenCounter', '1');
+        localStorage.setItem('tokenCounter', 1);
         localStorage.setItem('currentDate', currentDate.toDateString());
       }
   
       // Create a counter to keep track of the token number
-      let counter = parseInt(localStorage.getItem('tokenCounter')) || 1;
+      let counter = parseInt(localStorage.getItem('tokenCounter')) ;
   
       // Format the counter with leading zeros
       const formattedCounter = ('000' + counter).slice(-3);
@@ -48,18 +53,10 @@ const GenerateToken = () => {
       let newTokenNumber = `${locationAbbreviation}-${month}${day}-${formattedCounter}`;
   
       // Check if the generated token number already exists
-      if (generatedTokenData.length > 0) {
-        const existingTokens = generatedTokenData.map(Gtok => Gtok.tokenNumber);
-        while (existingTokens.includes(newTokenNumber)) {
-          counter++; 
-          const updatedFormattedCounter = ('000' + counter).slice(-3);
-          newTokenNumber = `${locationAbbreviation}-${month}${day}-${updatedFormattedCounter}`;
-        }
-      }
+      
       console.log("The token number is", newTokenNumber);
       // Update the counter for the next token number
-      localStorage.setItem('tokenCounter', (counter + 1).toString());
-  
+      
       // Set the generated token number in the state
       setTokenNumber(newTokenNumber);
   

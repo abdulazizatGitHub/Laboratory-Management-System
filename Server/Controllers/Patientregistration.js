@@ -3,9 +3,8 @@ import Patient from '../Models/Patientregistration.js';
 
 export const registerPatient = async (req, res) => {
   try {
-    const { name, gender, age, cnic, mobileNumber, address, email, refDoctor, internalRemarks, patientRemarks } = req.body;
-    console.log('The pin number is:', req.body.generatedPin);
-
+    const { name, gender, age, cnic, mobileNumber, address, email, refDoctor, internalRemarks, patientRemarks, pin } = req.body;
+    
     // Check if the patient already exists
     const existingPatient = await Patient.findOne({ name, cnic }); // Adjust the query as per your database schema
 
@@ -26,7 +25,7 @@ export const registerPatient = async (req, res) => {
       refDoctor,
       internalRemarks,
       patientRemarks,
-      pin: req.body.generatedPin,
+      pin,
     });
 
     await patient.save();

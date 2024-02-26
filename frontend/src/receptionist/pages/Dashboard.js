@@ -59,7 +59,6 @@ const Dashboard = () => {
     const fetchPatient = async () => {
         try {
             const patientCount = await getAllPatientNumbers();
-            console.log("The Total Patients are", patientCount);
             setTotalPatients(patientCount); // Update the state
         } catch (error) {
             console.error("Error in Patient", error);

@@ -4,7 +4,7 @@ import generatePinMiddleware from '../Middlewares/GeneratePin.js';
 const router = express.Router();
 
 
-router.post('/', generatePinMiddleware, registerPatient); ////Patient registration data
+router.post('/', registerPatient); ////Patient registration data
 router.get('/',getPatientCount);
 
 export default router;
