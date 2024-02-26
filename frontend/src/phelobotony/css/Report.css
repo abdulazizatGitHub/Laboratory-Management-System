@@ -187,6 +187,8 @@
   border: 1px solid rgb(187, 185, 185);
   border-left: none;
   border-right: none;
+  padding-bottom: 1.3rem;
+  padding-top: 1.3rem;
 }
 
 .Middle-text h2{
@@ -210,7 +212,21 @@
 }
 
 
-.medical-lab-report-table th,
+.medical-lab-report-table th
+{
+  border-left: none;
+  border-right: none;
+  border-top: none ;
+  padding-bottom: 4px;
+  padding-top: 0;
+  background: transparent;
+}
+
+/* .tableHead-row{
+  height: 1rem;
+} */
+
+
 .medical-lab-report-table td {
   border: none; /* Remove borders from table header and data cells */
   padding: 0.5rem; /* Add padding for better readability */
@@ -218,6 +234,17 @@
 
 .medical-lab-report-table tbody td {
   text-align: left; /* Align tbody content to the left */
+  border: none;
+}
+
+#input-report{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+}
+.tableBody-row{
+  border: none;
 }
 
 

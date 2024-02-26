@@ -139,10 +139,10 @@ const SearchTest = () => {
                   <th>Code</th>
                   <th>Name</th>
                   <th>Type</th>
-                  <th>Price</th>
                   <th>Sample Type</th>
-                  <th>Sample Quantity</th>
+                  <th>Price</th>
                   <th>Unit</th>
+                  <th>Sample Quantity</th>
                   <th>Male Normal Range (From)</th>
                   <th>Male Normal Range (To)</th>
                   <th>Female Normal Range (From)</th>
@@ -151,7 +151,7 @@ const SearchTest = () => {
               </thead>
               <tbody>
                 {filteredData.map((data) => (
-                  <>
+                  
                   <tr key={data._id}>
                     <td>
                     <input
@@ -163,35 +163,15 @@ const SearchTest = () => {
                     <td>{data.code}</td>
                     <td>{data.name}</td>
                     <td>{data.type}</td>
-                    <td>{data.price}</td>
                     <td>{data.sampleType}</td>
-                    <td>{data.sampleQuantity}</td>
+                    <td>{data.price}</td>
                     <td>{data.unit}</td>
+                    <td>{data.sampleQuantity}</td>
                     <td>{data.normalRange.male.from}</td>
                     <td>{data.normalRange.male.to}</td>
                     <td>{data.normalRange.female.from}</td>
                     <td>{data.normalRange.female.to}</td>
                   </tr>
-                  <tr key={data._id}>
-                    <td>
-                    <input
-                  type="checkbox"
-                  onChange={(event) => handleRowCheckboxChange(event, data._id)}
-                  checked={selectedTests.some((item) => item._id === data._id)}
-                />
-                    </td>
-                    <td>{data.code}</td>
-                    <td>{data.name}</td>
-                    <td>{data.type}</td>
-                    <td>{data.price}</td>
-                    <td>{data.sampleType}</td>
-                    <td>{data.sampleQuantity}</td>
-                    <td>{data.unit}</td>
-                    <td>{data.normalRange.male.from}</td>
-                    <td>{data.normalRange.male.to}</td>
-                    <td>{data.normalRange.female.from}</td>
-                    <td>{data.normalRange.female.to}</td>
-                  </tr></>
                 ))}
 
 

@@ -72,24 +72,24 @@ function Report() {
 
                 <div className="Table-report">
                     <table className="medical-lab-report-table">
-                        <thead>
-                            <tr>
+                        <thead className="tableHead-report">
+                            <tr className="tableHead-row">
                                 <th>Investigation</th>
                                 <th>Result</th>
                                 <th>Reference Value</th>
                                 <th>Unit</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
+                        <tbody className="tableBody-report">
+                            <tr className="tableBody-row">
                                 <td>Primary Sample Type:</td>
-                                <td> <input type="text" placeholder="Enter value" /> </td>
+                                <td> <input type="text" placeholder="Enter value" id="input-report"/> </td>
                             </tr>
-                            <tr>
+                            <tr className="tableBody-row">
                                 <td>Haemoglobin HB</td>
                             </tr>
 
-                            <tr>
+                            <tr className="tableBody-row">
                                 <td>Haemoglobin</td>
                                 <td>13.6</td>
                                 <td>14-17</td>

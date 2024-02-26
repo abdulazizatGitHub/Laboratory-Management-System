@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/PatientDetailPage.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { deletePatData, updatePatData } from "../../Services/API";
+import { deletePatData, updatePatData, getGeneratedToken } from "../../Services/API";
 
 const PatientDetailPage = () => {
     const navigation = useNavigate();
@@ -11,8 +11,15 @@ const PatientDetailPage = () => {
     const [editedData, setEditedData] = useState(data); 
 
     useEffect(() => {
-        console.log("contact No: ", data);
+        const getTokenData= async()=>{
+            const token= await getGeneratedToken();
+            const eachToken = token.filter(t=> t.patientData.pin == data.pin)
+            console.log("Token i si ", token)
+        }
+        getTokenData();
     }, []);
+
+
     
     const delPat=async()=>{
         const res = await deletePatData(data._id)
