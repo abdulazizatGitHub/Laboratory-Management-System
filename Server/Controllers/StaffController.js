@@ -243,11 +243,10 @@ export const getStaffDetailsByRole = async (req, res) => {
 //Forgot Password //////////////////////////////
 
 // Set up OAuth 2.0 client credentials
-const CLIENT_ID = '1003734756814-v6qnfbuhb52ksl7c0p9rmff653enmi58.apps.googleusercontent.com';
-const CLIENT_SECRET = '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';
-const REDIRECT_URI = 'https://developers.google.com/oauthplayground'; // Redirect URI used during OAuth 2.0 setup
-const REFRESH_TOKEN = '1//04bb5_hi_MlJoCgYIARAAGAQSNwF-L9IrItsBm1Hb_7G3EolBFwvV537etgJuigKJ9ov35AYaZibqnKLDg3aTt5qaGqXTZznoBrc'; // Refresh token obtained during OAuth 2.0 setup
-
+const CLIENT_ID = process.env.CLIENT_ID;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
+const REDIRECT_URI = process.env.REDIRECT_URI;
+const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 // Create OAuth 2.0 client
 const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
 oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
