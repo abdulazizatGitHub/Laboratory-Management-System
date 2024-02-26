@@ -9,6 +9,15 @@ import { google } from 'googleapis';
 
 import dotenv from 'dotenv';
 dotenv.config();
+// Set up OAuth 2.0 client credentials
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+const redirected_url = process.env.REDIRECT_URI;
+const Refresh_token = process.env.REFRESH_TOKEN;
+// Create OAuth 2.0 client
+const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirected_url);
+oAuth2Client.setCredentials({ refresh_token: Refresh_token });
+
 
 export const staffRegistration = async (req, res) => {
     try {
@@ -240,16 +249,9 @@ export const getStaffDetailsByRole = async (req, res) => {
 
 }
 
+
 //Forgot Password //////////////////////////////
 
-// Set up OAuth 2.0 client credentials
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-const REDIRECT_URI = process.env.REDIRECT_URI;
-const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
-// Create OAuth 2.0 client
-const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
-oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
 
 // Create a Nodemailer transporter using OAuth 2.0
 const transporter = nodemailer.createTransport({
@@ -257,9 +259,9 @@ const transporter = nodemailer.createTransport({
     auth: {
         type: 'OAuth2',
         user: 'mahadwajid613@gmail.com', // Your Gmail address
-        clientId: CLIENT_ID,
-        clientSecret: CLIENT_SECRET,
-        refreshToken: REFRESH_TOKEN,
+        clientId: client_id,
+        clientSecret: client_secret,
+        refreshToken: Refresh_token,
         accessToken: oAuth2Client.getAccessToken()
     }
 });
