@@ -1,4 +1,3 @@
-// DailySalesChart.js
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
@@ -14,18 +13,18 @@ const DailySalesChart = ({ data }) => {
     const newChartInstance = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: data.map(item => item.date),
+        labels: [], // Empty labels array to remove the days
         datasets: [
           {
-            label: 'Daily Sales',
-            data: data.map(item => item.sales),
-            borderColor: 'rgb(75, 192, 192)',
+            label: 'Total Sales',
+            data: [data.reduce((acc, curr) => acc + curr.sales, 0)], // Sum of all sales
+            borderColor: 'rgb(255, 99, 132)', // Red color
             tension: 0.1
           },
           {
-            label: 'Daily Tokens',
-            data: data.map(item => item.tokens),
-            borderColor: 'rgb(255, 99, 132)',
+            label: 'Total Tokens',
+            data: [data.reduce((acc, curr) => acc + curr.tokens, 0)], // Sum of all tokens
+            borderColor: 'rgb(75, 192, 192)', // Green color
             tension: 0.1
           }
         ]

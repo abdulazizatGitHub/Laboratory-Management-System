@@ -27,9 +27,9 @@ const DetailStaff = () => {
         console.log("Token is ", token, " and cnic ", data.userName)
         const dateTimeString = token[0].dateTime;
         const dateTime = new Date(dateTimeString);
-const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-const dayOfWeekIndex = dateTime.getDay();
-const dayOfWeek = daysOfWeek[dayOfWeekIndex];
+         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+           const dayOfWeekIndex = dateTime.getDay();
+          const dayOfWeek = daysOfWeek[dayOfWeekIndex];
     }
 
     // Dummy data for demonstration
