@@ -45,10 +45,12 @@ function Sidebar({ setIsSideBar }) {
         <Link to="phlebotomy" style={{ textDecoration: "none" }} onClick={handleLinkClick} >
           {" "}
           <p>
-            <i className="fa fa-microscope"></i> Phlebotomy
+          <i className="fa fa-user-md"></i> Phlebotomy
           </p>
         </Link>
       </div>
+
+      <div className="version">Version 1.0</div>
     </div>
   );
 }

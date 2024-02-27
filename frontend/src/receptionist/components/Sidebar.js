@@ -76,7 +76,7 @@ function Sidebar({ setIsSideBar }) {
             <Link to="search_test_report" style={{textDecoration:'none'}} onClick={handleLinkClick} ><p >Search Test Report</p></Link>
             </div>
 
-            {/* <div className="version">Version 1.0</div> */}
+            <div className="version">Version 1.0</div>
             
         </div>
         </div>
