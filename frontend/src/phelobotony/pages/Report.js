@@ -1,14 +1,31 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import '../css/Report.css' 
 import { FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing the icons from react-icons library
 import img1 from '../../Assessts/Images/Logo2.png';
 import { useLocation } from "react-router-dom";
+import JsBarcode from 'jsbarcode';
 
 function Report() {
 
     const location = useLocation();
     const { selectedRegistrationDetails } = location.state;
     const [generatedDateTime, setGeneratedDateTime] = useState(null);
+    const canvasRef = useRef(null);
+    useEffect(() => {
+        if (canvasRef.current) {
+            const pinToEncode = selectedRegistrationDetails.patientData.pin;
+            JsBarcode(canvasRef.current, pinToEncode, {
+                format: "CODE128",
+                displayValue: true,
+                width: 1,
+                height: 40,
+                margin: 10,
+                fontSize: 12 // Adjust the font size as needed
+            });
+        }
+    }, [selectedRegistrationDetails]);
+    
+    
 
 
     // Function to print only the Main-Report-container div
@@ -35,6 +52,7 @@ function Report() {
          // Set the captured date and time to the state
          setGeneratedDateTime(generatedOn);
     }
+
     return (
         <div className="Main-Report-container">
             <section className="Main-report">
@@ -75,9 +93,14 @@ function Report() {
                     <span className="R-Line"></span>
 
                     <div className="R-Report">
-                        <p>Reffered on:12:23pm</p>
+                    <div className="bar-code"> <canvas ref={canvasRef} /></div> 
+                    
+                    <div className="generated">
+                    <p >Reffered on:12:23pm</p>
                         <p>Reported on:12:20pm</p>
                         <p>Collected on:12:30pm</p>
+                    </div>
+                        
                     </div>
 
                 </div>
