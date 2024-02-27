@@ -19,10 +19,11 @@ const Login = () => {
         try {
             const response = await login(username, password, localStorage.getItem('token'));
             const { token, user } = response; // Extract token and user data from response
-            console.log("user and token is ", JSON.stringify(user), " and ",token)
+            console.log("user and token is ", JSON.stringify(user), " and ",token , user.role)  
             // Store token and user data in local storage
             localStorage.setItem('token', token);
             localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('role', user.role);
     
             switch (user.role) {
                 case 'Receptionist':
