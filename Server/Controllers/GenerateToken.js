@@ -7,7 +7,7 @@ import GenToken from "../Models/GenerateToken.js";
 const saveToken = async (req, res) => {
   try {
     // Extract token data from the request body
-    const {  tokenNumber, patientData, tests, grandTotal, dateTime, generatedBy ,status} = req.body; 
+    const {  tokenNumber, patientData, tests, grandTotal, dateTime, generatedBy ,state} = req.body; 
 
     // Create a new token document
     const newToken = new GenToken({
@@ -18,7 +18,7 @@ const saveToken = async (req, res) => {
       grandTotal,
       dateTime,
       generatedBy,
-      status
+      state
     });
 
     const savedToken = await newToken.save();

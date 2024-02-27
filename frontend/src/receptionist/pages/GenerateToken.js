@@ -112,7 +112,7 @@ const GenerateToken = () => {
       grandTotal,
       dateTime: formattedDateTime,
       generatedBy: JSON.parse(localStorage.getItem('user')).userName,
-      status:"generated"
+      state:"generated"
     };
     
     

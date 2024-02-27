@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData } from "../../Services/API";
+import { getGeneratedToken, getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData } from "../../Services/API";
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
@@ -12,37 +12,40 @@ const Phlebotomy = () => {
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
     const [remarks, setRemarks] = useState('');
     const navigation = useNavigate();
+    //By basit
+    const [tokens, setTokens] = useState([]);
 
     useEffect(() => {
         const fetchTokenDetails = async () => {
+            const res = await getGeneratedToken();
+            console.log("res.data is ",res)
             try {
                 const response = await getTokenDetails();
                 setRegistrationDetails(response.data);
-                console.log('Token Details are: ', response.data);
+                setTokens(res.data);
             } catch (error) {
                 console.log('Error occure in fetching the token data', error);
             }
         }
-
         fetchTokenDetails();
     }, []);
 
 
-    useEffect(() => {
-        const fetchPendingData = async () => {
-            if (selectedOption === 'Pending Phlebotomy') {
-                try {
-                    const response = await getPendingPhlebotomyData(); // Fetch pending phlebotomy data
-                    setPendingPhlebotomy(response.data);
-                    console.log('Pending Phlebotomy Data:', response.data);
-                } catch (error) {
-                    console.log('Error occurred while fetching pending phlebotomy data:', error);
-                }
-            }
-        };
+    // useEffect(() => {
+    //     const fetchPendingData = async () => {
+    //         if (selectedOption === 'Pending Phlebotomy') {
+    //             try {
+    //                 const response = await getPendingPhlebotomyData(); // Fetch pending phlebotomy data
+    //                 setPendingPhlebotomy(response.data);
+    //                 console.log('Pending Phlebotomy Data:', response.data);
+    //             } catch (error) {
+    //                 console.log('Error occurred while fetching pending phlebotomy data:', error);
+    //             }
+    //         }
+    //     };
 
-        fetchPendingData();
-    }, [selectedOption]);
+    //     fetchPendingData();
+    // }, [selectedOption]);
 
 
     useEffect(() => {
@@ -67,7 +70,7 @@ const Phlebotomy = () => {
 
 
     const handleOptionChange = (e) => {
-        console.log("Taargettt: ",e.target.vaue)
+        console.log("Target value: ", e.target.value);
         setSelectedOption(e.target.value);
     };
 
@@ -98,17 +101,17 @@ const Phlebotomy = () => {
         // Save pending phlebotomy data to the backend API
         try {
             // Ensure that remarks are provided along with selectedRegistrationDetails
-            await savePendingPhlebotomyData({ ...selectedRegistrationDetails, remarks });
-            setPendingPhlebotomy([...pendingPhlebotomy, { ...selectedRegistrationDetails, remarks }]);
-            setRegistrationDetails(registrationDetails.filter(patient => patient.patientData.pin !== selectedRegistrationDetails.patientData.pin));
-            setSelectedRegistrationDetails(null);
+            // await savePendingPhlebotomyData({ ...selectedRegistrationDetails, remarks });
+            // setPendingPhlebotomy([...pendingPhlebotomy, { ...selectedRegistrationDetails, remarks }]);
+            // setRegistrationDetails(registrationDetails.filter(patient => patient.patientData.pin !== selectedRegistrationDetails.patientData.pin));
+            // setSelectedRegistrationDetails(null);
         } catch (error) {
             console.error('Error occurred while saving pending phlebotomy data:', error);
         }
     };
-    const filteredRecords = selectedOption === 'Pending Phlebotomy' ? pendingPhlebotomy : registrationDetails;
-    const filteredTotalRecords = registrationDetails.filter(token => !pendingPhlebotomy.some(p => p.patientData.pin === token.patientData.pin));
-
+    // const filteredRecords = selectedOption === 'Pending Phlebotomy' ? pendingPhlebotomy : registrationDetails;
+    // const filteredTotalRecords = registrationDetails.filter(token => !pendingPhlebotomy.some(p => p.patientData.pin === token.patientData.pin));
+    const AllRecords = tokens.filter(tkn => tkn.state == "generated");
 
     return (
         <div className="phlebotomy-container">
@@ -144,7 +147,6 @@ const Phlebotomy = () => {
                                 value={selectedOption}
                                 onChange={handleOptionChange}
                             >
-                                <option >Select Filter</option>
                                 <option value="All Records">All Records</option>
                                 <option value="Pending Records">Pending Phlebotomy</option>
                                 {/* {selectedOption === 'Pending Phlebotomy' ? (
@@ -162,18 +164,22 @@ const Phlebotomy = () => {
                             <div className="pl-patient-search">
                                 <i className="fa fa-search"> <input type="text" placeholder="filter here" /></i>
                             </div>
-                            <p>Total Records: </p>
+                            {
+                                selectedOption == "Pending Records" ? <p>Pending Records</p> : <p>All Records</p>
+                            }
                             <div className="pl-patient-list-container">
                                 <table className="pl-patient-list">
                                     <tbody>
-                                        {filteredTotalRecords.map((data) => (
-                                            <tr key={data.patientData.pin}>
-                                                <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
+                                        {AllRecords.map((data) => (
+                                            <tr key={data._id}>
+                                                <td >{data.tokenNumber}</td>
                                             </tr>
                                         ))}
                                     </tbody>
                                 </table>
                             </div>
+
+
                         </div>
                     </div>
                 </div>
