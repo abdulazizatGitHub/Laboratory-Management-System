@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useLocation } from "react-router-dom";
 import DailySalesChart from "../components/DailySaleschart";
 import MonthlySalesChart from "../components/Detailstaffmonthly";
 import '../css/StaffReportDetails.css';
+import { useEffect } from "react";
 import { getGeneratedToken } from "../../Services/API";
-
+import { useState } from "react";
 const DetailStaff = () => {
-    const location = useLocation();
+      const location = useLocation();
     const { data } = location.state;
     const [token, setToken] = useState([]);
     const [daily, setDaily] = useState({ labels: [], salesData: [], tokenData: [] });
@@ -50,43 +51,88 @@ const DetailStaff = () => {
             tokenData: tokenData
         });
     }
-
     const getMonthlyData = () => {
-        const monthlyData = token.filter(tkn => {
+        console.log("Token is ", token, " and cnic ", data.userName)
+
+        const dailyData = token.filter(tkn => {
             let dateStr = tkn.dateTime;
             let dateObj = new Date(dateStr);
-            let mnthNum = dateObj.getMonth() + 1;
-            return mnthNum === new Date().getMonth() + 1;
+            let mnthNum = dateObj.getMonth() + 1 ;
+            if (mnthNum == new Date().getMonth()+1 ) {
+                return tkn;
+            }
+
+
+        })
+
+        let sum = 0;
+
+        dailyData.forEach((dat) => {
+            sum += dat.grandTotal;
         });
-    
-        const monthlyChartData = monthlyData.map(item => ({
-            dateOfMonth: item.dateTime,
-            sales: Number(item.grandTotal) // Use grandTotal as sales
-        }));
-    
-        setMonthly(monthlyChartData);
-        
-        // Calculate total amount
-        const totalAmount = monthlyChartData.reduce((acc, curr) => acc + (curr.sales || 0), 0);
-        console.log('Total amount:', totalAmount);
+
+        setMonthly({
+            numOfToken: dailyData.length,
+            amount: sum
+        });
     }
-    
+
+    // // Dummy data for demonstration
+    // const dailySalesData = [
+    //     { date: 'Monday', sales: 200, tokens: 20 },
+    //     { date: 'Tuesday', sales: 250, tokens: 25 },
+    //     { date: 'Wednesday', sales: 300, tokens: 30 },
+    //     { date: 'Thursday', sales: 350, tokens: 35 },
+    //     { date: 'Friday', sales: 320, tokens: 32 },
+    //     { date: 'Saturday', sales: 280, tokens: 28 },
+    //     { date: 'Sunday', sales: 400, tokens: 40 }
+    // ];
+
+    // Dummy data for demonstration
+    const monthlySalesData = [
+        { month: 'January', sales: 1000 },
+        { month: 'February', sales: 1500 },
+        { month: 'March', sales: 2000 },
+        { month: 'April', sales: 2500 },
+        { month: 'May', sales: 1800 },
+        { month: 'June', sales: 2200 }
+    ];
 
     return (
         <div className="staff-report-detail-container">
-            <div className="sr-details-main">
-                <h2>{data.name} Reports</h2>
-                <div className="staff-details">
-                    <p><strong>Name:</strong> {data.name}</p>
-                    <p><strong>Contact #:</strong> {data.contactNumber}</p>
-                    <p><strong>Role:</strong> {data.role}</p>
-                    <p><strong>Status:</strong> {data.status}</p>
-                    <p><strong>Shift:</strong> {data.shift}</p>
-                </div>
-            </div>
+                   <div className="sr-details-main">
+                        <h2>{data.name} Reports</h2>
+                         <div className="staff-details">
+                            <p><strong>Name:</strong> {data.name}</p>
+                             <p><strong>Contact #:</strong> {data.contactNumber}</p>
+                             <p><strong>Role:</strong> {data.role}</p>
+                             <p><strong>Status:</strong> {data.status}</p>
+                             <p><strong>Shift:</strong> {data.shift}</p>
+                         </div>
+                    </div>
+        
+                <div className="sr-daily-details-container">
+                   <h2>Daily Reports</h2>
+                       <div className="sr-daily-details-main">
+                         <div className="sr-daily-details">
+                        <div className="sr-daily-content">
+                            <p>Total Number of Tokens</p>
+                              <p>{daily.tokenData.length}</p>
+                                </div>
+                                <div className="sr-daily-content">
+                                <p>Total amount</p>
+                                    <p>{daily.salesData.reduce((acc, curr) => acc + curr, 0)}</p>
+                                </div>
+                            </div>
+                            {/* Daily Sales Chart */}
+                            <div className="sr-daily-detail-graph">
+                               <DailySalesChart daily={daily} />
+                         </div>
+                       </div>
+                    </div>
 
             <div className="sr-daily-details-container">
-                <h2>Daily Reports</h2>
+                <h2>Monthly Reports</h2>
                 <div className="sr-daily-details-main">
                     <div className="sr-daily-details">
                         <div className="sr-daily-content">
@@ -95,33 +141,12 @@ const DetailStaff = () => {
                         </div>
                         <div className="sr-daily-content">
                             <p>Total amount</p>
-                            <p>{daily.salesData.reduce((acc, curr) => acc + curr, 0)}</p>
+                            <p>{monthly.amount}</p>
                         </div>
                     </div>
-                    {/* Daily Sales Chart */}
-                    <div className="sr-daily-detail-graph">
-                        <DailySalesChart daily={daily} />
-                    </div>
-                </div>
-            </div>
-
-            <div className="sr-daily-details-container">
-                <h2>Monthly Reports</h2>
-                <div className="sr-daily-details-main">
-                    <div className="sr-daily-details">
-                        <div className="sr-daily-content">
-                            <p>Total Number of Tokens</p>
-                            <p>{monthly.length}</p>
-                        </div>
-                        <div className="sr-daily-content">
-                            <p>Total amount</p>
-                            <p>{monthly.reduce((acc, curr) => acc + curr.sales, 0)}</p>
-                        </div>
-                    </div>
-                    
                     {/* Monthly Sales Chart */}
                     <div className="sr-daily-detail-graph">
-                        <MonthlySalesChart data={monthly} />
+                        <MonthlySalesChart data={monthlySalesData} />
                     </div>
                 </div>
             </div>
