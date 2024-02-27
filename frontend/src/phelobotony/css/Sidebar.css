@@ -6,15 +6,12 @@
     position: fixed;
     top: 0px;
     left: 0;
-    width: 17%; /* Adjusted width for the sidebar */
-    height: 100%;
+    width: 17%; 
     z-index: 99;
     background-color: var(--sidebarBackColor);
     padding-top: 50px;
     font-family: var(--fontRegular);
     z-index: 1000;
-    
-
 }
 .crossSign{
     position: absolute;
@@ -24,7 +21,6 @@
 }
 
 .sidenav {
-    height: 100%;
     position: relative;
     overflow-x: hidden;
 }
@@ -104,12 +100,10 @@
 
 
 .version1 {
-    font-size: 14px;
     font-weight: bold;
     color: #22CAB8;
-    width: 100%;
-    text-align: center;
-    margin-top: -2rem;
+    width: 100%;  position: absolute;
+    bottom: 1rem;
   }
   
 

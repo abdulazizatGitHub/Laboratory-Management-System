@@ -15,7 +15,6 @@
 }
 
 .sidenav {
-    height: 100%;
     position: relative;
     overflow-x: hidden;
 }
@@ -95,12 +94,11 @@
 
 
 .version {
-  font-size: 14px;
   font-weight: bold;
   color: #22CAB8;
   width: 100%;
-  text-align: center;
-  margin-top: 29rem;
+  position: absolute;
+  bottom: 1rem;
 }
 
 /* Sidebar.css */

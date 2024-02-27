@@ -74,11 +74,9 @@ function Sidebar({ setIsSideBar }) {
             <div className={`dropdown-container ${isTestReportsDropdownOpen ? 'open' : ''}`}>
             <Link to="view_test_report" style={{textDecoration:'none'}} onClick={handleLinkClick} ><p>View Test Report</p></Link>
             <Link to="search_test_report" style={{textDecoration:'none'}} onClick={handleLinkClick} ><p >Search Test Report</p></Link>
-            </div>
-
-            <div className="version">Version 1.0</div>
-            
+            </div>            
         </div>
+            <div className="version">Version 1.0</div>
         </div>
     );
 }
