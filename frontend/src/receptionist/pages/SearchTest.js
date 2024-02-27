@@ -180,7 +180,7 @@ const SearchTest = () => {
           </div>
         </div>
       </div>
-      <button type="button" id="searchTest-btn" onClick={handleGenerateToken} disabled={selectedTests.length==0?true:false} style={selectedTests.length==0? { backdropFilter: "blur(4px)", pointerEvents: "none", opacity: 0.6 } : {}}>Generate Token</button>
+      <button type="button" id="searchTest-btn" onClick={handleGenerateToken} disabled={selectedTests.length==0?true:false} style={selectedTests.length==0? { display:"none" } : {}}>Generate Token</button>
     </div>
   );
 };

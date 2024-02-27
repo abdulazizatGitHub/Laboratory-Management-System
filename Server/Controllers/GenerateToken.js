@@ -17,13 +17,11 @@ const saveToken = async (req, res) => {
       tests,
       grandTotal,
       dateTime,
-      generatedBy
+      generatedBy,
+      status
     });
 
-    // Save the token to the database
     const savedToken = await newToken.save();
-
-    // Respond with success message and saved token data
     res.status(201).json({ message: 'Token saved successfully', token: savedToken });
   } catch (error) {
     // Handle errors
@@ -47,10 +45,49 @@ const getGeneratedToken  = async (req, res) => {
   }
 }
 
+const updateToken = async (req, res) => {
+  try {
+    // Extract token ID from request parameters
+    const tokenId = req.params.id;
+
+    // Extract updated token data from request body
+    const { tokenNumber, patientData, tests, grandTotal, dateTime, generatedBy, status } = req.body; 
+
+    // Check if the token with the provided ID exists
+    const existingToken = await GenToken.findById(tokenId);
+
+    if (!existingToken) {
+      return res.status(404).json({ message: 'Token not found' });
+    }
+
+    // Update the token document with the new data
+    existingToken.tokenNumber = tokenNumber;
+    existingToken.patientData = patientData;
+    existingToken.tests = tests;
+    existingToken.grandTotal = grandTotal;
+    existingToken.dateTime = dateTime;
+    existingToken.generatedBy = generatedBy;
+    existingToken.status = status;
+
+    // Save the updated token document
+    const updatedToken = await existingToken.save();
+
+    res.status(200).json({ message: 'Token updated successfully', token: updatedToken });
+  } catch (error) {
+    // Handle errors
+    console.error('Error updating token:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
+
 
 
 // Export the controller function
-export { saveToken,getGeneratedToken };
+export { saveToken,getGeneratedToken,updateToken };
+
+
+
 
 
 

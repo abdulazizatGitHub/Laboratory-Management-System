@@ -10,7 +10,8 @@ const tokenSchema = new Schema({
   tests: [Object], // Assuming tests is an array of objects
   grandTotal: Number,
   dateTime: String,
-  generatedBy: String
+  generatedBy: String,
+  state: String
 });
 
 // Create the Token model

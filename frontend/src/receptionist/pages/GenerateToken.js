@@ -18,7 +18,6 @@ const GenerateToken = () => {
   
   useEffect(() => {
     fetchAllGeneratedTokens();
-    handleOneTime();
   }, []);
   
  
@@ -112,14 +111,14 @@ const GenerateToken = () => {
       tests: selectedTests,
       grandTotal,
       dateTime: formattedDateTime,
-      generatedBy: JSON.parse(localStorage.getItem('user')).userName
+      generatedBy: JSON.parse(localStorage.getItem('user')).userName,
+      status:"generated"
     };
     
     saveToken(tokenData)
       .then(response => {
         console.log('Token saved successfully:', response);
         patientData.pin=null;
-        console.log("patient data.pin ", patientData.pin);
        
        handleOneTime();
 
@@ -209,7 +208,7 @@ const handleOneTime=()=>{
           <p id="genToken-subTotal-text">Total: {grandTotal}</p>
         </div>
       </div>
-      <button type="Submit" id="generateToken-btn" onClick={saveTokenData} disabled={buttonPress} style={buttonPress ? { backdropFilter: "blur(4px)", pointerEvents: "none", opacity: 0.6 } : {}}>Print</button>
+      <button type="Submit" id="generateToken-btn" onClick={saveTokenData} disabled={buttonPress} style={buttonPress ? { display:"none" } : {}}>Print</button>
       {/* <button type="button" id="generateToken-btn" onClick={saveTokenData} disabled={handleOneTime}>Save Token Data</button> */}
     </div>
   );

@@ -1,11 +1,11 @@
 import express from 'express';
-import { saveToken,getGeneratedToken } from '../Controllers/GenerateToken.js';
+import { saveToken,getGeneratedToken,updateToken } from '../Controllers/GenerateToken.js';
 
 
 const router = express.Router();
 
 router.post('/',saveToken);
 router.get('/',getGeneratedToken);
-
+router.put('/:id', updateToken);
 
 export default router;

@@ -6,7 +6,7 @@ import { getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData } 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [selectedOption, setSelectedOption] = useState('Pending Phlebotomy'); // Set the default selected option
+    const [selectedOption, setSelectedOption] = useState('All Records'); // Set the default selected option
     const [registrationDetails, setRegistrationDetails] = useState([]);
     const [pendingPhlebotomy, setPendingPhlebotomy] = useState([]);
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
@@ -43,7 +43,7 @@ const Phlebotomy = () => {
 
         fetchPendingData();
     }, [selectedOption]);
-    
+
 
     useEffect(() => {
         // Set default "to" date to today in the format "YYYY-MM-DD"
@@ -73,18 +73,18 @@ const Phlebotomy = () => {
     const handlePatientClick = (pin) => {
         // Check if the selected patient is in the registrationDetails array
         let selectedPatientData = registrationDetails.find(patient => patient.patientData.pin === pin);
-        
+
         // If the patient is not found in registrationDetails, check in pendingPhlebotomy
         if (!selectedPatientData) {
             selectedPatientData = pendingPhlebotomy.find(patient => patient.patientData.pin === pin);
         }
-        
+
         setSelectedRegistrationDetails(selectedPatientData);
     };
-    
+
 
     const handleTransferData = () => {
-        navigation('/phelobotny/phlebotomy/Report', {state: {selectedRegistrationDetails, remarks}});
+        navigation('/phelobotny/phlebotomy/Report', { state: { selectedRegistrationDetails, remarks } });
     }
 
     const handleTransferToPending = async () => {
@@ -93,7 +93,7 @@ const Phlebotomy = () => {
             console.error('Remarks field is required.');
             return;
         }
-    
+
         // Save pending phlebotomy data to the backend API
         try {
             // Ensure that remarks are provided along with selectedRegistrationDetails
@@ -139,20 +139,21 @@ const Phlebotomy = () => {
                                 ))}
                             </select>
                             <select
-                id="phlebotomyType"
-                value={selectedOption}
-                onChange={handleOptionChange}
-            >
-                {selectedOption === 'Pending Phlebotomy' ? (
-                    <option value="Pending Phlebotomy">Pending Phlebotomy</option>
-                ) : null}
-            </select>
-            {/* Render patient list based on selected option */}
-            {filteredRecords?.map((data) => (
-    <tr key={data.patientData.pin}>
-        <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
-    </tr>
-))}
+                                id="phlebotomyType"
+                                value={selectedOption}
+                                onChange={handleOptionChange}
+                            >
+                                <option value="All Records">All Records</option>
+                                <option value="Pending Records">Pending Phlebotomy</option>
+                                {/* {selectedOption === 'Pending Phlebotomy' ? (
+                                    <option value="Pending Phlebotomy">Pending Phlebotomy</option>
+                                ) : null} */}
+                            </select>
+                            {/* {filteredRecords?.map((data) => (
+                                <tr key={data.patientData.pin}>
+                                    <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
+                                </tr>
+                            ))} */}
 
                         </div>
                         <div className="pl-patient-container">
@@ -162,13 +163,13 @@ const Phlebotomy = () => {
                             <p>Total Records: </p>
                             <div className="pl-patient-list-container">
                                 <table className="pl-patient-list">
-                                <tbody>
-    {filteredTotalRecords.map((data) => (
-        <tr key={data.patientData.pin}>
-            <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
-        </tr>
-    ))}
-</tbody>
+                                    <tbody>
+                                        {filteredTotalRecords.map((data) => (
+                                            <tr key={data.patientData.pin}>
+                                                <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
@@ -177,10 +178,10 @@ const Phlebotomy = () => {
             </div>
 
             <div className="phlebotomy-right-container">
-                <div className="pl-heading"><p>Visit Samples {selectedRegistrationDetails ?`(${selectedRegistrationDetails.patientData.pin})`:""}</p></div>
+                <div className="pl-heading"><p>Visit Samples {selectedRegistrationDetails ? `(${selectedRegistrationDetails.patientData.pin})` : ""}</p></div>
                 <div className="pr-patient-details-container">
 
-                {selectedRegistrationDetails && (
+                    {selectedRegistrationDetails && (
                         <div className="pr-patient-details">
                             <p style={{ fontWeight: '600', fontSize: '1rem' }}>{`${selectedRegistrationDetails.patientData.name} (${selectedRegistrationDetails.patientData.pin})`}</p>
                             <div className="patient-other-details">
@@ -239,7 +240,7 @@ const Phlebotomy = () => {
                             <button>Save Remarks</button>
                         </div>
                         <div className="pr-buttons-container">
-                             <button onClick={handleTransferToPending}>Pending</button>
+                            <button onClick={handleTransferToPending}>Pending</button>
                             <button>Print Barcode</button>
                             <button onClick={handleTransferData}>Transfer</button>
                             {/* <Link to='/phelobotny/phlebotomy/Report' style={{ width: "100%" }}>

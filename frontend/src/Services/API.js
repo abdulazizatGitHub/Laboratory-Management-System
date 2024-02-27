@@ -182,3 +182,15 @@ export const getPendingPhlebotomyData = async () => {
     return await axios.get(`${Url}/phelobotny/savePendingPhlebotomyData`);
 
 };
+
+// updating Tokens :
+export const updateToken = async (updatedTokenData)=>{
+  try{
+    const response = await axios.put(`${Url}/receptionist/generate_token/${updatedTokenData._id}`, updatedTokenData);
+    return response.data;
+  }
+  catch(error){
+    throw new Error('Error occurred while Updating token:', error);
+  
+  }
+}
