@@ -2,15 +2,20 @@ import React, {useEffect, useRef, useState} from "react";
 import '../css/Report.css' 
 import { FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing the icons from react-icons library
 import img1 from '../../Assessts/Images/Logo2.png';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import JsBarcode from 'jsbarcode';
+import { addPhlebotomyReport } from "../../Services/API";
 
 function Report() {
 
     const location = useLocation();
     const { selectedRegistrationDetails } = location.state;
+    const { remarks } = location.state;
     const [generatedDateTime, setGeneratedDateTime] = useState(null);
+    const [testResults, setTestResults] = useState({}); 
     const canvasRef = useRef(null);
+    const navigation = useNavigate();
+
     useEffect(() => {
         if (canvasRef.current) {
             const pinToEncode = selectedRegistrationDetails.patientData.pin;
@@ -25,7 +30,16 @@ function Report() {
         }
     }, [selectedRegistrationDetails]);
     
-    
+    const handleInputChange = (testName, value) => {
+        setTestResults(prevResults => {
+            // Use a copy of the previous state to avoid modifying it directly
+            const newResults = { ...prevResults };
+            // Update the specific test in the copied state
+            newResults[testName] = value;
+            // Return the updated state
+            return newResults;
+        });
+    };
 
 
     // Function to print only the Main-Report-container div
@@ -43,14 +57,58 @@ function Report() {
     };
 
     const handleFinalizeReport = () => {
-         // Capture the current date and time
-         const currentDate = new Date();
-         const formattedDate = currentDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-         const formattedTime = currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-         const generatedOn = `${formattedDate} at ${formattedTime}`;
- 
-         // Set the captured date and time to the state
-         setGeneratedDateTime(generatedOn);
+        const currentDate = new Date();
+        const formattedDate = currentDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        const formattedTime = currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+        const generatedOn = `${formattedDate} at ${formattedTime}`;
+    
+        setGeneratedDateTime(generatedOn);
+    }
+
+    const handleAddPhlebotomyReport = async (e) => {
+        e.preventDefault();
+        
+        handleFinalizeReport();
+
+        // Create an array of formatted tests
+        const formattedTests = selectedRegistrationDetails.tests.map((data) => {
+            const testName = data.name;
+            const inputValue = testResults[testName] || ""; // Get the input value associated with the test
+    
+            return {
+                name: testName,
+                result: inputValue,
+                referenceValue: selectedRegistrationDetails.patientData.gender === 'male'
+                    ? `${data.normalRange.male.from} - ${data.normalRange.male.to}`
+                    : `${data.normalRange.female.from} - ${data.normalRange.female.to}`,
+                unit: data.unit,
+            };
+        });
+    
+        const reportData = {
+            state: "Finalized", // Replace with your actual state
+            patientDetails: selectedRegistrationDetails.patientData,
+            report: formattedTests,
+            remarks: remarks, // Replace with your actual remarks
+            generatedBy: JSON.parse(localStorage.getItem("user")).name,
+            dateTime: generatedDateTime,
+        };
+
+        console.log('The report data is: ', reportData);
+
+        try {
+            const response = await addPhlebotomyReport(reportData);
+
+            if(response.data.message === true) {
+                alert('Report has been finalized successfully');
+                navigation('/phelobotny/phlebotomy');
+            } else {
+                alert('Error try again to finalize the report');
+            }
+            
+        } catch (error) {
+            console.log('The error in saving the report data is: ', error);
+        }
     }
 
     return (
@@ -123,7 +181,13 @@ function Report() {
                             {selectedRegistrationDetails.tests.map((data) => (
                                 <tr className="tableBody-row">
                                 <td>{data.name}</td>
-                                <td> <input type="text" placeholder="Enter value" id="input-report"/> </td>
+                                <td> <input type="text" 
+                                    placeholder="Enter value" 
+                                    id="input-report"
+                                    value={testResults[data.name] || ""}
+                                        onChange={(e) => handleInputChange(data.name, e.target.value)}
+                                /> 
+                                </td>
                                 <td>{selectedRegistrationDetails.patientData.gender === 'male' ? data.normalRange.male.from + ' - ' + data.normalRange.male.to : data.normalRange.female.from + ' - ' + data.normalRange.female.to}</td>
                                 <td>{data.unit}</td>
                                 </tr>
@@ -163,7 +227,7 @@ function Report() {
             </section>
 
             <div className="sr-button-container">
-            <button onClick={handleFinalizeReport}>Finalized</button>
+            <button onClick={handleAddPhlebotomyReport}>Finalized</button>
             </div>
         </div>
     )

@@ -10,7 +10,7 @@ const Phlebotomy = () => {
     const [selectedOption, setSelectedOption] = useState('Phlebotomy');
     const [registrationDetails, setRegistrationDetails] = useState([]);
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
-
+    const [remarks, setRemarks] = useState('');
     const navigation = useNavigate();
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const Phlebotomy = () => {
         };
 
     const handleTransferData = () => {
-        navigation('/phelobotny/phlebotomy/Report', {state: {selectedRegistrationDetails}});
+        navigation('/phelobotny/phlebotomy/Report', {state: {selectedRegistrationDetails, remarks}});
     }
 
     return (
@@ -178,6 +178,8 @@ const Phlebotomy = () => {
                                 rows='4'
                                 cols='60'
                                 placeholder="Enter visit remarks"
+                                value={remarks}
+                                onChange={(e) => setRemarks(e.target.value)}
                             />
                             <button>Save Remarks</button>
                         </div>

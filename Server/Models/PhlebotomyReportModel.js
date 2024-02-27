@@ -3,12 +3,12 @@ import mongoose from "mongoose";
 const ReportSchema = mongoose.Schema({
     state: String,
     patientDetails: Object,
-    report: Object,
+    report: Array,
     remarks: String,
     generatedBy: String,
     dateTime: String  
 });
 
-const ReportModel = mongoose.model('Report', ReportSchema);
+const PhlebotomyReportModel = mongoose.model('Report', ReportSchema);
 
-export default ReportModel;
+export default PhlebotomyReportModel;
