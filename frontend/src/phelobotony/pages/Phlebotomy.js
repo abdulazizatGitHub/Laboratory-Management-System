@@ -11,6 +11,7 @@ const Phlebotomy = () => {
     const [pendingPhlebotomy, setPendingPhlebotomy] = useState([]);
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
     const [remarks, setRemarks] = useState('');
+    const [state,setState] = useState('');
     const navigation = useNavigate();
     //By basit
     const [allToken, setAllTokens] = useState([]);
@@ -28,7 +29,7 @@ const Phlebotomy = () => {
             }
         }
         fetchTokenDetails();
-    }, []);
+    }, [state]);
 
 
     // useEffect(() => {
@@ -81,14 +82,14 @@ const Phlebotomy = () => {
 
 
     const handleTransferData = () => {
-        navigation('/phelobotny/phlebotomy/Report', { state: { selectedRegistrationDetails, setSelectedRegistrationDetails } });
+        navigation('/phelobotny/phlebotomy/Report', { state: { selectedRegistrationDetails } });
     }
 
     const handleTransferToPending = async () => {
        
         if (!remarks && selectedRegistrationDetails.remark === "") {
 
-            alert('Remarks field is required in tran.');
+            alert('Remarks field is required .');
             return;
         }
 
@@ -103,6 +104,7 @@ const Phlebotomy = () => {
 
             await updateToken(tokenId, updatedTokenData);
           setSelectedRegistrationDetails(updatedTokenData);
+          setState(state);
            alert("Set To Pending successfully");
         } catch (error) {
             console.error('Error occurred while saving pending phlebotomy data:', error);

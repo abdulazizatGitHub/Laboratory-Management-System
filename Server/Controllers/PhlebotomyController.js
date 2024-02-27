@@ -12,9 +12,10 @@ export const getTokenDetails = async (req, res) => {
 
 export const addPhlebotomyReport = async (req, res) => {
     try {
-        const { state, patientDetails, report, remarks, generatedBy, dateTime } = req.body;
+        const { tokenNumber,state, patientDetails, report, remarks, generatedBy, dateTime } = req.body;
         
         const phlebotomyReport = new PhlebotomyReportModel({
+            tokenNumber,
             state,
             patientDetails,
             report,

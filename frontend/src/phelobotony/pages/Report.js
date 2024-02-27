@@ -9,7 +9,7 @@ import { addPhlebotomyReport,updateToken } from "../../Services/API";
 function Report() {
 
     const location = useLocation();
-    const { selectedRegistrationDetails,setSelectedRegistrationDetails } = location.state;
+    const { selectedRegistrationDetails } = location.state;
     
     const [generatedDateTime, setGeneratedDateTime] = useState(null);
     const [testResults, setTestResults] = useState({}); 
@@ -88,6 +88,7 @@ function Report() {
         handleFinalized();
     
         const reportData = {
+            tokenNumber: selectedRegistrationDetails.tokenNumber,
             state: "Finalized", // Replace with your actual state
             patientDetails: selectedRegistrationDetails.patientData,
             report: formattedTests,
@@ -99,31 +100,29 @@ function Report() {
         
         console.log('The report data is: ', reportData);
 
-        // try {
-        //     const response = await addPhlebotomyReport(reportData);
+        try {
+            const response = await addPhlebotomyReport(reportData);
 
-        //     if(response.data.message === true) {
-        //         alert('Report has been finalized successfully');
-        //         navigation('/phelobotny/phlebotomy');
-        //     } else {
-        //         alert('Error try again to finalize the report');
-        //     }
+            if(response.data.message === true) {
+                alert('Report has been finalized successfully');
+                navigation('/phelobotny/phlebotomy');
+            } else {
+                alert('Error try again to finalize the report');
+            }
             
-        // } catch (error) {
-        //     console.log('The error in saving the report data is: ', error);
-        // }
+        } catch (error) {
+            console.log('The error in saving the report data is: ', error);
+        }
     }
     const handleFinalized = async () => {
        
         try {
             const tokenId = selectedRegistrationDetails._id;
-            const state = "Finilized";
+            const state = "Finalized";
           const updatedTokenData = { ...selectedRegistrationDetails, state };
 
-            const res = await updateToken(tokenId, updatedTokenData);
-          setSelectedRegistrationDetails(updatedTokenData);
-          console.log("now for update Token ", updatedTokenData," and res ", res);
-           alert("Set To Pending successfully");
+         await updateToken(tokenId, updatedTokenData);
+         
         } catch (error) {
             console.error('Error occurred while saving finilized phlebotomy data:', error);
         }
