@@ -67,6 +67,7 @@ const Phlebotomy = () => {
 
 
     const handleOptionChange = (e) => {
+        console.log("Taargettt: ",e.target.vaue)
         setSelectedOption(e.target.value);
     };
 
@@ -143,6 +144,7 @@ const Phlebotomy = () => {
                                 value={selectedOption}
                                 onChange={handleOptionChange}
                             >
+                                <option >Select Filter</option>
                                 <option value="All Records">All Records</option>
                                 <option value="Pending Records">Pending Phlebotomy</option>
                                 {/* {selectedOption === 'Pending Phlebotomy' ? (

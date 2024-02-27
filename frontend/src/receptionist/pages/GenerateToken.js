@@ -23,7 +23,7 @@ const GenerateToken = () => {
  
 
   useEffect(()=>{
-   
+   console.log("value of button pressend : ", buttonPress)
     generateToken();
     
   },[generatedTokenData])
@@ -114,6 +114,7 @@ const GenerateToken = () => {
       generatedBy: JSON.parse(localStorage.getItem('user')).userName,
       status:"generated"
     };
+    
     
     saveToken(tokenData)
       .then(response => {
