@@ -1,0 +1,452 @@
+@import '../../constants/Colors.css';
+
+
+.Main-Report-container{
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  top: 10px;
+  padding-bottom: 5rem;
+  font-family: var(--fontRegular);
+
+}
+.Main-report{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 78%;
+  height: 100%;
+  gap: 0.3rem;
+  border: 5px solid rgb(255, 253, 253);
+  border-radius: 5px; 
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+}
+.Header-report{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 6rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+.Report-left-image {
+   width: 15%;
+   height: 100%;
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.Report-Middle{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 85%;
+  height: 100%;
+}
+
+.Report-Middle h3 {
+  font-size: 20px;
+}
+
+.Report-Middle h3,
+.Report-Middle p {
+  margin-top: -10px;
+
+}
+.Report-Middle h1 {
+  margin-top: -5px; /* Remove default margin from the top */
+  font-size: 35px;
+  font-weight: 900;
+}
+.report-heading-effect {
+  background: linear-gradient(to right, #6ec007, #90EE90);
+  -webkit-background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+.Report-smCnt{
+  width: 70%;
+  height: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.Report-Right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+  padding-left: 1rem;
+  gap: 10px;
+  width: 30%;
+  height: 100%;
+
+}
+
+.Report-Right a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+
+/* ==================Middle================ */
+.Middle-Report-Section-Color{
+  width: 100%;
+  height: 2.5vh;
+  background: linear-gradient(to right, #6ec007 -0.9%, #90EE90 100%);
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.Middle-Report-Section {
+  display: flex;
+ justify-content: flex-start;
+ align-items: center;
+  width: 90%;
+  height: 7rem;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.L-Report {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 20%;
+  height: 100%;
+  margin-left: 1rem;
+}
+
+/* .L-Report h3 {
+  font-weight: 800;
+} */
+
+.M-Report p, 
+.L-Report p{
+  margin-top: -15px;
+}
+
+.M-Report h3,
+.L-Report h3{
+  margin-top: 0px;
+  font-weight: 800;
+}
+
+.M-Report{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 40%;
+  height: 100%;
+}
+
+.R-Report {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+
+  width: 30%;
+  height: 20vh;
+  /* margin-left: 0.5rem; */
+  /* border: 1px solid black; */
+}
+
+.bar-code{
+  width: 100%;
+  /* border: 1px solid black; */
+}
+.generated {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 0.8rem;
+  /* border: 1px solid black; */
+  
+}
+
+.R-Report p {
+  font-weight: 600;
+}
+
+.R-Line {
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to right, #6ec007 -0.9%, #90EE90 100%);
+}
+
+/* =============After Middle======================== */
+.Middle-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+  height: 2rem;
+  margin-top: -0.5rem;
+  border: 1px solid rgb(187, 185, 185);
+  border-left: none;
+  border-right: none;
+  padding-bottom: 1.3rem;
+  padding-top: 1.3rem;
+}
+
+.Middle-text h2{
+  text-align: center;
+  font-size: 1.1em;
+}
+.Table-report {
+  display: flex;
+  justify-content: center;
+  width: 95%;
+  max-height: 30vh; /* Change height to max-height */
+  overflow: auto;
+  margin-bottom: 30rem; /* Add margin bottom to create space */
+}
+
+.medical-lab-report-table {
+  width: 100%;
+  height: auto;
+  border-collapse: collapse; /* Remove borders between table cells */
+  background-color: white; /* Set background color to white */
+}
+
+
+.medical-lab-report-table th
+{
+  border-left: none;
+  border-right: none;
+  border-top: none ;
+  padding-bottom: 4px;
+  padding-top: 0;
+  background: transparent;
+}
+
+/* .tableHead-row{
+  height: 1rem;
+} */
+
+
+.medical-lab-report-table td {
+  border: none; /* Remove borders from table header and data cells */
+  padding: 0.5rem; /* Add padding for better readability */
+}
+
+.medical-lab-report-table tbody td {
+  text-align: left; /* Align tbody content to the left */
+  border: none;
+}
+
+#input-report{
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  outline: none;
+}
+.tableBody-row{
+  border: none;
+}
+
+
+.medical-lab-report-table tbody td,
+.medical-lab-report-table tbody tr  {
+  background-color: transparent; /* Remove background color from table rows */
+}
+
+
+/* ====================Footer Section=============================== */
+.Footer-Section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  height: 25%; /* Set the height of the footer */
+}
+
+.Footer-Section-heading {
+  margin-left: 1rem;
+  font-weight: 800;
+  font-size: large;
+}
+
+.Details-Footer{
+  width: 95%;
+  height: 90%;
+   display: flex;
+   flex-direction: row;
+   justify-content: space-between;
+   align-items: center;
+   gap: 0.5rem;
+   margin-left: 1.5rem;
+    border: 1px solid rgb(187, 185, 185);
+  border-left: none;
+  border-right: none;
+}
+.Fl-report{
+  width: 33%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+
+}
+
+.Main-Report-container button{
+  
+  background-color: var(--buttonColor);
+  
+  color: whitesmoke;
+  width: 9rem;
+  font-size: large;
+  height: 2rem;
+  border:1px solid var(--buttonColor);
+  border-radius: 4px;
+}
+
+.generated-time {
+  position: relative;
+  left: 70%;
+}
+
+.report-bottom-bar-code {
+  width: 100%;
+  height: 5vh;
+  background: linear-gradient(to right, #6ec007 -0.9%, #90EE90 100%);
+  margin-bottom: 1rem;
+  border-radius: 5px;
+}
+
+.sr-button-container {
+  width: 20%;
+  height: 10rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 5rem;
+}
+
+.sr-button-container button {
+  cursor: pointer;
+  transition: 0.2s ease-out;
+}
+
+.sr-button-container button:hover {
+  transform: scale(1.1);
+}
+
+@media  screen and (max-width: 844px) {
+  .Report-smCnt{
+    width: 100%;
+  }
+  .Report-Right{
+    width: 100%;
+  }
+ 
+}
+
+@media  screen and (max-width:790px) {
+  .Report-Middle h1{
+    font-size: 1.2em;
+  }
+  .Report-Middle h3{
+    font-size: 1em;
+  }
+  .Report-Middle p{
+    font-size: 0.8em;
+  }
+  .Report-Right a{
+    font-size: 0.8em;
+  }
+  .L-Report h3,
+  .M-Report h3
+  {
+    font-size: 1em;
+  }
+  .L-Report p,
+  .M-Report p,
+  .R-Report p{
+  font-size: 0.8em;
+  }
+  .L-Report{
+    gap: 0.4em;
+  }
+  .Middle-Report-Section-Color{
+    height: 2vh;
+  }
+  .Middle-text h2{
+    font-size: 0.8rem;
+  }
+  .medical-lab-report-table thead tr th{
+    font-size: 1em;
+  }
+  .medical-lab-report-table tbody tr td{
+    font-size: 0.8em;
+  }
+  .Footer-Section h3{
+    font-size: 1rem;
+  }
+  .Fl-report{
+    font-size: 0.8rem;
+  }
+  
+}
+
+
+
+
+
+
+@media print {
+    /* Hide elements not necessary for printing */
+    
+    .Footer-Section button {
+        display: none;
+    }
+
+    
+    
+
+    .logo-image {
+        max-width: 100px;
+    }
+
+  
+
+    /* Ensure table fits within the page */
+    .Table-report {
+        overflow: visible;
+    }
+
+  
+
+   
+
+    /* Ensure footer text fits within the page */
+    .Details-Footer {
+        flex-wrap: wrap;
+    }
+
+    /* Ensure footer fits within the page */
+    .Footer-Section {
+        margin-top: 10px;
+    }
+}

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
-import { getGeneratedToken, getPatientDetails } from "../../Services/API";
+import { getPatientDetails, getTestReportDetails } from "../../Services/API";
 const ViewTestReport = () => {
 
     const [queryByPIN, setQueryByPIN] = useState('');
@@ -10,6 +11,8 @@ const ViewTestReport = () => {
     const [selectedField, setSelectedField] = useState("PIN");
 
     const [reportData, setReportData] = useState([]);
+
+    const navigation = useNavigate();
 
     useEffect(() => {
         fetchdata();
@@ -26,13 +29,13 @@ const ViewTestReport = () => {
     }
     
     const fetchdata = async () => {
-        const data = await getGeneratedToken();
-    
+        const response = await getTestReportDetails();
+      console.log('The report data is: ', response.data);
         // Filter the data to include only today's data
-        const todayData = data.filter(item => isToday(item.dateTime));
+        const todayData = response.data.filter(item => isToday(item.dateTime));
     
         console.log("Today's Patient Data is ", todayData);
-        setReportData(todayData);
+        setReportData(response.data);
     }
     
 
@@ -57,14 +60,14 @@ const ViewTestReport = () => {
 
 
     const handleReceipt = () => {
-        console.log("Printing Receipt");
+        navigation('/receptionist/view_test_report/ReportDetailsPage')
     }
 
     const filteredData = selectedField === "PIN"
-    ? reportData.filter(data => data.patientData.pin && data.patientData.pin.includes(queryByPIN))
+    ? reportData.filter(data => data.patientDetails.pin && data.patientDetails.pin.includes(queryByPIN))
     : (selectedField === "CONTACT"
-        ? reportData.filter(data => data.patientData.mobileNumber && data.patientData.mobileNumber.includes(queryByContact))
-        : reportData.filter(data => data.patientData.cnic && data.patientData.cnic.includes(queryByCNIC))
+        ? reportData.filter(data => data.patientDetails.mobileNumber && data.patientDetails.mobileNumber.includes(queryByContact))
+        : reportData.filter(data => data.patientDetails.cnic && data.patientDetails.cnic.includes(queryByCNIC))
     )
 
     
@@ -112,7 +115,7 @@ const ViewTestReport = () => {
                   <th>Cnic</th>
                   <th>Mobile Number</th>
                   <th>Date and Time</th>
-                  <th>Total Price</th>
+                  <th>Status</th>
                   <th>Reciept</th>
                     </tr>
                 </thead>
@@ -120,13 +123,13 @@ const ViewTestReport = () => {
                     {
                         filteredData.map((data) => (
                             <tr key={data._id}>
-                                <td>{data.patientData.pin}</td>
+                                <td>{data.patientDetails.pin}</td>
                                 <td>{data.tokenNumber}</td>
-                                <td>{data.patientData.name}</td>
-                                <td>{data.patientData.cnic}</td>
-                                <td>{data.patientData.mobileNumber}</td>
+                                <td>{data.patientDetails.name}</td>
+                                <td>{data.patientDetails.cnic}</td>
+                                <td>{data.patientDetails.mobileNumber}</td>
                                 <td>{data.dateTime}</td>
-                                <td>{data.grandTotal}</td>
+                                <td>{data.state}</td>
                                 <td><button type="submit" id="ViewTestReport-roundButton" onClick={handleReceipt}>Receipt</button></td>
                             </tr>
                         ))

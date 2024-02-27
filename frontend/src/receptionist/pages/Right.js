@@ -9,6 +9,7 @@ import ViewTestReport from "./ViewTestReport";
 import SearchTestReport from "./SearchTestReport"
 import SearchPatient from "./SearchPatient";
 import ChangePassword from "./ChangePassword";
+import ReportDetailsPage from "./ReportDetailsPage";
 
 const Right = ({setIsSideBar}) => {
   return (
@@ -29,8 +30,8 @@ const Right = ({setIsSideBar}) => {
             <Route path="/search_test_report" element={<SearchTestReport />} />
             <Route path="/SearchPatient" element={<SearchPatient />} />
             <Route path="/ChangedPassword" element={<ChangePassword />} />
-
-
+            <Route path="/ReportDetailsPage" element={<ReportDetailsPage />} />
+            
           </Routes>
           
         </div>

@@ -193,3 +193,11 @@ export const updateToken = async (tokenId, updatedTokenData) => {
     throw new Error('Error occurred while updating token:', error);
   }
 };
+
+export const getTestReportDetails = async () => {
+  return await axios.get(`${Url}/receptionist/view_test_report`);
+}
+
+export const getAllTestReportDetails = async () => {
+  return await axios.get(`${Url}/receptionist/search_test_report`);
+}

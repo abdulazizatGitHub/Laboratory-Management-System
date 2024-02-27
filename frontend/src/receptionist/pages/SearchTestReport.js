@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
-import { getGeneratedToken, getPatientDetails } from "../../Services/API";
+import { getAllTestReportDetails, getGeneratedToken, getPatientDetails } from "../../Services/API";
 const SearchTestReport = () => {
 
     const [queryByPIN, setQueryByPIN] = useState('');
@@ -17,7 +17,7 @@ const SearchTestReport = () => {
 
     
     const fetchdata = async () => {
-        const data = await getGeneratedToken();
+        const response = await getAllTestReportDetails();
     
         // Get the current date
         const today = new Date();
@@ -27,7 +27,7 @@ const SearchTestReport = () => {
         const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
     
         // Filter the data to include only records within the current month
-        const monthData = data.filter(item => {
+        const monthData = response.data.filter(item => {
             const itemDate = new Date(item.dateTime);
             return itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth;
         });

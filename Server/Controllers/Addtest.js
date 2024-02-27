@@ -1,5 +1,5 @@
 import Test from "../Models/AddTest.js";
-
+import PhlebotomyReportModel from "../Models/PhlebotomyReportModel.js";
 
 export const addTest = async (req, res) => {
   const { code, name, type, price, section, sampleType, sampleQuantity, unit, normalRange } = req.body;
@@ -43,3 +43,35 @@ export const getAllTests = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getTestReportDetails = async (req,res) => {
+  try {
+    const reportsResult = await PhlebotomyReportModel.find({state: 'Finalized'});
+    
+    if(reportsResult) {
+      res.status(201).json(reportsResult);
+    } else {
+      res.status(400).json({message: 'No Finalized Reports Found.'});
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Server Error', error);
+  }
+}
+
+export const getAllTestReportDetails = async (req, res) => {
+  try {
+    const allReportsData = await PhlebotomyReportModel.find();
+    console.log(allReportsData);
+    if(allReportsData) {
+      res.status(201).json(allReportsData);
+    } else {
+      res.status(400).json('No Reports Found.');
+    }
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json('Server Error', error);
+  }
+}
