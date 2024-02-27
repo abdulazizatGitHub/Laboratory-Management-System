@@ -1,18 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import DailySalesChart from "../components/DailySaleschart";
 import MonthlySalesChart from "../components/Detailstaffmonthly";
 import '../css/StaffReportDetails.css';
-import { useEffect } from "react";
 import { getGeneratedToken } from "../../Services/API";
-import { useState } from "react";
+
 const DetailStaff = () => {
     const location = useLocation();
     const { data } = location.state;
     const [token, setToken] = useState([]);
-
-    const [monthly, setMonthly] = useState({ numOfToken: 0, amount: 0 });
-    const [daily, setDaily] = useState({ numOfToken: 0, amount: 0 });
+    const [daily, setDaily] = useState({ labels: [], salesData: [], tokenData: [] });
+    const [monthly, setMonthly] = useState([]);
 
     useEffect(() => {
         getGenerateTokenData();
@@ -33,79 +31,46 @@ const DetailStaff = () => {
         }
     }
 
-
     const getDailyData = () => {
-        const mnthData = token.filter(tkn => {
+        const dailyData = token.filter(tkn => {
             let dateStr = tkn.dateTime;
             let dateObj = new Date(dateStr);
             let mnthNum = dateObj.getMonth() + 1;
             let dayNum = dateObj.getDate();
-            if (mnthNum == new Date().getMonth() + 1) {
-                if (dayNum == new Date().getDate()) {
-                        
-                    return tkn;
-                }
-            }
-        })
-
-        let sum = 0;
-
-        mnthData.forEach((dat) => {
-            sum += dat.grandTotal;
+            return mnthNum === new Date().getMonth() + 1 && dayNum === new Date().getDate();
         });
 
+        const labels = dailyData.map(item => item.dateTime);
+        const salesData = dailyData.map(item => item.grandTotal);
+        const tokenData = dailyData.map(item => item.numOfToken);
+
         setDaily({
-            numOfToken: mnthData.length,
-            amount: sum
+            labels: labels,
+            salesData: salesData,
+            tokenData: tokenData
         });
     }
 
     const getMonthlyData = () => {
-        console.log("Token is ", token, " and cnic ", data.userName)
-
-        const dailyData = token.filter(tkn => {
+        const monthlyData = token.filter(tkn => {
             let dateStr = tkn.dateTime;
             let dateObj = new Date(dateStr);
-            let mnthNum = dateObj.getMonth() + 1 ;
-            if (mnthNum == new Date().getMonth()+1 ) {
-                return tkn;
-            }
-
-
-        })
-
-        let sum = 0;
-
-        dailyData.forEach((dat) => {
-            sum += dat.grandTotal;
+            let mnthNum = dateObj.getMonth() + 1;
+            return mnthNum === new Date().getMonth() + 1;
         });
-
-        setMonthly({
-            numOfToken: dailyData.length,
-            amount: sum
-        });
+    
+        const monthlyChartData = monthlyData.map(item => ({
+            dateOfMonth: item.dateTime,
+            sales: Number(item.grandTotal) // Use grandTotal as sales
+        }));
+    
+        setMonthly(monthlyChartData);
+        
+        // Calculate total amount
+        const totalAmount = monthlyChartData.reduce((acc, curr) => acc + (curr.sales || 0), 0);
+        console.log('Total amount:', totalAmount);
     }
-
-    // Dummy data for demonstration
-    const dailySalesData = [
-        { date: 'Monday', sales: 200, tokens: 20 },
-        { date: 'Tuesday', sales: 250, tokens: 25 },
-        { date: 'Wednesday', sales: 300, tokens: 30 },
-        { date: 'Thursday', sales: 350, tokens: 35 },
-        { date: 'Friday', sales: 320, tokens: 32 },
-        { date: 'Saturday', sales: 280, tokens: 28 },
-        { date: 'Sunday', sales: 400, tokens: 40 }
-    ];
-
-    // Dummy data for demonstration
-    const monthlySalesData = [
-        { month: 'January', sales: 1000 },
-        { month: 'February', sales: 1500 },
-        { month: 'March', sales: 2000 },
-        { month: 'April', sales: 2500 },
-        { month: 'May', sales: 1800 },
-        { month: 'June', sales: 2200 }
-    ];
+    
 
     return (
         <div className="staff-report-detail-container">
@@ -126,16 +91,16 @@ const DetailStaff = () => {
                     <div className="sr-daily-details">
                         <div className="sr-daily-content">
                             <p>Total Number of Tokens</p>
-                            <p>{daily.numOfToken}</p>
+                            <p>{daily.tokenData.length}</p>
                         </div>
                         <div className="sr-daily-content">
                             <p>Total amount</p>
-                            <p>{daily.amount}</p>
+                            <p>{daily.salesData.reduce((acc, curr) => acc + curr, 0)}</p>
                         </div>
                     </div>
                     {/* Daily Sales Chart */}
                     <div className="sr-daily-detail-graph">
-                        <DailySalesChart data={dailySalesData} />
+                        <DailySalesChart daily={daily} />
                     </div>
                 </div>
             </div>
@@ -146,16 +111,17 @@ const DetailStaff = () => {
                     <div className="sr-daily-details">
                         <div className="sr-daily-content">
                             <p>Total Number of Tokens</p>
-                            <p>{monthly.numOfToken}</p>
+                            <p>{monthly.length}</p>
                         </div>
                         <div className="sr-daily-content">
                             <p>Total amount</p>
-                            <p>{monthly.amount}</p>
+                            <p>{monthly.reduce((acc, curr) => acc + curr.sales, 0)}</p>
                         </div>
                     </div>
+                    
                     {/* Monthly Sales Chart */}
                     <div className="sr-daily-detail-graph">
-                        <MonthlySalesChart data={monthlySalesData} />
+                        <MonthlySalesChart data={monthly} />
                     </div>
                 </div>
             </div>
