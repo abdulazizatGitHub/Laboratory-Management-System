@@ -4,13 +4,13 @@ import { FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing the icons fro
 import img1 from '../../Assessts/Images/Logo2.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import JsBarcode from 'jsbarcode';
-import { addPhlebotomyReport } from "../../Services/API";
+import { addPhlebotomyReport,updateToken } from "../../Services/API";
 
 function Report() {
 
     const location = useLocation();
-    const { selectedRegistrationDetails } = location.state;
-    const { remarks } = location.state;
+    const { selectedRegistrationDetails,setSelectedRegistrationDetails } = location.state;
+    
     const [generatedDateTime, setGeneratedDateTime] = useState(null);
     const [testResults, setTestResults] = useState({}); 
     const canvasRef = useRef(null);
@@ -84,32 +84,50 @@ function Report() {
                 unit: data.unit,
             };
         });
+
+        handleFinalized();
     
         const reportData = {
             state: "Finalized", // Replace with your actual state
             patientDetails: selectedRegistrationDetails.patientData,
             report: formattedTests,
-            remarks: remarks, // Replace with your actual remarks
+            remarks: selectedRegistrationDetails.remark, // Replace with your actual remarks
             generatedBy: JSON.parse(localStorage.getItem("user")).name,
             dateTime: generatedDateTime,
         };
 
+        
         console.log('The report data is: ', reportData);
 
-        try {
-            const response = await addPhlebotomyReport(reportData);
+        // try {
+        //     const response = await addPhlebotomyReport(reportData);
 
-            if(response.data.message === true) {
-                alert('Report has been finalized successfully');
-                navigation('/phelobotny/phlebotomy');
-            } else {
-                alert('Error try again to finalize the report');
-            }
+        //     if(response.data.message === true) {
+        //         alert('Report has been finalized successfully');
+        //         navigation('/phelobotny/phlebotomy');
+        //     } else {
+        //         alert('Error try again to finalize the report');
+        //     }
             
-        } catch (error) {
-            console.log('The error in saving the report data is: ', error);
-        }
+        // } catch (error) {
+        //     console.log('The error in saving the report data is: ', error);
+        // }
     }
+    const handleFinalized = async () => {
+       
+        try {
+            const tokenId = selectedRegistrationDetails._id;
+            const state = "Finilized";
+          const updatedTokenData = { ...selectedRegistrationDetails, state };
+
+            const res = await updateToken(tokenId, updatedTokenData);
+          setSelectedRegistrationDetails(updatedTokenData);
+          console.log("now for update Token ", updatedTokenData," and res ", res);
+           alert("Set To Pending successfully");
+        } catch (error) {
+            console.error('Error occurred while saving finilized phlebotomy data:', error);
+        }
+    };
 
     return (
         <div className="Main-Report-container">

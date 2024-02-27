@@ -51,8 +51,9 @@ const updateToken = async (req, res) => {
     // Extract token ID from request parameters
     const tokenId = req.params.id;
 
+    
     // Extract updated token data from request body
-    const { tokenNumber, patientData, tests, grandTotal, dateTime, generatedBy, status } = req.body; 
+    const { tokenNumber, patientData, tests, grandTotal, dateTime, generatedBy, state, remark } = req.body; 
 
     // Check if the token with the provided ID exists
     const existingToken = await GenToken.findById(tokenId);
@@ -68,8 +69,9 @@ const updateToken = async (req, res) => {
     existingToken.grandTotal = grandTotal;
     existingToken.dateTime = dateTime;
     existingToken.generatedBy = generatedBy;
-    existingToken.status = status;
-
+    existingToken.state= state;
+    existingToken.remark = remark;
+    
     // Save the updated token document
     const updatedToken = await existingToken.save();
 

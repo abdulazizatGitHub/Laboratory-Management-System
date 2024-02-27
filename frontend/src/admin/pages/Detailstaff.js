@@ -137,7 +137,7 @@ const DetailStaff = () => {
                     <div className="sr-daily-details">
                         <div className="sr-daily-content">
                             <p>Total Number of Tokens</p>
-                            <p>{daily.tokenData.length}</p>
+                            <p>{monthly.tokenData.length}</p>
                         </div>
                         <div className="sr-daily-content">
                             <p>Total amount</p>

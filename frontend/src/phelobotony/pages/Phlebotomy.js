@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { getGeneratedToken, getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData } from "../../Services/API";
+import { getGeneratedToken, getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData, updateToken } from "../../Services/API";
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
@@ -13,16 +13,16 @@ const Phlebotomy = () => {
     const [remarks, setRemarks] = useState('');
     const navigation = useNavigate();
     //By basit
-    const [tokens, setTokens] = useState([]);
-
+    const [allToken, setAllTokens] = useState([]);
     useEffect(() => {
         const fetchTokenDetails = async () => {
-            const res = await getGeneratedToken();
-            console.log("res.data is ",res)
             try {
-                const response = await getTokenDetails();
-                setRegistrationDetails(response.data);
-                setTokens(res.data);
+                const res = await getGeneratedToken();
+                // const response = await getTokenDetails();
+                setRegistrationDetails(res);
+                setAllTokens(res);
+                console.log("res.data is ",res , " and ", allToken)
+                
             } catch (error) {
                 console.log('Error occure in fetching the token data', error);
             }
@@ -75,44 +75,63 @@ const Phlebotomy = () => {
     };
 
     const handlePatientClick = (pin) => {
-        // Check if the selected patient is in the registrationDetails array
-        let selectedPatientData = registrationDetails.find(patient => patient.patientData.pin === pin);
-
-        // If the patient is not found in registrationDetails, check in pendingPhlebotomy
-        if (!selectedPatientData) {
-            selectedPatientData = pendingPhlebotomy.find(patient => patient.patientData.pin === pin);
-        }
-
-        setSelectedRegistrationDetails(selectedPatientData);
+        let selectedPatientData = allToken.find(patient => patient.patientData.pin === pin);
+       setSelectedRegistrationDetails(selectedPatientData);
     };
 
 
     const handleTransferData = () => {
-        navigation('/phelobotny/phlebotomy/Report', { state: { selectedRegistrationDetails, remarks } });
+        navigation('/phelobotny/phlebotomy/Report', { state: { selectedRegistrationDetails, setSelectedRegistrationDetails } });
     }
 
     const handleTransferToPending = async () => {
-        // Check if remarks field is empty
-        if (!remarks) {
-            console.error('Remarks field is required.');
+       
+        if (!remarks && selectedRegistrationDetails.remark === "") {
+
+            alert('Remarks field is required in tran.');
             return;
         }
 
-        // Save pending phlebotomy data to the backend API
+        if(selectedRegistrationDetails.state === "pending"){
+                alert("Already in Pending State ")
+                return;
+        }
         try {
-            // Ensure that remarks are provided along with selectedRegistrationDetails
-            // await savePendingPhlebotomyData({ ...selectedRegistrationDetails, remarks });
-            // setPendingPhlebotomy([...pendingPhlebotomy, { ...selectedRegistrationDetails, remarks }]);
-            // setRegistrationDetails(registrationDetails.filter(patient => patient.patientData.pin !== selectedRegistrationDetails.patientData.pin));
-            // setSelectedRegistrationDetails(null);
+            const tokenId = selectedRegistrationDetails._id;
+            const state = "pending";
+          const updatedTokenData = { ...selectedRegistrationDetails, state };
+
+            await updateToken(tokenId, updatedTokenData);
+          setSelectedRegistrationDetails(updatedTokenData);
+           alert("Set To Pending successfully");
         } catch (error) {
             console.error('Error occurred while saving pending phlebotomy data:', error);
         }
     };
+
+    const handleAddRemark = async () => {
+        try {
+          
+          if (!remarks) {
+            alert('Remarks field is required.');
+            return;
+          }
+          
+            const tokenId = selectedRegistrationDetails._id;
+          const updatedTokenData = { ...selectedRegistrationDetails, remark: remarks };
+          setSelectedRegistrationDetails(updatedTokenData);
+          await updateToken(tokenId, updatedTokenData);
+          setRemarks('');
+        } catch (error) {
+          console.error('Error occurred while adding remarks:', error);
+        }
+      };
+    
     // const filteredRecords = selectedOption === 'Pending Phlebotomy' ? pendingPhlebotomy : registrationDetails;
     // const filteredTotalRecords = registrationDetails.filter(token => !pendingPhlebotomy.some(p => p.patientData.pin === token.patientData.pin));
-    const AllRecords = tokens.filter(tkn => tkn.state == "generated");
-
+    const AllRecords = allToken ? allToken.filter(tkn => tkn.state === "generated") : [];
+    const PendingRecords= allToken ? allToken.filter(tkn => tkn.state == "pending"): [];
+    
     return (
         <div className="phlebotomy-container">
             <div className="phlebotomy-left-container">
@@ -170,9 +189,14 @@ const Phlebotomy = () => {
                             <div className="pl-patient-list-container">
                                 <table className="pl-patient-list">
                                     <tbody>
-                                        {AllRecords.map((data) => (
+                                        {selectedOption == "All Records" && AllRecords.map((data) => (
                                             <tr key={data._id}>
-                                                <td >{data.tokenNumber}</td>
+                                                <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
+                                            </tr>
+                                        ))}
+                                        {selectedOption == "Pending Records" && PendingRecords.map((data) => (
+                                            <tr key={data._id}>
+                                                <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
                                             </tr>
                                         ))}
                                     </tbody>
@@ -245,7 +269,7 @@ const Phlebotomy = () => {
                                 value={remarks}
                                 onChange={(e) => setRemarks(e.target.value)}
                             />
-                            <button>Save Remarks</button>
+                            <button onClick={handleAddRemark} style={selectedRegistrationDetails==null ? {display:"none"}: {}}>Save Remarks</button>
                         </div>
                         <div className="pr-buttons-container">
                             <button onClick={handleTransferToPending}>Pending</button>
