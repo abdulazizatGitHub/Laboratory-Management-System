@@ -11,7 +11,8 @@ const tokenSchema = new Schema({
   grandTotal: Number,
   dateTime: String,
   generatedBy: String,
-  state: String
+  state: String,
+  remark: String
 });
 
 // Create the Token model
