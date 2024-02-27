@@ -131,7 +131,8 @@ const DetailStaff = () => {
                     </div>
                     {/* Monthly Sales Chart */}
                     <div className="sr-daily-detail-graph">
-                        <MonthlySalesChart data={monthlySalesData} />
+                    <MonthlySalesChart monthlyData={monthly.tokenData} />
+
                     </div>
                 </div>
             </div>

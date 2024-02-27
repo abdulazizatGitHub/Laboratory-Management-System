@@ -1,28 +1,32 @@
-// MonthlySalesChart.js
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-const MonthlySalesChart = ({ data }) => {
+const MonthlySalesChart = ({ monthlyData }) => {
   const chartRef = useRef(null);
 
   useEffect(() => {
+    if (!monthlyData || !monthlyData.length) {
+      return; // Return early if monthlyData is undefined or empty
+    }
+
     if (chartRef.current) {
+      // If a chart instance already exists, destroy it before creating a new one
       chartRef.current.destroy();
     }
 
     const ctx = document.getElementById('monthlySalesChart');
+    const labels = monthlyData.map(item => item.dateTime); // Assuming dateTime is the label
+    const data = monthlyData.map(item => item.grandTotal); // Assuming grandTotal represents sales
     const newChartInstance = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: data.map(item => item.month),
-        datasets: [
-          {
-            label: 'Monthly Sales',
-            data: data.map(item => item.sales),
-            borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
-          }
-        ]
+        labels: labels,
+        datasets: [{
+          label: 'Monthly Sales',
+          data: data,
+          borderColor: 'rgb(75, 192, 192)',
+          tension: 0.1
+        }]
       },
       options: {
         scales: {
@@ -33,14 +37,16 @@ const MonthlySalesChart = ({ data }) => {
       }
     });
 
+    // Save the reference to the chart instance
     chartRef.current = newChartInstance;
 
+    // Cleanup function to destroy the chart instance when component unmounts
     return () => {
       if (chartRef.current) {
         chartRef.current.destroy();
       }
     };
-  }, [data]);
+  }, [monthlyData]);
 
   return <canvas id="monthlySalesChart" width="400" height="200"></canvas>;
 };
