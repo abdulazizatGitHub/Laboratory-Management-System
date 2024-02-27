@@ -34,6 +34,8 @@ function Navbar({ setIsSideBar }) {
                         className="round-icon"
                     />
 
+                    
+
                     <div className="dropdown-content">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <img

@@ -96,11 +96,11 @@
 
 .version {
   font-size: 14px;
+  font-weight: bold;
   color: #22CAB8;
-  position: absolute;
-  top: 95vh;
   width: 100%;
   text-align: center;
+  margin-top: -2rem;
 }
 
 /* Sidebar.css */
