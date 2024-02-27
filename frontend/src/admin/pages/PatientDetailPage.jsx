@@ -9,12 +9,15 @@ const PatientDetailPage = () => {
     const { data } = location.state;
     const [showEditModal, setShowEditModal] = useState(false);
     const [editedData, setEditedData] = useState(data); 
+    const [visit,setVisit] = useState(0);
+    const[lastVisit,setLastVisit] = useState('');
 
     useEffect(() => {
         const getTokenData= async()=>{
             const token= await getGeneratedToken();
             const eachToken = token.filter(t=> t.patientData.pin == data.pin)
-            console.log("Token i si ", token)
+            setVisit(eachToken.length);
+            setLastVisit(eachToken[eachToken.length-1].dateTime);
         }
         getTokenData();
     }, []);
@@ -59,23 +62,23 @@ const PatientDetailPage = () => {
             <div className="pdp-details">
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Name: </p>
-                    <p>{data.name}</p>
+                    <p className="pdp-text">{data.name}</p>
                 </div>.
                 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Age: </p>
-                    <p>{data.age}</p>
+                    <p className="pdp-text">{data.age}</p>
                 </div>.
 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Gender: </p>
-                    <p>{data.gender}</p>
+                    <p className="pdp-text">{data.gender}</p>
                 </div>
 
 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">CNIC: </p>
-                    <p>{data.cnic}</p>
+                    <p className="pdp-text">{data.cnic}</p>
                 </div>
             </div>
 
@@ -84,17 +87,17 @@ const PatientDetailPage = () => {
             <div className="pdp-details">
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Contact#: </p>
-                    <p>{data.mobileNumber}</p>
+                    <p className="pdp-text">{data.mobileNumber}</p>
                 </div>.
 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Email: </p>
-                    <p>{data.email}</p>
+                    <p className="pdp-text">{data.email}</p>
                 </div>.
 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Address: </p>
-                    <p>{data.address}</p>
+                    <p className="pdp-text">{data.address}</p>
                 </div>
             </div>
 
@@ -102,17 +105,17 @@ const PatientDetailPage = () => {
             <div className="pdp-details">
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Pin No: </p>
-                    <p>{data.pin}</p>
+                    <p className="pdp-text">{data.pin}</p>
                 </div>.
 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">Last visit on: </p>
-                    <p>20/01/2024, 12:45 PM</p>
+                    <p className="pdp-text">{lastVisit}</p>
                 </div>.
 
                 <div className="pdp-subBoxes">
                     <p className="pdp-smallHeading">No of Visit: </p>
-                    <p>04</p>
+                    <p className="pdp-text">{visit}</p>
                 </div>
             </div>
            

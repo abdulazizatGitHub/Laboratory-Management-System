@@ -20,9 +20,9 @@
   --fontRegular: 'Visby Round CF', sans-serif;
 
   /* Font Sizes */
-  --small: 0.7rem;
-  --medium: 1.1rem;
-  --large: 1.7rem;
+  --small: 1.2rem;
+  --medium: 1.5rem;
+  --large: 1.8rem;
   --xLarge: 2.1rem;
   --xxLarge: 5.1rem;
 }
