@@ -160,3 +160,7 @@ export const updatePatData = async (editedData) => {
 export const getStaffByRole = async () => {
   return await axios.get(`${Url}/admin/staff_report`);
 }
+
+export const addPhlebotomyReport = async (reportData) => {
+  return await axios.post(`${Url}/phelobotny/phlebotomy/Report`, reportData);
+}
