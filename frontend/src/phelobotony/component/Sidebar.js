@@ -50,7 +50,7 @@ function Sidebar({ setIsSideBar }) {
         </Link>
       </div>
 
-      <div className="version">Version 1.0</div>
+      <div className="version1">Version 1.0</div>
     </div>
   );
 }
