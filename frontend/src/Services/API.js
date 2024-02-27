@@ -164,3 +164,21 @@ export const getStaffByRole = async () => {
 export const addPhlebotomyReport = async (reportData) => {
   return await axios.post(`${Url}/phelobotny/phlebotomy/Report`, reportData);
 }
+
+////Prnding pehlybotny ///////
+export const savePendingPhlebotomyData = async (data) => {
+  try {
+
+      const response = await axios.post(`${Url}/phelobotny/savePendingPhlebotomyData`, data);
+      return response.data;
+  } catch (error) {
+      throw new Error('Error occurred while saving pending phlebotomy data:', error);
+  }
+};
+
+// Function to fetch pending phlebotomy data
+export const getPendingPhlebotomyData = async () => {
+
+    return await axios.get(`${Url}/phelobotny/savePendingPhlebotomyData`);
+
+};

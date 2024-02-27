@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { getTokenDetails } from "../../Services/API";
-import Barcode from 'react-barcode';
+import { getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData } from "../../Services/API";
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [selectedOption, setSelectedOption] = useState('Phlebotomy');
+    const [selectedOption, setSelectedOption] = useState('Pending Phlebotomy'); // Set the default selected option
     const [registrationDetails, setRegistrationDetails] = useState([]);
+    const [pendingPhlebotomy, setPendingPhlebotomy] = useState([]);
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
     const [remarks, setRemarks] = useState('');
     const navigation = useNavigate();
@@ -26,6 +26,24 @@ const Phlebotomy = () => {
 
         fetchTokenDetails();
     }, []);
+
+
+    useEffect(() => {
+        const fetchPendingData = async () => {
+            if (selectedOption === 'Pending Phlebotomy') {
+                try {
+                    const response = await getPendingPhlebotomyData(); // Fetch pending phlebotomy data
+                    setPendingPhlebotomy(response.data);
+                    console.log('Pending Phlebotomy Data:', response.data);
+                } catch (error) {
+                    console.log('Error occurred while fetching pending phlebotomy data:', error);
+                }
+            }
+        };
+
+        fetchPendingData();
+    }, [selectedOption]);
+    
 
     useEffect(() => {
         // Set default "to" date to today in the format "YYYY-MM-DD"
@@ -46,19 +64,50 @@ const Phlebotomy = () => {
         return date.toISOString().split('T')[0];
     });
 
+
+
     const handleOptionChange = (e) => {
         setSelectedOption(e.target.value);
     };
 
     const handlePatientClick = (pin) => {
-        // Find the selected patient from the registrationDetails array
-        const selectedPatientData = registrationDetails.find(patient => patient.patientData.pin === pin);
+        // Check if the selected patient is in the registrationDetails array
+        let selectedPatientData = registrationDetails.find(patient => patient.patientData.pin === pin);
+        
+        // If the patient is not found in registrationDetails, check in pendingPhlebotomy
+        if (!selectedPatientData) {
+            selectedPatientData = pendingPhlebotomy.find(patient => patient.patientData.pin === pin);
+        }
+        
         setSelectedRegistrationDetails(selectedPatientData);
-        };
+    };
+    
 
     const handleTransferData = () => {
         navigation('/phelobotny/phlebotomy/Report', {state: {selectedRegistrationDetails, remarks}});
     }
+
+    const handleTransferToPending = async () => {
+        // Check if remarks field is empty
+        if (!remarks) {
+            console.error('Remarks field is required.');
+            return;
+        }
+    
+        // Save pending phlebotomy data to the backend API
+        try {
+            // Ensure that remarks are provided along with selectedRegistrationDetails
+            await savePendingPhlebotomyData({ ...selectedRegistrationDetails, remarks });
+            setPendingPhlebotomy([...pendingPhlebotomy, { ...selectedRegistrationDetails, remarks }]);
+            setRegistrationDetails(registrationDetails.filter(patient => patient.patientData.pin !== selectedRegistrationDetails.patientData.pin));
+            setSelectedRegistrationDetails(null);
+        } catch (error) {
+            console.error('Error occurred while saving pending phlebotomy data:', error);
+        }
+    };
+    const filteredRecords = selectedOption === 'Pending Phlebotomy' ? pendingPhlebotomy : registrationDetails;
+    const filteredTotalRecords = registrationDetails.filter(token => !pendingPhlebotomy.some(p => p.patientData.pin === token.patientData.pin));
+
 
     return (
         <div className="phlebotomy-container">
@@ -90,13 +139,21 @@ const Phlebotomy = () => {
                                 ))}
                             </select>
                             <select
-                                id="phlebotomyType"
-                                value={selectedOption}
-                                onChange={handleOptionChange}
-                            >
-                                <option value="Phlebotomy">Phlebotomy</option>
-                                <option value="Pending Phlebotomy">Pending Phlebotomy</option>
-                            </select>
+                id="phlebotomyType"
+                value={selectedOption}
+                onChange={handleOptionChange}
+            >
+                {selectedOption === 'Pending Phlebotomy' ? (
+                    <option value="Pending Phlebotomy">Pending Phlebotomy</option>
+                ) : null}
+            </select>
+            {/* Render patient list based on selected option */}
+            {filteredRecords?.map((data) => (
+    <tr key={data.patientData.pin}>
+        <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
+    </tr>
+))}
+
                         </div>
                         <div className="pl-patient-container">
                             <div className="pl-patient-search">
@@ -105,15 +162,13 @@ const Phlebotomy = () => {
                             <p>Total Records: </p>
                             <div className="pl-patient-list-container">
                                 <table className="pl-patient-list">
-                                    <tbody>
-                                        {
-                                            registrationDetails.map((data) => (
-                                                <tr>
-                                                    <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
+                                <tbody>
+    {filteredTotalRecords.map((data) => (
+        <tr key={data.patientData.pin}>
+            <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
+        </tr>
+    ))}
+</tbody>
                                 </table>
                             </div>
                         </div>
@@ -184,7 +239,7 @@ const Phlebotomy = () => {
                             <button>Save Remarks</button>
                         </div>
                         <div className="pr-buttons-container">
-                            <button>Pending</button>
+                             <button onClick={handleTransferToPending}>Pending</button>
                             <button>Print Barcode</button>
                             <button onClick={handleTransferData}>Transfer</button>
                             {/* <Link to='/phelobotny/phlebotomy/Report' style={{ width: "100%" }}>
