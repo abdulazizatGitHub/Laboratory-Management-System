@@ -9,27 +9,81 @@ import { useState } from "react";
 const DetailStaff = () => {
     const location = useLocation();
     const { data } = location.state;
-    const[token,setToken] = useState([]);
-    const[daily,setDaily] = useState([]);
+    const [token, setToken] = useState([]);
 
-    useEffect(()=>{
-        console.log("data is ", data);
+    const [monthly, setMonthly] = useState({ numOfToken: 0, amount: 0 });
+    const [daily, setDaily] = useState({ numOfToken: 0, amount: 0 });
+
+    useEffect(() => {
         getGenerateTokenData();
-    },[]);
+    }, []);
 
-    const getGenerateTokenData=async()=>{
-        const data = await getGeneratedToken(); 
-        setToken(data);
+    useEffect(() => {
+        getMonthlyData();
         getDailyData();
+    }, [token]);
+
+    const getGenerateTokenData = async () => {
+        try {
+            const tokenData = await getGeneratedToken();
+            const filteredTokenData = tokenData.filter(d => d.generatedBy === data.userName);
+            setToken(filteredTokenData);
+        } catch (error) {
+            console.error("Error fetching token data:", error);
+        }
     }
 
-    const getDailyData=()=>{
+
+    const getDailyData = () => {
+        const mnthData = token.filter(tkn => {
+            let dateStr = tkn.dateTime;
+            let dateObj = new Date(dateStr);
+            let mnthNum = dateObj.getMonth() + 1;
+            let dayNum = dateObj.getDate();
+            if (mnthNum == new Date().getMonth() + 1) {
+                if (dayNum == new Date().getDate()) {
+                        
+                    return tkn;
+                }
+            }
+        })
+
+        let sum = 0;
+
+        mnthData.forEach((dat) => {
+            sum += dat.grandTotal;
+        });
+
+        setDaily({
+            numOfToken: mnthData.length,
+            amount: sum
+        });
+    }
+
+    const getMonthlyData = () => {
         console.log("Token is ", token, " and cnic ", data.userName)
-        const dateTimeString = token[0].dateTime;
-        const dateTime = new Date(dateTimeString);
-         const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-           const dayOfWeekIndex = dateTime.getDay();
-          const dayOfWeek = daysOfWeek[dayOfWeekIndex];
+
+        const dailyData = token.filter(tkn => {
+            let dateStr = tkn.dateTime;
+            let dateObj = new Date(dateStr);
+            let mnthNum = dateObj.getMonth() + 1 ;
+            if (mnthNum == new Date().getMonth()+1 ) {
+                return tkn;
+            }
+
+
+        })
+
+        let sum = 0;
+
+        dailyData.forEach((dat) => {
+            sum += dat.grandTotal;
+        });
+
+        setMonthly({
+            numOfToken: dailyData.length,
+            amount: sum
+        });
     }
 
     // Dummy data for demonstration
@@ -72,11 +126,11 @@ const DetailStaff = () => {
                     <div className="sr-daily-details">
                         <div className="sr-daily-content">
                             <p>Total Number of Tokens</p>
-                            <p>20</p>
+                            <p>{daily.numOfToken}</p>
                         </div>
                         <div className="sr-daily-content">
                             <p>Total amount</p>
-                            <p>2000</p>
+                            <p>{daily.amount}</p>
                         </div>
                     </div>
                     {/* Daily Sales Chart */}
@@ -92,16 +146,16 @@ const DetailStaff = () => {
                     <div className="sr-daily-details">
                         <div className="sr-daily-content">
                             <p>Total Number of Tokens</p>
-                            <p>20</p>
+                            <p>{monthly.numOfToken}</p>
                         </div>
                         <div className="sr-daily-content">
                             <p>Total amount</p>
-                            <p>2000</p>
+                            <p>{monthly.amount}</p>
                         </div>
                     </div>
                     {/* Monthly Sales Chart */}
                     <div className="sr-daily-detail-graph">
-                    <MonthlySalesChart data={monthlySalesData} />
+                        <MonthlySalesChart data={monthlySalesData} />
                     </div>
                 </div>
             </div>

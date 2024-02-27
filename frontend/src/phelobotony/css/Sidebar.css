@@ -4,7 +4,7 @@
 
 .sidebar-container {
     position: fixed;
-    top: 0px;
+    top: 0;
     left: 0;
     width: 17%; 
     z-index: 99;
@@ -56,7 +56,7 @@
 .main {
     margin-left: 250px; /* Adjusted the margin to match the sidebar width */
     font-size: 20px; /* Increased text to enable scrolling */
-    padding: 20px; /* Adjusted padding for content */
+    /* padding: 20px; Adjusted padding for content */
 }
 
 .active {

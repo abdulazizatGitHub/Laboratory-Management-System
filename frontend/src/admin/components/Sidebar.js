@@ -75,9 +75,9 @@ function Sidebar({ setIsSideBar }) {
                     <Link to="MonthlyReport" style={{ textDecoration: 'none' }} onClick={handleLinkClick} ><p >Monthly Report</p></Link>
                 </div>
 
-                <div className="version">Version 1.0</div>
 
             </div>
+                <div className="version">Version 1.0</div>
         </div>
     );
 }
