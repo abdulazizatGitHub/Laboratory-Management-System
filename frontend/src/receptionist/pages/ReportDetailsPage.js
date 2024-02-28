@@ -9,7 +9,10 @@ import { addPhlebotomyReport,updateToken } from "../../Services/API";
 function ReportDetailsPage() {
 
     const location = useLocation();
-    // const { selectedRegistrationDetails } = location.state;
+    const { data } = location.state;
+    useEffect(()=>{
+        console.log("S...... ", data);
+    })
     
     // const [generatedDateTime, setGeneratedDateTime] = useState(null);
     // const [testResults, setTestResults] = useState({}); 

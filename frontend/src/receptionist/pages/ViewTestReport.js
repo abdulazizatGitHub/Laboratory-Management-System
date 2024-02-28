@@ -20,22 +20,25 @@ const ViewTestReport = () => {
 
     const isToday = (someDate) => {
         const today = new Date();
-        const date = new Date(someDate);
-        return (
-            date.getDate() === today.getDate() &&
-            date.getMonth() === today.getMonth() &&
-            date.getFullYear() === today.getFullYear()
-        );
+        const date = today.getDate();
+const month = today.getMonth() + 1; 
+const year = today.getFullYear();
+
+const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).slice(-2)}`;
+
+        const dat = someDate;
+        if(generatedDateTime === dat)
+        return true;
+        
     }
     
     const fetchdata = async () => {
-        const response = await getTestReportDetails();
-      console.log('The report data is: ', response.data);
-        // Filter the data to include only today's data
-        const todayData = response.data.filter(item => isToday(item.dateTime));
-    
-        console.log("Today's Patient Data is ", todayData);
-        setReportData(response.data);
+      const response = await getTestReportDetails();
+      const todayData = response.data.filter(item => isToday(item.dateTime));
+        
+
+        // console.log("Today's Patient Data is ", todayData);
+        setReportData(todayData);
     }
     
 
@@ -59,8 +62,8 @@ const ViewTestReport = () => {
     }
 
 
-    const handleReceipt = () => {
-        navigation('/receptionist/view_test_report/ReportDetailsPage')
+    const handleReceipt = (data) => {
+        navigation('/receptionist/view_test_report/ReportDetailsPage', { state: { data } });
     }
 
     const filteredData = selectedField === "PIN"
@@ -130,7 +133,7 @@ const ViewTestReport = () => {
                                 <td>{data.patientDetails.mobileNumber}</td>
                                 <td>{data.dateTime}</td>
                                 <td>{data.state}</td>
-                                <td><button type="submit" id="ViewTestReport-roundButton" onClick={handleReceipt}>Receipt</button></td>
+                                <td><button type="submit" id="ViewTestReport-roundButton" onClick={()=>handleReceipt(data)}>Receipt</button></td>
                             </tr>
                         ))
 

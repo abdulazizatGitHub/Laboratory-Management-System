@@ -1,18 +1,18 @@
-import React, {useEffect, useRef, useState} from "react";
-import '../css/Report.css' 
+import React, { useEffect, useRef, useState } from "react";
+import '../css/Report.css'
 import { FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing the icons from react-icons library
 import img1 from '../../Assessts/Images/Logo2.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import JsBarcode from 'jsbarcode';
-import { addPhlebotomyReport,updateToken } from "../../Services/API";
+import { addPhlebotomyReport, updateToken } from "../../Services/API";
 
 function Report() {
 
     const location = useLocation();
     const { selectedRegistrationDetails } = location.state;
-    
-    const [generatedDateTime, setGeneratedDateTime] = useState(null);
-    const [testResults, setTestResults] = useState({}); 
+
+    const [generatedDateTime, setGeneratedDateTime] = useState("");
+    const [testResults, setTestResults] = useState({});
     const canvasRef = useRef(null);
     const navigation = useNavigate();
 
@@ -29,7 +29,7 @@ function Report() {
             });
         }
     }, [selectedRegistrationDetails]);
-    
+
     const handleInputChange = (testName, value) => {
         setTestResults(prevResults => {
             // Use a copy of the previous state to avoid modifying it directly
@@ -56,25 +56,25 @@ function Report() {
         document.body.innerHTML = originalContents;
     };
 
-    const handleFinalizeReport = () => {
-        const currentDate = new Date();
-        const formattedDate = currentDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-        const formattedTime = currentDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-        const generatedOn = `${formattedDate} at ${formattedTime}`;
     
-        setGeneratedDateTime(generatedOn);
-    }
-
     const handleAddPhlebotomyReport = async (e) => {
         e.preventDefault();
+
+        const currentDate = new Date();
+
+
+        const date = currentDate.getDate();
+        const month = currentDate.getMonth() + 1;
+        const year = currentDate.getFullYear();
+
+        const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).slice(-2)}`;
         
-        handleFinalizeReport();
 
         // Create an array of formatted tests
         const formattedTests = selectedRegistrationDetails.tests.map((data) => {
             const testName = data.name;
             const inputValue = testResults[testName] || ""; // Get the input value associated with the test
-    
+
             return {
                 name: testName,
                 result: inputValue,
@@ -86,7 +86,7 @@ function Report() {
         });
 
         handleFinalized();
-    
+
         const reportData = {
             tokenNumber: selectedRegistrationDetails.tokenNumber,
             state: "Finalized", // Replace with your actual state
@@ -97,35 +97,35 @@ function Report() {
             dateTime: generatedDateTime,
         };
 
-        
+
         console.log('The report data is: ', reportData);
 
-        try {
-            const response = await addPhlebotomyReport(reportData);
+            try {
+                const response = await addPhlebotomyReport(reportData);
 
-            if(response.data.message === true) {
-                alert('Report has been finalized successfully');
-                navigation('/phelobotny/phlebotomy');
-            } else {
-                alert('Error try again to finalize the report');
+                if(response.data.message === true) {
+                    alert('Report has been finalized successfully');
+                    navigation('/phelobotny/phlebotomy');
+                } else {
+                    alert('Error try again to finalize the report');
+                }
+
+            } catch (error) {
+                console.log('The error in saving the report data is: ', error);
             }
-            
-        } catch (error) {
-            console.log('The error in saving the report data is: ', error);
         }
-    }
-    const handleFinalized = async () => {
-       
-        try {
-            const tokenId = selectedRegistrationDetails._id;
-            const state = "Finalized";
-          const updatedTokenData = { ...selectedRegistrationDetails, state };
+        const handleFinalized = async () => {
 
-         await updateToken(tokenId, updatedTokenData);
-         
-        } catch (error) {
-            console.error('Error occurred while saving finilized phlebotomy data:', error);
-        }
+            try {
+                const tokenId = selectedRegistrationDetails._id;
+                const state = "Finalized";
+              const updatedTokenData = { ...selectedRegistrationDetails, state };
+
+             await updateToken(tokenId, updatedTokenData);
+
+            } catch (error) {
+                console.error('Error occurred while saving finilized phlebotomy data:', error);
+            }
     };
 
     return (
@@ -143,7 +143,7 @@ function Report() {
                         </div>
                     </div>
                     <div className="Report-Right">
-                        <a><FaPhone  color='#6ec007'/> 03000-98545565/0303-0094836</a>
+                        <a><FaPhone color='#6ec007' /> 03000-98545565/0303-0094836</a>
                         <a><FaEnvelope color='#6ec007' /> doctorkhan123@gmail.com</a>
                     </div>
                 </div>
@@ -168,14 +168,14 @@ function Report() {
                     <span className="R-Line"></span>
 
                     <div className="R-Report">
-                    <div className="bar-code"> <canvas ref={canvasRef} /></div> 
-                    
-                    <div className="generated">
-                    <p >Reffered on:12:23pm</p>
-                        <p>Reported on:12:20pm</p>
-                        <p>Collected on:12:30pm</p>
-                    </div>
-                        
+                        <div className="bar-code"> <canvas ref={canvasRef} /></div>
+
+                        <div className="generated">
+                            <p >Reffered on:12:23pm</p>
+                            <p>Reported on:12:20pm</p>
+                            <p>Collected on:12:30pm</p>
+                        </div>
+
                     </div>
 
                 </div>
@@ -196,17 +196,17 @@ function Report() {
                         </thead>
                         <tbody className="tableBody-report">
                             {selectedRegistrationDetails.tests.map((data) => (
-                                <tr className="tableBody-row">
-                                <td>{data.name}</td>
-                                <td> <input type="text" 
-                                    placeholder="Enter value" 
-                                    id="input-report"
-                                    value={testResults[data.name] || ""}
+                                <tr key={data._id} className="tableBody-row">
+                                    <td>{data.name}</td>
+                                    <td> <input type="text"
+                                        placeholder="Enter value"
+                                        id="input-report"
+                                        value={testResults[data.name] || ""}
                                         onChange={(e) => handleInputChange(data.name, e.target.value)}
-                                /> 
-                                </td>
-                                <td>{selectedRegistrationDetails.patientData.gender === 'male' ? data.normalRange.male.from + ' - ' + data.normalRange.male.to : data.normalRange.female.from + ' - ' + data.normalRange.female.to}</td>
-                                <td>{data.unit}</td>
+                                    />
+                                    </td>
+                                    <td>{selectedRegistrationDetails.patientData.gender === 'male' ? data.normalRange.male.from + ' - ' + data.normalRange.male.to : data.normalRange.female.from + ' - ' + data.normalRange.female.to}</td>
+                                    <td>{data.unit}</td>
                                 </tr>
                             ))
 
@@ -223,14 +223,14 @@ function Report() {
 
                         <div className="Fl-report" >
                             <p>Report Preparaed By</p>
-                            
+
                             <h4>{JSON.parse(localStorage.getItem('user')).name}</h4>
                             <h5>Pathologist</h5>
                         </div>
 
                         <div className="Fl-report" >
                             <p>Reviewed By</p>
-                            
+
                             <h4>{JSON.parse(localStorage.getItem('user')).name}</h4>
                             <h5>Pathologist</h5>
                         </div>
@@ -244,7 +244,7 @@ function Report() {
             </section>
 
             <div className="sr-button-container">
-            <button onClick={handleAddPhlebotomyReport}>Finalized</button>
+                <button onClick={handleAddPhlebotomyReport}>Finalized</button>
             </div>
         </div>
     )

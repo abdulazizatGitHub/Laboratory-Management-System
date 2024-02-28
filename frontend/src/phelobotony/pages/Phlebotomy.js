@@ -67,7 +67,10 @@ const Phlebotomy = () => {
 
 
     const handleTransferData = () => {
+        if(selectedRegistrationDetails.remark !== "")
         navigation('/phelobotny/phlebotomy/Report', { state: { selectedRegistrationDetails } });
+        else
+        alert("Remarks are required")
     }
 
     const handleTransferToPending = async () => {
@@ -298,7 +301,7 @@ const Phlebotomy = () => {
                             />
                             <button onClick={handleAddRemark} style={selectedRegistrationDetails==null ? {display:"none"}: {}}>Save Remarks</button>
                         </div>
-                        <div className="pr-buttons-container">
+                        <div className="pr-buttons-container" style={selectedRegistrationDetails==null ? {display:"none"}: {}}>
                             <button onClick={handleTransferToPending}>Pending</button>
                             <button onClick={generateBarcodeAndSaveToPDF}>Print Barcode</button>
                             <div id="barcode" style={{ display: 'none' }}></div>
