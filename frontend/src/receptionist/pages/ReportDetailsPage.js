@@ -9,12 +9,12 @@ import { addPhlebotomyReport,updateToken } from "../../Services/API";
 function ReportDetailsPage() {
 
     const location = useLocation();
-    const { selectedRegistrationDetails } = location.state;
+    // const { selectedRegistrationDetails } = location.state;
     
-    const [generatedDateTime, setGeneratedDateTime] = useState(null);
-    const [testResults, setTestResults] = useState({}); 
-    const canvasRef = useRef(null);
-    const navigation = useNavigate();
+    // const [generatedDateTime, setGeneratedDateTime] = useState(null);
+    // const [testResults, setTestResults] = useState({}); 
+    // const canvasRef = useRef(null);
+    // const navigation = useNavigate();
 
     // useEffect(() => {
     //     if (canvasRef.current) {
