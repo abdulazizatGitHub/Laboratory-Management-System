@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { getGeneratedToken, getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData, updateToken } from "../../Services/API";
+import { getGeneratedToken,  updateToken } from "../../Services/API";
 import JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
 import ReactDOM from 'react-dom'; 
@@ -9,10 +9,8 @@ import ReactDOM from 'react-dom';
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [selectedOption, setSelectedOption] = useState('All Records'); 
-    const [registrationDetails, setRegistrationDetails] = useState([]);
-    const [pendingPhlebotomy, setPendingPhlebotomy] = useState([]);
-    const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
+    const [selectedOption, setSelectedOption] = useState('All Records'); // Set the default selected option
+     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
     const [remarks, setRemarks] = useState('');
     const [state,setState] = useState('');
     const navigation = useNavigate();
@@ -22,8 +20,7 @@ const Phlebotomy = () => {
         const fetchTokenDetails = async () => {
             try {
                 const res = await getGeneratedToken();
-                // const response = await getTokenDetails();
-                setRegistrationDetails(res);
+                
                 setAllTokens(res);
                 console.log("res.data is ",res , " and ", allToken)
                 
@@ -35,21 +32,6 @@ const Phlebotomy = () => {
     }, [state]);
 
 
-    // useEffect(() => {
-    //     const fetchPendingData = async () => {
-    //         if (selectedOption === 'Pending Phlebotomy') {
-    //             try {
-    //                 const response = await getPendingPhlebotomyData(); // Fetch pending phlebotomy data
-    //                 setPendingPhlebotomy(response.data);
-    //                 console.log('Pending Phlebotomy Data:', response.data);
-    //             } catch (error) {
-    //                 console.log('Error occurred while fetching pending phlebotomy data:', error);
-    //             }
-    //         }
-    //     };
-
-    //     fetchPendingData();
-    // }, [selectedOption]);
 
 
     useEffect(() => {
@@ -219,15 +201,9 @@ const Phlebotomy = () => {
                             >
                                 <option value="All Records">All Records</option>
                                 <option value="Pending Records">Pending Phlebotomy</option>
-                                {/* {selectedOption === 'Pending Phlebotomy' ? (
-                                    <option value="Pending Phlebotomy">Pending Phlebotomy</option>
-                                ) : null} */}
+                               
                             </select>
-                            {/* {filteredRecords?.map((data) => (
-                                <tr key={data.patientData.pin}>
-                                    <td onClick={() => handlePatientClick(data.patientData.pin)}>{data.patientData.pin}</td>
-                                </tr>
-                            ))} */}
+                           
 
                         </div>
                         <div className="pl-patient-container">
