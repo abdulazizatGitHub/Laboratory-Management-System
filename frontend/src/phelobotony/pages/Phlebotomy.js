@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import '../css/Phlebotomy.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { getGeneratedToken, getPendingPhlebotomyData, getTokenDetails, savePendingPhlebotomyData, updateToken } from "../../Services/API";
+import JsBarcode from 'jsbarcode';
+import jsPDF from 'jspdf';
+import ReactDOM from 'react-dom'; 
 
 const Phlebotomy = () => {
     const [fromDate, setFromDate] = useState('');
     const [toDate, setToDate] = useState('');
-    const [selectedOption, setSelectedOption] = useState('All Records'); // Set the default selected option
+    const [selectedOption, setSelectedOption] = useState('All Records'); 
     const [registrationDetails, setRegistrationDetails] = useState([]);
     const [pendingPhlebotomy, setPendingPhlebotomy] = useState([]);
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
@@ -128,6 +131,52 @@ const Phlebotomy = () => {
           console.error('Error occurred while adding remarks:', error);
         }
       };
+
+
+   const generateBarcodeAndSaveToPDF = () => {
+    if (!selectedRegistrationDetails) {
+        alert('Please select a patient.');
+        return;
+    }
+
+    const doc = new jsPDF();
+    const barcodeValue = selectedRegistrationDetails.patientData.pin;
+    const tokenNo = selectedRegistrationDetails.tokenNumber;
+
+    // Create a canvas element to render the barcode
+    const canvas = document.createElement('canvas');
+
+    // Get the context of the canvas
+    const ctx = canvas.getContext('2d');
+
+    // Generate barcode with PIN and token number
+    JsBarcode(canvas, barcodeValue + '\n' + tokenNo, {
+        format: "CODE128",
+        displayValue: true,
+        width: 0.8,
+        height: 15,
+        fontSize: 18, 
+        margin: 8
+    });
+
+    // Set font style for PIN and token number
+    const fontStyle = '5px Arial'; // Adjust font size and family as needed
+    ctx.font = fontStyle;
+
+    // Draw the text on canvas
+    ctx.fillText(barcodeValue, canvas.width / 4, canvas.height + 10); // Adjust x-coordinate for PIN
+    ctx.fillText(tokenNo, (canvas.width / 4) * 3, canvas.height + 10); // Adjust x-coordinate for token number
+
+    // Convert canvas to data URL
+    const imgData = canvas.toDataURL();
+
+    // Add the barcode image to the PDF
+    doc.addImage(imgData, 'PNG', 5, 5, 40, 20); // Increase height to accommodate both lines of text
+
+    // Save the PDF
+    doc.save(`barcode_${barcodeValue}.pdf`);
+};
+
     
     // const filteredRecords = selectedOption === 'Pending Phlebotomy' ? pendingPhlebotomy : registrationDetails;
     // const filteredTotalRecords = registrationDetails.filter(token => !pendingPhlebotomy.some(p => p.patientData.pin === token.patientData.pin));
@@ -275,11 +324,10 @@ const Phlebotomy = () => {
                         </div>
                         <div className="pr-buttons-container">
                             <button onClick={handleTransferToPending}>Pending</button>
-                            <button>Print Barcode</button>
+                            <button onClick={generateBarcodeAndSaveToPDF}>Print Barcode</button>
+                            <div id="barcode" style={{ display: 'none' }}></div>
                             <button onClick={handleTransferData}>Transfer</button>
-                            {/* <Link to='/phelobotny/phlebotomy/Report' style={{ width: "100%" }}>
-                                
-                            </Link> */}
+
                         </div>
                     </div>
                 </div>
