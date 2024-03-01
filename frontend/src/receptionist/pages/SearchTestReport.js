@@ -113,7 +113,7 @@ const SearchTestReport = () => {
                   <th>PIN</th>
                   <th>Token No</th>
                   <th>Name</th>
-                  <th>Cnic</th>
+                  <th>CNIC</th>
                   <th>Mobile Number</th>
                   <th>Date and Time</th>
                   <th>Status</th>

@@ -115,7 +115,7 @@ const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).sli
                   <th>PIN</th>
                   <th>Token No</th>
                   <th>Name</th>
-                  <th>Cnic</th>
+                  <th>CNIC</th>
                   <th>Mobile Number</th>
                   <th>Date and Time</th>
                   <th>Status</th>
