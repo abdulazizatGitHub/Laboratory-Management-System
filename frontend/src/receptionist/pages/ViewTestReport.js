@@ -73,6 +73,7 @@ const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).sli
         : reportData.filter(data => data.patientDetails.cnic && data.patientDetails.cnic.includes(queryByCNIC))
     )
 
+      
     
 
 
