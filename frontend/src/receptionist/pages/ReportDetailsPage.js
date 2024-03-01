@@ -27,11 +27,18 @@ function ReportDetailsPage() {
         }
     }, [data]);
 
-
+ // Function to print only the Main-Report-container div
+ const handlePrint = () => {
+    let printContents = document.getElementById('Main-report').innerHTML;
+    let originalContents = document.body.innerHTML;
+    document.body.innerHTML = printContents;
+    window.print();
+   document.body.innerHTML = originalContents; 
+};
 
     return (
         <div className="Main-Report-container">
-            <section className="Main-report">
+            <section id="Main-report" className="Main-report">
                 <div className="Header-report">
                     <div className="Report-smCnt">
                         <div className="Report-left-image">
@@ -139,7 +146,7 @@ function ReportDetailsPage() {
             </section>
 
             <div className="sr-button-container">
-                <button>Print</button>
+                <button  onClick={handlePrint}>Print</button>
             </div>
         </div>
     )
