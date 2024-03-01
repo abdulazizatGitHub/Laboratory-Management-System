@@ -31,7 +31,7 @@ const Right = ({setIsSideBar}) => {
             <Route path="/SearchPatient" element={<SearchPatient />} />
             <Route path="/ChangedPassword" element={<ChangePassword />} />
             <Route path="/view_test_report/ReportDetailsPage" element={<ReportDetailsPage />} />
-            
+            <Route path="/search_test_report/ReportDetailsPage" element={<ReportDetailsPage />} />
           </Routes>
           
         </div>

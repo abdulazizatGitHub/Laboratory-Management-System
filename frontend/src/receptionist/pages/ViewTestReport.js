@@ -133,7 +133,7 @@ const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).sli
                                 <td>{data.patientDetails.mobileNumber}</td>
                                 <td>{data.dateTime}</td>
                                 <td>{data.state}</td>
-                                <td><button type="submit" id="ViewTestReport-roundButton" onClick={()=>handleReceipt(data)}>Receipt</button></td>
+                                <td><button style={{cursor: 'pointer'}} type="submit" id="ViewTestReport-roundButton" onClick={()=>handleReceipt(data)}>Receipt</button></td>
                             </tr>
                         ))
 

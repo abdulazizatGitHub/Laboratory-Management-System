@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
+import { useNavigate } from "react-router";
 import { getAllTestReportDetails, getGeneratedToken, getPatientDetails } from "../../Services/API";
 const SearchTestReport = () => {
 
@@ -10,6 +11,8 @@ const SearchTestReport = () => {
     const [selectedField, setSelectedField] = useState("PIN");
 
     const [reportData, setReportData] = useState([]);
+
+    const navigation = useNavigate();
 
     useEffect(() => {
         fetchdata();
@@ -33,7 +36,7 @@ const SearchTestReport = () => {
         });
     
         console.log("Current Month's Patient Data is ", monthData);
-        setReportData(monthData);
+        setReportData(response.data);
     }
     
     
@@ -58,15 +61,15 @@ const SearchTestReport = () => {
     }
 
 
-    const handleReceipt = () => {
-        console.log("Printing Receipt");
-    }
+    const handleReceipt = (data) => {
+      navigation('/receptionist/search_test_report/ReportDetailsPage', { state: { data } });
+  }
 
     const filteredData = selectedField === "PIN"
-    ? reportData.filter(data => data.patientData.pin && data.patientData.pin.includes(queryByPIN))
+    ? reportData.filter(data => data.patientDetails.pin && data.patientDetails.pin.includes(queryByPIN))
     : (selectedField === "CONTACT"
-        ? reportData.filter(data => data.patientData.mobileNumber && data.patientData.mobileNumber.includes(queryByContact))
-        : reportData.filter(data => data.patientData.cnic && data.patientData.cnic.includes(queryByCNIC))
+        ? reportData.filter(data => data.patientDetails.mobileNumber && data.patientDetails.mobileNumber.includes(queryByContact))
+        : reportData.filter(data => data.patientDetails.cnic && data.patientDetails.cnic.includes(queryByCNIC))
     )
     
 
@@ -113,7 +116,7 @@ const SearchTestReport = () => {
                   <th>Cnic</th>
                   <th>Mobile Number</th>
                   <th>Date and Time</th>
-                  <th>Total Price</th>
+                  <th>Status</th>
                   <th>Reciept</th>
                     </tr>
                 </thead>
@@ -121,14 +124,14 @@ const SearchTestReport = () => {
                     {
                        filteredData.map((data) => (
                             <tr key={data._id}>
-                                <td>{data.patientData.pin}</td>
+                                <td>{data.patientDetails.pin}</td>
                                 <td>{data.tokenNumber}</td>
-                                <td>{data.patientData.name}</td>
-                                <td>{data.patientData.cnic}</td>
-                                <td>{data.patientData.mobileNumber}</td>
+                                <td>{data.patientDetails.name}</td>
+                                <td>{data.patientDetails.cnic}</td>
+                                <td>{data.patientDetails.mobileNumber}</td>
                                 <td>{data.dateTime}</td>
-                                <td>{data.grandTotal}</td>
-                                <td><button type="submit" id="ViewTestReport-roundButton" onClick={handleReceipt}>Receipt</button></td>
+                                <td>{data.state}</td>
+                                <td><button style={{cursor: 'pointer'}} type="submit" id="ViewTestReport-roundButton" onClick={() => handleReceipt(data)}>Receipt</button></td>
                             </tr>
                         ))
 
