@@ -3,10 +3,10 @@ import NamingBar from "../components/NamingBar";
 import '../CSS/PatientRegistration.css';
 import { getPatientDetails, registerPatient } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
-import { fetchTokenCount,getAllPatientNumbers } from "../../Services/API";
+import { fetchTokenCount, getAllPatientNumbers } from "../../Services/API";
 
 const PatientRegistration = () => {
-  
+
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -18,65 +18,28 @@ const PatientRegistration = () => {
     refDoctor: '',
     internalRemarks: '',
     patientRemarks: '',
-    pin:'',
   });
 
-  const [data,setData] = useState([]);
+  const [data, setData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     fetchPatientData();
-    
-   
-    fetchPatientNumber();
-    }, []); // Run only once when the component mounts
 
-      
+  }, []); // Run only once when the component mounts
 
-    
 
-    const fetchPatientData=async()=>{
-      const data = await getPatientDetails();
-      setData(data);
-      
-       }
 
-   const fetchPatientNumber = () => {
-    getAllPatientNumbers()
-      .then(patientCount => {
-        generatePin(patientCount);
-      })
-      .catch(error => console.error('Error fetching token count:', error));
-  };
 
-  
-    const generatePin = (patientCount) => {
-      const currentDate = new Date();
-      const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
-      const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-      let pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-      
-      // Check if data is available
-      if (data.length > 0) {
-        // Extract existing PINs from data
-        const existingPins = data.map(patient => patient.pin);
-    
-        // Generate a unique pin
-        while (existingPins.includes(pinNumber)) {
-          patientCount++; 
-          pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-        } 
-        
-      }
-    
-      setFormData(prevData => ({
-        ...prevData,
-        pin: pinNumber,
-      }));
-    };
-    
-  
+
+  const fetchPatientData = async () => {
+    const data = await getPatientDetails();
+    setData(data);
+
+  }
+
+
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
@@ -94,47 +57,43 @@ const PatientRegistration = () => {
     }));
   };
 
-  
-const handleNextClick = async (event) => {
-  event.preventDefault(); // Prevent the default form submission behavior
-  
-  // Manually check if any required fields are empty
-  const requiredFields = ['name', 'gender', 'age', 'cnic', 'mobileNumber', 'refDoctor', 'internalRemarks', 'patientRemarks'];
-  const isEmpty = requiredFields.some(field => !formData[field]);
-  
-  if (isEmpty) {
-    window.alert('Please fill in all required fields.');
-    return;
-  }
 
-  try {
-    const response = await registerPatient(formData);
-    
-    if (response.status === 200 && response.data.patient) {
-      // Patient already exists, show warning
-      window.alert('Patient already exists. Loading existing data.');
-      navigate("/receptionist/SearchPatient");
-    } else if (response.status === 201 && response.data.patient) {
-      window.alert('Patient registered successfully');
-      navigate("/receptionist/search_test", { state: { patientData: formData } });
-    } else {
-      // Handle other cases (error or unexpected response)
-      console.error('Unexpected response from the server:', response);
-    }
-  } catch (error) {
-    if (error.response && error.response.status === 200 && error.response.data.patient) {
-      // Patient already exists, show warning
-      window.alert('Patient already exists. Loading existing data.');
-      navigate("/receptionist/search_patient");
-    } else {
-      console.error('Error during registration:', error);
-    }
-  }
-};
+  const handleNextClick = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
 
-  
-  
-  
+    // Manually check if any required fields are empty
+    const requiredFields = ['name', 'gender', 'age', 'cnic', 'mobileNumber', 'refDoctor', 'internalRemarks', 'patientRemarks'];
+    const isEmpty = requiredFields.some(field => !formData[field]);
+
+    if (isEmpty) {
+      window.alert('Please fill in all required fields.');
+      return;
+    }
+
+    try {
+      const response = await registerPatient(formData);
+
+      if (response.status === 200 && response.data.patient) {
+        // Patient already exists, show warning
+        window.alert('Patient already exists. Loading existing data.');
+        navigate("/receptionist/SearchPatient");
+      } else if (response.status === 201 && response.data.patient) {
+        window.alert('Patient registered successfully');
+        navigate("/receptionist/search_test", { state: { patientData: formData } });
+      } else {
+        // Handle other cases (error or unexpected response)
+        console.error('Unexpected response from the server:', response);
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 200 && error.response.data.patient) {
+        // Patient already exists, show warning
+        window.alert('Patient already exists. Loading existing data.');
+        navigate("/receptionist/search_patient");
+      } else {
+        console.error('Error during registration:', error);
+      }
+    }
+  };
 
 
   return (
@@ -155,13 +114,13 @@ const handleNextClick = async (event) => {
                   Male
                 </label>
                 <input
-          className="patientGender-radio"
-          type="radio"
-          value="male"
-          checked={selectedGender === "male"}
-          onChange={handleGenderChange}
-          required // Add required attribute here
-        />
+                  className="patientGender-radio"
+                  type="radio"
+                  value="male"
+                  checked={selectedGender === "male"}
+                  onChange={handleGenderChange}
+                  required // Add required attribute here
+                />
 
               </div>
               <div className="Patient-Gender-label">
@@ -169,13 +128,13 @@ const handleNextClick = async (event) => {
                   Female
                 </label>
                 <input
-          className="patientGender-radio"
-          type="radio"
-          value="female"
-          checked={selectedGender === "female"}
-          onChange={handleGenderChange}
-          required // Add required attribute here
-        />
+                  className="patientGender-radio"
+                  type="radio"
+                  value="female"
+                  checked={selectedGender === "female"}
+                  onChange={handleGenderChange}
+                  required // Add required attribute here
+                />
 
               </div>
             </div>
@@ -216,9 +175,9 @@ const handleNextClick = async (event) => {
             <input type="text" id="refDoctor" name="refDoctor" placeholder="Enter Your Name" value={formData.refDoctor}
               onChange={handleInputChange} required /><br></br>
 
-             <label for="fname">Internal Remarks</label><br></br>
-              <input type="text" id="internalRemarks" name="internalRemarks" placeholder="Enter Your Rmarks" value={formData.internalRemarks}
-                onChange={handleInputChange} required /> 
+            <label for="fname">Internal Remarks</label><br></br>
+            <input type="text" id="internalRemarks" name="internalRemarks" placeholder="Enter Your Rmarks" value={formData.internalRemarks}
+              onChange={handleInputChange} required />
 
           </div>
 

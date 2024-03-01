@@ -1,35 +1,40 @@
-
-const fetchPatientNumber = () => {
-    getAllPatientNumbers()// This function gets the number of patient from the database.
-      .then(patientCount => {// NOw if the promise is resolved then the number is passed to the generate pin function  that is writtenbelow
-        generatePin(patientCount);
-      })
-      .catch(error => console.error('Error fetching token count:', error));
-  };
-
-
-
-  const generatePin = (patientCount) => {
+// Middleware function to generate a PIN based on the specified logic
+const generatePinMiddleware = (req, res, next) => {
+  try {
     const currentDate = new Date();
-    const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
-    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-    let pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
     
-    // Check if data is available
-    if (data.length > 0) {
-      // Extract existing PINs from data
-      const existingPins = data.map(patient => patient.pin);
-  
-      // Generate a unique pin
-      while (existingPins.includes(pinNumber)) {
-        patientCount++; 
-        pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-      } 
-      
+    // Extract year and month from the current date
+    const year = currentDate.getFullYear().toString().slice(2);
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+
+    // Check if the month has changed
+    if (req.app.locals.currentMonth !== month) {
+      // If the month has changed, reset the counter to 1
+      req.app.locals.pinCounter = 1;
+      req.app.locals.currentMonth = month;
     }
-  
-    setFormData(prevData => ({
-      ...prevData,
-      pin: pinNumber,
-    }));
-  };
+
+    // Create a counter to keep track of the PIN
+    let counter = req.app.locals.pinCounter || 1;
+
+    // Format the counter with leading zeros
+    const formattedCounter = ('0000' + counter).slice(-4);
+
+    // Construct the PIN with the specified format
+    const pin = `${year}${month}-${formattedCounter}`;
+
+    // Update the counter for the next PIN
+    req.app.locals.pinCounter = counter + 1;
+
+    // Attach the generated PIN to the request object
+    req.body.generatedPin = pin;
+
+    // Continue to the next middleware or route handler
+    next();
+  } catch (error) {
+    console.error('Error generating PIN:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+};
+
+export default generatePinMiddleware;
