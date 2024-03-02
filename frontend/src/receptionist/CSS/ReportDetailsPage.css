@@ -10,9 +10,9 @@
   font-family: var(--fontRegular);
 
 }
-#Main-report{
+/* #Main-report{
   max-height: 280vh;
-}
+} */
 .Main-report{
   display: flex;
   flex-direction: column;
@@ -218,7 +218,7 @@
   justify-content: center;
   width: 95%;
   /* max-height: 30vh; Change height to max-height */
-  overflow: auto;
+  /* overflow: hidden; */
   margin-bottom: 30rem; /* Add margin bottom to create space */
 }
 
