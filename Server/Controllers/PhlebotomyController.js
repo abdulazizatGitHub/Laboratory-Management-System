@@ -38,3 +38,49 @@ export const addPhlebotomyReport = async (req, res) => {
     
     
 }
+
+
+export const updateReport = async (req, res) => {
+    try {
+      // Extract token ID from request parameters
+      const tokenId = req.params.id;
+  
+      
+      // Extract updated token data from request body
+      const { tokenNumber,
+        state,
+        patientDetails,
+        report,
+        remarks,
+        generatedBy,
+        dateTime
+        } = req.body; 
+  
+      // Check if the token with the provided ID exists
+      const existingReport = await PhlebotomyReportModel.findById(tokenId);
+  
+      if (!existingReport) {
+        return res.status(404).json({ message: 'Token not found' });
+      }
+  
+      // Update the token document with the new data
+      existingReport.tokenNumber = tokenNumber;
+      existingReport.report = report;
+      existingReport.patientDetails = patientDetails;
+      existingReport.dateTime = dateTime;
+      existingReport.generatedBy = generatedBy;
+      existingReport.state= state;
+      existingReport.remarks = remarks;
+      
+      // Save the updated token document
+      const updatedReport = await existingReport.save();
+  
+      res.status(200).json({ message: 'Report updated successfully', report: updatedReport });
+    } catch (error) {
+      console.error('Error updating Report:', error);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  };
+  
+  
+  

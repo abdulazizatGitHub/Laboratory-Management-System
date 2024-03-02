@@ -201,3 +201,13 @@ export const getTestReportDetails = async () => {
 export const getAllTestReportDetails = async () => {
   return await axios.get(`${Url}/receptionist/search_test_report`);
 }
+
+
+export const updateReport = async (reportId, updatedReportData) => {
+  try {
+    const response = await axios.put(`/phelobotny/phlebotomy/${reportId}`, updatedReportData);
+    return response;
+  } catch (error) {
+    throw new Error('Error occurred while updating Report:', error);
+  }
+};
