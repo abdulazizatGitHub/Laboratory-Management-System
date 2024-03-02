@@ -217,9 +217,10 @@
   display: flex;
   justify-content: center;
   width: 95%;
-  height: 90vh;
+  height: 100vh;
   /* max-height: 30vh; Change height to max-height */
   overflow: visible;
+  margin-top: 1rem;
 }
 
 .RC-medical-lab-report-table {
@@ -283,7 +284,8 @@
   align-items: flex-start;
   width: 100%;
   height: fit-content;
-
+  margin-top: 1rem;
+  gap: 0.5rem;
 }
 
 .RC-Footer-Section {
