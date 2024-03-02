@@ -189,7 +189,7 @@
 }
 
 .sr-form-gender-main label {
-    font-size: var(--medium);
+    font-size: var(--small);
     font-weight: lighter;
     color: #5A6475;
     text-align: center; /* Center text */
