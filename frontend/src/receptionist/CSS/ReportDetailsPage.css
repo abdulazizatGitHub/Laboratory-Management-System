@@ -1,7 +1,7 @@
 @import '../../constants/Colors.css';
 
 
-.Main-Report-container{
+.RC-Main-Report-container{
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -13,20 +13,20 @@
 /* #Main-report{
   max-height: 280vh;
 } */
-.Main-report{
+.RC-Main-report{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 78%;
-  min-height: 100vh;
+  min-height: 95vh;
   gap: 0.5rem;
   border: 5px solid rgb(255, 253, 253);
   border-radius: 5px; 
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 
 }
-.Header-report{
+.RC-Header-report{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -36,18 +36,18 @@
   margin-top: 1rem;
   flex-wrap: wrap;
 }
-.Report-left-image {
+.RC-Report-left-image {
    width: 15%;
    height: 100%;
 }
 
-.logo-image {
+.RC-logo-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.Report-Middle{
+.RC-Report-Middle{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -57,16 +57,16 @@
   height: 100%;
 }
 
-.Report-Middle h3 {
+.RC-Report-Middle h3 {
   font-size: 20px;
 }
 
-.Report-Middle h3,
-.Report-Middle p {
+.RC-Report-Middle h3,
+.RC-Report-Middle p {
   margin-top: -10px;
 
 }
-.Report-Middle h1 {
+.RC-Report-Middle h1 {
   margin-top: -5px; /* Remove default margin from the top */
   font-size: 35px;
   font-weight: 900;
@@ -77,7 +77,7 @@
   color: transparent;
   display: inline-block;
 }
-.Report-smCnt{
+.RC-Report-smCnt{
   width: 70%;
   height: 100%;
   display: flex;
@@ -85,7 +85,7 @@
   align-items: center;
 }
 
-.Report-Right {
+.RC-Report-Right {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -97,7 +97,7 @@
 
 }
 
-.Report-Right a {
+.RC-Report-Right a {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,15 +106,15 @@
 
 
 /* ==================Middle================ */
-.Middle-Report-Section-Color{
+.RC-Middle-Report-Section-Color {
   width: 100%;
-  height: 2.5vh;
+  height: 3vh;
   background: linear-gradient(to right, #6ec007 -0.9%, #90EE90 100%);
   margin-bottom: 1rem;
   border-radius: 5px;
 }
 
-.Middle-Report-Section {
+.RC-Middle-Report-Section {
   display: flex;
  justify-content: flex-start;
  align-items: center;
@@ -123,7 +123,7 @@
   gap: 1rem;
   margin-bottom: 1rem;
 }
-.L-Report {
+.RC-L-Report {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -138,18 +138,18 @@
   font-weight: 800;
 } */
 
-.M-Report p, 
-.L-Report p{
+.RC-M-Report p, 
+.RC-L-Report p{
   margin-top: -15px;
 }
 
-.M-Report h3,
-.L-Report h3{
+.RC-M-Report h3,
+.RC-L-Report h3{
   margin-top: 0px;
   font-weight: 800;
 }
 
-.M-Report{
+.RC-M-Report{
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -159,7 +159,7 @@
   height: 100%;
 }
 
-.R-Report {
+.RC-R-Report {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -171,11 +171,11 @@
   /* border: 1px solid black; */
 }
 
-.bar-code{
+.RC-bar-code{
   width: 100%;
   /* border: 1px solid black; */
 }
-.generated {
+.RC-generated {
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -184,18 +184,18 @@
   
 }
 
-.R-Report p {
+.RC-R-Report p {
   font-weight: 600;
 }
 
-.R-Line {
+.RC-R-Line {
   width: 2px;
   height: 100%;
   background: linear-gradient(to right, #6ec007 -0.9%, #90EE90 100%);
 }
 
 /* =============After Middle======================== */
-.Middle-text {
+.RC-Middle-text {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -209,20 +209,20 @@
   padding-top: 1.3rem;
 }
 
-.Middle-text h2{
+.RC-Middle-text h2{
   text-align: center;
   font-size: 1.1em;
 }
-.Table-report {
+.RC-Table-report {
   display: flex;
   justify-content: center;
   width: 95%;
-  height: 80vh;
+  height: 90vh;
   /* max-height: 30vh; Change height to max-height */
   overflow: visible;
 }
 
-.medical-lab-report-table {
+.RC-medical-lab-report-table {
   width: 100%;
   /* height: auto; */
   height: fit-content;
@@ -231,7 +231,7 @@
 }
 
 
-.medical-lab-report-table th
+.RC-medical-lab-report-table th
 {
   border-left: none;
   border-right: none;
@@ -246,12 +246,12 @@
 } */
 
 
-.medical-lab-report-table td {
+.RC-medical-lab-report-table td {
   border: none; /* Remove borders from table header and data cells */
   padding: 0.5rem; /* Add padding for better readability */
 }
 
-.medical-lab-report-table tbody td {
+.RC-medical-lab-report-table tbody td {
   text-align: left; /* Align tbody content to the left */
   border: none;
 }
@@ -262,19 +262,19 @@
   border-right: none;
   outline: none;
 }
-.tableBody-row{
+.RC-tableBody-row{
   border: none;
 }
 
 
-.medical-lab-report-table tbody td,
-.medical-lab-report-table tbody tr  {
+.RC-medical-lab-report-table tbody td,
+.RC-medical-lab-report-table tbody tr  {
   background-color: transparent; /* Remove background color from table rows */
 }
 
 
 /* ====================Footer Section=============================== */
-.Footer-Section {
+.RC-Footer-Section {
   position: absolute;
   bottom: 0px;
   display: flex;
@@ -282,24 +282,24 @@
   justify-content: center;
   align-items: flex-start;
   width: 100%;
-  height: 25%;
+  height: fit-content;
 
 }
 
-.Main-report {
+.RC-Footer-Section {
   position: relative;
-  padding-bottom: 24.9rem; 
+  padding-bottom: 21rem; 
 
 }
 
 
-.Footer-Section-heading {
+.RC-Footer-Section-heading {
   margin-left: 1rem;
   font-weight: 800;
   font-size: large;
 }
 
-.Details-Footer{
+.RC-Details-Footer{
   width: 95%;
   /* height: 90%; */
    display: flex;
@@ -312,7 +312,7 @@
   border-left: none;
   border-right: none;
 }
-.Fl-report{
+.RC-Fl-report{
   width: 33%;
   display: flex;
   flex-direction: column;
@@ -321,7 +321,7 @@
 
 }
 
-.Main-Report-container button{
+/* .Main-Report-container button{
   
   background-color: var(--buttonColor);
   
@@ -331,9 +331,9 @@
   height: 2rem;
   border:1px solid var(--buttonColor);
   border-radius: 4px;
-}
+} */
 
-.generated-time {
+.RC-generated-time {
   position: relative;
   left: 70%;
 }
@@ -346,7 +346,7 @@
   border-radius: 5px;
 }
 
-.sr-button-container {
+.RC-sr-button-container {
   width: 20%;
   height: 10rem;
   display: flex;
@@ -356,12 +356,22 @@
   margin-top: 5rem;
 }
 
-.sr-button-container button {
+.RC-sr-button-container button {
+  margin: 2em;
+    background-color: var(--buttonColor);
+    color: var(--sideBartextColor);
+    border: none;
+    border-radius: 4px;
+    width: 40%;
+    height: 2.5rem;
+    font-size: var(--small);
+    font-weight: 600;
+    letter-spacing: 1px;
   cursor: pointer;
   transition: 0.2s ease-out;
 }
 
-.sr-button-container button:hover {
+.RC-sr-button-container button:hover {
   transform: scale(1.1);
 }
 

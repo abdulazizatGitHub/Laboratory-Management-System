@@ -69,48 +69,48 @@ function ReportDetailsPage() {
 
 
     return (
-        <div className="Main-Report-container">
-            <section id="Main-report" className="Main-report">
-                <div className="Header-report">
-                    <div className="Report-smCnt">
-                        <div className="Report-left-image">
-                            <img src={img1} alt="Logo" className="logo-image" />
+        <div className="RC-Main-Report-container">
+            <section id="Main-report" className="RC-Main-report">
+                <div className="RC-Header-report">
+                    <div className="RC-Report-smCnt">
+                        <div className="RC-Report-left-image">
+                            <img src={img1} alt="Logo" className="RC-logo-image" />
                         </div>
-                        <div className="Report-Middle">
+                        <div className="RC-Report-Middle">
                             <span ><h1>SIRAJ SHAHEED MEDICAL LAB</h1></span>
                             <h3>ACCURATE , CARING , INSTANT</h3>
                             <p>Opposite Cat A Hospital DHQ Batkhela Distt Malakand 230100</p>
                         </div>
                     </div>
-                    <div className="Report-Right">
+                    <div className="RC-Report-Right">
                         <a><FaPhone color='#6ec007' /> 03000-98545565/0303-0094836</a>
                         <a><FaEnvelope color='#6ec007' /> doctorkhan123@gmail.com</a>
                     </div>
                 </div>
 
-                <div className="Middle-Report-Section-Color"></div>
+                <div className="RC-Middle-Report-Section-Color"></div>
 
-                <div className="Middle-Report-Section">
-                    <div className="L-Report">
+                <div className="RC-Middle-Report-Section">
+                    <div className="RC-L-Report">
                         <h3>{data.patientDetails.name}</h3>
                         <p>PID: {data.patientDetails.pin}</p>
                         <p>AGE: {data.patientDetails.age} / {data.patientDetails.gender}</p>
                         <p>Contact #: {data.patientDetails.mobileNumber}</p>
                         <p>Address: {data.patientDetails.address}</p>
                     </div>
-                    <span className="R-Line"></span>
+                    <span className="RC-R-Line"></span>
 
-                    <div className="M-Report">
+                    <div className="RC-M-Report">
                         <h3>Sample Collected At:</h3>
                         <p>Siraj Shaheed Medical Laboratory Batkhela</p>
                         <h4>Ref By: {data.patientDetails.refDoctor}</h4>
                     </div>
-                    <span className="R-Line"></span>
+                    <span className="RC-R-Line"></span>
 
-                    <div className="R-Report">
-                        <div className="bar-code"> <canvas ref={canvasRef} /></div>
+                    <div className="RC-R-Report">
+                        <div className="RC-bar-code"> <canvas ref={canvasRef} /></div>
 
-                        <div className="generated">
+                        <div className="RC-generated">
                             <p>Reffered on:12:23pm</p>
                             <p>Reported on:12:20pm</p>
                             <p>Collected on:12:30pm</p>
@@ -120,12 +120,12 @@ function ReportDetailsPage() {
 
                 </div>
 
-                <div className="Middle-text">
+                <div className="RC-Middle-text">
                     <h2>Complete Blood Count (CBC) With Absolute Count</h2>
                 </div>
 
-                <div className="Table-report" style={{overflow:"visible", border:"10px solid", marginBottom:"0px"}}>
-                    <table className="medical-lab-report-table" style={{height:"fit-content"}}>
+                <div className="RC-Table-report" style={{overflow:"visible", border:"10px solid", marginBottom:"0px"}}>
+                    <table className="RC-medical-lab-report-table" style={{height:"fit-content"}}>
                         <thead className="tableHead-report">
                             <tr className="tableHead-row">
                                 <th>Investigation</th>
@@ -137,7 +137,7 @@ function ReportDetailsPage() {
                         <tbody className="tableBody-report">
                             {data.report.map((data, index) => (
 
-                                <tr key={index} className="tableBody-row">
+                                <tr key={index} className="RC-tableBody-row">
                                     <td>{data.name}</td>
                                     <td>{data.result}</td>
                                     <td>{data.referenceValue}</td>
@@ -151,19 +151,19 @@ function ReportDetailsPage() {
                     </table>
                 </div>
 
-                <div className="Footer-Section">
-                    <p className="Footer-Section-heading">This Report is For intended Doctor Reference Only</p>
+                <div className="RC-Footer-Section">
+                    <p className="RC-Footer-Section-heading">This Report is For intended Doctor Reference Only</p>
 
-                    <div className="Details-Footer" style={{height:"8rem"}}>
+                    <div className="RC-Details-Footer" style={{height:"8rem"}}>
 
-                        <div className="Fl-report" style={{height:"auto"}}>
+                        <div className="RC-Fl-report" style={{height:"auto"}}>
                             <p>Report Preparaed By</p>
 
                             {data.generatedBy}
                             <h5>Pathologist</h5>
                         </div>
 
-                        <div className="Fl-report" style={{height:"auto"}}>
+                        <div className="RC-Fl-report" style={{height:"auto"}}>
                            
                             <p>Reviewed By</p>
 
@@ -172,14 +172,14 @@ function ReportDetailsPage() {
                         </div>
                     </div>
 
-                    <p className="generated-time"> Prepared On: {data.dateTime}</p>
-                    <div className="report-bottom-bar-code"></div>
+                    <p className="RC-generated-time"> Prepared On: {data.dateTime}</p>
+                    <div className="RC-Middle-Report-Section-Color"></div>
 
 
                 </div>
             </section>
 
-            <div className="sr-button-container">
+            <div className="RC-sr-button-container">
                 <button onClick={handleSaveAsPDF}>Print</button>
             </div>
         </div>
