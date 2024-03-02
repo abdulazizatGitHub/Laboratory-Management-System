@@ -137,7 +137,7 @@ function ReportDetailsPage() {
                         <tbody className="tableBody-report">
                             {data.report.map((data, index) => (
 
-                                <tr key={index} className="RC-tableBody-row">
+                                <tr key={index} className="RC-tableBody-row" style={{backgroundColor:"transparent"}}>
                                     <td>{data.name}</td>
                                     <td>{data.result}</td>
                                     <td>{data.referenceValue}</td>

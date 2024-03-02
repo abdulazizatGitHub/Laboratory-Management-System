@@ -264,12 +264,13 @@
 }
 .RC-tableBody-row{
   border: none;
+  /* background-color: transparent; */
 }
 
 
 .RC-medical-lab-report-table tbody td,
 .RC-medical-lab-report-table tbody tr  {
-  background-color: transparent; /* Remove background color from table rows */
+  background-color: transparent; 
 }
 
 
