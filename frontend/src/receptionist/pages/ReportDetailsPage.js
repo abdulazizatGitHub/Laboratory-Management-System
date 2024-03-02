@@ -36,33 +36,36 @@ function ReportDetailsPage() {
         
         html2canvas(input, {
             scale: 2,
-            logging: true, // Enable logging to debug any potential issues
-            preserveDrawingBuffer: true // Preserve the drawing buffer to capture text properly
+            logging: true,
+            allowTaint: true, // Allow taint to render images from other domains
+            useCORS: true, // Use cross-origin request to render images
+            scrollY: -window.scrollY, // Fix for scrolling capture
+            windowWidth: document.documentElement.offsetWidth, // Fix for capture width
+            windowHeight: document.documentElement.offsetHeight, // Fix for capture height
         }).then((canvas) => {
             const pdf = new jsPDF("p", "mm", "a4");
-            const imgData = canvas.toDataURL("image/png");
+            const imgData = canvas.toDataURL("image/jpeg", 0.8); // Adjust quality here
             const imgWidth = 210;
             const pageHeight = 295;
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             let heightLeft = imgHeight;
             let position = 0;
-
-            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+    
+            pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
             heightLeft -= pageHeight;
-
+    
             while (heightLeft >= 0) {
                 position = heightLeft - imgHeight;
                 pdf.addPage();
-                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
                 heightLeft -= pageHeight;
             }
-
+    
             const filename = `report_${Date.now()}.pdf`;
             pdf.save(filename);
-
         });
     };
-
+    
 
 
     return (

@@ -116,7 +116,7 @@ function Addtest() {
         </div>
 
         <div className="btn-container">
-          <button className="Next-button" onClick={handleSubmit}>Next</button>
+          <button className="Next-button" onClick={handleSubmit}>Add</button>
         </div>
       </div>
     </div>
