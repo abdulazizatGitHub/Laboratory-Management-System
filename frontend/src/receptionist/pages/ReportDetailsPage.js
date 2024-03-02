@@ -124,7 +124,7 @@ function ReportDetailsPage() {
                     <h2>Complete Blood Count (CBC) With Absolute Count</h2>
                 </div>
 
-                <div className="Table-report">
+                <div className="Table-report" style={{overflow:"visible"}}>
                     <table className="medical-lab-report-table">
                         <thead className="tableHead-report">
                             <tr className="tableHead-row">
