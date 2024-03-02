@@ -37,7 +37,6 @@ const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).sli
       const todayData = response.data.filter(item => isToday(item.dateTime));
         
 
-        // console.log("Today's Patient Data is ", todayData);
         setReportData(todayData);
     }
     

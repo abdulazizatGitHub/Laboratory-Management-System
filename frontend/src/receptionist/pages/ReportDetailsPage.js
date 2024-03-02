@@ -29,39 +29,41 @@ function ReportDetailsPage() {
         }
     }, [data]);
 
-  // Function to save the Main-report div as PDF
-// Function to save the Main-report div as PDF
-const handleSaveAsPDF = () => {
-    const input = document.getElementById("Main-report");
-  
-    html2canvas(input, { 
-      scale: 2,
-      logging: true, // Enable logging to debug any potential issues
-      preserveDrawingBuffer: true // Preserve the drawing buffer to capture text properly
-    }).then((canvas) => {
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgData = canvas.toDataURL("image/png");
-      const imgWidth = 210;
-      const pageHeight = 295;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-      let position = 0;
-  
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-  
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-  
-      pdf.save("report.pdf");
-    });
-  };
-  
-  
+    // Function to save the Main-report div as PDF
+    // Function to save the Main-report div as PDF
+    const handleSaveAsPDF = () => {
+        const input = document.getElementById("Main-report");
+        console.log("helo kkkkkkkkkkkkkkk")
+        html2canvas(input, {
+            scale: 2,
+            logging: true, // Enable logging to debug any potential issues
+            preserveDrawingBuffer: true // Preserve the drawing buffer to capture text properly
+        }).then((canvas) => {
+            const pdf = new jsPDF("p", "mm", "a4");
+            const imgData = canvas.toDataURL("image/png");
+            const imgWidth = 210;
+            const pageHeight = 295;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            let heightLeft = imgHeight;
+            let position = 0;
+
+            pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+            heightLeft -= pageHeight;
+
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                pdf.addPage();
+                pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+            }
+
+            const filename = `report_${Date.now()}.pdf`;
+            pdf.save(filename);
+
+        });
+    };
+
+
 
     return (
         <div className="Main-Report-container">
@@ -130,8 +132,9 @@ const handleSaveAsPDF = () => {
                             </tr>
                         </thead>
                         <tbody className="tableBody-report">
-                            {data.report.map((data) => (
-                                <tr className="tableBody-row">
+                            {data.report.map((data, index) => (
+
+                                <tr key={index} className="tableBody-row">
                                     <td>{data.name}</td>
                                     <td>{data.result}</td>
                                     <td>{data.referenceValue}</td>
@@ -173,7 +176,7 @@ const handleSaveAsPDF = () => {
             </section>
 
             <div className="sr-button-container">
-                <button  onClick={handleSaveAsPDF}>Print</button>
+                <button onClick={handleSaveAsPDF}>Print</button>
             </div>
         </div>
     )
