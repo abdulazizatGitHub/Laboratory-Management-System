@@ -5,6 +5,8 @@ import img1 from '../../Assessts/Images/Logo2.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import JsBarcode from 'jsbarcode';
 import { addPhlebotomyReport, updateToken } from "../../Services/API";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 function ReportDetailsPage() {
 
@@ -27,14 +29,39 @@ function ReportDetailsPage() {
         }
     }, [data]);
 
- // Function to print only the Main-Report-container div
- const handlePrint = () => {
-    let printContents = document.getElementById('Main-report').innerHTML;
-    let originalContents = document.body.innerHTML;
-    document.body.innerHTML = printContents;
-    window.print();
-   document.body.innerHTML = originalContents; 
-};
+  // Function to save the Main-report div as PDF
+// Function to save the Main-report div as PDF
+const handleSaveAsPDF = () => {
+    const input = document.getElementById("Main-report");
+  
+    html2canvas(input, { 
+      scale: 2,
+      logging: true, // Enable logging to debug any potential issues
+      preserveDrawingBuffer: true // Preserve the drawing buffer to capture text properly
+    }).then((canvas) => {
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgData = canvas.toDataURL("image/png");
+      const imgWidth = 210;
+      const pageHeight = 295;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+      let position = 0;
+  
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+  
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+  
+      pdf.save("report.pdf");
+    });
+  };
+  
+  
 
     return (
         <div className="Main-Report-container">
@@ -45,7 +72,7 @@ function ReportDetailsPage() {
                             <img src={img1} alt="Logo" className="logo-image" />
                         </div>
                         <div className="Report-Middle">
-                            <span className="report-heading-effect"><h1>SIRAJ SHAHEED MEDICAL LAB</h1></span>
+                            <span ><h1>SIRAJ SHAHEED MEDICAL LAB</h1></span>
                             <h3>ACCURATE , CARING , INSTANT</h3>
                             <p>Opposite Cat A Hospital DHQ Batkhela Distt Malakand 230100</p>
                         </div>
@@ -146,7 +173,7 @@ function ReportDetailsPage() {
             </section>
 
             <div className="sr-button-container">
-                <button  onClick={handlePrint}>Print</button>
+                <button  onClick={handleSaveAsPDF}>Print</button>
             </div>
         </div>
     )
