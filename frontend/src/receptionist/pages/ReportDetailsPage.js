@@ -154,16 +154,17 @@ function ReportDetailsPage() {
                 <div className="Footer-Section">
                     <p className="Footer-Section-heading">This Report is For intended Doctor Reference Only</p>
 
-                    <div className="Details-Footer">
+                    <div className="Details-Footer" style={{height:"8rem"}}>
 
-                        <div className="Fl-report" >
+                        <div className="Fl-report" style={{height:"auto"}}>
                             <p>Report Preparaed By</p>
 
                             {data.generatedBy}
                             <h5>Pathologist</h5>
                         </div>
 
-                        <div className="Fl-report" >
+                        <div className="Fl-report" style={{height:"auto"}}>
+                           
                             <p>Reviewed By</p>
 
                             {data.generatedBy}
