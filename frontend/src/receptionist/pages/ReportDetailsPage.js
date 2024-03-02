@@ -33,7 +33,7 @@ function ReportDetailsPage() {
     // Function to save the Main-report div as PDF
     const handleSaveAsPDF = () => {
         const input = document.getElementById("Main-report");
-        console.log("helo kkkkkkkkkkkkkkk")
+        
         html2canvas(input, {
             scale: 2,
             logging: true, // Enable logging to debug any potential issues
