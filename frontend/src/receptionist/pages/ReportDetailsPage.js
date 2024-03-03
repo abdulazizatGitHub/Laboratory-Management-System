@@ -4,7 +4,7 @@ import { FaPhone, FaEnvelope } from 'react-icons/fa'; // Importing the icons fro
 import img1 from '../../Assessts/Images/Logo2.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import JsBarcode from 'jsbarcode';
-import { addPhlebotomyReport, updateToken } from "../../Services/API";
+import { addPhlebotomyReport, updateReport, updateToken } from "../../Services/API";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 
@@ -16,6 +16,7 @@ function ReportDetailsPage() {
     const canvasRef = useRef(null);
 
     useEffect(() => {
+        console.log(data)
         if (canvasRef.current) {
             const pinToEncode = data.patientDetails.pin;
             JsBarcode(canvasRef.current, pinToEncode, {
@@ -29,9 +30,30 @@ function ReportDetailsPage() {
         }
     }, [data]);
 
+    const customAlert=(msg)=>{
+        const confirm = window.confirm(msg);
+        if(confirm){
+            return "yes"
+        }
+            return "no"
+        
+    }
+
     // Function to save the Main-report div as PDF
     // Function to save the Main-report div as PDF
     const handleSaveAsPDF = () => {
+        let pr="no";
+        if(data.state==="Delivered"){
+            pr=customAlert(
+                "The report is already Delivered .... Would you like to print it?"  
+            )
+        }
+        else{
+        handleDelivered();
+        }
+
+
+        if(pr=="yes"){
         const input = document.getElementById("Main-report");
         
         html2canvas(input, {
@@ -64,7 +86,27 @@ function ReportDetailsPage() {
             const filename = `report_${Date.now()}.pdf`;
             pdf.save(filename);
         });
+        }
+        
     };
+
+    const handleDelivered = async () => {
+
+        try {
+            const reportId = data._id;
+            const state = "Delivered";
+          const updatedReportData = { ...data, state };
+
+
+         const res = await updateReport(reportId, updatedReportData);
+        data.state=state;
+        //  console.log("updatedReportData is  ", updatedReportData, "and state is ",data.state);
+        console.log("RES s ", res)
+
+        } catch (error) {
+            console.error('Error occurred while saving delivered report data:', error);
+        }
+    }
     
 
 
