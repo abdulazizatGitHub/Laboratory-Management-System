@@ -10,7 +10,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 // Set up OAuth 2.0 client credentials
 const client_id ='1003734756814-v6qnfbuhb52ksl7c0p9rmff653enmi58.apps.googleusercontent.com';
-const client_secret ='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';
+const client_secret =process.env.CLIENT_SECRET;
 const redirected_url ='https://developers.google.com/oauthplayground';
 const Refresh_token ='1//04jYSJtW2DtFqCgYIARAAGAQSNwF-L9IrLig5vOJFOty3JBzE6X-E6tmkZbnApoGIFA3hmiafb0PlhtsaiefrGwn1Bxj1WLXNOO0';
 // Create OAuth 2.0 client
