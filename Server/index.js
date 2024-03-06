@@ -1,7 +1,8 @@
-import  express from "express";
+import express from "express";
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { connection } from './Connection.js';
+import { connection } from './connection.js'; // Adjusted import
+
 import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/StaffRoutes.js';
@@ -33,26 +34,14 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.use('/uploads', express.static('uploads'));
 
-app.use('/receptionist/PatientRegistration',Patientdata); //Patient Registration 
-
-
+app.use('/receptionist/PatientRegistration', Patientdata);
 app.use('/admin', StaffRoutes);
-
-app.use('/admin/Addtest',Addtestroutes);//Add Test
-app.use('/receptionist',GetTest); //Get Test Count
-
-
-
-app.use('/receptionist/generate_token',gentok);
-
-
-app.use('/Login',logincre);
-
-app.use('/admin/Change-password',Chanpass);
-
+app.use('/admin/Addtest', Addtestroutes);
+app.use('/receptionist', GetTest);
+app.use('/receptionist/generate_token', gentok);
+app.use('/Login', logincre);
+app.use('/admin/Change-password', Chanpass);
 app.use('/phelobotny', PhlebotomyRoutes);
-
-app.use('/',Forpass);
+app.use('/', Forpass);
