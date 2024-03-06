@@ -29,7 +29,7 @@ function Navbar({ setIsSideBar }) {
             <div className="right-section">
                 <div className="dropdown">
                     <img
-                        src={`http://localhost:5000/uploads/${user.image}` || "https://via.placeholder.com/50x50.png?text=ML"}
+                        src={`https://laboratory-management-system-wie6.vercel.app/uploads/${user.image}` || "https://via.placeholder.com/50x50.png?text=ML"}
                         alt="Profile"
                         className="round-icon"
                     />
@@ -39,7 +39,7 @@ function Navbar({ setIsSideBar }) {
                     <div className="dropdown-content">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <img
-                                src={`http://localhost:5000/uploads/${user.image}` || "https://via.placeholder.com/50x50.png?text=ML"}
+                                src={`https://laboratory-management-system-wie6.vercel.app/${user.image}` || "https://via.placeholder.com/50x50.png?text=ML"}
                                 alt="Profile"
                                 className="round-icon"
                             />

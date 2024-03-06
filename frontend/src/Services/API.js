@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const Url = 'http://localhost:5000';
+// const Url = 'http://localhost:5000';
+const Url ="https://laboratory-management-system-wie6.vercel.app"; 
 
 export const registerPatient = async (formData) => {
   return await axios.post(`${Url}/receptionist/PatientRegistration`, formData);
