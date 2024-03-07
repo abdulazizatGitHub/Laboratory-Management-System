@@ -10,7 +10,7 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const destinationPath = path.join(__dirname, '..', 'images');
+        const destinationPath = path.join(process.cwd(), 'images');
         cb(null, destinationPath);
     },
     filename: function (req, file, cb) {
