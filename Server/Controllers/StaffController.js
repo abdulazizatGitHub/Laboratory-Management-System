@@ -7,6 +7,7 @@ import nodemailer from 'nodemailer';
 import { google } from 'googleapis';
 
 import dotenv from 'dotenv';
+import cloudinary from "../Cloudinaryconfig.js";
 dotenv.config();
 // Set up OAuth 2.0 client credentials
 const client_id ='1003734756814-v6qnfbuhb52ksl7c0p9rmff653enmi58.apps.googleusercontent.com';
@@ -21,7 +22,10 @@ oAuth2Client.setCredentials({ refresh_token: Refresh_token });
 export const staffRegistration = async (req, res) => {
     try {
         const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, email , userName, password } = req.body;
-
+        
+        const imageupload = await cloudinary.uploader.upload(req.file['image'].path,{
+            folder:"staffImages",
+        })
         // Check if a staff member with the same contact number or CNIC already exists
         const existingStaff = await StaffModel.findOne({
             $or: [
@@ -46,7 +50,7 @@ export const staffRegistration = async (req, res) => {
                 cnic,
                 address,
                 email,
-                image: req.file.filename,               
+                image:imageupload,              
                 
                 userName,
                 password

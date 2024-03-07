@@ -1,11 +1,11 @@
 import express from 'express';
 import multer from 'multer';
 import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff, updatePatient, getStaffDetailsByRole } from '../Controllers/StaffController.js';
-
-
-import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
-const router = express.Router();
 import {imageUpload} from "../ImageUpload/imageUpload.js";
+import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
+
+
+const router = express.Router();
 
 router.post("/staff_registration",imageUpload.single("image"),generateStaffCredentials,staffRegistration);
 // router.post('/staff_registration', upload.single('image'), generateStaffCredentials, staffRegistration);
