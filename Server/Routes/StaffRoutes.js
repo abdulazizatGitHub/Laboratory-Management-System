@@ -7,8 +7,24 @@ import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
 
 const router = express.Router();
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, './Images/');
+      },
+    filename:function (req ,file, cb){
+        cb(null , Date.now() + '-' + file.originalname);
+    },
+});
 
-router.post("/staff_registration",imageUpload.single("image"),generateStaffCredentials,staffRegistration);
+const upload= multer({
+    storage : storage,
+    limits: {
+        fieldSize: 1024 * 1024 * 100,
+    },
+});
+
+
+router.post("/staff_registration",upload.single("image"),generateStaffCredentials,staffRegistration);
 // router.post('/staff_registration', upload.single('image'), generateStaffCredentials, staffRegistration);
 router.get('/view-staff-record', getStaffDetais);
 router.get('/view-patient-detail', getPatientDetails);
