@@ -3,27 +3,26 @@ import multer from 'multer';
 import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff, updatePatient, getStaffDetailsByRole } from '../Controllers/StaffController.js';
 import {imageUpload} from "../ImageUpload/imageUpload.js";
 import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
-import path from 'path';
 
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        const destinationPath = path.join(process.cwd(), 'images');
-        cb(null, destinationPath);
-    },
-    filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' + file.originalname);
+        cb(null, './images/');
+      },
+    filename:function (req ,file, cb){
+        cb(null , Date.now() + '-' + file.originalname);
     },
 });
 
-const upload = multer({
-    storage: storage,
+const upload= multer({
+    storage : storage,
     limits: {
         fieldSize: 1024 * 1024 * 100,
     },
 });
+
 
 router.post("/staff_registration",upload.single("image"),generateStaffCredentials,staffRegistration);
 // router.post('/staff_registration', upload.single('image'), generateStaffCredentials, staffRegistration);
