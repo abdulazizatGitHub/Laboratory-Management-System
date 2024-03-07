@@ -6,9 +6,8 @@
       "use": "@vercel/node"
     },
     {
-      "src": "uploads/**",
-      "use": "@now/static-build",
-      "config": { "zeroConfig": true }
+      "src": "./uploads/**/*",
+      "use": "@now/static"
     }
   ],
   "routes": [
