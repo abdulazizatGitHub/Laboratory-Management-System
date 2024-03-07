@@ -34,7 +34,7 @@ app.use(bodyParser.json({ extended: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use('/uploads', express.static('uploads'));
+app.use('/images', express.static('images'));
 
 app.use('/receptionist/PatientRegistration', Patientdata);
 app.use('/admin', StaffRoutes);
