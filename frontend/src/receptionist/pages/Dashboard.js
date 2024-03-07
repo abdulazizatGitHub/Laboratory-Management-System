@@ -124,7 +124,7 @@ const Dashboard = () => {
             <div className="Profile">
                
                 <div className="Image-details">
-                    <img src={`https://laboratory-management-system-wie6.vercel.app/uploads/${user.image}`} className="profile-image" />
+                    <img src={user.image.url} className="profile-image" />
                 </div>
 
                 <div className='profile-info'>
