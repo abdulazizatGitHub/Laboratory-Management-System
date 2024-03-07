@@ -23,7 +23,7 @@ export const staffRegistration = async (req, res) => {
     try {
         const { name, fatherName, gender, age, role, shift, contactNumber, cnic, address, email , userName, password } = req.body;
         
-        const imageupload = await cloudinary.uploader.upload(req.file['image'].path,{
+        const imageupload = await cloudinary.uploader.upload(req.file.path,{
             folder:"staffImages",
         })
         // Check if a staff member with the same contact number or CNIC already exists
@@ -50,8 +50,10 @@ export const staffRegistration = async (req, res) => {
                 cnic,
                 address,
                 email,
-                image:imageupload,              
-                
+                image:{
+                  public_id: imageupload.public_id,
+                  url:imageupload.secure_url,
+                },           
                 userName,
                 password
             });

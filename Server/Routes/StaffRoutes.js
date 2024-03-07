@@ -7,6 +7,7 @@ import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
 
 const router = express.Router();
 
+
 router.post("/staff_registration",imageUpload.single("image"),generateStaffCredentials,staffRegistration);
 // router.post('/staff_registration', upload.single('image'), generateStaffCredentials, staffRegistration);
 router.get('/view-staff-record', getStaffDetais);
