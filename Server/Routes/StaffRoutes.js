@@ -3,6 +3,7 @@ import multer from 'multer';
 import { getPatientDetails,deletePatData, deleteStaffData, getStaffDetais, staffRegistration , updateStaff, updatePatient, getStaffDetailsByRole } from '../Controllers/StaffController.js';
 import {imageUpload} from "../ImageUpload/imageUpload.js";
 import { generateStaffCredentials } from '../Middlewares/StaffCredentials.js';
+import path from 'path';
 
 
 const router = express.Router();
