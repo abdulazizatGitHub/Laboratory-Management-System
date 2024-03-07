@@ -9,20 +9,20 @@ const router = express.Router();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './images/');
-      },
-    filename:function (req ,file, cb){
-        cb(null , Date.now() + '-' + file.originalname);
+        const destinationPath = path.join(__dirname, '..', 'images');
+        cb(null, destinationPath);
+    },
+    filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' + file.originalname);
     },
 });
 
-const upload= multer({
-    storage : storage,
+const upload = multer({
+    storage: storage,
     limits: {
         fieldSize: 1024 * 1024 * 100,
     },
 });
-
 
 router.post("/staff_registration",upload.single("image"),generateStaffCredentials,staffRegistration);
 // router.post('/staff_registration', upload.single('image'), generateStaffCredentials, staffRegistration);
