@@ -7,7 +7,8 @@ const ReportSchema = mongoose.Schema({
     report: Array,
     remarks: String,
     generatedBy: String,
-    dateTime: String  
+    dateTime: String,
+    time: String
 });
 
 const PhlebotomyReportModel = mongoose.model('Report', ReportSchema);

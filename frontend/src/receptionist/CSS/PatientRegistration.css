@@ -32,6 +32,9 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.inputFieldPR{
+    border-radius: 5px;
+}
 
 .btn-container {
     width: 100%;

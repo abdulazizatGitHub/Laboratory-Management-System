@@ -61,13 +61,20 @@ function Report() {
         e.preventDefault();
 
         const currentDate = new Date();
-
+        const options = { timeZone: 'Asia/Karachi', hour12: true, hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        const formattedTime = currentDate.toLocaleTimeString('en-US', options);
+        
+        // console.log("Current Time in Pakistan: ", formattedTime);
 
         const date = currentDate.getDate();
         const month = currentDate.getMonth() + 1;
         const year = currentDate.getFullYear();
 
         const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).slice(-2)}`;
+
+
+
+        
         
 
         // Create an array of formatted tests
@@ -95,6 +102,7 @@ function Report() {
             remarks: selectedRegistrationDetails.remark, // Replace with your actual remarks
             generatedBy: JSON.parse(localStorage.getItem("user")).name,
             dateTime: generatedDateTime,
+             time:formattedTime
         };
 
 
@@ -105,6 +113,7 @@ function Report() {
 
                 if(response.data.message === true) {
                     alert('Report has been finalized successfully');
+                    
                     navigation('/phelobotny/phlebotomy');
                 } else {
                     alert('Error try again to finalize the report');
@@ -170,11 +179,11 @@ function Report() {
                     <div className="R-Report">
                         <div className="bar-code"> <canvas ref={canvasRef} /></div>
 
-                        <div className="generated">
+                        {/* <div className="generated">
                             <p >Reffered on:12:23pm</p>
                             <p>Reported on:12:20pm</p>
                             <p>Collected on:12:30pm</p>
-                        </div>
+                        </div> */}
 
                     </div>
 

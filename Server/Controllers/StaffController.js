@@ -279,19 +279,6 @@ export const sendResetCode = async (req, res) => {
     const { username } = req.body;
 
     try {
-        const accessToken = await oAuth2Client.getAccessToken();
-        const transporter = nodemailer.createTransport({
-            service: 'Gmail',
-            auth: {
-                type: 'OAuth2',
-                user: 'mahadwajid613@gmail.com', // Your Gmail address
-                clientId: client_id,
-                clientSecret: client_secret,
-                refreshToken: Refresh_token,
-                accessToken: accessToken
-            }
-        });
-
         // Generate reset code (for demonstration purpose)
         const resetCode = Math.random().toString(36).slice(-8);
 

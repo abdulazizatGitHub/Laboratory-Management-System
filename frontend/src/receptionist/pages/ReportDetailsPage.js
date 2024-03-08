@@ -35,14 +35,15 @@ function ReportDetailsPage() {
         if(confirm){
             return "yes"
         }
-            return "no"
+        
+        return "no"
         
     }
 
     // Function to save the Main-report div as PDF
     // Function to save the Main-report div as PDF
     const handleSaveAsPDF = () => {
-        let pr="no";
+        let pr="yes";
         if(data.state==="Delivered"){
             pr=customAlert(
                 "The report is already Delivered .... Would you like to print it?"  
@@ -52,7 +53,7 @@ function ReportDetailsPage() {
         handleDelivered();
         }
 
-
+        
         if(pr=="yes"){
         const input = document.getElementById("Main-report");
         
@@ -152,11 +153,11 @@ function ReportDetailsPage() {
                     <div className="RC-R-Report">
                         <div className="RC-bar-code"> <canvas ref={canvasRef} /></div>
 
-                        <div className="RC-generated">
+                        {/* <div className="RC-generated">
                             <p>Reffered on:12:23pm</p>
                             <p>Reported on:12:20pm</p>
                             <p>Collected on:12:30pm</p>
-                        </div>
+                        </div> */}
 
                     </div>
 
@@ -214,7 +215,7 @@ function ReportDetailsPage() {
                         </div>
                     </div>
 
-                    <p className="RC-generated-time"> Prepared On: {data.dateTime}</p>
+                    <p className="RC-generated-time"> Prepared On: {data.dateTime + " " + data.time}</p>
                     <div className="RC-Middle-Report-Section-Color"></div>
 
 

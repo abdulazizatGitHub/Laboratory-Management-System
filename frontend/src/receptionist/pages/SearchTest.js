@@ -80,14 +80,16 @@ const SearchTest = () => {
 
   return (
     <div id="SearchTest">
-      <NamingBar name={"SEARCH TEST"} />
+      {/* <NamingBar name={"SEARCH TEST"} /> */}
       <div className="SearchTest-innerComponent">
         <form className="searchTest-mainBox">
+          {/* <p style={{textDecoration:"none" ,alignSelf:"start",textAlign:"center", fontSize:"1.5rem",fontWeight:"bold", color:"#00ADB5"}}>SEARCH TEST</p> */}
           <div className="searchTest-searchDivs">
             <label className="searchTest-Text">By Name</label>
             <div className="searchTest-radio">
               <div className="searchTest-search-input">
                 <input
+                
                   type="radio"
                   value="Name"
                   checked={selectedField === 'Name'}
@@ -95,6 +97,7 @@ const SearchTest = () => {
                   className="searchTest-search-radio"
                 />
                 <input
+                  style={{height:"3rem", fontSize:"1rem"}}
                   type="text"
                   value={queryByName}
                   onChange={handleQueryChangeByName}
@@ -118,6 +121,7 @@ const SearchTest = () => {
                   className="searchTest-search-radio"
                 />
                 <input
+                style={{height:"3rem", fontSize:"1rem"}}
                   type="text"
                   value={queryByCode}
                   onChange={handleQueryChangeByCode}

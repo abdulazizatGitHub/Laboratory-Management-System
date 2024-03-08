@@ -150,21 +150,23 @@ const PatientRegistration = () => {
 
     <div className="Patient-Main-Container">
       <form className="Patient-Details-Container">
+      <p style={{alignSelf:"center", fontSize:"1.5rem",fontWeight:"bold", color:"#00ADB5"}}>Patient Registration</p>
         <h2 style={{marginLeft:"0.5rem"}}>Patient Details</h2>
         <div className="patient-Details-pers">
           <div className="patient-divss">
             <p>Patient Name</p>
-            <input type="text" id="name" name="name" placeholder="Enter Patient Name" value={formData.name} onChange={handleInputChange} required />
+            <input className="inputFieldPR" type="text" id="name" name="name" placeholder="Enter Patient Name" value={formData.name} onChange={handleInputChange} required />
           </div>
           <div className="patient-divss">
             <p>Age</p>
-            <input type="Number" id="age" name="age" placeholder="Enter Patient Age" value={formData.age} onChange={handleInputChange} required />
+            <input className="inputFieldPR" type="Number" id="age" name="age" placeholder="Enter Patient Age" value={formData.age} onChange={handleInputChange} required />
           </div>
           <div className="patient-divss">
             <p>Gender</p>
             <div className="radio-div">
-              <div className="patient-divss-radio-btns">
+              <div className="patient-divss-radio-btns inputFieldPR" >
                 <input
+                className="inputFieldPR" 
                   style={{ width: "2rem", height: "1rem" }}
                   type="radio"
                   value="male"
@@ -174,9 +176,10 @@ const PatientRegistration = () => {
                 />
                 <p style={{ marginLeft: "0.2rem" }}>Male</p>
               </div>
-              <div className="patient-divss-radio-btns">
+              <div className="patient-divss-radio-btns inputFieldPR" >
                 <input
-                  style={{ width: "2rem", height: "1rem" }}
+                  style={{ width: "2rem", height: "1rem", borderRadius:"5px" }}
+                  className="inputFieldPR" 
                   type="radio"
                   value="female"
                   checked={selectedGender === "female"}
@@ -189,7 +192,7 @@ const PatientRegistration = () => {
           </div>
           <div className="patient-divss">
             <p>CNIC</p>
-            <input type="text" id="cnic" name="cnic" placeholder="Enter Patient CNIC" value={formData.cnic} onChange={handleInputChange} required />
+            <input className="inputFieldPR" type="text" id="cnic" name="cnic" placeholder="Enter Patient CNIC" value={formData.cnic} onChange={handleInputChange} required />
           </div>
         </div>
 
@@ -198,17 +201,17 @@ const PatientRegistration = () => {
         <div className="patient-Details-pers">
           <div className="patient-divss">
             <p>Mobile Number</p>
-            <input type="text" id="mobileNumber" name="mobileNumber" placeholder="Enter Patient Contact" value={formData.mobileNumber}
+            <input className="inputFieldPR" type="text" id="mobileNumber" name="mobileNumber" placeholder="Enter Patient Contact" value={formData.mobileNumber}
               onChange={handleInputChange} required />
           </div>
           <div className="patient-divss">
             <p>Email</p>
-            <input type="text" id="email" name="email" placeholder="Enter Patient Email" value={formData.email}
+            <input className="inputFieldPR" type="text" id="email" name="email" placeholder="Enter Patient Email" value={formData.email}
               onChange={handleInputChange} required />
           </div>
           <div className="patient-divss">
             <p>Address</p>
-            <input type="text" id="address" name="address" placeholder="Enter Patient Address" value={formData.address}
+            <input className="inputFieldPR" type="text" id="address" name="address" placeholder="Enter Patient Address" value={formData.address}
               onChange={handleInputChange} required />
           </div>
         </div>
@@ -217,18 +220,18 @@ const PatientRegistration = () => {
         <div className="patient-Details-pers">
           <div className="patient-divss">
             <p>Reffered By</p>
-            <input type="text" id="refDoctor" name="refDoctor" placeholder="Enter Your Name" value={formData.refDoctor}
+            <input className="inputFieldPR" type="text" id="refDoctor" name="refDoctor" placeholder="Enter Your Name" value={formData.refDoctor}
               onChange={handleInputChange} required />
 
           </div>
           <div className="patient-divss">
             <p>Patient Remarks</p>
-            <input type="text" id="patientRemarks" name="patientRemarks" placeholder="Enter Patient Remarks" value={formData.patientRemarks}
+            <input className="inputFieldPR"  type="text" id="patientRemarks" name="patientRemarks" placeholder="Enter Patient Remarks" value={formData.patientRemarks}
               onChange={handleInputChange} required />
           </div>
           <div className="patient-divss">
             <p>Internal Remarks</p>
-            <input type="text" id="internalRemarks" name="internalRemarks" placeholder="Enter Your Rmarks" value={formData.internalRemarks}
+            <input className="inputFieldPR" type="text" id="internalRemarks" name="internalRemarks" placeholder="Enter Your Rmarks" value={formData.internalRemarks}
               onChange={handleInputChange} required />
           </div>
         </div>

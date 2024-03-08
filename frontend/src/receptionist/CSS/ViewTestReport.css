@@ -53,9 +53,8 @@
     overflow: scroll;
 }
 .ViewTestReport-Table{
-    width: 100% ;
-    
-    margin: 2em;
+    width: 100% ;    
+    margin: 0.5em;
 }
 .TableDiv::-webkit-scrollbar {
     width: 0;

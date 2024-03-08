@@ -106,7 +106,7 @@ const SearchTestReport = () => {
         </div>
 
         <div className="ViewTestReport-innerComponent TableDiv">
-            <table className="ViewTestReport-Table">
+            <table  className="ViewTestReport-Table">
                 <thead id="ViewTestReport-TableHead">
                     <tr >
 

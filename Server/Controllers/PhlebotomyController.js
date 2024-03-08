@@ -12,7 +12,7 @@ export const getTokenDetails = async (req, res) => {
 
 export const addPhlebotomyReport = async (req, res) => {
     try {
-        const { tokenNumber,state, patientDetails, report, remarks, generatedBy, dateTime } = req.body;
+        const { tokenNumber,state, patientDetails, report, remarks, generatedBy, dateTime,time } = req.body;
         
         const phlebotomyReport = new PhlebotomyReportModel({
             tokenNumber,
@@ -21,7 +21,8 @@ export const addPhlebotomyReport = async (req, res) => {
             report,
             remarks,
             generatedBy,
-            dateTime
+            dateTime,
+            time
         });
 
         const result = await phlebotomyReport.save();
@@ -53,7 +54,8 @@ export const updateReport = async (req, res) => {
         report,
         remarks,
         generatedBy,
-        dateTime
+        dateTime,
+        time
         } = req.body; 
   
       // Check if the token with the provided ID exists
@@ -71,7 +73,7 @@ export const updateReport = async (req, res) => {
       existingReport.generatedBy = generatedBy;
       existingReport.state= state;
       existingReport.remarks = remarks;
-      
+      existingReport.time=time;
       // Save the updated token document
       const updatedReport = await existingReport.save();
   
