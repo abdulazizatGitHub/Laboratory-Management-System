@@ -10,10 +10,10 @@ import dotenv from 'dotenv';
 import cloudinary from "../Cloudinaryconfig.js";
 dotenv.config();
 // Set up OAuth 2.0 client credentials
-const client_id ='1003734756814-v6qnfbuhb52ksl7c0p9rmff653enmi58.apps.googleusercontent.com';
-const client_secret ='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';
+const client_id ='366053873235-5378r5ff27nnstr1j8k62eq87njjtl9g.apps.googleusercontent.com';
+const client_secret ='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';
 const redirected_url ='https://developers.google.com/oauthplayground';
-const Refresh_token ='1//04jYSJtW2DtFqCgYIARAAGAQSNwF-L9IrLig5vOJFOty3JBzE6X-E6tmkZbnApoGIFA3hmiafb0PlhtsaiefrGwn1Bxj1WLXNOO0';
+const Refresh_token ='1//040Rvw1Z3chyWCgYIARAAGAQSNwF-L9Ir8JYDI0zb8wMTzjeCruIHWXQxUJilS4PNuHFWZbQbpQBJ0BHkSRmJhAnYr2gETxaMA9k';
 // Create OAuth 2.0 client
 const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirected_url);
 oAuth2Client.setCredentials({ refresh_token: Refresh_token });
@@ -263,13 +263,14 @@ const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         type: 'OAuth2',
-        user: 'mahadwajid613@gmail.com', // Your Gmail address
+        user: 'khanmahad19285@gmail.com', // Your Gmail address
         clientId: client_id,
         clientSecret: client_secret,
         refreshToken: Refresh_token,
         accessToken: oAuth2Client.getAccessToken()
     }
 });
+
 
 
 
@@ -295,7 +296,7 @@ export const sendResetCode = async (req, res) => {
 
         // Send the reset code to the user via email or other means
         await transporter.sendMail({
-            from: 'mahadwajid613@gmail.com',
+            from: 'khanmahad19285@gmail.com',
             to: user.email,
             subject: 'Password Reset Code',
             text: `Your password reset code is: ${resetCode}`
@@ -332,7 +333,7 @@ export const resetPassword = async (req, res) => {
 
         // Send confirmation email to the user
         await transporter.sendMail({
-            from: 'mahadwajid613@gmail.com',
+            from: 'khanmahad19285@gmail.com',
             to: user.email,
             subject: 'Password Reset Confirmation',
             text: 'Your password has been successfully reset.'
