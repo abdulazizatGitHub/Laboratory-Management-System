@@ -1,8 +1,7 @@
 import express from "express";
 import bodyParser from 'body-parser';
 import cors from 'cors';
-import { connection } from './Connection.js'; // Adjusted import
-
+import {connection} from './Connection.js';
 import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/StaffRoutes.js';
