@@ -11,6 +11,7 @@
 .phlebotomy-left-container {
     width: 25%;
     height: auto;
+    max-height: 26rem;
     margin-top: 3rem;
     border: 1px solid black;border: 5px solid rgb(255, 253, 253);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -42,6 +43,8 @@
 
 .pl-select-options-container {
     width: 100%;
+    height: auto;
+    max-height: 29rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -59,9 +62,16 @@
     gap: 1rem;
 }
 
+.custom-datepicker {
+    width: 100%;
+    border: none; /* Remove border of the input field */
+    outline: none; /* Remove outline */
+}
+
 .pl-select-date {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 0.5rem;
     margin-top: 0.5rem;
 }
