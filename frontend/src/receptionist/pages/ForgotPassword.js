@@ -8,9 +8,11 @@ const ForgotPassword = () => {
     const [resetCode, setResetCode] = useState('');
     const [message, setMessage] = useState('');
 
+    const URl='https://backend-lab-981eb22ce767.herokuapp.com';
+
     const handleSendResetCode = async () => {
         try {
-            await axios.post('/Forgotpassword', { username });
+            await axios.post(`${URl}/Forgotpassword`, { username });
             setMessage('Reset code sent successfully');
         } catch (error) {
             console.error('Error:', error);
@@ -30,7 +32,7 @@ const ForgotPassword = () => {
                 return;
             }
 
-            await axios.post('/resetPassword', { username, resetCode, newPassword: password });
+            await axios.post(`${URl}/resetPassword`, { username, resetCode, newPassword: password });
             setMessage('Password updated successfully');
         } catch (error) {
             console.error('Error:', error);
