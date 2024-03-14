@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-// const Url = 'http://localhost:5000';
-const Url = 'https://backend-lab-981eb22ce767.herokuapp.com'
+const Url = 'http://localhost:5000';
+// const Url = 'https://backend-lab-981eb22ce767.herokuapp.com'
 // const Url ="https://laboratory-management-system-wie6.vercel.app"; 
 // const Url = "https://perfect-costume-worm.cyclic.app"
 
@@ -190,7 +190,7 @@ export const getPendingPhlebotomyData = async () => {
 
 export const updateToken = async (tokenId, updatedTokenData) => {
   try {
-    const response = await axios.put(`/receptionist/generate_token/${tokenId}`, updatedTokenData);
+    const response = await axios.put(`${Url}/receptionist/generate_token/${tokenId}`, updatedTokenData);
     return response;
   } catch (error) {
     throw new Error('Error occurred while updating token:', error);

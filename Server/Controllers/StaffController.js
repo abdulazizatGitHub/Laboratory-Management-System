@@ -160,7 +160,6 @@ export const changePassword = async (req, res) => {
 
 
 export const deleteStaffData = async (req, res) => {
-    
     try {
         // Find the staff data by ID
         const staffData = await StaffModel.findById(req.params.id);
@@ -170,12 +169,9 @@ export const deleteStaffData = async (req, res) => {
             return res.status(404).send("Staff data not found.");
         }
 
-        // Delete the associated image file from the uploads folder
-        if (staffData.image) {
-            const imagePath = path.join('./uploads/', staffData.image);
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath);
-            }
+        // Delete the associated image from Cloudinary
+        if (staffData.image && staffData.image.public_id) {
+            await cloudinary.uploader.destroy(staffData.image.public_id);
         }
 
         // Delete the staff data from the database
@@ -187,6 +183,7 @@ export const deleteStaffData = async (req, res) => {
         res.status(500).send("An error occurred while deleting staff data.");
     }
 };
+
 
 export const deletePatData = async (req, res) => {
     
