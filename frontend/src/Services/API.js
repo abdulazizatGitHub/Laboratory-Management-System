@@ -105,7 +105,7 @@ export const login = async (username, password) => {
 // Change Password API
 export const changePassword = async (userData, token) => {
   try {
-      const response = await axios.put("/admin/Change-password", userData, {
+      const response = await axios.put(`${Url}/admin/Change-password`, userData, {
           headers: {
               Authorization: `Bearer ${token}`
           }
