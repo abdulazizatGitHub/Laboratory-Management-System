@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getPatientDetails } from '../../Services/API';
+import ReactLoading from 'react-loading'; 
 
 function SearchPatient() {
   const navigate = useNavigate();
@@ -22,15 +23,23 @@ function SearchPatient() {
     patientRemarks: '',
     pin:'',
   });
+  const [loading, setLoading] = useState(false); 
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async () => {
-    const data = await getPatientDetails();
-    setTestData(data);
-  }
+    setLoading(true); // Activate loader
+    try {
+        const data = await getPatientDetails();
+        setTestData(data);
+    } catch (error) {
+        console.error("Error fetching patient data:", error);
+    } finally {
+        setLoading(false); // Deactivate loader
+    }
+};
 
   const handleFieldChange = (event) => {
     setSelectedField(event.target.value);
@@ -73,6 +82,11 @@ function SearchPatient() {
 
   return (
     <div id="SearchTest">
+         {loading && ( // Display loader if loading state is true
+                <div className="loader-container">
+                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
+                </div>
+            )}
       <div className="SearchTest-innerComponent">
         <div className="Search-Container" style={{width:"100%"}}>
           <p>Search Here</p>

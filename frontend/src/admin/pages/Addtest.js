@@ -1,6 +1,7 @@
 import '../css/AddTestDetails.css';
 import React, { useState } from 'react';
 import { addTest } from '../../Services/API';
+import ReactLoading from 'react-loading';
 
 function Addtest() {
   const [test, setTest] = useState({
@@ -17,6 +18,7 @@ function Addtest() {
       female: { from: '', to: '' },
     },
   });
+  const [loading, setLoading] = useState(false); // Add loading state
 
   // Function to handle input changes
   const handleChange = (e) => {
@@ -38,6 +40,7 @@ function Addtest() {
   };
 
   const handleSubmit = async () => {
+    setLoading(true); // Start loading
     try {
       const response = await addTest(test); // Use the API function
 
@@ -53,8 +56,16 @@ function Addtest() {
       }
     } catch (error) {
       console.error('Error during registration:', error);
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
+
+  if (loading) {
+    return <div className="loader-container"> <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} /></div>;
+  }
+
+  
   return (
     <div className="Test-Details-Main-Container">
       <div className="Test-Details-Container">

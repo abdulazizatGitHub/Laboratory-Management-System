@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import '../css/StaffReport.css';
 import { useNavigate } from "react-router-dom";
 import { getStaffByRole } from "../../Services/API";
+import ReactLoading from 'react-loading';
+
 const ViewStaffRecord = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByShift, setQueryByShift] = useState('');
     const [queryByCNIC, setQueryByCNIC] = useState('');
-    const navigation = useNavigate();
     const [receptionistData, setReceptionistData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user'));
+    const navigation = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -26,8 +28,8 @@ const ViewStaffRecord = () => {
         
     }, []);
 
-    const filteringData=()=>{
-        const data = receptionistData.filter(d=> d._id != user._id);
+    const filteringData = () => {
+        const data = receptionistData.filter(d => d._id !== user._id);
         setReceptionistData(data);
     }
 
@@ -51,13 +53,12 @@ const ViewStaffRecord = () => {
 
     if (receptionistData === null) {
         // Data is still being fetched, you can show a loading spinner or message
-        return <div>Loading...</div>;
+        return <div className="loader-container"> <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} /></div>;
     }
 
     const filteredData = selectedField === "Shift"
         ? receptionistData.filter(data => data.shift.includes(queryByShift))
-        : receptionistData.filter(data => data.cnic.includes(queryByCNIC)
-        );
+        : receptionistData.filter(data => data.cnic.includes(queryByCNIC));
 
     return (
         <div className="View-Staff-Report-Container">
@@ -116,4 +117,5 @@ const ViewStaffRecord = () => {
         </div>
     )
 }
+
 export default ViewStaffRecord;

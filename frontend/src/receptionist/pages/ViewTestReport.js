@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
 import { getPatientDetails, getTestReportDetails } from "../../Services/API";
+import ReactLoading from 'react-loading';
 const ViewTestReport = () => {
 
     const [queryByPIN, setQueryByPIN] = useState('');
@@ -11,6 +12,7 @@ const ViewTestReport = () => {
     const [selectedField, setSelectedField] = useState("PIN");
 
     const [reportData, setReportData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigation = useNavigate();
 
@@ -33,12 +35,17 @@ const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).sli
     }
     
     const fetchdata = async () => {
-      const response = await getTestReportDetails();
-      const todayData = response.data.filter(item => isToday(item.dateTime));
-        
-
-        setReportData(todayData);
-    }
+      setLoading(true); // Activate loader
+      try {
+          const response = await getTestReportDetails();
+          const todayData = response.data.filter(item => isToday(item.dateTime));
+          setReportData(todayData);
+      } catch (error) {
+          console.error("Error fetching test reports: ", error);
+      } finally {
+          setLoading(false); // Deactivate loader
+      }
+  }
     
 
     const handleFieldChange = (event) => {
@@ -77,6 +84,11 @@ const generatedDateTime = `${year}-${('0' + month).slice(-2)}-${('0' + date).sli
 
 
     return (<div id="ViewTestReport">
+         {loading && ( // Display loader if loading state is true
+                <div className="loader-container">
+                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
+                </div>
+            )}
        <div style={{width:"95%"}}>
        <NamingBar name={"VIEW TEST REPORTS"} />
        </div>

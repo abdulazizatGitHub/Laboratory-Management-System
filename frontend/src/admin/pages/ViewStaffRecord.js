@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import '../css/ViewPatientDetail.css';
 import { useNavigate } from "react-router-dom";
 import { getStaffDetails } from "../../Services/API";
+import ReactLoading from 'react-loading';
+
 const ViewStaffRecord = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByShift, setQueryByShift] = useState('');
@@ -10,6 +12,7 @@ const ViewStaffRecord = () => {
     const navigation = useNavigate();
     const [staffData, setStaffData] = useState(null);
     const user = JSON.parse(localStorage.getItem('user'));
+    const [loading, setLoading] = useState(true); // Add loading state
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,15 +22,17 @@ const ViewStaffRecord = () => {
                 filteringData();
             } catch (error) {
                 console.log('Error occurred in fetching the staff data');
+            } finally {
+                setLoading(false); // Set loading to false when data fetching is done
             }
         }
-    
+
         fetchData();
-        
+
     }, []);
 
-    const filteringData=()=>{
-        const data = staffData.filter(d=> d._id != user._id);
+    const filteringData = () => {
+        const data = staffData.filter(d => d._id != user._id);
         setStaffData(data);
     }
 
@@ -54,9 +59,9 @@ const ViewStaffRecord = () => {
         navigation('/admin/view-staff-record/staffDetail', { state: { data } });
     }
 
-    if (staffData === null) {
+    if (loading) {
         // Data is still being fetched, you can show a loading spinner or message
-        return <div>Loading...</div>;
+        return <div className="loader-container"> <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} /></div>;
     }
 
     const filteredData = selectedField === "Shift"
@@ -114,7 +119,7 @@ const ViewStaffRecord = () => {
                                     <td>{data.cnic}</td>
                                     <td>{data.shift}</td>
                                     <td>
-                                        <button type="button" id="ViewTestReport-roundButton" style={{cursor: 'pointer'}} onClick={() => handleDetailView(data)}>View</button>
+                                        <button type="button" id="ViewTestReport-roundButton" style={{ cursor: 'pointer' }} onClick={() => handleDetailView(data)}>View</button>
                                     </td>
                                 </tr>
                             ))

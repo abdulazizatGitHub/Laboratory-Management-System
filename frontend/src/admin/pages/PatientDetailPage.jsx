@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../css/PatientDetailPage.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { deletePatData, updatePatData, getGeneratedToken } from "../../Services/API";
+import ReactLoading from 'react-loading';
 
 const PatientDetailPage = () => {
     const navigation = useNavigate();
@@ -10,37 +11,52 @@ const PatientDetailPage = () => {
     const [showEditModal, setShowEditModal] = useState(false);
     const [editedData, setEditedData] = useState(data); 
     const [visit,setVisit] = useState(0);
-    const[lastVisit,setLastVisit] = useState('');
+    const [lastVisit,setLastVisit] = useState('');
+    const [loading, setLoading] = useState(false); // Add loading state
 
     useEffect(() => {
-        const getTokenData= async()=>{
-            const token= await getGeneratedToken();
-            const eachToken = token.filter(t=> t.patientData.pin == data.pin)
+        const getTokenData = async () => {
+            setLoading(true); // Start loading
+            const token = await getGeneratedToken();
+            const eachToken = token.filter(t => t.patientData.pin == data.pin);
             setVisit(eachToken.length);
-            setLastVisit(eachToken[eachToken.length-1].dateTime);
+            setLastVisit(eachToken[eachToken.length - 1].dateTime);
+            setLoading(false); // Stop loading
         }
         getTokenData();
     }, []);
 
-
-    
-    const delPat=async()=>{
-        const res = await deletePatData(data._id)
-        alert(res.data);
-        navigation('/admin/view-patient-detail');
+    const delPat = async () => {
+        setLoading(true); // Start loading
+        try {
+            const res = await deletePatData(data._id);
+            alert(res.data);
+            navigation('/admin/view-patient-detail');
+        } catch (error) {
+            console.error('Error deleting patient:', error);
+        } finally {
+            setLoading(false); // Stop loading
+        }
     }
-    
+
     const handleEdit = () => {
         setShowEditModal(true);
     }
 
     const handleSave = async () => {
-        // Call API to save edited data
-        await updatePatData(editedData);
-        // Close modal
-        setShowEditModal(false);
-        // Reload the page to reflect the changes
-        window.location.reload();
+        setLoading(true); // Start loading
+        try {
+            // Call API to save edited data
+            await updatePatData(editedData);
+            // Close modal
+            setShowEditModal(false);
+            // Reload the page to reflect the changes
+            window.location.reload();
+        } catch (error) {
+            console.error('Error updating patient data:', error);
+        } finally {
+            setLoading(false); // Stop loading
+        }
     }
 
     const handleChange = (e) => {
@@ -49,6 +65,10 @@ const PatientDetailPage = () => {
             ...prevData,
             [name]: value
         }));
+    }
+
+    if (loading) {
+        return <div className="loader-container"> <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} /></div>;
     }
 
     return (<div id="patientDetailPage-Fullcontainer">

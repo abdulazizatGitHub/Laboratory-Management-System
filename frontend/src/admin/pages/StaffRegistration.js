@@ -4,6 +4,8 @@ import { IoClose } from "react-icons/io5";
 import { FcCheckmark, FcCancel } from "react-icons/fc"; // Import additional icons
 import '../css/StaffRegistration.css';
 import { staffRegsiteration } from "../../Services/API";
+import ReactLoading from 'react-loading';
+
 
 const StaffRegistration = () => {
     const [downloadImgUrl, setDownloadImgUrl] = useState(null);
@@ -94,7 +96,7 @@ const StaffRegistration = () => {
 
     const handleRegisterStaff = async (e) => {
         e.preventDefault();
-        setAlert({ ...alert, loading: true, message: "Registering staff..." })
+        setAlert(prevAlert => ({ ...prevAlert, loading: true, message: "Registering staff..." }));
         try {
             const formData = new FormData();
             formData.append('name', name);
@@ -118,6 +120,8 @@ const StaffRegistration = () => {
             }
         } catch (error) {
             console.error('Error registering staff:', error);
+        }finally {
+            setAlert(prevAlert => ({ ...prevAlert, loading: false })); // Set loading to false regardless of success or failure
         }
     };
 
@@ -248,6 +252,11 @@ const StaffRegistration = () => {
                     <p>
                         {alert.icon} {alert.message}
                     </p>
+                </div>
+            )}
+            {alert.loading && (
+                <div className="loader-container">
+                     <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
                 </div>
             )}
 

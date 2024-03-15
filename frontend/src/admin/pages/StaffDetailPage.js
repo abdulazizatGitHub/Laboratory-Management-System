@@ -3,8 +3,8 @@ import "../css/PatientDetailPage.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons'
-
 import { deleteStaffData, updateStaffData } from "../../Services/API";
+import ReactLoading from 'react-loading';
 
 const StaffDetailPage = () => {
     const navigation = useNavigate();
@@ -13,7 +13,7 @@ const StaffDetailPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [editedData, setEditedData] = useState(data); // State to hold edited data
     const [showEditModal, setShowEditModal] = useState(false);
-
+    const [loading, setLoading] = useState(false); // Add loading state
 
     useEffect(() => {
         console.log("contact No: ", data);
@@ -23,10 +23,17 @@ const StaffDetailPage = () => {
         setShowPassword((prevShowPassword) => !prevShowPassword);
     };
 
-    const delStaff=async()=>{
-        const res=await deleteStaffData(data._id)
-        alert(res.data);
-        navigation('/admin/view-staff-record');
+    const delStaff = async () => {
+        setLoading(true);
+        try {
+            const res = await deleteStaffData(data._id);
+            alert(res.data);
+            navigation('/admin/view-staff-record');
+        } catch (error) {
+            console.error('Error deleting staff:', error);
+        } finally {
+            setLoading(false);
+        }
     }
 
     const handleEdit = () => {
@@ -34,14 +41,20 @@ const StaffDetailPage = () => {
     }
 
     const handleSave = async () => {
-        // Call API to save edited data
-        await updateStaffData(editedData);
-        // Close modal
-        setShowEditModal(false);
-        // Reload the page to reflect the changes
-        window.location.reload();
+        setLoading(true);
+        try {
+            // Call API to save edited data
+            await updateStaffData(editedData);
+            // Close modal
+            setShowEditModal(false);
+            // Reload the page to reflect the changes
+            window.location.reload();
+        } catch (error) {
+            console.error('Error updating staff data:', error);
+        } finally {
+            setLoading(false);
+        }
     }
-    
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -51,6 +64,9 @@ const StaffDetailPage = () => {
         }));
     }
 
+    if (loading) {
+        return <div className="loader-container"> <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} /></div>;
+    }
     return (
         <div id="patientDetailPage-Fullcontainer">
             <div id="pdp-nameAndButtons">

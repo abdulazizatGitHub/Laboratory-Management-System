@@ -1,25 +1,32 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import '../css/ViewPatientDetail.css';
 import { useNavigate } from "react-router-dom";
 import { getPatientDetails } from "../../Services/API";
+import ReactLoading from 'react-loading';
+
 const ViewPatientDetail = () => {
     const [selectedField, setSelectedField] = useState("PIN");
     const [queryByPIN, setQueryByPIN] = useState('');
     const [queryByContact, setQueryByContact] = useState('');
     const [queryByCNIC, setQueryByCNIC] = useState('');
     const navigation = useNavigate();
-    
     const [patientData, setPatientData] = useState([]);
+    const [loading, setLoading] = useState(false); // Add loading state
 
-    
-
-    useEffect(()=>{
+    useEffect(() => {
         fetchPatientData();
-    },[])
-    
-    const fetchPatientData =async()=>{
-        const data= await getPatientDetails();
-        setPatientData(data);
+    }, []);
+
+    const fetchPatientData = async () => {
+        setLoading(true); // Start loading when fetching data
+        try {
+            const data = await getPatientDetails();
+            setPatientData(data);
+        } catch (error) {
+            console.error('Error fetching patient data:', error);
+        } finally {
+            setLoading(false); // Stop loading
+        }
     }
 
     const handleFieldChange = (event) => {
@@ -52,6 +59,9 @@ const ViewPatientDetail = () => {
             : patientData.filter(data => data.cnic.includes(queryByCNIC))
         )
 
+    if (loading) {
+        return <div className="loader-container"> <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} /></div>;
+    }
 
 
     return (

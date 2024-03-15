@@ -3,6 +3,7 @@ import NamingBar from "../components/NamingBar";
 import "../CSS/SearchTest.css";
 import { fetchtests } from "../../Services/API";
 import { useLocation, useNavigate } from "react-router-dom";
+import ReactLoading from 'react-loading';
 
 const SearchTest = () => {
   const navigate = useNavigate();
@@ -12,22 +13,26 @@ const SearchTest = () => {
   const [queryByCode, setQueryByCode] = useState('');
   const [testData, setTestData] = useState([]);
   const [selectedTests, setSelectedTests] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchData();
      }, []);
 
-  const fetchData = async () => {
-    try {
-      const tests = await fetchtests();
-      if (tests.data && Array.isArray(tests.data)) {
-        setTestData(tests.data);
-      } else {
-        console.error("Error fetching tests: data is not an array");
+     const fetchData = async () => {
+      setLoading(true); // Activate loader
+      try {
+          const tests = await fetchtests();
+          if (tests.data && Array.isArray(tests.data)) {
+              setTestData(tests.data);
+          } else {
+              console.error("Error fetching tests: data is not an array");
+          }
+      } catch (error) {
+          console.error("Error fetching tests: ", error);
+      } finally {
+          setLoading(false); // Deactivate loader
       }
-    } catch (error) {
-      console.error("Error fetching tests: ", error);
-    }
   };
 
   const handleFieldChange = (event) => {
@@ -80,6 +85,11 @@ const SearchTest = () => {
 
   return (
     <div id="SearchTest">
+         {loading && ( // Display loader if loading state is true
+                <div className="loader-container">
+                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
+                </div>
+            )}
       {/* <NamingBar name={"SEARCH TEST"} /> */}
       <div className="SearchTest-innerComponent">
         <form className="searchTest-mainBox">

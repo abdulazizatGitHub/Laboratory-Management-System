@@ -1,16 +1,15 @@
-// Dashboard.js
-import '../CSS/Dashboard.css';
-import img1 from '../../Assessts/Images/Profile1.jpg';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { getAllTests, fetchTokenCount, getAllPatientNumbers, getGeneratedToken } from '../../Services/API'; // Update import
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFlask, faDollarSign, faUser, faKey } from '@fortawesome/free-solid-svg-icons';
 import DailySalesChart from '../components/DailySalesChart';
 import MonthlySalesChart from '../components/MonthlySalesChart';
-import React, { useState, useEffect } from "react";
-import { getAllTests, fetchTokenCount, getAllPatientNumbers, getGeneratedToken } from '../../Services/API'; // Update import
-import { useNavigate } from "react-router-dom";
+import ReactLoading from 'react-loading';
+import '../CSS/Dashboard.css';
+import img1 from '../../Assessts/Images/Profile1.jpg';
 
 const Dashboard = () => {
-    
     const [numberOfTests, setNumberOfTests] = useState([]);
     const [totalAmount, setTotalAmount] = useState(0);
     const [totalPatients, setTotalPatients] = useState(0);
@@ -18,19 +17,31 @@ const Dashboard = () => {
     const [dailySalesData, setDailySalesData] = useState([]);
     const [monthlySalesData, setMonthlySalesData] = useState([]);
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true); // Initialize loading state to true
     const navigation = useNavigate();
 
     useEffect(() => {
-        getTests();
-        fetchToken();
-        fetchPatient();
-        getDailySales();
-        getMonthlySales();
-        
+        const fetchData = async () => {
+            try {
+                await Promise.all([
+                    getTests(),
+                    fetchToken(),
+                    fetchPatient(),
+                    getDailySales(),
+                    getMonthlySales(),
+                    fetchUser(),
+                ]);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                setLoading(false); // Set loading to false when all data fetching is complete
+            }
+        };
+
+        fetchData();
     }, []);
 
-   
-    useEffect(() => {
+    const fetchUser = async () => {
         const userData = localStorage.getItem('user');
         if (userData) {
             setUser(JSON.parse(userData));
@@ -38,31 +49,21 @@ const Dashboard = () => {
             // Redirect to login if user data is not available
             navigation('/');
         }
-    }, []);
-   
+    };
 
     const getTests = async () => {
-        try {
-            const result = await getAllTests();
-            setNumberOfTests(result.length);
-        } catch (error) {
-            console.error('Error fetching tests:', error);
-        }
+        const result = await getAllTests();
+        setNumberOfTests(result.length);
     };
 
     const fetchToken = async () => {
         const tokencount = await getGeneratedToken();
-
         setTokensGenerated(tokencount.length);
     };
 
     const fetchPatient = async () => {
-        try {
-            const patientCount = await getAllPatientNumbers();
-            setTotalPatients(patientCount); // Update the state
-        } catch (error) {
-            console.error("Error in Patient", error);
-        }
+        const patientCount = await getAllPatientNumbers();
+        setTotalPatients(patientCount);
     };
 
     const isToday = (someDate) => {
@@ -78,7 +79,6 @@ const Dashboard = () => {
     const getDailySales = async () => {
         const salesdata = await getGeneratedToken();
         const todayData = salesdata.filter(item => isToday(item.dateTime));
-        console.log("The Daily Data is", todayData);
         setDailySalesData(todayData);
     };
 
@@ -91,7 +91,6 @@ const Dashboard = () => {
             const itemDate = new Date(item.dateTime);
             return itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth;
         });
-        console.log("Current Month's Sales Data is", monthData);
         setMonthlySalesData(monthData);
     };
 
@@ -119,83 +118,83 @@ const Dashboard = () => {
 
     return (
         <div className="Main-Container">
-
-{user && (
-            <div className="Profile">
-               
-                <div className="Image-details">
-                    <img src={user.image.url} className="profile-image" />
+            {loading ? ( // Render loader if loading is true
+                <div className="loader-container">
+                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
                 </div>
+            ) : (
+                <React.Fragment>
+                    {user && (
+                        <div className="Profile">
+                            <div className="Image-details">
+                                <img src={user.image.url} className="profile-image" />
+                            </div>
 
-                <div className='profile-info'>
-                    <div className="profile-divs">
-                        <p className="bold-light">NAME</p>
-                        <p>{user.name}</p>
+                            <div className='profile-info'>
+                                <div className="profile-divs">
+                                    <p className="bold-light">NAME</p>
+                                    <p>{user.name}</p>
+                                </div>
+
+                                <div className="profile-divs">
+                                    <p className="bold-light">FATHER NAME</p>
+                                    <p>{user.fatherName}</p>
+                                </div>
+
+                                <div className="profile-divs">
+                                    <p className="bold-light">GENDER</p>
+                                    <p>{user.gender}</p>
+                                </div>
+
+                                <div className="profile-divs">
+                                    <p className="bold-light">ADDRESS</p>
+                                    <p>{user.address}</p>
+                                </div>
+
+                                <div className="profile-divs">
+                                    <p className="bold-light">CONTACT</p>
+                                    <p>{user.contactNumber}</p>
+                                </div>
+
+                                <div className="profile-divs">
+                                    <p className="bold-light">CNIC</p>
+                                    <p>{user.cnic}</p>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    <div className="dashboard">
+                        <div className="dashboard-item">
+                            <h3>NUMBER OF TESTS</h3>
+                            <p ><FontAwesomeIcon icon={faFlask} />{numberOfTests}</p>
+                        </div>
+                        <div className="dashboard-item">
+                            <h3>TOTAL AMOUNT</h3>
+                            <p>  <FontAwesomeIcon icon={faDollarSign} />{totalAmount}</p>
+                        </div>
+                        <div className="dashboard-item">
+                            <h3>TOTAL PATIENT</h3>
+                            <p>  <FontAwesomeIcon icon={faUser} /> {totalPatients}</p>
+                        </div>
+                        <div className="dashboard-item">
+                            <h3>TOKENS GENERATED</h3>
+                            <p><FontAwesomeIcon icon={faKey} /> {tokensGenerated}</p>
+                        </div>
                     </div>
-
-                    <div className="profile-divs">
-                        <p className="bold-light">FATHER NAME</p>
-                        <p>{user.fatherName}</p>
+                    <div className="dashboard-charts">
+                        <div className="chart-container">
+                            <h3>DAILY SALES CHART</h3>
+                            <DailySalesChart data={formattedDailySalesData} />
+                        </div>
+                        <div className="chart-container">
+                            <h3>MONTHLY SALES CHART</h3>
+                            <MonthlySalesChart data={formattedMonthlySalesData} />
+                        </div>
                     </div>
-
-
-
-                    <div className="profile-divs">
-                        <p className="bold-light">GENDER</p>
-                        <p>{user.gender}</p>
-                    </div>
-
-                    <div className="profile-divs">
-                        <p className="bold-light">ADDRESS</p>
-                        <p>{user.address}</p>
-                    </div>
-
-
-
-                    <div className="profile-divs">
-                        <p className="bold-light">CONTACT</p>
-                        <p>{user.contactNumber}</p>
-                    </div>
-
-                    <div className="profile-divs">
-                        <p className="bold-light">CNIC</p>
-                        <p>{user.cnic}</p>
-                    </div>
-                </div>
-            </div>
-
-)}
-
-            <div className="dashboard">
-                <div className="dashboard-item">
-                    <h3>NUMBER OF TESTS</h3>
-                    <p ><FontAwesomeIcon icon={faFlask} />{numberOfTests}</p>
-                </div>
-                <div className="dashboard-item">
-                    <h3>TOTAL AMOUNT</h3>
-                    <p>  <FontAwesomeIcon icon={faDollarSign} />{totalAmount}</p>
-                </div>
-                <div className="dashboard-item">
-                    <h3>TOTAL PATIENT</h3>
-                    <p>  <FontAwesomeIcon icon={faUser} /> {totalPatients}</p>
-                </div>
-                <div className="dashboard-item">
-                    <h3>TOKENS GENERATED</h3>
-                    <p><FontAwesomeIcon icon={faKey} /> {tokensGenerated}</p>
-                </div>
-            </div>
-            <div className="dashboard-charts">
-                <div className="chart-container">
-                    <h3>DAILY SALES CHART</h3>
-                    <DailySalesChart data={formattedDailySalesData} />
-                </div>
-                <div className="chart-container">
-                    <h3>MONTHLY SALES CHART</h3>
-                    <MonthlySalesChart data={formattedMonthlySalesData} />
-                </div>
-            </div>
+                </React.Fragment>
+            )}
         </div>
-
     );
 }
 

@@ -3,6 +3,7 @@ import NamingBar from "../components/NamingBar";
 import "../CSS/ViewTestReport.css";
 import { useNavigate } from "react-router";
 import { getAllTestReportDetails, getGeneratedToken, getPatientDetails } from "../../Services/API";
+import ReactLoading from 'react-loading';
 const SearchTestReport = () => {
 
     const [queryByPIN, setQueryByPIN] = useState('');
@@ -11,6 +12,7 @@ const SearchTestReport = () => {
     const [selectedField, setSelectedField] = useState("PIN");
 
     const [reportData, setReportData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigation = useNavigate();
 
@@ -18,26 +20,33 @@ const SearchTestReport = () => {
         fetchdata();
     }, []);
 
-    
     const fetchdata = async () => {
-        const response = await getAllTestReportDetails();
-    
-        // Get the current date
-        const today = new Date();
-        // Get the first day of the current month
-        const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
-        // Get the last day of the current month
-        const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-    
-        // Filter the data to include only records within the current month
-        const monthData = response.data.filter(item => {
-            const itemDate = new Date(item.dateTime);
-            return itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth;
-        });
-    
-        console.log("Current Month's Patient Data is ", monthData);
-        setReportData(response.data);
-    }
+      setLoading(true); // Activate loader
+      try {
+          const response = await getAllTestReportDetails();
+  
+          // Get the current date
+          const today = new Date();
+          // Get the first day of the current month
+          const firstDayOfMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+          // Get the last day of the current month
+          const lastDayOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+  
+          // Filter the data to include only records within the current month
+          const monthData = response.data.filter(item => {
+              const itemDate = new Date(item.dateTime);
+              return itemDate >= firstDayOfMonth && itemDate <= lastDayOfMonth;
+          });
+  
+          console.log("Current Month's Patient Data is ", monthData);
+          setReportData(response.data);
+      } catch (error) {
+          console.error("Error fetching test reports: ", error);
+      } finally {
+          setLoading(false); // Deactivate loader
+      }
+  };
+  
     
     
 
@@ -75,6 +84,11 @@ const SearchTestReport = () => {
 
 
     return (<div id="ViewTestReport">
+        {loading && ( // Display loader if loading state is true
+                <div className="loader-container">
+                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
+                </div>
+            )}
     <div style={{width:"95%"}}>
         <NamingBar name={"Search Test Report"} />
     </div>

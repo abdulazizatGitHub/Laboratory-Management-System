@@ -4,6 +4,8 @@ import '../CSS/PatientRegistration.css';
 import { getPatientDetails, registerPatient } from "../../Services/API";
 import { useNavigate } from "react-router-dom";
 import { fetchTokenCount, getAllPatientNumbers } from "../../Services/API";
+import ReactLoading from 'react-loading';
+
 
 const PatientRegistration = () => {
 
@@ -23,6 +25,7 @@ const PatientRegistration = () => {
 
    const [data, setData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,6 +42,7 @@ const PatientRegistration = () => {
   }, [data]); 
 
   const generatePin = () => {
+    setLoading(true);
     const currentDate = new Date();
     const year = currentDate.getFullYear().toString().slice(2);
     const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
@@ -77,14 +81,17 @@ const PatientRegistration = () => {
     console.log("format counter is ", formattedCounter)
     // Update state with generated PIN
     setFormData(prevData => ({ ...prevData, pin: pin }));
+    setLoading(false);
 };
 
 
   
   
   const fetchPatientData = async () => {
+    setLoading(true);
     const Pdata = await getPatientDetails();
     setData(Pdata);
+    setLoading(false); 
     }
 
 
@@ -119,6 +126,8 @@ const PatientRegistration = () => {
       return;
     }
 
+    setLoading(true);
+
     try {
       const response = await registerPatient(formData);
 
@@ -141,7 +150,9 @@ const PatientRegistration = () => {
       } else {
         console.error('Error during registration:', error);
       }
-    }
+    }finally {
+      setLoading(false); // Deactivate loader
+  }
 
   };
 
@@ -149,6 +160,11 @@ const PatientRegistration = () => {
   return (
 
     <div className="Patient-Main-Container">
+         {loading && ( // Display loader if loading state is true
+                <div className="loader-container">
+                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
+                </div>
+            )}
       <form className="Patient-Details-Container">
       <p style={{alignSelf:"center", fontSize:"1.5rem",fontWeight:"bold", color:"#00ADB5"}}>Patient Registration</p>
         <h2 style={{marginLeft:"0.5rem"}}>Patient Details</h2>
