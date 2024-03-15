@@ -4,7 +4,7 @@ import { addTest } from '../../Services/API';
 import ReactLoading from 'react-loading';
 
 function Addtest() {
-  const [test, setTest] = useState({
+  const initialTestState = {
     code: '',
     name: '',
     type: '',
@@ -17,7 +17,8 @@ function Addtest() {
       male: { from: '', to: '' },
       female: { from: '', to: '' },
     },
-  });
+  };
+  const [test, setTest] = useState(initialTestState);
   const [loading, setLoading] = useState(false); // Add loading state
 
   // Function to handle input changes
@@ -47,6 +48,8 @@ function Addtest() {
       if (response.status === 201 && response.data) {
         // Test registered successfully
         window.alert('Test registered successfully');
+        // Clear form inputs after successful submission
+        setTest(initialTestState);
       } else if (response.status === 400 && response.data.message === 'Test already exists') {
         // Test already exists, show warning
         window.alert('Test already exists.');
