@@ -7,13 +7,17 @@ import JsBarcode from 'jsbarcode';
 import { addPhlebotomyReport, updateReport, updateToken } from "../../Services/API";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
-
+import { useReactToPrint } from 'react-to-print';
 function ReportDetailsPage() {
 
     const location = useLocation();
     const { data } = location.state;
 
     const canvasRef = useRef(null);
+    const componentRef = useRef();
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current,
+    });
 
     useEffect(() => {
         console.log(data)
@@ -55,38 +59,7 @@ function ReportDetailsPage() {
 
         
         if(pr=="yes"){
-        const input = document.getElementById("Main-report");
-        
-        html2canvas(input, {
-            scale: 2,
-            logging: true,
-            allowTaint: true, // Allow taint to render images from other domains
-            useCORS: true, // Use cross-origin request to render images
-            scrollY: -window.scrollY, // Fix for scrolling capture
-            windowWidth: document.documentElement.offsetWidth, // Fix for capture width
-            windowHeight: document.documentElement.offsetHeight, // Fix for capture height
-        }).then((canvas) => {
-            const pdf = new jsPDF("p", "mm", "a4");
-            const imgData = canvas.toDataURL("image/jpeg", 0.8); // Adjust quality here
-            const imgWidth = 210;
-            const pageHeight = 295;
-            const imgHeight = (canvas.height * imgWidth) / canvas.width;
-            let heightLeft = imgHeight;
-            let position = 0;
-    
-            pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-    
-            while (heightLeft >= 0) {
-                position = heightLeft - imgHeight;
-                pdf.addPage();
-                pdf.addImage(imgData, "JPEG", 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-            }
-    
-            const filename = `report_${Date.now()}.pdf`;
-            pdf.save(filename);
-        });
+            handlePrint();
         }
         
     };
@@ -113,7 +86,7 @@ function ReportDetailsPage() {
 
     return (
         <div className="RC-Main-Report-container">
-            <section id="Main-report" className="RC-Main-report">
+            <section  ref={componentRef} id="Main-report" className="RC-Main-report">
                 <div className="RC-Header-report">
                     <div className="RC-Report-smCnt">
                         <div className="RC-Report-left-image">
@@ -200,7 +173,7 @@ function ReportDetailsPage() {
                     <div className="RC-Details-Footer" style={{height:"8rem"}}>
 
                         <div className="RC-Fl-report" style={{height:"auto"}}>
-                            <p>Report Preparaed By</p>
+                            <p>Preparaed By</p>
 
                             {data.generatedBy}
                             <h5>Pathologist</h5>
@@ -208,10 +181,10 @@ function ReportDetailsPage() {
 
                         <div className="RC-Fl-report" style={{height:"auto"}}>
                            
-                            <p>Reviewed By</p>
+                            <p>Printed By</p>
 
-                            {data.generatedBy}
-                            <h5>Pathologist</h5>
+                            {JSON.parse(localStorage.getItem('user')).name}
+                            <h5>Receptionist</h5>
                         </div>
                     </div>
 
