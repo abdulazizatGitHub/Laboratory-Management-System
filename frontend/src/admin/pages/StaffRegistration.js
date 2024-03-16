@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 import { IoClose } from "react-icons/io5";
-import { FcCheckmark, FcCancel } from "react-icons/fc"; // Import additional icons
 import '../css/StaffRegistration.css';
 import { staffRegsiteration } from "../../Services/API";
 import ReactLoading from 'react-loading';
+import AlertModal from "../components/AlertModal";
 
 
 const StaffRegistration = () => {
@@ -27,42 +27,25 @@ const StaffRegistration = () => {
     const [alert, setAlert] = useState({
         show: false,
         message: "",
-        icon: null,
+        type: "",
         loading: false,
     });
 
+
     const showAlert = (message, type) => {
-        let icon = null;
-        let alertClass = "";
-
-        switch (type) {
-            case "success":
-                icon = <FcCheckmark size={20} color="green" />;
-                alertClass = "success-alert";
-                break;
-            case "error":
-                icon = <FcCancel size={20} color="red" />;
-                alertClass = "error-alert";
-                break;
-            default:
-                break;
-        }
-
         setAlert({
             show: true,
             message,
-            icon,
+            type,
             loading: false,
-            alertClass, // Add the alert class
         });
 
         setTimeout(() => {
             setAlert({
                 show: false,
                 message: "",
-                icon: null,
+                type: "",
                 loading: false,
-                alertClass: "",
             });
         }, 3000);
     };
@@ -262,11 +245,7 @@ const StaffRegistration = () => {
                 </div>
             </div>
             {alert.show && (
-                <div className={`custom-alert ${alert.alertClass}`}>
-                    <p>
-                        {alert.icon} {alert.message}
-                    </p>
-                </div>
+                <AlertModal message={alert.message} type={alert.type} />
             )}
             {alert.loading && (
                 <div className="loader-container">

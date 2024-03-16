@@ -104,7 +104,7 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                             placeholder="Enter your password"
                         />
-                        {error && <p className="error-message">{error}</p>}
+                        {error && <p style={{color: 'red'}} className="error-message">{error}</p>}
                         <Link to='/Forgotpassword' className="forgot-pass">Forgot password?</Link>
                     </div>
                     <div className="login-form-btn-container">
