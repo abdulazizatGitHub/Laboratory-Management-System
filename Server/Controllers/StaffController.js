@@ -9,14 +9,14 @@ import { google } from 'googleapis';
 import dotenv from 'dotenv';
 import cloudinary from "../Cloudinaryconfig.js";
 dotenv.config();
-// Set up OAuth 2.0 client credentials
-const client_id ='366053873235-5378r5ff27nnstr1j8k62eq87njjtl9g.apps.googleusercontent.com';
-const client_secret ='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';
-const redirected_url ='https://developers.google.com/oauthplayground';
-const Refresh_token ='1//040Rvw1Z3chyWCgYIARAAGAQSNwF-L9Ir8JYDI0zb8wMTzjeCruIHWXQxUJilS4PNuHFWZbQbpQBJ0BHkSRmJhAnYr2gETxaMA9k';
-// Create OAuth 2.0 client
-const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirected_url);
-oAuth2Client.setCredentials({ refresh_token: Refresh_token });
+// // Set up OAuth 2.0 client credentials
+// const client_id ='366053873235-5378r5ff27nnstr1j8k62eq87njjtl9g.apps.googleusercontent.com';
+// const client_secret ='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';
+// const redirected_url ='https://developers.google.com/oauthplayground';
+// const Refresh_token ='1//040Rvw1Z3chyWCgYIARAAGAQSNwF-L9Ir8JYDI0zb8wMTzjeCruIHWXQxUJilS4PNuHFWZbQbpQBJ0BHkSRmJhAnYr2gETxaMA9k';
+// // Create OAuth 2.0 client
+// const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirected_url);
+// oAuth2Client.setCredentials({ refresh_token: Refresh_token });
 
 
 export const staffRegistration = async (req, res) => {
@@ -252,93 +252,93 @@ export const getStaffDetailsByRole = async (req, res) => {
 }
 
 
-//Forgot Password //////////////////////////////
+// //Forgot Password //////////////////////////////
 
 
-// Create a Nodemailer transporter using OAuth 2.0
-const transporter = nodemailer.createTransport({
-    service: 'Gmail',
-    auth: {
-        type: 'OAuth2',
-        user: 'khanmahad19285@gmail.com', // Your Gmail address
-        clientId: client_id,
-        clientSecret: client_secret,
-        refreshToken: Refresh_token,
-        accessToken: oAuth2Client.getAccessToken()
-    }
-});
+// // Create a Nodemailer transporter using OAuth 2.0
+// const transporter = nodemailer.createTransport({
+//     service: 'Gmail',
+//     auth: {
+//         type: 'OAuth2',
+//         user: 'khanmahad19285@gmail.com', // Your Gmail address
+//         clientId: client_id,
+//         clientSecret: client_secret,
+//         refreshToken: Refresh_token,
+//         accessToken: oAuth2Client.getAccessToken()
+//     }
+// });
 
 
 
 
 
-// Function to send reset code
-export const sendResetCode = async (req, res) => {
-    const { username } = req.body;
+// // Function to send reset code
+// export const sendResetCode = async (req, res) => {
+//     const { username } = req.body;
 
-    try {
-        // Generate reset code (for demonstration purpose)
-        const resetCode = Math.random().toString(36).slice(-8);
+//     try {
+//         // Generate reset code (for demonstration purpose)
+//         const resetCode = Math.random().toString(36).slice(-8);
 
-        // Store the reset code in the database for the user
-        const user = await StaffModel.findOneAndUpdate(
-            { userName: username },
-            { resetCode: resetCode },
-            { new: true }
-        );
+//         // Store the reset code in the database for the user
+//         const user = await StaffModel.findOneAndUpdate(
+//             { userName: username },
+//             { resetCode: resetCode },
+//             { new: true }
+//         );
 
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
 
-        // Send the reset code to the user via email or other means
-        await transporter.sendMail({
-            from: 'khanmahad19285@gmail.com',
-            to: user.email,
-            subject: 'Password Reset Code',
-            text: `Your password reset code is: ${resetCode}`
-        });
+//         // Send the reset code to the user via email or other means
+//         await transporter.sendMail({
+//             from: 'khanmahad19285@gmail.com',
+//             to: user.email,
+//             subject: 'Password Reset Code',
+//             text: `Your password reset code is: ${resetCode}`
+//         });
 
-        res.status(200).json({ message: 'Reset code sent successfully' });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: 'Failed to send reset code' });
-    }
-};
+//         res.status(200).json({ message: 'Reset code sent successfully' });
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ message: 'Failed to send reset code' });
+//     }
+// };
 
-// Function to reset password
-export const resetPassword = async (req, res) => {
-    const { username, resetCode, newPassword } = req.body;
+// // Function to reset password
+// export const resetPassword = async (req, res) => {
+//     const { username, resetCode, newPassword } = req.body;
 
-    try {
-        // Retrieve the reset code associated with the user from the database
-        const user = await StaffModel.findOne({ userName: username });
+//     try {
+//         // Retrieve the reset code associated with the user from the database
+//         const user = await StaffModel.findOne({ userName: username });
 
-        if (!user) {
-            return res.status(404).json({ message: 'User not found' });
-        }
+//         if (!user) {
+//             return res.status(404).json({ message: 'User not found' });
+//         }
 
-        // Check if the reset code matches the one stored in the database
-        if (user.resetCode !== resetCode) {
-            return res.status(400).json({ message: 'Invalid reset code' });
-        }
+//         // Check if the reset code matches the one stored in the database
+//         if (user.resetCode !== resetCode) {
+//             return res.status(400).json({ message: 'Invalid reset code' });
+//         }
 
-        // Update the user's password and clear the reset code
-        user.password = newPassword;
-        user.resetCode = null;
-        await user.save();
+//         // Update the user's password and clear the reset code
+//         user.password = newPassword;
+//         user.resetCode = null;
+//         await user.save();
 
-        // Send confirmation email to the user
-        await transporter.sendMail({
-            from: 'khanmahad19285@gmail.com',
-            to: user.email,
-            subject: 'Password Reset Confirmation',
-            text: 'Your password has been successfully reset.'
-        });
+//         // Send confirmation email to the user
+//         await transporter.sendMail({
+//             from: 'khanmahad19285@gmail.com',
+//             to: user.email,
+//             subject: 'Password Reset Confirmation',
+//             text: 'Your password has been successfully reset.'
+//         });
 
-        res.status(200).json({ message: 'Password updated successfully' });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ message: 'Failed to reset password' });
-    }
-};
+//         res.status(200).json({ message: 'Password updated successfully' });
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ message: 'Failed to reset password' });
+//     }
+// };

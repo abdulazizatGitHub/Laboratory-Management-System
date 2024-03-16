@@ -56,6 +56,11 @@ const Login = () => {
         return await getStaffDetails();
     }
 
+    const handleUsernameSuffixChange = (e) => {
+        // Convert input to uppercase
+        setUsernameSuffix(e.target.value.toUpperCase());
+    }
+
     return (
         <div className="login-main-container">
             {loading && ( // Display loader if loading state is true
@@ -88,7 +93,7 @@ const Login = () => {
                             <input
                                 type="text"
                                 value={usernameSuffix}
-                                onChange={(e) => setUsernameSuffix(e.target.value)}
+                                onChange={handleUsernameSuffixChange} // Call handle function for uppercase conversion
                             />
                             <p>-</p>
                             <input

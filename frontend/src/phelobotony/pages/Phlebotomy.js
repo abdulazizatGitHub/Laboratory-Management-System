@@ -5,10 +5,9 @@ import { getGeneratedToken, updateToken } from "../../Services/API";
 import JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
 import ReactDOM from 'react-dom';
-import DatePicker from "react-datepicker";
+import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { TbCalendarPlus } from "react-icons/tb";
-import ReactLoading from 'react-loading';
 
 const formatDate = (date) => {
     // Format the date as "MM/dd/yyyy"
@@ -31,23 +30,20 @@ const Phlebotomy = () => {
     const [selectedRegistrationDetails, setSelectedRegistrationDetails] = useState(null);
     const [remarks, setRemarks] = useState('');
     const [state, setState] = useState('');
-    const [loading, setLoading] = useState(true); // Loader state
-
     const navigation = useNavigate();
     //By basit
     const [allToken, setAllTokens] = useState([]);
-
-  useEffect(() => {
+    useEffect(() => {
         const fetchTokenDetails = async () => {
             try {
                 const res = await getGeneratedToken();
+
                 setAllTokens(res);
-                setLoading(false); // Set loading to false after fetching data
+
             } catch (error) {
-                console.log('Error occurred in fetching the token data', error);
-                setLoading(false); // Set loading to false in case of error
+                console.log('Error occure in fetching the token data', error);
             }
-        };
+        }
         fetchTokenDetails();
     }, [state]);
 
@@ -146,7 +142,7 @@ const Phlebotomy = () => {
 
         const doc = new jsPDF();
         const barcodeValue = selectedRegistrationDetails.patientData.pin;
-        const tokenNo = selectedRegistrationDetails.tokenNumber;
+        const Patientname = selectedRegistrationDetails.patientData.name;
 
         // Create a canvas element to render the barcode
         const canvas = document.createElement('canvas');
@@ -155,7 +151,7 @@ const Phlebotomy = () => {
         const ctx = canvas.getContext('2d');
 
         // Generate barcode with PIN and token number
-        JsBarcode(canvas, barcodeValue + '\n' + tokenNo, {
+        JsBarcode(canvas, Patientname+ '\n' +barcodeValue, {
             format: "CODE128",
             displayValue: true,
             width: 0.8,
@@ -170,7 +166,7 @@ const Phlebotomy = () => {
 
         // Draw the text on canvas
         ctx.fillText(barcodeValue, canvas.width / 4, canvas.height + 10); // Adjust x-coordinate for PIN
-        ctx.fillText(tokenNo, (canvas.width / 4) * 3, canvas.height + 10); // Adjust x-coordinate for token number
+        ctx.fillText(Patientname, (canvas.width / 4) * 3, canvas.height + 10); // Adjust x-coordinate for token number
 
         // Convert canvas to data URL
         const imgData = canvas.toDataURL();
@@ -183,16 +179,15 @@ const Phlebotomy = () => {
     };
 
 
-    if (loading) {
-        return (
-            <div className="loader-container">
-                <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
-            </div>
-        );
-    }
 
+
+    // const filteredRecords = selectedOption === 'Pending Phlebotomy' ? pendingPhlebotomy : registrationDetails;
+    // const filteredTotalRecords = registrationDetails.filter(token => !pendingPhlebotomy.some(p => p.patientData.pin === token.patientData.pin));
     const AllRecords = allToken ? allToken.filter(tkn => tkn.state === "generated" && (fromDate!=null ? (toDate!=null ? formatDate(new Date(tkn.dateTime))>=fromDate && formatDate(new Date(tkn.dateTime))<=toDate:formatDate(new Date(tkn.dateTime)) >= fromDate):true) ): [];
     const PendingRecords = allToken ? allToken.filter(tkn => tkn.state === "pending" && (fromDate!=null ? (toDate!=null ? formatDate(new Date(tkn.dateTime))>=fromDate && formatDate(new Date(tkn.dateTime))<=toDate:formatDate(new Date(tkn.dateTime)) >= fromDate):true) ): [];
+
+
+    
 
     const handleDateChange = (date, name) => {
         let formattedDate = null;
