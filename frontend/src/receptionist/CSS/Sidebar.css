@@ -101,6 +101,12 @@
   bottom: 1rem;
 }
 
+.highlighted {
+    background-color: #282238;
+    color: white;
+}
+
+
 /* Sidebar.css */
 
 /* Existing styles... */

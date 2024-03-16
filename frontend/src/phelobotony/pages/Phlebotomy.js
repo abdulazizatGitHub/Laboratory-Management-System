@@ -139,19 +139,16 @@ const Phlebotomy = () => {
             alert('Please select a patient.');
             return;
         }
-
-        const doc = new jsPDF();
+    
         const barcodeValue = selectedRegistrationDetails.patientData.pin;
-        const Patientname = selectedRegistrationDetails.patientData.name;
-
+        const patientName = selectedRegistrationDetails.patientData.name;
+    
         // Create a canvas element to render the barcode
         const canvas = document.createElement('canvas');
-
-        // Get the context of the canvas
         const ctx = canvas.getContext('2d');
-
-        // Generate barcode with PIN and token number
-        JsBarcode(canvas, Patientname+ '\n' +barcodeValue, {
+    
+        // Generate barcode with PIN (avoid including patient name in the barcode itself)
+        JsBarcode(canvas, barcodeValue, {
             format: "CODE128",
             displayValue: true,
             width: 0.8,
@@ -160,23 +157,23 @@ const Phlebotomy = () => {
             margin: 8
         });
 
-        // Set font style for PIN and token number
-        const fontStyle = '5px Arial'; // Adjust font size and family as needed
+        const fontStyle = '10px Arial'; // Adjust font size and family as needed
         ctx.font = fontStyle;
+        ctx.fillText(patientName, -43, 7); 
 
-        // Draw the text on canvas
-        ctx.fillText(barcodeValue, canvas.width / 4, canvas.height + 10); // Adjust x-coordinate for PIN
-        ctx.fillText(Patientname, (canvas.width / 4) * 3, canvas.height + 10); // Adjust x-coordinate for token number
-
-        // Convert canvas to data URL
+        ctx.drawImage(canvas, Math.max(patientName.length * 8, 10), 40);
+    
+        const pinWidth = ctx.measureText(barcodeValue).width;
+        ctx.fillText(barcodeValue, (canvas.width - pinWidth) / 2, canvas.height + 10); 
+    
         const imgData = canvas.toDataURL();
-
-        // Add the barcode image to the PDF
-        doc.addImage(imgData, 'PNG', 5, 5, 40, 20); // Increase height to accommodate both lines of text
-
-        // Save the PDF
-        doc.save(`barcode_${barcodeValue}.pdf`);
+        const windowContent = `<img src="${imgData}" style="display:block;margin:auto;">`;
+        const printWindow = window.open('', '_blank');
+        printWindow.document.open();
+        printWindow.document.write(`<html><head><title>Print Barcode</title></head><body onload="window.print();">${windowContent}</body></html>`);
+        printWindow.document.close();
     };
+    
 
 
 
