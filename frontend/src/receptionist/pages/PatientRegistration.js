@@ -6,11 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { fetchTokenCount, getAllPatientNumbers } from "../../Services/API";
 import ReactLoading from 'react-loading';
 
-
 const PatientRegistration = () => {
 
-
-  const initialFormData = {
+  const [formData, setFormData] = useState({
     name: '',
     gender: '',
     age: '',
@@ -22,36 +20,80 @@ const PatientRegistration = () => {
     internalRemarks: '',
     patientRemarks: '',
     pin:'',
-  };
+  });
 
-  const [formData, setFormData] = useState(initialFormData);
-  const [data, setData] = useState([]);
+   const [data, setData] = useState([]);
   const [selectedGender, setSelectedGender] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchPatientData();
-    generatePin(); // Move pin generation to a separate function
+   
+    
   }, []); 
 
   useEffect(() => {
     // if(data.length>0)
     generatePin();
+   
+    
   }, [data]); 
 
   const generatePin = () => {
     setLoading(true);
-    // Your pin generation logic here
-    setLoading(false);
-  };
+    const currentDate = new Date();
+    const year = currentDate.getFullYear().toString().slice(2);
+    const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
 
+    let storedMonth = localStorage.getItem('month');
+
+    if (!storedMonth) {
+        localStorage.setItem('month', month);
+        storedMonth = month;
+    }
+
+    let counter = 1; // Default counter value
+
+    if (data.length > 0) {
+        const existing_pc = parseInt(data[data.length - 1].pin.slice(-4));
+        counter = existing_pc + 1; // Set counter to the next available number
+    }
+
+    if(storedMonth !== month){
+      console.log("Stored Mont h is ", storedMonth, " and ", typeof(storedMonth));
+      console.log("Month ", month, " and ", typeof(month));
+
+      counter=1;
+      localStorage.setItem('month', month);
+        
+    }
+
+    // Format the counter with leading zeros
+    const formattedCounter = ('0000' + counter).slice(-4);
+
+    const pin = `${year}${month}-${formattedCounter}`;
+
+    // Store generated PIN, year, month, and update counter in localStorage
+    localStorage.setItem('generatedPin', pin);
+    localStorage.setItem('year', year);
+    console.log("format counter is ", formattedCounter)
+    // Update state with generated PIN
+    setFormData(prevData => ({ ...prevData, pin: pin }));
+    setLoading(false);
+};
+
+
+  
+  
   const fetchPatientData = async () => {
     setLoading(true);
     const Pdata = await getPatientDetails();
     setData(Pdata);
     setLoading(false); 
   };
+
+
 
   const handleGenderChange = (event) => {
     setSelectedGender(event.target.value);
@@ -69,7 +111,9 @@ const PatientRegistration = () => {
     }));
   };
 
+
   const handleNextClick = async (event) => {
+   
     event.preventDefault(); // Prevent the default form submission behavior
 
     // Manually check if any required fields are empty
@@ -81,8 +125,7 @@ const PatientRegistration = () => {
       return;
     }
 
-    setLoading(true);
-
+     setLoading(true);
     try {
       const response = await registerPatient(formData);
 
@@ -93,7 +136,6 @@ const PatientRegistration = () => {
       } else if (response.status === 201 && response.data.patient) {
         window.alert('Patient registered successfully');
         navigate("/receptionist/search_test", { state: { patientData: formData } });
-        setFormData(initialFormData); // Reset the form fields to initial state after successful registration
       } else {
         // Handle other cases (error or unexpected response)
         console.error('Unexpected response from the server:', response);
@@ -106,20 +148,21 @@ const PatientRegistration = () => {
       } else {
         console.error('Error during registration:', error);
       }
-    } finally {
-      setLoading(false); // Deactivate loader
-    }
+    }finally {
+            setLoading(false); // Deactivate loader
+          }
+
   };
 
 
   return (
 
     <div className="Patient-Main-Container">
-         {loading && ( // Display loader if loading state is true
-                <div className="loader-container">
-                    <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
-                </div>
-            )}
+           {loading && ( 
+                 <div className="loader-container">
+                     <ReactLoading type={"bars"} color={"#03fc4e"} height={100} width={100} />
+                 </div>
+             )}
       <form className="Patient-Details-Container">
       <p style={{alignSelf:"center", fontSize:"1.5rem",fontWeight:"bold", color:"#00ADB5"}}>Patient Registration</p>
         <h2 style={{marginLeft:"0.5rem"}}>Patient Details</h2>
