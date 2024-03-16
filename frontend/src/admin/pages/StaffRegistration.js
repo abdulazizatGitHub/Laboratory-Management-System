@@ -115,6 +115,20 @@ const StaffRegistration = () => {
             const response = await staffRegsiteration(formData);
             if (response.data.message) {
                 showAlert(response.data.message, "success");
+                setStaffDetails({
+                    name: '',
+                    fatherName: '',
+                    gender: '',
+                    age: '',
+                    role: '',
+                    shift: '',
+                    contactNumber: '',
+                    cnic: '',
+                    address: '',
+                    email: '',
+                    image: "",
+                });
+                setDownloadImgUrl(null);
             } else {
                 showAlert("Registration failed", "error");
             }

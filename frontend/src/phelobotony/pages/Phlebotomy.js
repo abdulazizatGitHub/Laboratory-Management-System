@@ -5,7 +5,7 @@ import { getGeneratedToken, updateToken } from "../../Services/API";
 import JsBarcode from 'jsbarcode';
 import jsPDF from 'jspdf';
 import ReactDOM from 'react-dom';
-import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
 import 'react-datepicker/dist/react-datepicker.css';
 import { TbCalendarPlus } from "react-icons/tb";
 import ReactLoading from 'react-loading';

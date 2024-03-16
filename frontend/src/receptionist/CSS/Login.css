@@ -37,16 +37,16 @@
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    width: 50%;
-    height: 60%;
+    width: fit-content;
+    /* height: 60%; */
     border: 5px solid rgb(255, 253, 253);
     box-shadow: var(--divShadowColor);
     border-radius: 0.5rem;
 }
 
 .login-form-text-container {
-    display: flex;
-    flex-direction: column;
+    padding-top: 0.5rem;
+    max-width: 90%;
 }
 
 .welcome-text {
@@ -60,10 +60,12 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    width: 95%;
 }
 
 .login-form-details input {
-    width: 22rem;
+    /* width: 22rem; */
+    width: 100%;
     height: 30px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
@@ -80,7 +82,7 @@
 .login-form-username-container input,
 .login-form-username-container select {
     width: 5rem;
-    height: 30px; /* Increase the height as needed */
+    height: 31px; /* Increase the height as needed */
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
     padding: 8px; /* Add padding for better spacing */
@@ -101,11 +103,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 95%;
 }
 
 .login-form-btn {
-    width: 23rem;
-    height: 5vh;
+    width: 100%;
+    height: 2rem;
     margin-bottom: 20px;
     font-weight: bold;
     font-family: var(--fontRegular);
@@ -142,4 +145,49 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+
+@media  screen and (max-width: 844px) {   
+    .login-image-container{
+        display: none;
+        
+    }
+    .login-form-container{
+        width: 100%;
+    }
+    .login-form{
+        height: fit-content;
+    }
+    
+}
+
+@media screen and (max-width: 458px) {
+    .login-form{
+        width: 80%;
+    }
+    .login-form-details{
+        width: 100%;
+        padding: 1rem;
+    }
+    .login-form-username-container{
+        width: fit-content;
+        gap: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 444px) {
+    .login-form-username-container {
+        flex-direction:column;
+        width: 100%;
+        gap: 0.2rem;
+    }
+    
+.login-form-username-container input,
+  .login-form-username-container select {
+  
+    width: 100%;
+  }
+
 }
