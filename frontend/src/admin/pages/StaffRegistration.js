@@ -131,11 +131,11 @@ const StaffRegistration = () => {
                     <div className="sr-form-details-container">
                         <div className="sr-form-inputs-container">
                             <label>Name</label>
-                            <input type="text" name="name" placeholder="Enter Name" onChange={handleInputChange} required />
+                            <input type="text" name="name" id="name" placeholder="Enter Name" onChange={handleInputChange} required />
                         </div> 
                         <div className="sr-form-inputs-container">
                             <label>Father Name</label>
-                            <input type="text" name="fatherName" placeholder="Enter Father Name" onChange={handleInputChange} required />
+                            <input type="text" name="fatherName" id="fatherName" placeholder="Enter Father Name" onChange={handleInputChange} required />
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Gender</label>
@@ -144,6 +144,7 @@ const StaffRegistration = () => {
                                     <label>Male</label>
                                     <input
                                         name="gender"
+                                        id="gender"
                                         type="radio"
                                         value="male"
                                         checked={gender === 'male'}
@@ -155,6 +156,7 @@ const StaffRegistration = () => {
                                     <label>Female</label>
                                     <input
                                         name="gender"
+                                        id="gender"
                                         type="radio"
                                         value="female"
                                         checked={gender === 'female'}
@@ -166,7 +168,7 @@ const StaffRegistration = () => {
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Age</label>
-                            <input type="text" name="age" placeholder="Enter Age" onChange={handleInputChange} required />
+                            <input type="text" name="age" id="age" placeholder="Enter Age" onChange={handleInputChange} required />
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Role</label>
@@ -183,7 +185,7 @@ const StaffRegistration = () => {
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Shift</label>
-                            <input type="text" name="shift" placeholder="Enter Shift" onChange={handleInputChange} required />
+                            <input type="text" name="shift" id="shift" placeholder="Enter Shift" onChange={handleInputChange} required />
                         </div>
                     </div>
 
@@ -191,20 +193,20 @@ const StaffRegistration = () => {
                     <div className="sr-form-details-container">
                         <div className="sr-form-inputs-container">
                             <label>Contact #</label>
-                            <input type="text" name="contactNumber" placeholder="Enter Contact Number" onChange={handleInputChange} required />
+                            <input type="text" name="contactNumber" id="contactNumber" placeholder="Enter Contact Number" onChange={handleInputChange} required />
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>CNIC</label>
-                            <input type="text" name="cnic" placeholder="Enter 15 digit CNIC" onChange={handleInputChange} required />
+                            <input type="text" name="cnic" id="cnic" placeholder="Enter 15 digit CNIC" onChange={handleInputChange} required />
                         </div>
                         <div className="sr-form-inputs-container">
                             <label>Address</label>
-                            <input type="text" name="address" placeholder="Enter Address" onChange={handleInputChange} required />
+                            <input type="text" name="address" id="address" placeholder="Enter Address" onChange={handleInputChange} required />
                         </div>
 
                         <div className="sr-form-inputs-container">
                             <label>Email</label>
-                            <input type="email" name="email" placeholder="Enter Email" onChange={handleInputChange} required />
+                            <input type="email" name="email" id="email" placeholder="Enter Email" onChange={handleInputChange} required />
                         </div>
                     </div>
                     <div className="sr-form-button-container">
