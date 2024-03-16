@@ -12,6 +12,7 @@ import StaffDetailPage from "./StaffDetailPage";
 import DetailStaff from "./Detailstaff";
 import Addtest from "./Addtest";
 import ChangePassword from "../../receptionist/pages/ChangePassword";
+import Searchreciept from "./Searchreciept";
 
 const AdminRight = ({setIsSideBar}) => {
     return (
@@ -30,6 +31,7 @@ const AdminRight = ({setIsSideBar}) => {
                     <Route path="/StaffReport/Detailstaff" element={<DetailStaff />} />
                     <Route path="/Addtest" element={<Addtest />} />
                     <Route path="/Change-password" element={<ChangePassword />} />
+                    <Route path="/Searchreciept" element={<Searchreciept />} />
 
                 </Routes>
             </div>

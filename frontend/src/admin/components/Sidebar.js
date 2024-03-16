@@ -63,6 +63,7 @@ function Sidebar({ setIsSideBar }) {
                     <Link to="view-staff-record"  style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>View Staff Record</p></Link>
                     <Link to="view-patient-detail" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>View Patient Details</p></Link>
                     <Link to="Addtest" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>Add Test Details</p></Link>
+                    <Link to="Searchreciept" style={{ textDecoration: 'none' }} onClick={handleLinkClick} > <p>Search Reciept</p></Link>
 
 
                 </div>
