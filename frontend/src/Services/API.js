@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const Url = 'http://localhost:5000';
-// const Url = 'https://backend-lab-981eb22ce767.herokuapp.com'
+// const Url = 'http://localhost:5000';
+const Url = 'https://backend-lab-981eb22ce767.herokuapp.com'
 
 export const registerPatient = async (formData) => {
   return await axios.post(`${Url}/receptionist/PatientRegistration`, formData);
