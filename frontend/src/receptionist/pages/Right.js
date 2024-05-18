@@ -10,6 +10,7 @@ import SearchTestReport from "./SearchTestReport"
 import SearchPatient from "./SearchPatient";
 import ChangePassword from "./ChangePassword";
 import ReportDetailsPage from "./ReportDetailsPage";
+import Phlebotomy from "../../phelobotony/pages/Phlebotomy";
 
 const Right = ({setIsSideBar}) => {
   return (
@@ -33,6 +34,7 @@ const Right = ({setIsSideBar}) => {
             <Route path="/view_test_report/ReportDetailsPage" element={<ReportDetailsPage />} />
             <Route path="/search_test_report/ReportDetailsPage" element={<ReportDetailsPage />} />
             <Route path="/Change-password" element={<ChangePassword />} />
+            <Route path="/phlebotomy" element={<Phlebotomy />} />
           </Routes>
           
         </div>

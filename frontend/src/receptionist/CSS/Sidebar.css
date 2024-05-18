@@ -116,3 +116,57 @@
         width: 80%;
     }
 } */
+
+
+.SB-main {
+    height: 100dvh;
+    width: 5%;
+    background-color: black;
+    border-radius: 0rem 3rem 3rem 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+.SB-items {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 4em;
+    height: 4rem;
+    background-color: transparent;
+    border-radius: 50%;
+    transition: 0.5 ease-in-out;
+}
+
+.SB-re-main:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.SB-ph-main:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.SB-icon {
+    width: 90%;
+    height: 90%;
+    color: gray;
+    transition: 0.5 ease-in-out;
+}
+
+.SB-items {
+    background-color: black;
+    transition: background-color 0.3s ease;
+}
+
+.SB-items.active {
+    background-color: transparent;
+}
+
+.SB-items.active .SB-icon {
+    color: white;
+}
