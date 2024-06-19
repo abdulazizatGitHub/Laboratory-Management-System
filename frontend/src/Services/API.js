@@ -18,6 +18,7 @@ export const getStaffDetails = async () => {
 export const getPatientDetails = async () => {
   try {
     const res = await axios.get(`${Url}/admin/view-patient-detail`);
+    
     return  res.data; // Extract patient data from the response
     
   } catch (error) {

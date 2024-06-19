@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchTokenCount,getAllPatientNumbers } from "../../Services/API";
 
 const PatientRegistration = () => {
+  
   const [formData, setFormData] = useState({
     name: '',
     gender: '',
@@ -26,14 +27,20 @@ const PatientRegistration = () => {
   
   useEffect(() => {
     fetchPatientData();
-    fetchPatientNumber();
     
+   
+    fetchPatientNumber();
     }, []); // Run only once when the component mounts
 
+      
+
+    
+
     const fetchPatientData=async()=>{
-      const data = getPatientDetails();
+      const data = await getPatientDetails();
       setData(data);
-    }
+      
+       }
 
    const fetchPatientNumber = () => {
     getAllPatientNumbers()
@@ -49,7 +56,7 @@ const PatientRegistration = () => {
       const year = currentDate.getFullYear().toString().slice(-2); // Get last two digits of the year
       const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
       let pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-    
+      
       // Check if data is available
       if (data.length > 0) {
         // Extract existing PINs from data
@@ -59,10 +66,10 @@ const PatientRegistration = () => {
         while (existingPins.includes(pinNumber)) {
           patientCount++; 
           pinNumber = `${year}${month}-${(patientCount + 1).toString().padStart(5, '0')}`;
-        }
+        } 
+        
       }
     
-      // Update form data with the generated pin
       setFormData(prevData => ({
         ...prevData,
         pin: pinNumber,
