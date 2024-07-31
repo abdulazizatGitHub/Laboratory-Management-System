@@ -5,8 +5,6 @@ import img1 from '../../Assessts/Images/Logo2.png';
 import { useLocation, useNavigate } from "react-router-dom";
 import JsBarcode from 'jsbarcode';
 import { addPhlebotomyReport, updateReport, updateToken } from "../../Services/API";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
 import { useReactToPrint } from 'react-to-print';
 function ReportDetailsPage() {
 

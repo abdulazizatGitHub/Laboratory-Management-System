@@ -150,7 +150,6 @@
     min-height: 25em
   } */
 
-
   @media screen and (max-width: 900px){
     .searchTest-mainBox{
       flex-direction: column;

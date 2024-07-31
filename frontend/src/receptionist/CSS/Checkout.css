@@ -1,0 +1,236 @@
+@import '../../constants/Colors.css';
+
+.checkout-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--fontRegular);
+    overflow: hidden;
+}
+
+.checkout-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    height: 70vh;
+    margin-top: 2rem;
+    box-sizing: border-box;
+    border: 5px solid rgb(255, 253, 253);
+    border-radius: 10px; 
+    background-color: var(--navbarTextColor);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+}
+
+.checkout-heading {
+    color: var(--buttonColor);
+    font-size: var(--medium);
+    font-weight: bold;
+}
+
+.checkout-hsopital-info {
+    width: 100%;
+    height: 20%;
+}
+
+.checkout-staff-container {
+    display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto;
+  gap: 1rem 2rem; /* Adjust gap as needed */
+    width: 80%;
+    height: 20%;
+}
+
+.checkout-sales-info {
+    width: 82%;
+    height: auto;
+    overflow: visible;
+}
+
+.checkout-total-sales {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 30%;
+    height: 5%;
+    margin-right: -50%;
+}
+.checkout-total-sales p:nth-child(odd) {
+    font-weight: 600;
+}
+
+.checkout-remarks-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    width: 80%;
+    height: 10%;
+    border: 2px solid #22CAB8;
+    border-radius: 0.5rem;
+}
+
+.checkout-remarks-container p {
+    font-weight: 600;
+}
+
+.checkout-remarks-container textarea {
+    width: 90%;
+    border: none;
+    resize: none;
+    overflow: hidden;
+}
+
+.checkout-remarks-container textarea:focus {
+    border: none; /* Ensures border remains none when focused */
+    outline: none; /* Prevents outline from showing */
+}
+
+.checkout-button-container {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.checkout-button-container button {
+    width: 5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 10px;
+    color: #f8f8f8ef;
+    background: #3fc7b9e1;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease-out;
+}
+
+.checkout-button-container button:hover {
+    transform: scale(1.1);
+}
+
+.checkout-footer-container {
+    width: 80%;
+    height: 10%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: auto;
+}
+
+.checkout-footer-container span:nth-child(odd) {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checkout-footer-container span:nth-child(odd) p:nth-child(odd) {
+    font-weight: 600;
+}
+
+.checkout-footer-container span:nth-child(odd) p:nth-child(even) {
+    width: 40%;
+    border-bottom: 1px solid black;
+    margin-top: 1rem;
+}
+
+.checkout-footer-container span:nth-child(even) {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.checkout-footer-container span:nth-child(even) p:nth-child(odd) {
+    font-weight: 600;
+}
+
+.checkout-middle-heading {
+    font-size: var(--small);
+    font-weight: 600;
+}
+
+.checkout-staff-info {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-row: 100%;
+}
+
+.checkout-staff-details {
+    display: grid;
+    grid-template-columns: 15rem 10rem;
+    grid-template-rows: auto;
+    justify-items: self-start;
+}
+
+.labels {
+    font-weight: 600;
+}
+
+.checkout-sales-table {
+    width: 100%;
+    /* height: auto; */
+    height: fit-content;
+    border-collapse: collapse; /* Remove borders between table cells */
+    background-color: white; /* Set background color to white */
+}
+
+.checkout-sales-table th
+{
+  border-left: none;
+  border-right: none;
+  border-top: none ;
+  padding-bottom: 4px;
+  padding-top: 0;
+  background: transparent;
+}
+
+.checkout-sales-table td {
+    border: none; /* Remove borders from table header and data cells */
+    padding: 0.5rem; /* Add padding for better readability */
+}
+  
+.checkout-sales-table tbody td {
+    text-align: left; /* Align tbody content to the left */
+    border: none;
+}
+
+.checkout-sales-table tbody td,
+.checkout-sales-table tbody tr  {
+  background-color: transparent; 
+}
+
+.checout-table-row{
+    border: none;
+    /* background-color: transparent; */
+}
+
+@media print {
+    body {
+      margin: 0; /* Reset margin for printing */
+      padding: 0; /* Reset padding for printing */
+      font-family: var(--fontRegular); /* Set desired font for printing */
+    }
+    #sales-report {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 45rem;
+      margin: 0;
+      padding: 0;
+      border: none;
+      box-shadow: none;
+      gap: 1rem;
+    }
+    #sales-report-hospital-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+  }

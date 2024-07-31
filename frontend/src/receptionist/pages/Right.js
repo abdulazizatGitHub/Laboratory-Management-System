@@ -11,6 +11,7 @@ import SearchPatient from "./SearchPatient";
 import ChangePassword from "./ChangePassword";
 import ReportDetailsPage from "./ReportDetailsPage";
 import Phlebotomy from "../../phelobotony/pages/Phlebotomy";
+import CheckOut from "./Checkout";
 
 const Right = ({setIsSideBar}) => {
   return (
@@ -35,6 +36,7 @@ const Right = ({setIsSideBar}) => {
             <Route path="/search_test_report/ReportDetailsPage" element={<ReportDetailsPage />} />
             <Route path="/Change-password" element={<ChangePassword />} />
             <Route path="/phlebotomy" element={<Phlebotomy />} />
+            <Route path="/checkout" element={<CheckOut />} />
           </Routes>
           
         </div>

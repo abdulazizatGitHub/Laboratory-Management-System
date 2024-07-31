@@ -164,7 +164,19 @@ function Sidebar({ setIsSideBar }) {
               <p>Search Test Report</p>
             </Link>
           </div>
+          <Link
+            style={{ textDecoration: "none" }}
+            to="checkout"
+            
+          >
+          <button
+            className={`dropdown-btn`}
+          >
+            <i className="fa fa-credit-card-alt"></i> Sales CheckOut{" "}
+          </button>
+          </Link>
         </div>
+
 
         <button
           className={`dropdown-btn ${
