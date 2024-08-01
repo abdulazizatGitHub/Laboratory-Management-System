@@ -44,4 +44,5 @@ app.use('/Login', logincre);
 app.use('/admin/Change-password', Chanpass);
 app.use('/phelobotny', PhlebotomyRoutes);
 app.use('/receptionist', gentok);
+app.use('/receptionist', gentok)
 // app.use('/', Forpass);

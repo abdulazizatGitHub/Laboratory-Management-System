@@ -219,3 +219,7 @@ export const getSales = async (user, date) => {
     params: { user, date },
   });
 };
+
+export const addSalesData = async (saveSalesData) => {
+  return await axios.post(`${Url}/receptionist/checkout`, saveSalesData);
+};

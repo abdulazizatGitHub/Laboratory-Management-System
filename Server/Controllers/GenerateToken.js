@@ -2,6 +2,7 @@
 
 import GenToken from "../Models/GenerateToken.js";
 import moment from "moment";
+import SalesModel from "../Models/SalesModel.js";
 
 // Controller function to handle saving token data
 const saveToken = async (req, res) => {
@@ -150,3 +151,35 @@ export const getSales = async (req, res) => {
   }
 };
 
+export const addSalesData = async (req, res) => {
+  try {
+    const { user, date, closingNumber, totalTokens, totalAmount, remarks } = req.body;
+
+    // Check if a sales record with the same closingNumber already exists
+    const existingSales = await SalesModel.findOne({ closingNumber });
+
+    if (existingSales) {
+      // If record exists, respond with an appropriate message
+      console.log('Data with this closing number already exists:', existingSales);
+      return res.status(400).json({ message: "Data already saved!" });
+    }
+
+    // Create a new sales record
+    const newSales = new SalesModel({
+      user,
+      date,
+      closingNumber,
+      totalTokens,
+      totalAmount,
+      remarks
+    });
+
+    // Save the new sales record
+    const response = await newSales.save();
+    console.log('Response of sales data after save:', response);
+    res.status(201).json({ message: true });
+  } catch (error) {
+    console.error("Error saving sales data:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
