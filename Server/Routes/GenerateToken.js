@@ -1,5 +1,5 @@
 import express from 'express';
-import { saveToken,getGeneratedToken,updateToken } from '../Controllers/GenerateToken.js';
+import { saveToken,getGeneratedToken,updateToken, getSales } from '../Controllers/GenerateToken.js';
 
 
 const router = express.Router();
@@ -7,5 +7,6 @@ const router = express.Router();
 router.post('/',saveToken);
 router.get('/',getGeneratedToken);
 router.put('/:id', updateToken);
+router.get('/checkout', getSales);
 
 export default router;

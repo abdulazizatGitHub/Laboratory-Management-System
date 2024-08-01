@@ -103,14 +103,16 @@ const GenerateToken = () => {
    document.body.innerHTML = originalContents; 
     
     const currentDate = new Date();
-    const formattedDateTime = currentDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-    
+    const formattedDate = currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const formattedTime = currentDate.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
+
     const tokenData = {
       tokenNumber,
       patientData,
       tests: selectedTests,
       grandTotal,
-      dateTime: formattedDateTime,
+      date: formattedDate,
+      time: formattedTime,
       generatedBy: JSON.parse(localStorage.getItem('user')).userName,
       state:"generated",
       remark:""

@@ -43,4 +43,5 @@ app.use('/receptionist/generate_token', gentok);
 app.use('/Login', logincre);
 app.use('/admin/Change-password', Chanpass);
 app.use('/phelobotny', PhlebotomyRoutes);
+app.use('/receptionist', gentok);
 // app.use('/', Forpass);

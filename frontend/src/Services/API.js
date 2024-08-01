@@ -212,3 +212,10 @@ export const updateReport = async (reportId, updatedReportData) => {
     throw new Error('Error occurred while updating Report:', error);
   }
 };
+
+
+export const getSales = async (user, date) => {
+  return await axios.get(`${Url}/receptionist/checkout`, { 
+    params: { user, date },
+  });
+};
