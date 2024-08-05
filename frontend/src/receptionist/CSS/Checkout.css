@@ -223,7 +223,7 @@
     /* background-color: transparent; */
 }
 
-.modal {
+/* .modal {
     position: relative;
     margin: auto;
     padding: 20px;
@@ -270,7 +270,7 @@
   
   .modal button:hover {
     background: #1b9e8e;
-  }
+  } */
   
 
 @media print {

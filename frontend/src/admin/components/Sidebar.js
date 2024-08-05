@@ -51,7 +51,7 @@ function Sidebar({ setIsSideBar }) {
             }
             <div className="sidenav">
                 <span className='Heading-sidebar'>LMS</span>
-                <Link to="" style={{ textDecoration: 'none' }} onClick={handleLinkClick} ><p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
+                <Link to="/dashboard" style={{ textDecoration: 'none' }} onClick={handleLinkClick} ><p><i className="fa fa-dashboard"></i> Dashboard</p></Link>
 
                 <button className={`dropdown-btn ${activeDropdown === 'registration' ? 'active highlighted' : ''}`} onClick={handleRegistrationDropdownToggle}>
                     <i className="fa fa-user-plus"></i> Registrations <i className="fa fa-caret-down"></i>

@@ -8,19 +8,20 @@ function Navbar({ setIsSideBar }) {
     const { logout } = useAuth();
     const user = JSON.parse(localStorage.getItem('user'));
 
-    useEffect(()=>{
-      console.log("User is , ",user.image
-      )
-       
-    },[])
+    useEffect(() => {
+        console.log("User is , ", user);
+    }, []);
+
     const handleClickNav = () => {
         setIsSideBar((prev) => !prev);
     };
 
     const handleLogout = () => {
         logout();
-        console.log("The logout Performd",logout);
+        console.log("The logout performed", logout);
     };
+
+    const profileImageUrl = user.image?.url || "https://via.placeholder.com/50x50.png?text=ML";
 
     return (
         <div className="navbar">
@@ -29,17 +30,15 @@ function Navbar({ setIsSideBar }) {
             <div className="right-section">
                 <div className="dropdown">
                     <img
-                        src={`${user.image.url}` || "https://via.placeholder.com/50x50.png?text=ML"}
+                        src={profileImageUrl}
                         alt="Profile"
                         className="round-icon"
                     />
 
-                    
-
                     <div className="dropdown-content">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <img
-                                src={`${user.image.url}` || "https://via.placeholder.com/50x50.png?text=ML"}
+                                src={profileImageUrl}
                                 alt="Profile"
                                 className="round-icon"
                             />
@@ -50,7 +49,7 @@ function Navbar({ setIsSideBar }) {
                         </div>
                         <div className="horizontal-line"></div>
                         <div className="anchorTagFor">
-                            <Link to="Change-password" >
+                            <Link to="Change-password">
                                 <FaLock /> Change Password
                             </Link>
                         </div>

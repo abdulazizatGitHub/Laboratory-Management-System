@@ -10,17 +10,15 @@ const Login = () => {
     const navigation = useNavigate();
     const [usernamePrefix, setUsernamePrefix] = useState("Select");
     const [usernameSuffix, setUsernameSuffix] = useState("");
-    const [registrationNumber, setRegistrationNumber] = useState("");
+    const [userName, setUserName] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false); // State variable for loader
 
     const handleLogin = async () => {
         setLoading(true); // Activate loader
-        const username = `${usernamePrefix}-${usernameSuffix}-${registrationNumber}`;
-        console.log("username s ", username);
         try {
-            const response = await login(username, password, localStorage.getItem('token'));
+            const response = await login(userName, password);
             const { token, user } = response;
             console.log("user and token is ", JSON.stringify(user), " and ", token, user.role);
             localStorage.setItem('token', token);
@@ -30,9 +28,6 @@ const Login = () => {
             switch (user.role) {
                 case 'Receptionist':
                     navigation('/receptionist');
-                    break;
-                case 'Admin':
-                    navigation('/admin');
                     break;
                 case 'Phlebotomy':
                     navigation('/phelobotny');
@@ -56,11 +51,6 @@ const Login = () => {
         return await getStaffDetails();
     }
 
-    const handleUsernameSuffixChange = (e) => {
-        // Convert input to uppercase
-        setUsernameSuffix(e.target.value.toUpperCase());
-    }
-
     return (
         <div className="login-main-container">
             {loading && ( // Display loader if loading state is true
@@ -79,29 +69,12 @@ const Login = () => {
                     </div>
                     <div className="login-form-details">
                         <label className="login-form-label">Username</label>
-                        <div className="login-form-username-container">
-                            <select
-                                value={usernamePrefix}
-                                onChange={(e) => setUsernamePrefix(e.target.value)}
-                            >
-                                <option value="Select">Select</option>
-                                <option value="RE">RE</option>
-                                <option value="PH">PH</option>
-                                <option value="AD">AD</option>
-                            </select>
-                            <p>-</p>
-                            <input
+                        <input
                                 type="text"
-                                value={usernameSuffix}
-                                onChange={handleUsernameSuffixChange} // Call handle function for uppercase conversion
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                                placeholder="Enter your username"
                             />
-                            <p>-</p>
-                            <input
-                                type="text"
-                                value={registrationNumber}
-                                onChange={(e) => setRegistrationNumber(e.target.value)}
-                            />
-                        </div>
                         <label className="login-form-label">Password</label>
                         <input
                             type="password"

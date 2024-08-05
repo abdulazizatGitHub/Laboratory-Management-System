@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../../phelobotony/component/Navbar";
+import Navbar from "../components/Navbar";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 import StaffRegistration from "./StaffRegistration";
@@ -32,7 +32,6 @@ const AdminRight = ({setIsSideBar}) => {
                     <Route path="/Addtest" element={<Addtest />} />
                     <Route path="/Change-password" element={<ChangePassword />} />
                     <Route path="/Searchreciept" element={<Searchreciept />} />
-
                 </Routes>
             </div>
         </div>

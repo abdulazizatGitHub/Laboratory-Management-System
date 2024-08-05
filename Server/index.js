@@ -4,7 +4,7 @@ import cors from 'cors';
 import {connection} from './Connection.js';
 import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
-import StaffRoutes from './Routes/StaffRoutes.js';
+import AdminRoutes from './Routes/adminRoutes.js';
 import Addtestroutes from './Routes/Addtest.js';
 import GetTest from './Routes/Addtest.js';
 import gentok from './Routes/GenerateToken.js';
@@ -36,7 +36,7 @@ app.use(express.json());
 app.use('/images', express.static('images'));
 
 app.use('/receptionist/PatientRegistration', Patientdata);
-app.use('/admin', StaffRoutes);
+app.use('/admin', AdminRoutes);
 app.use('/admin/Addtest', Addtestroutes);
 app.use('/receptionist', GetTest);
 app.use('/receptionist/generate_token', gentok);
@@ -44,5 +44,5 @@ app.use('/Login', logincre);
 app.use('/admin/Change-password', Chanpass);
 app.use('/phelobotny', PhlebotomyRoutes);
 app.use('/receptionist', gentok);
-app.use('/receptionist', gentok)
+app.use('/receptionist', gentok);
 // app.use('/', Forpass);

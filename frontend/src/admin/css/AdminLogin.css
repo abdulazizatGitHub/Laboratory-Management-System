@@ -1,8 +1,7 @@
-/* Login.css */
 
 @import '../../constants/Colors.css';
 
-.login-main-container {
+.admin-login-container {
     display: flex;
     width: 100%;
     height: 100vh;
@@ -10,19 +9,19 @@
     overflow: hidden;
 }
 
-.login-image-container {
+.admin-image-container {
     width: 45%;
     height: 100%;
     overflow: hidden;
 }
 
-.login-image {
+.admin-log-image {
     width: 100%;
     height: 100%;
     border-radius: 0rem 0.5rem 0.5rem 0rem;
 }
 
-.login-form-container {
+.admin-login-form-container {
     width: 55%;
     height: 100%;
     overflow: hidden;
@@ -31,31 +30,31 @@
     align-items: center;
 }
 
-.login-form {
+.admin-login-form-main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    width: fit-content;
+    width: 50%;
     /* height: 60%; */
     border: 5px solid rgb(255, 253, 253);
     box-shadow: var(--divShadowColor);
     border-radius: 0.5rem;
 }
 
-.login-form-text-container {
+.admin-login-headings-container {
     padding-top: 0.5rem;
     max-width: 90%;
 }
 
-.welcome-text {
+.admin-welcome-heading {
     font-size: larger;
     font-weight: bold;
     color: var(--buttonColor);
 }
 
-.login-form-details {
+.admin-login-form-input-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -63,7 +62,7 @@
     width: 95%;
 }
 
-.login-form-details input {
+.admin-login-form-input-container input {
     /* width: 22rem; */
     width: 90%;
     height: 15px; /* Increase the height as needed */
@@ -73,25 +72,25 @@
 }
 
 
-.login-form-details label {
+.admin-login-form-input-container label {
     margin-left: 1rem;
     font-weight: bold;
 }
 
-.forgot-pass {
+.admin-forgotpass-link {
     font-size: smaller;
     color: #A0A3AD;
     text-decoration: none;
 }
 
-.login-form-btn-container {
+.admin-login-form-btn-container {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 95%;
 }
 
-.login-form-btn {
+.admin-login-form-btn {
     width: 100%;
     height: 2rem;
     margin-bottom: 20px;
@@ -105,7 +104,7 @@
 }
 
 /* Add this CSS to your Login.css file or create a new CSS file */
-.loader-container {
+.admin-loader-container {
     position: fixed;
     top: 0;
     left: 0;
@@ -118,51 +117,35 @@
     z-index: 9999; /* Ensure it appears above other content */
 }
 
-.loader {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
 
 @media  screen and (max-width: 844px) {   
-    .login-image-container{
+    .admin-image-container{
         display: none;
         
     }
-    .login-form-container{
+    .admin-login-form-container{
         width: 100%;
     }
-    .login-form{
+    .admin-login-form-main{
         height: fit-content;
     }
     
 }
 
 @media screen and (max-width: 458px) {
-    .login-form{
+    .admin-login-form-container{
         width: 80%;
     }
-    .login-form-details{
+    .admin-login-form-input-container{
         width: 100%;
         padding: 1rem;
     }
-
 }
 
 @media screen and (max-width: 444px) {
-    .login-form-username-container {
-        flex-direction:column;
-        width: 100%;
-        gap: 0.2rem;
-    }
+    
+.ad-login-form-username-container input {
+    width: 100%;
+  }
 
 }
