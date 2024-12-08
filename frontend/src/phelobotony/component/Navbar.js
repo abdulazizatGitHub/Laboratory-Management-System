@@ -8,9 +8,10 @@ function Navbar({ setIsSideBar }) {
     const { logout } = useAuth();
     const user = JSON.parse(localStorage.getItem('user'));
 
-    useEffect(() => {
-        console.log("User is , ", user);
-    }, []);
+    useEffect(()=>{
+        console.log("User is , ",user.image
+        )      
+      },[]);
 
     const handleClickNav = () => {
         setIsSideBar((prev) => !prev);
@@ -30,7 +31,7 @@ function Navbar({ setIsSideBar }) {
             <div className="right-section">
                 <div className="dropdown">
                     <img
-                        src={profileImageUrl}
+                        src={`${user.image.url}` || "https://via.placeholder.com/50x50.png?text=ML"}
                         alt="Profile"
                         className="round-icon"
                     />
@@ -38,7 +39,7 @@ function Navbar({ setIsSideBar }) {
                     <div className="dropdown-content">
                         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                             <img
-                                src={profileImageUrl}
+                                src={`${user.image.url}` || "https://via.placeholder.com/50x50.png?text=ML"}
                                 alt="Profile"
                                 className="round-icon"
                             />
@@ -49,7 +50,7 @@ function Navbar({ setIsSideBar }) {
                         </div>
                         <div className="horizontal-line"></div>
                         <div className="anchorTagFor">
-                            <Link to="Change-password">
+                            <Link to="Change-password" >
                                 <FaLock /> Change Password
                             </Link>
                         </div>

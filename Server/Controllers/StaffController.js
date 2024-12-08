@@ -8,7 +8,7 @@ import { google } from 'googleapis';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 import cloudinary from "../Cloudinaryconfig.js";
-import AdminModel from "../Models/AdminModel.js";
+// import AdminModel from "../Models/AdminModel.js";
 dotenv.config();
 // // Set up OAuth 2.0 client credentials
 // const client_id ='366053873235-5378r5ff27nnstr1j8k62eq87njjtl9g.apps.googleusercontent.com';
@@ -95,14 +95,17 @@ export const getPatientDetails = async (req, res) => {
 }
 
 export const login = async (req, res) => {
-    const { userName, password } = req.body;
+
+    const { username, password } = req.body;
+    console.log("User name: " + username, "Password: " + password);
+    
     try {
         // Check if the staff exists with the provided username and password
-        const staff = await StaffModel.findOne({ userName: userName, password: password });
+        const staff = await StaffModel.findOne({ userName: username, password: password });
         
         if (staff) {
             // Generate JWT token
-            const token = jwt.sign({ userName: staff.userName, role: staff.role }, process.env.SECRETKEY, { expiresIn: '1h' });
+            const token = jwt.sign({ username: staff.userName, role: staff.role }, process.env.SECRETKEY, { expiresIn: '1h' });
             // Return all user data upon successful login
             res.status(200).json({ token, user: staff });
         } else {
@@ -252,30 +255,30 @@ export const getStaffDetailsByRole = async (req, res) => {
 
 }
 
-export const adminLogin = async (req, res) => {
-    const { username, password } = req.body;
-    console.log('Admin credentials are: ', {username, password});
+// export const adminLogin = async (req, res) => {
+//     const { username, password } = req.body;
+//     console.log('Admin credentials are: ', {username, password});
 
-    try {
-        const admin = await AdminModel.find({username: username, password: password});
-        console.log("The admin data is:", admin);
-        if (!admin) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        } else {
-            const token = jwt.sign(
-                { id: admin._id, role: admin.role },
-                process.env.ADMIN_SECRETKET,
-                { expiresIn: '1h' } // Token expiry time
-            );
+//     try {
+//         const admin = await AdminModel.find({username: username, password: password});
+//         console.log("The admin data is:", admin);
+//         if (!admin) {
+//             return res.status(400).json({ message: 'Invalid credentials' });
+//         } else {
+//             const token = jwt.sign(
+//                 { id: admin._id, role: admin.role },
+//                 process.env.ADMIN_SECRETKET,
+//                 { expiresIn: '1h' } // Token expiry time
+//             );
     
-            // Return success response with token
-            res.status(200).json({ message: 'Login successful', token, admin });
-        }
-    } catch (error) {
-        console.error('Error during login:', error);
-        res.status(500).json({ message: 'Server error' });
-    }
-};
+//             // Return success response with token
+//             res.status(200).json({ message: 'Login successful', token, admin });
+//         }
+//     } catch (error) {
+//         console.error('Error during login:', error);
+//         res.status(500).json({ message: 'Server error' });
+//     }
+// };
 
 // //Forgot Password //////////////////////////////
 

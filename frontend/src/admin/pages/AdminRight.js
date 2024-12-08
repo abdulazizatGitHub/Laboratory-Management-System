@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../phelobotony/component/Navbar";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./AdminDashboard";
 import StaffRegistration from "./StaffRegistration";
