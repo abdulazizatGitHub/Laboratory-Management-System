@@ -178,7 +178,7 @@ const StaffRegistration = () => {
                                 onChange={handleInputChange}
                             >
                                 <option value="">Select Role</option>
-                                {/* <option value="Admin">Admin</option> */}
+                                <option value="Admin">Admin</option>
                                 <option value="Receptionist">Receptionist</option>
                                 <option value="Phlebotomy">Phlebotomy</option>
                             </select>

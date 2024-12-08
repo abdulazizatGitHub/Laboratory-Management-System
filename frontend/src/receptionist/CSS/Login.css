@@ -67,6 +67,10 @@
 .login-form-details input {
     /* width: 22rem; */
     width: 90%;
+<<<<<<< HEAD
+=======
+    height: 1.5rem; /* Increase the height as needed */
+>>>>>>> a59bda6b6a76050efe6e93f5e4e302283834f939
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
     padding: 8px; /* Add padding for better spacing */
@@ -76,8 +80,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0.9rem;
 }
+.login-form-username-container input {
+    width: 5rem;
+    height: 1rem; /* Increase the height as needed */
+    border: 1px solid #838181;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    padding: 8px; /* Add padding for better spacing */
+}
+<<<<<<< HEAD
 
 .login-form-username-container input {
     width: 5rem;
@@ -90,6 +102,11 @@
 .login-form-username-container select {
     width: 5rem;
     height: 2rem;
+=======
+.login-form-username-container select {
+    width: 5rem;
+    height: 2rem; /* Increase the height as needed */
+>>>>>>> a59bda6b6a76050efe6e93f5e4e302283834f939
     border: 1px solid #838181;
     border-radius: 5px; /* Add border-radius for rounded corners */
     padding: 8px; /* Add padding for better spacing */
