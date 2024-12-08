@@ -3,7 +3,7 @@ import PhlebotomyReportModel from "../Models/PhlebotomyReportModel.js";
 
 export const addTest = async (req, res) => {
   const { code, name, type, price, section, sampleType, sampleQuantity, unit, normalRange } = req.body;
-
+  
   try {
     const existingTest = await Test.findOne({ code });
 

@@ -5,7 +5,7 @@ import {connection} from './Connection.js';
 import dotenv from 'dotenv';
 import Patientdata from './Routes/Patientregistration.js';
 import StaffRoutes from './Routes/adminRoutes.js';
-import Addtestroutes from './Routes/adminRoutes.js';
+import Addtestroutes from './Routes/Addtest.js';
 import GetTest from './Routes/Addtest.js';
 import gentok from './Routes/GenerateToken.js';
 import login from './Routes/Login.js';
